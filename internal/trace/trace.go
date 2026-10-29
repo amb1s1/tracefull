@@ -131,7 +131,7 @@ func Finish(t Trace) (Trace, error) {
 		}
 		prev = h.TTL
 		sort.Strings(h.Addresses)
-		unresolvedIdentity = unresolvedIdentity || (len(h.Addresses) == 0 && len(h.Names) > 0)
+		unresolvedIdentity = unresolvedIdentity || (len(h.Addresses) == 0 && len(h.Names) > 0) || (h.Sent != nil && *h.Sent == 0)
 		if h.Sent != nil && *h.Sent < 0 {
 			return t, fmt.Errorf("negative sample count")
 		}

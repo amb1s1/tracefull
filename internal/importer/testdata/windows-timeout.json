@@ -1,0 +1,41 @@
+{
+  "ended_at": null,
+  "dest": "192.0.2.2",
+  "dest_addr": "192.0.2.2",
+  "source_addr": "",
+  "started_at": null,
+  "probe": {
+    "tool": "tracert",
+    "type": "",
+    "flows": null,
+    "cycles": null
+  },
+  "dest_reached": false,
+  "max_hops": 30,
+  "complete": true,
+  "notes": [],
+  "hops": [
+    {
+      "ttl": 1,
+      "addresses": [],
+      "names": [],
+      "rdns": {},
+      "asn": {},
+      "matches": {},
+      "sent": 3,
+      "lost": 3,
+      "loss_pct": 100,
+      "best": null,
+      "avg": null,
+      "worst": null,
+      "stdev": null,
+      "pmtu": null,
+      "tags": [],
+      "notes": [],
+      "evidence": [
+        "line:3"
+      ]
+    }
+  ],
+  "paths": []
+}

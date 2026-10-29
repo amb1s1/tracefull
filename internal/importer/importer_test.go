@@ -1,8 +1,10 @@
 package importer
 
 import (
+	"bytes"
 	"encoding/json"
 	"os"
+	"path/filepath"
 	"reflect"
 	"strings"
 	"testing"
@@ -143,5 +145,34 @@ func TestMetadataRegressions(t *testing.T) {
 	h := got.Hops[0]
 	if len(h.Addresses) != 1 || len(h.Names) != 1 || h.Avg != nil || h.Loss != nil {
 		t.Fatalf("bad empty sample or duplicate host: %+v", h)
+	}
+}
+
+func TestParserGoldens(t *testing.T) {
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			got, e := Registry().Parse([]byte(tc.input))
+			if e != nil {
+				t.Fatal(e)
+			}
+			encoded, e := json.MarshalIndent(got, "", "  ")
+			if e != nil {
+				t.Fatal(e)
+			}
+			encoded = append(encoded, '\n')
+			path := filepath.Join("testdata", tc.name+".json")
+			if os.Getenv("TRACEFULL_UPDATE_GOLDENS") == "1" {
+				if e := os.WriteFile(path, encoded, 0600); e != nil {
+					t.Fatal(e)
+				}
+			}
+			want, e := os.ReadFile(path)
+			if e != nil {
+				t.Fatal(e)
+			}
+			if !bytes.Equal(encoded, want) {
+				t.Fatalf("parsed data changed: review %s before updating", path)
+			}
+		})
 	}
 }

@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"net/netip"
 	"sort"
+	"strings"
 
 	"github.com/amb1s1/tracefull/internal/parse/parseutil"
 	"github.com/amb1s1/tracefull/internal/trace"
@@ -70,7 +71,7 @@ func (Parser) Parse(b []byte) (trace.Trace, error) {
 			}
 			t.DestAddr = v.Sent.IP.Dst
 			t.SourceAddr = v.Sent.IP.Src
-			h := trace.NewHop(v.Sent.IP.TTL, fmt.Sprintf("json:/flows/%s/%d", id, j))
+			h := trace.NewHop(v.Sent.IP.TTL, fmt.Sprintf("json:/flows/%s/%d", strings.NewReplacer("~", "~0", "/", "~1").Replace(id), j))
 			start, e := parseutil.UnixTimestamp(v.Sent.Timestamp)
 			if e != nil {
 				return t, e

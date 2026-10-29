@@ -93,7 +93,7 @@ func Hop(ttl int, body, ref string) (trace.Hop, error) {
 	h.Notes = append(h.Notes, Annotation.FindAllString(body, -1)...)
 	fields := strings.Fields(body)
 	for i, f := range fields {
-		if strings.HasPrefix(f, "(") && i > 0 && len(Addresses(f)) > 0 {
+		if (strings.HasPrefix(f, "(") || strings.HasPrefix(f, "[")) && i > 0 && len(Addresses(f)) > 0 {
 			name := fields[i-1]
 			if len(Addresses(name)) == 0 {
 				h.Names = trace.AddUnique(h.Names, name)

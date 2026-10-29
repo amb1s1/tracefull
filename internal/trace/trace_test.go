@@ -46,3 +46,12 @@ func TestBadMeasurements(t *testing.T) {
 		t.Fatal("empty trace accepted")
 	}
 }
+
+func TestUnresolvedDestinationIdentity(t *testing.T) {
+	h := NewHop(1, "line:1")
+	h.Names = []string{"dest.example"}
+	v, e := Finish(Trace{Hops: []Hop{h}, DestAddr: "192.0.2.1", Complete: true})
+	if e != nil || v.Reached != nil {
+		t.Fatal("hostname-only row cannot prove no destination response")
+	}
+}
