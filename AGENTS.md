@@ -1,8 +1,10 @@
 # tracefull — repository instructions
 
 tracefull is a Go CLI under implementation for interpreting traces, identifying devices, and
-collecting attributed read-only evidence. **Active scope: v0.1 saved-trace enrichment.**
-Implementation is authorized for v0.1; later milestones remain design only.
+collecting attributed read-only evidence. **Active scope: saved-trace enrichment
+and local-tool investigation.**
+v0.1 is merged. The user also authorized the local-tool `investigate` feature;
+device collection and native probing milestones remain design only.
 
 ## Read only what the task needs
 

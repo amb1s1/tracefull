@@ -1,8 +1,9 @@
 # tracefull
 
-tracefull interprets saved traces, matches hop addresses to inventory devices,
-and reports what the observations support. v0.1 reads files; it does not send
-probes, open SSH sessions, or collect device output.
+tracefull runs local diagnostic tools or interprets saved traces, matches hop
+addresses to inventory devices, and reports what the observations support.
+`enrich` reads saved files offline by default; `investigate` runs installed tools
+against the target you specify. Neither command opens SSH sessions.
 
 Supported operating systems: Linux and macOS. Windows execution is outside the
 supported scope; saved Windows `tracert` output can still be imported.
@@ -23,14 +24,25 @@ Its [provenance and license](testdata/README.md) travel with the file. No DNS ru
 unless enabled. The binary can be installed from the checkout with
 `go install ./cmd/tracefull`; no release has been published.
 
+Preview an investigation without sending traffic:
+
+```sh
+./bin/tracefull investigate 1.1.1.1 --dry-run
+```
+
+To execute the tools and save one report, omit `--dry-run`. This sends diagnostic
+probes to the requested target. See [investigation behavior](docs/investigate.md)
+for tool selection, limits, evidence and failure handling.
+
 ## Commands
 
 | Command | Behavior |
 | --- | --- |
 | `enrich --from FILE` | Parse, enrich, interpret and render a saved trace. Use `-` for stdin. |
+| `investigate TARGET` | Run installed diagnostic tools and report separate attributed measurements with saved evidence. |
 | `inventory check FILE` | Validate YAML/JSON; report duplicate addresses and unknown platforms. |
 | `explain` | Show implemented rules with examples; Glamour presentation on a terminal. |
-| `schema` | Print the embedded report JSON schema, version `"1"`. |
+| `schema` | Print the embedded saved-report schema; `--kind investigation` prints the investigation envelope schema. |
 | `version` / `--version` | Show the development version. |
 | `completion` / `man` | Generate shell completion or manpage output through Cobra/Fang. |
 
@@ -132,8 +144,9 @@ original strings with JSON escaping. There is no telemetry.
 
 `--fail-on` accepts implemented finding kinds, for example
 `--fail-on real-loss,dest-only-loss,unreachable,mtu-drop`. Unknown kinds fail.
-Collection/probing exit 3 is reserved for later milestones. Pager/live-view,
-SSH and probing flags are unavailable in v0.1.
+For `investigate`, exit 3 means no usable tool result or the overall deadline
+expired; details and available evidence are preserved. Pager/live-view, SSH and
+native probing remain unavailable.
 
 ## What a finding means
 

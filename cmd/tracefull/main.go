@@ -14,6 +14,7 @@ import (
 	"github.com/amb1s1/tracefull/cmd/tracefull/commands/enrich"
 	"github.com/amb1s1/tracefull/cmd/tracefull/root"
 	"github.com/amb1s1/tracefull/internal/app"
+	"github.com/amb1s1/tracefull/internal/investigate"
 	"github.com/amb1s1/tracefull/internal/report"
 	"github.com/amb1s1/tracefull/internal/ui"
 )
@@ -63,6 +64,9 @@ func run() (code int) {
 	}
 	if errors.Is(e, enrich.ErrFinding) {
 		return 1
+	}
+	if errors.Is(e, investigate.ErrNoResults) || errors.Is(e, context.DeadlineExceeded) {
+		return 3
 	}
 	if e != nil {
 		fmt.Fprintln(os.Stderr, "tracefull:", report.Safe(e.Error()))
