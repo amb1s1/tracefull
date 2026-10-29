@@ -37,7 +37,7 @@ func Header(t *trace.Trace, line string) {
 	if m := Limit.FindStringSubmatch(line); m != nil {
 		t.MaxHops = trace.Ptr(Int(m[1] + m[2]))
 	}
-	if strings.HasPrefix(line, "traceroute to ") {
+	if strings.HasPrefix(line, "traceroute to ") || strings.HasPrefix(line, "traceroute6 to ") {
 		f := strings.Fields(line)
 		t.Dest = strings.TrimSuffix(f[2], ",")
 		a := Addresses(line)

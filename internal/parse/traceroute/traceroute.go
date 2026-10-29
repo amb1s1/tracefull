@@ -14,7 +14,7 @@ type Parser struct{}
 func (Parser) Name() string { return "traceroute" }
 func (Parser) Detect(b []byte) bool {
 	s := strings.TrimSpace(string(b))
-	return strings.HasPrefix(s, "traceroute to ") || numberedHop.MatchString(strings.Split(s, "\n")[0])
+	return strings.HasPrefix(s, "traceroute to ") || strings.HasPrefix(s, "traceroute6 to ") || numberedHop.MatchString(strings.Split(s, "\n")[0])
 }
 func (Parser) Parse(b []byte) (trace.Trace, error) { return ParseText(b, false) }
 
@@ -74,7 +74,7 @@ func ParseText(b []byte, windows bool) (trace.Trace, error) {
 			group.evidence = append(group.evidence, ref)
 			continue
 		}
-		if strings.HasPrefix(line, "traceroute ") || strings.HasPrefix(line, "Tracing route") || strings.HasPrefix(line, "over a maximum") {
+		if strings.HasPrefix(line, "traceroute ") || strings.HasPrefix(line, "traceroute6 ") || strings.HasPrefix(line, "Tracing route") || strings.HasPrefix(line, "over a maximum") {
 			continue
 		}
 		t.Notes = append(t.Notes, fmt.Sprintf("Unparsed line %d retained in source.", n+1))

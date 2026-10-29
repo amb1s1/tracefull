@@ -163,6 +163,12 @@ func loadInventory(o Options) (inventory.Inventory, []string, error) {
 	}
 	return inventory.Inventory{}, []string{"No default inventory found; device matching unavailable."}, nil
 }
+
+// ValidateInventory lets active collection fail before starting any tools.
+func ValidateInventory(o Options) error {
+	_, _, err := loadInventory(o)
+	return err
+}
 func CheckFindings(r report.Report, kinds []string) bool {
 	for _, f := range r.Findings {
 		for _, k := range kinds {
