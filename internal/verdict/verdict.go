@@ -61,8 +61,8 @@ func Evaluate(t trace.Trace, jump time.Duration) []Finding {
 			pt.Complete = false
 			out = append(out, evaluate(pt, jump, p.ID)...)
 		}
-		if distinctPaths(t.Paths) && len(t.Hops) > 0 {
-			out = append(out, finding("ecmp", t.Hops[0], "", t.Hops...))
+		if f, ok := pathDifference(t.Paths); ok {
+			out = append(out, f)
 		}
 		return ordered(out)
 	}
@@ -236,16 +236,39 @@ func latencyRule(t trace.Trace, i int, jump time.Duration) string {
 	}
 	return ""
 }
-func distinctPaths(paths []trace.Path) bool {
-	seen := map[string]bool{}
+
+// Compare known responders at the same TTL. Silence and capture length alone
+// cannot establish different paths, and the first hop need not be where they differ.
+func pathDifference(paths []trace.Path) (Finding, bool) {
+	byTTL := map[int][]trace.Hop{}
+	ttls := []int{}
 	for _, p := range paths {
-		var b strings.Builder
 		for _, h := range p.Hops {
-			fmt.Fprintf(&b, "%d=%s;", h.TTL, strings.Join(h.Addresses, ","))
+			if len(h.Addresses) == 0 {
+				continue
+			}
+			if _, ok := byTTL[h.TTL]; !ok {
+				ttls = append(ttls, h.TTL)
+			}
+			byTTL[h.TTL] = append(byTTL[h.TTL], h)
 		}
-		seen[b.String()] = true
 	}
-	return len(seen) > 1
+	sort.Ints(ttls)
+	for _, ttl := range ttls {
+		hs := byTTL[ttl]
+		seen := map[string]bool{}
+		for _, h := range hs {
+			addresses := append([]string{}, h.Addresses...)
+			sort.Strings(addresses)
+			seen[strings.Join(addresses, ",")] = true
+		}
+		if len(seen) > 1 {
+			f := finding("ecmp", hs[0], "", hs[1:]...)
+			f.Text = "Recorded flows have different responding addresses at this TTL; possible path variation. Cause unconfirmed. This observation alone establishes neither ECMP nor a network fault."
+			return f, true
+		}
+	}
+	return Finding{}, false
 }
 func ordered(fs []Finding) []Finding {
 	order := map[string]int{}

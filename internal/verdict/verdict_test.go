@@ -153,11 +153,56 @@ func TestMultipleResponderEvidence(t *testing.T) {
 	if !strings.Contains(f.Text, "Multiple responders at this TTL") || !strings.Contains(f.Text, "neither ECMP nor a network fault") {
 		t.Fatal(f.Text)
 	}
-	// A comparison across recorded flow paths still needs evidence beyond one TTL.
+	// A comparison across recorded flows cites both observations at the differing TTL.
 	v.Paths = []trace.Path{{ID: "a", Hops: base(0, 0, 0).Hops}, {ID: "b", Hops: v.Hops}}
 	fs = Evaluate(v, 0)
 	comparison := fs[len(fs)-1]
-	if comparison.Flow != "" || !reflect.DeepEqual(comparison.Evidence, []string{"line:1", "line:2", "line:3", "line:4"}) {
+	if comparison.Flow != "" || comparison.Hop != 2 || !reflect.DeepEqual(comparison.Evidence, []string{"line:2", "line:3"}) {
 		t.Fatalf("flow comparison evidence lost: %+v", comparison)
+	}
+}
+
+// Synthetic flow observations isolate attribution from parser behavior.
+func TestCrossFlowAttribution(t *testing.T) {
+	makePath := func(id string, addresses ...string) trace.Path {
+		p := trace.Path{ID: id}
+		for i, addr := range addresses {
+			h := trace.NewHop(i+1, fmt.Sprintf("json:/flows/%s/%d", id, i))
+			if addr != "" {
+				h.AddAddress(addr)
+			}
+			p.Hops = append(p.Hops, h)
+		}
+		return p
+	}
+	a := makePath("a", "192.0.2.1", "192.0.2.2", "192.0.2.3")
+	for _, tc := range []struct {
+		name    string
+		b       trace.Path
+		wantHop int
+	}{
+		{"later difference", makePath("b", "192.0.2.1", "192.0.2.20", "192.0.2.30"), 2},
+		{"missing reply", makePath("b", "192.0.2.1", "", "192.0.2.3"), 0},
+		{"shorter capture", makePath("b", "192.0.2.1", "192.0.2.2"), 0},
+		{"empty capture", makePath("b"), 0},
+		{"identical", makePath("b", "192.0.2.1", "192.0.2.2", "192.0.2.3"), 0},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			// Aggregate hops need not carry the per-flow source references.
+			v := trace.Trace{Hops: base(0, 0, 0).Hops, Paths: []trace.Path{a, tc.b}}
+			fs := Evaluate(v, 0)
+			if tc.wantHop == 0 {
+				if has(fs, "ecmp") {
+					t.Fatalf("unknown or matching observations became a path difference: %+v", fs)
+				}
+				return
+			}
+			if len(fs) != 1 || fs[0].Hop != tc.wantHop || fs[0].Flow != "" {
+				t.Fatalf("wrong flow difference attribution: %+v", fs)
+			}
+			if !reflect.DeepEqual(fs[0].Evidence, []string{"json:/flows/a/1", "json:/flows/b/1"}) {
+				t.Fatalf("missing compared flow evidence: %v", fs[0].Evidence)
+			}
+		})
 	}
 }
