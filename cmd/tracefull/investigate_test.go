@@ -44,7 +44,7 @@ func TestInvestigateExecutable(t *testing.T) {
 	if _, err := os.Stat(marker); !os.IsNotExist(err) {
 		t.Fatal("dry-run executed a tool")
 	}
-	matches, _ := filepath.Glob(filepath.Join(dir, "tracefull-evidence-*"))
+	matches, _ := filepath.Glob(filepath.Join(dir, ".tracefull-evidence-*"))
 	if len(matches) > 0 {
 		t.Fatal("dry-run wrote evidence")
 	}

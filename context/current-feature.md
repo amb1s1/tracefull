@@ -61,6 +61,23 @@ implemented. There are no unresolved product decisions for this initial scope.
   Linux runtime, real-tool network behavior, new-feature CI and merge remain
   unverified. The next action is review of the local investigation commits.
 
+### Review and user-run evidence
+
+- The user supplied a macOS run on 2026-10-29: traceroute and MTR completed,
+  while tracepath was correctly reported unsupported. All 17 MTR rows matched
+  the supplied raw JSON for address, sample count, loss and displayed RTT values.
+  This is user-recorded real-tool evidence, not an independently repeated run
+  or a forwarding-cause diagnosis. Private captures are not committed.
+- Review found that sudo-created private evidence in a non-hidden directory can
+  make Go's recursive package discovery fail with permission denied. New default
+  directories use `.tracefull-evidence-*`, which Go skips. Explicit paths and
+  existing evidence are unchanged. A regression covers default report creation.
+  Full checks run in a clean checkout; the original blocked invocation is not
+  counted as a pass.
+- Push, PR, CI and merge after successful review/checks are authorized, followed
+  by work toward v0.2 collection. Real device captures and the routing-context
+  contract are requested before implementing affected platform behavior.
+
 ## Completed v0.1 record
 
 ## Scope and acceptance

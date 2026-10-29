@@ -57,9 +57,17 @@ Tool locale is fixed to C. MTR_OPTIONS/MTR_PACKET overrides are not inherited.
 
 ## Evidence and reports
 
-The default creates a unique `tracefull-evidence-*` directory in the current
-directory. `--evidence-dir` requires a new directory; an existing directory fails
+The default creates a unique `.tracefull-evidence-*` directory in the current
+directory. The leading dot keeps private evidence out of Go package discovery
+when running from a source checkout. The report prints its absolute path.
+`--evidence-dir` requires a new directory; an existing directory fails
 before any tool runs. Directories use mode 0700 and files 0600.
+
+Running the entire CLI with sudo creates root-owned evidence. To inspect it,
+use the corresponding account; tracefull does not change ownership or widen
+permissions. Earlier non-hidden evidence directories can prevent `go test ./...`
+from traversing a checkout if the current account cannot read them. Use a clean
+checkout for development checks in that case.
 
 Every executed tool produces separate stdout/stderr files. Successful output
 also gets a parser-input file: traceroute stderr (which carries its header), a

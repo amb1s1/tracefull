@@ -178,6 +178,22 @@ func TestPipelineAndSchema(t *testing.T) {
 	}
 }
 
+func TestDefaultEvidenceDirectory(t *testing.T) {
+	o := testOptions(t)
+	t.Chdir(t.TempDir())
+	o.EvidenceDir = ""
+	r, err := Run(context.Background(), o, deps())
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !strings.HasPrefix(filepath.Base(r.EvidenceDir), ".tracefull-evidence-") {
+		t.Fatalf("evidence must be excluded from Go package discovery: %s", r.EvidenceDir)
+	}
+	if _, err := os.Stat(filepath.Join(r.EvidenceDir, "report.json")); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestFailuresAndCancellation(t *testing.T) {
 	for _, status := range []string{"failed", "timeout", "truncated", "cancelled", "parse_failed"} {
 		t.Run(status, func(t *testing.T) {

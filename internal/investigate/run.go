@@ -220,7 +220,9 @@ func execute(ctx context.Context, o Options, runner Runner, c Command, address, 
 func newDirectory(path string) (string, error) {
 	var err error
 	if path == "" {
-		path, err = os.MkdirTemp(".", "tracefull-evidence-")
+		// Go package discovery skips hidden directories, including private
+		// evidence created by a privileged invocation from a source checkout.
+		path, err = os.MkdirTemp(".", ".tracefull-evidence-")
 	} else {
 		err = os.Mkdir(path, 0700)
 	}
