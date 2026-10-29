@@ -1,0 +1,69 @@
+{
+  "ended_at": null,
+  "dest": "",
+  "dest_addr": "",
+  "source_addr": "",
+  "started_at": null,
+  "probe": {
+    "tool": "mtr",
+    "type": "",
+    "flows": null,
+    "cycles": null
+  },
+  "dest_reached": null,
+  "max_hops": null,
+  "complete": false,
+  "notes": [
+    "Imported measurement start (timezone/format unverified): 2026-01-01",
+    "MTR text has no reliable destination/completeness metadata; use --dest when known."
+  ],
+  "hops": [
+    {
+      "ttl": 1,
+      "addresses": [
+        "192.0.2.1"
+      ],
+      "names": [],
+      "rdns": {},
+      "asn": {},
+      "matches": {},
+      "sent": 100,
+      "lost": null,
+      "loss_pct": 10,
+      "best": 1,
+      "avg": 2,
+      "worst": 3,
+      "stdev": 1,
+      "pmtu": null,
+      "tags": [],
+      "notes": [],
+      "evidence": [
+        "line:3"
+      ]
+    },
+    {
+      "ttl": 2,
+      "addresses": [
+        "192.0.2.2"
+      ],
+      "names": [],
+      "rdns": {},
+      "asn": {},
+      "matches": {},
+      "sent": 100,
+      "lost": 0,
+      "loss_pct": 0,
+      "best": 1,
+      "avg": 2,
+      "worst": 3,
+      "stdev": 1,
+      "pmtu": null,
+      "tags": [],
+      "notes": [],
+      "evidence": [
+        "line:4"
+      ]
+    }
+  ],
+  "paths": []
+}

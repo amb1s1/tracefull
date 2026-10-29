@@ -1,0 +1,71 @@
+{
+  "ended_at": null,
+  "dest": "dst",
+  "dest_addr": "2001:db8::2",
+  "source_addr": "",
+  "started_at": null,
+  "probe": {
+    "tool": "traceroute",
+    "type": "",
+    "flows": null,
+    "cycles": null
+  },
+  "dest_reached": true,
+  "max_hops": 30,
+  "complete": false,
+  "notes": [
+    "Text capture completeness and measurement window are unknown."
+  ],
+  "hops": [
+    {
+      "ttl": 1,
+      "addresses": [
+        "2001:db8::1",
+        "2001:db8::3"
+      ],
+      "names": [],
+      "rdns": {},
+      "asn": {},
+      "matches": {},
+      "sent": 3,
+      "lost": 1,
+      "loss_pct": 33.333333333333336,
+      "best": 1,
+      "avg": 1.5,
+      "worst": 2,
+      "stdev": 0.5,
+      "pmtu": null,
+      "tags": [],
+      "notes": [
+        "!X"
+      ],
+      "evidence": [
+        "line:2"
+      ]
+    },
+    {
+      "ttl": 2,
+      "addresses": [
+        "2001:db8::2"
+      ],
+      "names": [],
+      "rdns": {},
+      "asn": {},
+      "matches": {},
+      "sent": 1,
+      "lost": 0,
+      "loss_pct": 0,
+      "best": 3,
+      "avg": 3,
+      "worst": 3,
+      "stdev": 0,
+      "pmtu": null,
+      "tags": [],
+      "notes": [],
+      "evidence": [
+        "line:3"
+      ]
+    }
+  ],
+  "paths": []
+}

@@ -1,0 +1,43 @@
+{
+  "ended_at": null,
+  "dest": "dst.example",
+  "dest_addr": "",
+  "source_addr": "",
+  "started_at": null,
+  "probe": {
+    "tool": "mtr",
+    "type": "",
+    "flows": null,
+    "cycles": null
+  },
+  "dest_reached": null,
+  "max_hops": null,
+  "complete": true,
+  "notes": [],
+  "hops": [
+    {
+      "ttl": 1,
+      "addresses": [],
+      "names": [
+        "router.example"
+      ],
+      "rdns": {},
+      "asn": {},
+      "matches": {},
+      "sent": null,
+      "lost": null,
+      "loss_pct": null,
+      "best": null,
+      "avg": null,
+      "worst": null,
+      "stdev": null,
+      "pmtu": null,
+      "tags": [],
+      "notes": [],
+      "evidence": [
+        "json:/report/hubs/0"
+      ]
+    }
+  ],
+  "paths": []
+}

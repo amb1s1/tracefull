@@ -1,0 +1,94 @@
+{
+  "ended_at": null,
+  "dest": "192.0.2.3",
+  "dest_addr": "192.0.2.3",
+  "source_addr": "",
+  "started_at": null,
+  "probe": {
+    "tool": "tracepath",
+    "type": "",
+    "flows": null,
+    "cycles": null
+  },
+  "dest_reached": true,
+  "max_hops": null,
+  "complete": true,
+  "notes": [],
+  "hops": [
+    {
+      "ttl": 1,
+      "addresses": [
+        "192.0.2.1"
+      ],
+      "names": [],
+      "rdns": {},
+      "asn": {},
+      "matches": {},
+      "sent": null,
+      "lost": null,
+      "loss_pct": null,
+      "best": 1,
+      "avg": 1,
+      "worst": 1,
+      "stdev": 0,
+      "pmtu": 1500,
+      "tags": [],
+      "notes": [],
+      "evidence": [
+        "line:2"
+      ]
+    },
+    {
+      "ttl": 2,
+      "addresses": [],
+      "names": [],
+      "rdns": {},
+      "asn": {},
+      "matches": {},
+      "sent": null,
+      "lost": null,
+      "loss_pct": null,
+      "best": null,
+      "avg": null,
+      "worst": null,
+      "stdev": null,
+      "pmtu": 1500,
+      "tags": [],
+      "notes": [
+        "no reply; sent count unknown"
+      ],
+      "evidence": [
+        "line:3"
+      ]
+    },
+    {
+      "ttl": 3,
+      "addresses": [
+        "192.0.2.3"
+      ],
+      "names": [],
+      "rdns": {},
+      "asn": {},
+      "matches": {},
+      "sent": null,
+      "lost": null,
+      "loss_pct": null,
+      "best": 3,
+      "avg": 3,
+      "worst": 3,
+      "stdev": 0,
+      "pmtu": 1400,
+      "tags": [
+        "asymmetry-hint"
+      ],
+      "notes": [
+        "Repeated TTL includes PMTU retry; statistics not merged."
+      ],
+      "evidence": [
+        "line:4",
+        "line:5"
+      ]
+    }
+  ],
+  "paths": []
+}

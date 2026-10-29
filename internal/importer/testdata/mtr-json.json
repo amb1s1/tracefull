@@ -1,0 +1,66 @@
+{
+  "ended_at": null,
+  "dest": "192.0.2.2",
+  "dest_addr": "192.0.2.2",
+  "source_addr": "192.0.2.10",
+  "started_at": null,
+  "probe": {
+    "tool": "mtr",
+    "type": "",
+    "flows": null,
+    "cycles": 100
+  },
+  "dest_reached": true,
+  "max_hops": null,
+  "complete": true,
+  "notes": [],
+  "hops": [
+    {
+      "ttl": 1,
+      "addresses": [
+        "192.0.2.1"
+      ],
+      "names": [],
+      "rdns": {},
+      "asn": {},
+      "matches": {},
+      "sent": 100,
+      "lost": null,
+      "loss_pct": 10,
+      "best": 1,
+      "avg": 2,
+      "worst": 3,
+      "stdev": 1,
+      "pmtu": null,
+      "tags": [],
+      "notes": [],
+      "evidence": [
+        "json:/report/hubs/0"
+      ]
+    },
+    {
+      "ttl": 2,
+      "addresses": [
+        "192.0.2.2"
+      ],
+      "names": [],
+      "rdns": {},
+      "asn": {},
+      "matches": {},
+      "sent": 100,
+      "lost": 0,
+      "loss_pct": 0,
+      "best": 2,
+      "avg": 3,
+      "worst": 4,
+      "stdev": null,
+      "pmtu": null,
+      "tags": [],
+      "notes": [],
+      "evidence": [
+        "json:/report/hubs/1"
+      ]
+    }
+  ],
+  "paths": []
+}

@@ -2,8 +2,9 @@
 
 ## Status
 
-In progress. Implementation authorized on 2026-10-29. Review and integration
-remain separate from local completion.
+Ready for review: runtime support and CI now target Linux and macOS only.
+PR #1 is open; the local review and final CI/integration checks are in progress.
+The overall feature is not Complete.
 
 ## Scope and acceptance
 
@@ -27,7 +28,8 @@ remain separate from local completion.
 ## Decisions and rationale
 
 - Module: github.com/amb1s1/tracefull. License: MIT (explicit user decisions).
-- Go baseline and pinned dependency versions will follow inspected tool support.
+- Go baseline: 1.27.3. Dependency choices, compatibility corrections and pinned
+  checking tools are recorded in [dependency choices](../docs/dependencies.md).
 - Milliseconds for serialized RTT; bytes for MTU; unknown numeric/boolean facts
   are null. Stable ordering by TTL/address/flow; no invented measurement times.
 - Imported raw data is attributed by SHA-256 and line/JSON references. DNS lookup
@@ -38,19 +40,190 @@ remain separate from local completion.
   only when the imported tool explicitly identifies its configured limit.
 - Destination-only loss takes precedence over real-loss. Different flow paths
   are evaluated separately. Intermediate response loss does not establish CoPP.
-- No release, push, PR, deployment or production verification is authorized.
+- Pushes, PR creation, review and merge after review/checks pass are authorized.
+  No release, deployment or production verification is authorized.
+- Runtime scope: Linux and macOS only (user decision, 2026-10-29). Windows
+  execution is unsupported; importing saved `tracert` text remains in scope.
 
-## Pending contract decision
+## v0.1 contract choices
 
-Asked once: DNS opt-in, optional default inventory versus explicit missing-file
-failure, config precedence, and minimum 100 sent samples for compared loss rates.
-Parser implementation can proceed independently.
+- DNS is opt-in (`--rdns`, `--asn`); `--no-rdns` can disable an inherited setting.
+  This keeps saved-file analysis offline unless the user requests lookups.
+- Missing default inventory is allowed; explicit missing inventory is an error.
+- Precedence: defaults < user config < project config < environment < flags.
+- Loss classification requires at least 100 sent samples at every compared hop,
+  known destination response and no merged responder braid. This is a sample floor,
+  not a statistical confidence guarantee. Qualified names follow specification §16.
+
+The user explicitly approved these decisions on 2026-10-29.
 
 ## Verification evidence
 
-Pending implementation. Host tooling: Go 1.27.3, darwin/arm64. No CI has run.
+Local verification on 2026-10-29, macOS 27.0.1 arm64, Go 1.27.3:
+
+| Check | Result |
+| --- | --- |
+| `make check TOOLS_DIR=/tmp/tracefull-tools` | Passed: unit/regression/golden/schema/process tests, gofmt, vet, race, coverage, staticcheck, golangci-lint, Markdown checks and build. |
+| Parser / verdict coverage | 92.3% / 99.3%; both independent 90% gates passed. |
+| `make fuzz` | Passed: final 30-second mutation run completed 1,647,085 executions. No failure corpus was produced. |
+| `make scan TOOLS_DIR=/tmp/tracefull-tools` | Passed: govulncheck v1.9.0 reported no vulnerabilities after patching dependencies. |
+| `make cross` | Passed: CGO-disabled linux/darwin/windows × amd64/arm64 compilation. No runtime claim for those cross-builds. |
+| Actual CLI | Documented text/JSON/Markdown examples; explain, schema, version, Bash completion and manpage output passed. JSON was decoded; pipes contained no ANSI and stderr was clean. |
+| Process failure/cancellation | Tests verified exit 0/1/2, report preservation for fail-on, and exit 130 while blocked on stdin and a full stdout pipe. |
+| Terminal | Theme/Glamour unit tests passed; real executable in a local pseudo-terminal rendered and exited 0. A nonresponding terminal took about four seconds for background-color query fallback. |
+| Source/diff review | Reviewed parser contracts, uncertainty, config precedence, output escaping, cancellation ownership, fixture provenance and staged whitespace checks. |
+
+A first pseudo-terminal harness falsely reported failure by checking process state
+before waiting for exit after terminal closure. The corrected bounded check
+waited for completion and passed. The executable's stdin/stdout cancellation tests
+remain part of the automated suite.
+
+## Delivery and remaining limits
+
+- Implemented: every v0.1 slice above, including all seven dialect families,
+  explicit parser/command registries, MIT license and approved module path.
+- Local commits: focused domain, parser, matching, verdict, schema, configuration,
+  pipeline, UI and CLI changes on `codex/v0.1-enrich`. See `git log --oneline`.
+  Key implementation commits: `f989f06`, `7831ec5`, `dc433dc`, `dfd2650`,
+  `fbb43d5`, `097bc13`, `d9f0885`, `822f559`, `b96307c`.
+- CI: at `04668cd`, Linux and macOS runtime jobs passed race tests, vet and build.
+  Windows failed parser/report golden comparisons and is outside the newly
+  selected runtime scope. The quality job passed; the run failed solely on Windows.
+  Latest full-run status is recorded below.
+- Delivery: `codex/v0.1-enrich` was pushed to origin with user authorization.
+  No PR, merge, release or deployment occurred.
+  Production/live-device verification: not performed; not authorized or needed
+  for the saved-file milestone. DNS behavior is verified with fakes, not a live
+  service availability test.
+- No implementation blockers remain. Unsupported localized text, unrecoverable
+  flow/sample metadata, and later-milestone features are documented in README.
+  Next action: verify the revised CI matrix; review/integration remain pending.
 
 ## History
 
 - Project setup and boilerplate cleanup (existing documentation preserved).
 - 2026-10-29: v0.1 implementation authorized; created codex/v0.1-enrich.
+
+- 2026-10-29: completed the v0.1 pipeline, corrected dependency vulnerabilities,
+  parser edge cases, alias precedence and Unix stream cancellation; local checks
+  passed. Marked Ready for review, with CI and platform-runtime gaps explicit.
+
+## Follow-up regression — multiline traceroute
+
+- Accept indented responder continuations as part of the preceding TTL, including
+  IPv6 and hostname/IP rows. Recompute statistics over every recorded probe and
+  retain each contributing line reference. Keep unrecognized extensions visible.
+- Limit text/Markdown numbers to three fractional digits; keep JSON precision.
+- Verify the scrubbed real capture has 15 hops, three probes at every hop, and
+  multiple responders at TTLs 9, 11, 13, 14 and 15. Add synthetic boundary tests.
+- Rebuild the local binary and reprocess the original file offline. Preserve the
+  user's untracked `trace.txt`; commit only code, scrubbed fixture and documentation.
+
+Verification on 2026-10-29:
+
+- Reproduced skipped responders and IPv6 continuation misclassification with
+  failing regression tests before correcting the parser.
+- `make check TOOLS_DIR=/tmp/tracefull-tools` passed after the fix, including
+  schema/goldens, CLI integration, race, formatting, vet and both linters.
+  Parser coverage is now 92.5%; verdict coverage remains 99.3%.
+- `make fuzz` passed 2,131,713 executions with the scrubbed capture added as a
+  seed. No failure corpus was produced.
+- `make scan TOOLS_DIR=/tmp/tracefull-tools` reported no vulnerabilities;
+  `make cross` compiled all six candidate platform/architecture combinations.
+  Cross-compilation does not verify runtime behavior.
+- Rebuilt `bin/tracefull` and reprocessed the original capture with DNS disabled:
+  15 hops, 45 probes, no skipped lines, and multiple-responder observations at
+  TTLs 9, 11, 13, 14 and 15. Three samples do not support a loss classification;
+  multiple responders alone do not prove ECMP.
+- Text/Markdown rounding and unchanged JSON precision have regression coverage.
+  The original untracked capture remains untouched and outside the commits.
+
+## Follow-up — multiple-responder finding clarity
+
+- Use an observation-based display label and explain that multiple responders
+  do not establish ECMP or a network fault. Preserve JSON kind `ecmp`, rule
+  `v0.1/ecmp`, severity `warn` and `--fail-on ecmp` compatibility.
+- Attribute a finding at one TTL only to that hop's evidence; retain supporting
+  evidence for comparisons across flow paths.
+- Update text/Markdown output, `explain` and README. Verify rendering, JSON and
+  exit-code compatibility, run local checks and rebuild the executable.
+- No unresolved product decisions; this changes explanation and attribution
+  within v0.1, without changing detection or adding investigation tools.
+
+Verification on 2026-10-29:
+
+- `make check TOOLS_DIR=/tmp/tracefull-tools` passed: unit/regression, schema,
+  golden and CLI tests, race, formatting, vet, linters, docs and build. Parser
+  coverage remains 92.5%; verdict coverage remains 99.3%. No goldens changed.
+- `make scan TOOLS_DIR=/tmp/tracefull-tools` reported no vulnerabilities.
+- The rebuilt executable reprocessed the original capture offline in text,
+  Markdown and JSON; all five findings retained their identifiers and severity.
+  Hop 15 references only lines 22–24. `explain` uses the clearer label, and
+  `--fail-on ecmp` still returns exit 1 after writing the report.
+- The original capture's digest is unchanged. Remote CI, integration and platform
+  runtime gaps remain as recorded above; no new probes or device access occurred.
+
+## Follow-up — local report and evidence review
+
+- Compact repeated unmatched identities and duplicate address/name entries in
+  text/Markdown. Preserve matched and ambiguous address attribution and JSON.
+- Show limitations shared by every finding once; keep finding-specific caveats
+  attached to their findings. Preserve all per-finding limitations in JSON.
+- Correct cross-flow observations to identify the first TTL with differing known
+  responders and cite the compared flow evidence. Missing replies or different
+  capture lengths alone must not establish path variation.
+- Verify regression cases, schema/goldens, complete local checks and actual CLI
+  rendering; rebuild and make focused commits. No new milestone is authorized.
+
+Verification on 2026-10-29:
+
+- Failing tests reproduced cross-flow findings at the wrong TTL and false path
+  differences caused solely by missing replies, shorter captures or empty flows.
+  These cases now pass; evidence identifies the compared flow observations.
+- `make check TOOLS_DIR=/tmp/tracefull-tools` passed, including race, schema,
+  goldens, integration, formatting, vet and linters. Parser/verdict coverage is
+  92.5%/99.4%. No golden snapshots were changed.
+- `make scan TOOLS_DIR=/tmp/tracefull-tools` found no vulnerabilities. `make cross`
+  compiled all six targets; this is not runtime verification on those platforms.
+- The rebuilt CLI processed the original capture in text, Markdown and JSON:
+  15 compact unmatched rows, five findings, one shared limitation in human output,
+  and all per-finding limitations retained in JSON. Original capture unchanged.
+- Synthetic Dublin variants exercised the actual CLI: a changed responder was
+  attributed to TTL 2 and both flow references; a missing reply and a shorter
+  capture produced no cross-flow finding. These are tests, not live observations.
+- Review/CI/integration remain pending. No publication, deployment or live-device
+  verification occurred. Next action: review the local branch.
+
+## Follow-up — Linux and macOS runtime scope
+
+- The user explicitly excluded Windows runtime support on 2026-10-29 after the
+  first remote run failed on `windows-latest`. This is a product scope decision,
+  not an assertion that Windows tests passed.
+- Remove Windows from the runtime matrix and cross-build targets; retain all
+  Linux/macOS tests and gates. Keep `tracert` import and its regression fixtures.
+- Align README, dependency notes and the specification with Linux/macOS scope.
+  Existing Windows fallback files and transitive dependencies need no deletion.
+- Verify docs, four cross-build targets and the local check suite; commit, push
+  and inspect the new CI run. No unresolved decisions.
+
+Verification on 2026-10-29:
+
+- `make check TOOLS_DIR=/tmp/tracefull-tools` passed unchanged Linux/macOS gates
+  locally, including parser/report goldens and saved `tracert` fixtures.
+- `make cross` passed all four Linux/macOS × amd64/arm64 builds.
+- Prior remote run `40958720082` completed: Linux runtime, macOS runtime and
+  quality passed; Windows runtime failed. Its failure is retained as historical
+  evidence. A fresh run is required for the revised platform matrix.
+
+## PR review
+
+- Remote run `40959330516` passed all three Linux/macOS/quality jobs at `059a434`.
+- Created `main` at the documentation baseline `0b10854` and opened PR #1 against
+  it. Review covers interpretation, attribution, config precedence, offline DNS
+  defaults, input bounds, output escaping, cancellation and explicit registration.
+- Found MTR continuation addresses missing their evidence line. The correction
+  adds the reference and tests its propagation into findings. The single affected
+  synthetic golden is intentionally updated to include `line:3`; no measurements
+  or other snapshots change.
+- Await final local and PR checks before merging. The user also authorized the
+  next feature: orchestration of local tools through an investigation command.

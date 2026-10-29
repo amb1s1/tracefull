@@ -1,0 +1,91 @@
+{
+  "ended_at": null,
+  "dest": "dst",
+  "dest_addr": "192.0.2.3",
+  "source_addr": "",
+  "started_at": null,
+  "probe": {
+    "tool": "traceroute",
+    "type": "",
+    "flows": null,
+    "cycles": null
+  },
+  "dest_reached": true,
+  "max_hops": 30,
+  "complete": false,
+  "notes": [
+    "Text capture completeness and measurement window are unknown."
+  ],
+  "hops": [
+    {
+      "ttl": 1,
+      "addresses": [
+        "192.0.2.1"
+      ],
+      "names": [
+        "edge"
+      ],
+      "rdns": {},
+      "asn": {},
+      "matches": {},
+      "sent": 3,
+      "lost": 1,
+      "loss_pct": 33.333333333333336,
+      "best": 1,
+      "avg": 1.5,
+      "worst": 2,
+      "stdev": 0.5,
+      "pmtu": null,
+      "tags": [],
+      "notes": [],
+      "evidence": [
+        "line:2"
+      ]
+    },
+    {
+      "ttl": 2,
+      "addresses": [],
+      "names": [],
+      "rdns": {},
+      "asn": {},
+      "matches": {},
+      "sent": 3,
+      "lost": 3,
+      "loss_pct": 100,
+      "best": null,
+      "avg": null,
+      "worst": null,
+      "stdev": null,
+      "pmtu": null,
+      "tags": [],
+      "notes": [],
+      "evidence": [
+        "line:3"
+      ]
+    },
+    {
+      "ttl": 3,
+      "addresses": [
+        "192.0.2.3"
+      ],
+      "names": [],
+      "rdns": {},
+      "asn": {},
+      "matches": {},
+      "sent": 3,
+      "lost": 0,
+      "loss_pct": 0,
+      "best": 10,
+      "avg": 11,
+      "worst": 12,
+      "stdev": 0.816496580927726,
+      "pmtu": null,
+      "tags": [],
+      "notes": [],
+      "evidence": [
+        "line:4"
+      ]
+    }
+  ],
+  "paths": []
+}

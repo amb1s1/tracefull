@@ -1,7 +1,8 @@
 # tracefull — coding standards
 
 These are self-contained project rules. The specification defines product
-contracts and numeric limits. All implementation and tooling are still planned.
+contracts and numeric limits. v0.1 implementation and local tooling are active; later collection/probing rules
+remain requirements for their respective milestones.
 
 ## Architecture
 
@@ -127,7 +128,8 @@ Document Go/tool versions, install/run commands, layout, environment variables,
 sanitized config, and focused/golden-update commands in the README when added.
 Do not assume custom test flags exist. Check Markdown links/format for docs changes.
 
-The 90% verdict/parser/driver coverage gate and lint/release checks remain planned
-until configured. Pin `govulncheck` with an update process; assess actual usage and
-supported builds. Its database access is separate from offline tests. Report
-unavailable/failed scans accurately; test runtime support before claiming it.
+The 90% verdict/parser coverage gates and lint checks are configured in the
+Makefile; driver gates and release checks await their milestones. Checking-tool
+versions and their update process are recorded in docs/dependencies.md. Vulnerability
+database access is separate from offline tests. Report unavailable/failed scans
+accurately; test runtime support before claiming it.

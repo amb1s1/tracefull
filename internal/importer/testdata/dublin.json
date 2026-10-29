@@ -1,0 +1,127 @@
+{
+  "ended_at": null,
+  "dest": "192.0.2.2",
+  "dest_addr": "192.0.2.2",
+  "source_addr": "192.0.2.10",
+  "started_at": null,
+  "probe": {
+    "tool": "dublin",
+    "type": "udp",
+    "flows": 1,
+    "cycles": null
+  },
+  "dest_reached": true,
+  "max_hops": null,
+  "complete": false,
+  "notes": [
+    "Dublin flows retained separately; aggregate hop statistics intentionally unknown."
+  ],
+  "hops": [
+    {
+      "ttl": 1,
+      "addresses": [
+        "192.0.2.1"
+      ],
+      "names": [],
+      "rdns": {},
+      "asn": {},
+      "matches": {},
+      "sent": null,
+      "lost": null,
+      "loss_pct": null,
+      "best": null,
+      "avg": null,
+      "worst": null,
+      "stdev": null,
+      "pmtu": null,
+      "tags": [],
+      "notes": [],
+      "evidence": [
+        "json:/flows/33434/0"
+      ]
+    },
+    {
+      "ttl": 2,
+      "addresses": [
+        "192.0.2.2"
+      ],
+      "names": [],
+      "rdns": {},
+      "asn": {},
+      "matches": {},
+      "sent": null,
+      "lost": null,
+      "loss_pct": null,
+      "best": null,
+      "avg": null,
+      "worst": null,
+      "stdev": null,
+      "pmtu": null,
+      "tags": [],
+      "notes": [],
+      "evidence": [
+        "json:/flows/33434/1"
+      ]
+    }
+  ],
+  "paths": [
+    {
+      "source_port": null,
+      "dest_port": null,
+      "started_at": null,
+      "ended_at": null,
+      "id": "33434",
+      "hops": [
+        {
+          "ttl": 1,
+          "addresses": [
+            "192.0.2.1"
+          ],
+          "names": [],
+          "rdns": {},
+          "asn": {},
+          "matches": {},
+          "sent": 1,
+          "lost": 0,
+          "loss_pct": 0,
+          "best": 1,
+          "avg": 1,
+          "worst": 1,
+          "stdev": 0,
+          "pmtu": null,
+          "tags": [],
+          "notes": [],
+          "evidence": [
+            "json:/flows/33434/0"
+          ]
+        },
+        {
+          "ttl": 2,
+          "addresses": [
+            "192.0.2.2"
+          ],
+          "names": [],
+          "rdns": {},
+          "asn": {},
+          "matches": {},
+          "sent": 1,
+          "lost": 0,
+          "loss_pct": 0,
+          "best": 2,
+          "avg": 2,
+          "worst": 2,
+          "stdev": 0,
+          "pmtu": null,
+          "tags": [
+            "nat-hint"
+          ],
+          "notes": [],
+          "evidence": [
+            "json:/flows/33434/1"
+          ]
+        }
+      ],
+      "dest_reached": true
+    }
+  ]
+}

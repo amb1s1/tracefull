@@ -1,0 +1,57 @@
+{
+  "schema_version": "1",
+  "tracefull_version": "test",
+  "ended_at": null,
+  "dest": "dst",
+  "dest_addr": "192.0.2.1",
+  "source_addr": "",
+  "started_at": null,
+  "probe": {
+    "tool": "",
+    "type": "",
+    "flows": null,
+    "cycles": null
+  },
+  "dest_reached": true,
+  "max_hops": null,
+  "complete": false,
+  "notes": [],
+  "hops": [
+    {
+      "ttl": 1,
+      "addresses": [
+        "192.0.2.1"
+      ],
+      "names": [
+        "evil\u001b[31m|\u003cscript\u003e"
+      ],
+      "rdns": {},
+      "asn": {},
+      "matches": {},
+      "sent": 1,
+      "lost": 0,
+      "loss_pct": 0,
+      "best": 2,
+      "avg": 2,
+      "worst": 2,
+      "stdev": 0,
+      "pmtu": null,
+      "tags": [],
+      "notes": [
+        "untrusted [link](https://evil.example)"
+      ],
+      "evidence": [
+        "line:1"
+      ]
+    }
+  ],
+  "paths": [],
+  "source": {
+    "name": "synthetic",
+    "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "bytes": 1
+  },
+  "dns_observed_at": null,
+  "findings": [],
+  "devices": []
+}
