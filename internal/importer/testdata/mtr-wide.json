@@ -43,7 +43,8 @@
         "Continuation retained at line:3"
       ],
       "evidence": [
-        "line:2"
+        "line:2",
+        "line:3"
       ]
     },
     {

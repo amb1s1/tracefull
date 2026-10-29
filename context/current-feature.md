@@ -3,8 +3,8 @@
 ## Status
 
 Ready for review: runtime support and CI now target Linux and macOS only.
-The revised remote run, external review and integration remain pending; the
-overall feature is not Complete.
+PR #1 is open; the local review and final CI/integration checks are in progress.
+The overall feature is not Complete.
 
 ## Scope and acceptance
 
@@ -40,8 +40,8 @@ overall feature is not Complete.
   only when the imported tool explicitly identifies its configured limit.
 - Destination-only loss takes precedence over real-loss. Different flow paths
   are evaluated separately. Intermediate response loss does not establish CoPP.
-- Pushes to `codex/v0.1-enrich` are authorized. No PR, merge, release, deployment
-  or production verification is authorized.
+- Pushes, PR creation, review and merge after review/checks pass are authorized.
+  No release, deployment or production verification is authorized.
 - Runtime scope: Linux and macOS only (user decision, 2026-10-29). Windows
   execution is unsupported; importing saved `tracert` text remains in scope.
 
@@ -214,3 +214,16 @@ Verification on 2026-10-29:
 - Prior remote run `40958720082` completed: Linux runtime, macOS runtime and
   quality passed; Windows runtime failed. Its failure is retained as historical
   evidence. A fresh run is required for the revised platform matrix.
+
+## PR review
+
+- Remote run `40959330516` passed all three Linux/macOS/quality jobs at `059a434`.
+- Created `main` at the documentation baseline `0b10854` and opened PR #1 against
+  it. Review covers interpretation, attribution, config precedence, offline DNS
+  defaults, input bounds, output escaping, cancellation and explicit registration.
+- Found MTR continuation addresses missing their evidence line. The correction
+  adds the reference and tests its propagation into findings. The single affected
+  synthetic golden is intentionally updated to include `line:3`; no measurements
+  or other snapshots change.
+- Await final local and PR checks before merging. The user also authorized the
+  next feature: orchestration of local tools through an investigation command.

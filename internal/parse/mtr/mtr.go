@@ -165,6 +165,9 @@ func parseText(b []byte) (trace.Trace, error) {
 				for _, v := range a {
 					h.Addresses = trace.AddUnique(h.Addresses, v)
 				}
+				if len(a) > 0 {
+					h.Evidence = trace.AddUnique(h.Evidence, fmt.Sprintf("line:%d", i+1))
+				}
 				h.Notes = append(h.Notes, fmt.Sprintf("Continuation retained at line:%d", i+1))
 			}
 			continue
