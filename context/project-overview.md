@@ -7,8 +7,10 @@ and — when you have read-only access — what the device itself says about thi
 Status: draft v0.1 · Language: Go · License: MIT · Module path:
 `github.com/amb1s1/tracefull` (confirmed)
 
-**Implementation status:** v0.1 implementation authorized; see current-feature.md
-for verified progress. Later milestones below remain intended product behavior.
+**Implementation status:** v0.1 is implemented locally; see [current feature](current-feature.md)
+for verification and review state. [README](../README.md) and the
+[implemented schema](../docs/schema.md) define available v0.1 behavior. The draft
+CLI and report lists below include future behavior and are not availability claims.
 The first implementation milestone is **v0.1 — enrich** (§13).
 
 Development guidance: [repository instructions](../AGENTS.md),
@@ -521,8 +523,8 @@ secrets in config — the tool has no field for a password or token by design.
 
 ## 15. Open questions
 
-1. **Module path / owner:** `github.com/amb1s1/tracefull` or an org? Decide before the
-   first tag; it is in every import path.
+1. **Module path / license — resolved:** `github.com/amb1s1/tracefull`, MIT,
+   explicitly approved on 2026-10-29.
 2. **Name collision check** for "tracefull" on GitHub, Homebrew, and PyPI/crates (for
    future ports) before publishing.
 3. **Default probe type** when running unprivileged on Linux: ICMP via datagram socket
