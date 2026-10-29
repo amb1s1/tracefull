@@ -139,3 +139,29 @@ func TestDisplayPrecisionPreservesJSON(t *testing.T) {
 		t.Fatal("display rounding changed JSON measurement")
 	}
 }
+
+func TestMultipleResponderLabelPreservesJSON(t *testing.T) {
+	r := sample()
+	r.Hops[0].AddAddress("192.0.2.2")
+	r.Findings = verdict.Evaluate(r.Trace, 0)
+	for _, format := range []string{"text", "markdown"} {
+		var b bytes.Buffer
+		if e := Render(&b, r, format); e != nil {
+			t.Fatal(e)
+		}
+		if !strings.Contains(b.String(), "warn multiple responders / paths at hop 1") || strings.Contains(b.String(), "warn ecmp at") {
+			t.Fatalf("misleading display label: %s", b.String())
+		}
+	}
+	var b bytes.Buffer
+	if e := Render(&b, r, "json"); e != nil {
+		t.Fatal(e)
+	}
+	var got Report
+	if e := json.Unmarshal(b.Bytes(), &got); e != nil {
+		t.Fatal(e)
+	}
+	if len(got.Findings) != 1 || got.Findings[0].Kind != "ecmp" || got.Findings[0].Rule != "v0.1/ecmp" || got.Findings[0].Severity != "warn" {
+		t.Fatalf("JSON compatibility changed: %+v", got.Findings)
+	}
+}

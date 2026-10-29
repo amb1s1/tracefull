@@ -2,7 +2,7 @@
 
 ## Status
 
-Ready for review: v0.1 and the multiline macOS traceroute regression are
+Ready for review: v0.1 and follow-up parsing and finding-clarity fixes are
 implemented and verified locally. External review,
 remote CI and integration remain pending; the overall feature is not Complete.
 
@@ -131,3 +131,28 @@ Verification on 2026-10-29:
   multiple responders alone do not prove ECMP.
 - Text/Markdown rounding and unchanged JSON precision have regression coverage.
   The original untracked capture remains untouched and outside the commits.
+
+## Follow-up — multiple-responder finding clarity
+
+- Use an observation-based display label and explain that multiple responders
+  do not establish ECMP or a network fault. Preserve JSON kind `ecmp`, rule
+  `v0.1/ecmp`, severity `warn` and `--fail-on ecmp` compatibility.
+- Attribute a finding at one TTL only to that hop's evidence; retain supporting
+  evidence for comparisons across flow paths.
+- Update text/Markdown output, `explain` and README. Verify rendering, JSON and
+  exit-code compatibility, run local checks and rebuild the executable.
+- No unresolved product decisions; this changes explanation and attribution
+  within v0.1, without changing detection or adding investigation tools.
+
+Verification on 2026-10-29:
+
+- `make check TOOLS_DIR=/tmp/tracefull-tools` passed: unit/regression, schema,
+  golden and CLI tests, race, formatting, vet, linters, docs and build. Parser
+  coverage remains 92.5%; verdict coverage remains 99.3%. No goldens changed.
+- `make scan TOOLS_DIR=/tmp/tracefull-tools` reported no vulnerabilities.
+- The rebuilt executable reprocessed the original capture offline in text,
+  Markdown and JSON; all five findings retained their identifiers and severity.
+  Hop 15 references only lines 22–24. `explain` uses the clearer label, and
+  `--fail-on ecmp` still returns exit 1 after writing the report.
+- The original capture's digest is unchanged. Remote CI, integration and platform
+  runtime gaps remain as recorded above; no new probes or device access occurred.

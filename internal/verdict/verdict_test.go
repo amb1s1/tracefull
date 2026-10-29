@@ -2,6 +2,8 @@ package verdict
 
 import (
 	"fmt"
+	"reflect"
+	"strings"
 	"testing"
 	"time"
 
@@ -129,5 +131,33 @@ func TestIdenticalFlowsAndUnknownSilence(t *testing.T) {
 	v.Hops[0].Loss = nil
 	if has(Evaluate(v, 0), "silent-hop") {
 		t.Fatal("unknown response count became silence")
+	}
+}
+
+func TestMultipleResponderEvidence(t *testing.T) {
+	v := base(0, 0, 0)
+	v.Hops[1].AddAddress("192.0.2.20")
+	v.Hops[1].Evidence = []string{"line:2", "line:3"}
+	v.Hops[2].Evidence = []string{"line:4"}
+	fs := Evaluate(v, 0)
+	if len(fs) != 1 {
+		t.Fatalf("expected one observation, got %+v", fs)
+	}
+	f := fs[0]
+	if f.Kind != "ecmp" || f.Rule != "v0.1/ecmp" || f.Severity != "warn" || f.Hop != 2 {
+		t.Fatalf("finding contract changed: %+v", f)
+	}
+	if !reflect.DeepEqual(f.Evidence, []string{"line:2", "line:3"}) {
+		t.Fatalf("unrelated evidence included: %v", f.Evidence)
+	}
+	if !strings.Contains(f.Text, "Multiple responders at this TTL") || !strings.Contains(f.Text, "neither ECMP nor a network fault") {
+		t.Fatal(f.Text)
+	}
+	// A comparison across recorded flow paths still needs evidence beyond one TTL.
+	v.Paths = []trace.Path{{ID: "a", Hops: base(0, 0, 0).Hops}, {ID: "b", Hops: v.Hops}}
+	fs = Evaluate(v, 0)
+	comparison := fs[len(fs)-1]
+	if comparison.Flow != "" || !reflect.DeepEqual(comparison.Evidence, []string{"line:1", "line:2", "line:3", "line:4"}) {
+		t.Fatalf("flow comparison evidence lost: %+v", comparison)
 	}
 }

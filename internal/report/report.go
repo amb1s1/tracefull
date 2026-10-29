@@ -61,6 +61,14 @@ func Number[T int | float64](n *T) string {
 
 type TableRenderer func(headers []string, rows [][]string) string
 
+// FindingLabel describes the observation without changing machine-readable rule identifiers.
+func FindingLabel(kind string) string {
+	if kind == "ecmp" {
+		return "multiple responders / paths"
+	}
+	return kind
+}
+
 func Render(w io.Writer, r Report, format string) error { return render(w, r, format, nil) }
 
 // RenderText accepts a terminal table view while retaining the same report contents.
@@ -96,7 +104,7 @@ func render(w io.Writer, r Report, format string, table TableRenderer) error {
 	}
 	b.WriteString("\nFindings\n")
 	for _, f := range r.Findings {
-		fmt.Fprintf(&b, "- %s %s at hop %d", f.Severity, f.Kind, f.Hop)
+		fmt.Fprintf(&b, "- %s %s at hop %d", f.Severity, escape(FindingLabel(f.Kind)), f.Hop)
 		if f.Flow != "" {
 			fmt.Fprintf(&b, " flow %s", escape(f.Flow))
 		}

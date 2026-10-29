@@ -40,7 +40,7 @@ func Rules() []Rule {
 		{"latency-added", "warn", "RTT rise persists downstream; RTT includes reply generation and the unseen return path.", "Average RTT rises from 5 to 25 ms and stays above 15 ms."},
 		{"latency-control-plane", "info", "A transient RTT rise is consistent with response handling or return-path variation.", "Average RTT is 5, 40, 6 ms."},
 		{"jitter", "info", "RTT spread is large; queueing, reply generation and path variation remain possible.", "Best 5, average 10, worst 80 ms."},
-		{"ecmp", "warn", "Multiple responders or flow paths were observed; this does not prove simultaneous ECMP.", "One TTL contains two response addresses."},
+		{"ecmp", "warn", "Multiple responders or differing recorded flow paths; possible path variation. Cause unconfirmed. This observation alone establishes neither ECMP nor a network fault.", "One TTL contains two response addresses; the TTL identifies a probe position, not one router."},
 		{"mtu-drop", "problem", "Imported measured PMTU decreases; the observation does not isolate a failing link.", "Tracepath PMTU falls from 1500 to 1400 bytes."},
 		{"asymmetry", "info", "Imported tracepath asymmetry hint is an inference, not a measured reverse path.", "Tracepath prints asymm 3."},
 		{"icmp-error", "problem", "A probe received an explicit ICMP error; other flows may still work.", "Traceroute records !H or !X."},
@@ -104,7 +104,14 @@ func evaluate(t trace.Trace, jump time.Duration, flow string) []Finding {
 	realEmitted := false
 	for i, h := range hs {
 		for _, kind := range localRules(hs, i) {
-			out = append(out, finding(kind, h, flow, hs...))
+			if kind == "ecmp" {
+				// Responders at this TTL are sufficient evidence; other hops do not support the observation.
+				f := finding(kind, h, flow)
+				f.Text = "Multiple responders at this TTL; possible path variation. Cause unconfirmed. This observation alone establishes neither ECMP nor a network fault."
+				out = append(out, f)
+			} else {
+				out = append(out, finding(kind, h, flow, hs...))
+			}
 		}
 		if comparable {
 			for _, kind := range lossRules(hs, i, &realEmitted) {

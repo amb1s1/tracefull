@@ -136,6 +136,14 @@ that count; `cycles` alone does not. This is a minimum sample floor, not a
 statistical confidence guarantee. Multiple responders suppress aggregate loss
 comparisons; Dublin flows are assessed separately.
 
+The display label `multiple responders / paths` describes different responding
+addresses at one TTL or differences between recorded flow paths. A TTL is a
+probe position, not one identified router. This observation alone establishes
+neither ECMP nor a network fault. The JSON kind `ecmp`, rule `v0.1/ecmp`, severity
+`warn` and `--fail-on ecmp` remain stable; `warn` calls attention to interpretation
+limits. A multiple-responder finding at one TTL references only that hop's source
+evidence.
+
 `phantom-loss` means response loss decreases downstream; it does not prove CoPP.
 `real-loss` is a persistent response-loss pattern, not proof of a faulty link.
 At the overlapping 50% reduction/retention boundary, `phantom-loss` takes

@@ -149,3 +149,18 @@ func TestWrappedCapturePipeline(t *testing.T) {
 		}
 	}
 }
+
+func TestMultipleResponderCLICompatibility(t *testing.T) {
+	t.Setenv("XDG_CONFIG_HOME", t.TempDir())
+	out, _, e := execute(t, "enrich", "--from", "../../../internal/parse/traceroute/testdata/macos-multiple-responders.txt", "--no-rdns", "--asn=false", "--fail-on", "ecmp")
+	if !errors.Is(e, enrich.ErrFinding) || !strings.Contains(out, "warn multiple responders / paths at hop 15") {
+		t.Fatalf("finding exit or display changed: %v\n%s", e, out)
+	}
+	if !strings.Contains(out, "Evidence: line:22, line:23, line:24\n") {
+		t.Fatal("hop 15 finding includes unrelated evidence")
+	}
+	out, _, e = execute(t, "explain", "--no-color")
+	if e != nil || !strings.Contains(out, "multiple responders / paths (warn; rule: ecmp)") || !strings.Contains(out, "neither ECMP nor a network fault") {
+		t.Fatalf("explanation missing: %v\n%s", e, out)
+	}
+}
