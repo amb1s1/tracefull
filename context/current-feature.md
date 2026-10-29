@@ -27,10 +27,12 @@ capture. Evidence retains private permissions and exclusive creation; a single
 counter sample remains cumulative, without invented rates or incident times.
 
 The user identified the first target as an NVIDIA Cumulus switch accessible by
-native SSH. Its version and captures remain unverified. A bounded, read-only
-capture plan is awaiting explicit device-access authorization; private target
-details and raw captures stay outside this repository. Driver support must not
-be claimed until real scrubbed captures pass validation.
+native SSH. Its version and captures remain unverified. The user authorized a
+bounded read-only capture plan. The first SSH handshake failed strict host-key
+verification because the IP has no trusted key. No device command executed.
+Capture-backed driver validation is Blocked pending a trusted canonical hostname
+or independently verified host key. Private target details and raw captures stay
+outside this repository; host-key verification was not weakened.
 
 ## Collection progress
 
@@ -61,6 +63,11 @@ mutation run was needed because parsers did not change; existing fuzz seeds pass
 Next: authorized Cumulus captures and a capture-backed command policy/parser.
 The `collect` CLI, driver policies/parsers, orchestration, schema, owner sweep,
 cross-device checks and live view remain unfinished. v0.2 is not Complete.
+
+Local session commits: `e675258` (shared process runner), `abee317` (wrapper),
+`7c08f40` (native SSH) and `f4002c4` (contracts/docs). This branch has not been
+pushed and has no CI or integration result yet. The session slice is Ready for
+review; the whole collection milestone remains incomplete.
 
 # Local tool investigation record
 
