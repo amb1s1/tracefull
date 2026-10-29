@@ -2,7 +2,7 @@
 
 ## Status
 
-Ready for review: v0.1 and follow-up parsing and finding-clarity fixes are
+Ready for review: v0.1, report readability and flow-attribution fixes are
 implemented and verified locally. External review,
 remote CI and integration remain pending; the overall feature is not Complete.
 
@@ -156,3 +156,34 @@ Verification on 2026-10-29:
   `--fail-on ecmp` still returns exit 1 after writing the report.
 - The original capture's digest is unchanged. Remote CI, integration and platform
   runtime gaps remain as recorded above; no new probes or device access occurred.
+
+## Follow-up — local report and evidence review
+
+- Compact repeated unmatched identities and duplicate address/name entries in
+  text/Markdown. Preserve matched and ambiguous address attribution and JSON.
+- Show limitations shared by every finding once; keep finding-specific caveats
+  attached to their findings. Preserve all per-finding limitations in JSON.
+- Correct cross-flow observations to identify the first TTL with differing known
+  responders and cite the compared flow evidence. Missing replies or different
+  capture lengths alone must not establish path variation.
+- Verify regression cases, schema/goldens, complete local checks and actual CLI
+  rendering; rebuild and make focused commits. No new milestone is authorized.
+
+Verification on 2026-10-29:
+
+- Failing tests reproduced cross-flow findings at the wrong TTL and false path
+  differences caused solely by missing replies, shorter captures or empty flows.
+  These cases now pass; evidence identifies the compared flow observations.
+- `make check TOOLS_DIR=/tmp/tracefull-tools` passed, including race, schema,
+  goldens, integration, formatting, vet and linters. Parser/verdict coverage is
+  92.5%/99.4%. No golden snapshots were changed.
+- `make scan TOOLS_DIR=/tmp/tracefull-tools` found no vulnerabilities. `make cross`
+  compiled all six targets; this is not runtime verification on those platforms.
+- The rebuilt CLI processed the original capture in text, Markdown and JSON:
+  15 compact unmatched rows, five findings, one shared limitation in human output,
+  and all per-finding limitations retained in JSON. Original capture unchanged.
+- Synthetic Dublin variants exercised the actual CLI: a changed responder was
+  attributed to TTL 2 and both flow references; a missing reply and a shorter
+  capture produced no cross-flow finding. These are tests, not live observations.
+- Review/CI/integration remain pending. No publication, deployment or live-device
+  verification occurred. Next action: review the local branch.

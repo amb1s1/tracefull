@@ -165,3 +165,68 @@ func TestMultipleResponderLabelPreservesJSON(t *testing.T) {
 		t.Fatalf("JSON compatibility changed: %+v", got.Findings)
 	}
 }
+
+func TestCompactReportPreservesAttribution(t *testing.T) {
+	r := sample()
+	h := &r.Hops[0]
+	h.Names = []string{"192.0.2.1", "router.example", "router.example"}
+	h.AddAddress("192.0.2.2")
+	h.Matches = map[string]trace.Match{
+		"192.0.2.1": {Method: "unmatched", Candidates: []string{}},
+		"192.0.2.2": {Method: "unmatched", Candidates: []string{}},
+	}
+	r.Findings = []verdict.Finding{
+		{Kind: "ecmp", Hop: 1, Limitations: []string{"shared", "first two only"}},
+		{Kind: "jitter", Hop: 2, Limitations: []string{"shared", "first two only"}},
+		{Kind: "nat", Hop: 3, Limitations: []string{"shared", "third only"}},
+	}
+	before, e := json.Marshal(r)
+	if e != nil {
+		t.Fatal(e)
+	}
+	for _, format := range []string{"text", "markdown"} {
+		var b bytes.Buffer
+		if e := Render(&b, r, format); e != nil {
+			t.Fatal(e)
+		}
+		out := b.String()
+		if !strings.Contains(out, "192.0.2.1, 192.0.2.2, router.example") || strings.Count(out, "router.example") != 1 || !strings.Contains(out, "| unmatched |") || strings.Contains(out, "=unmatched") {
+			t.Fatalf("redundant address/identity display: %s", out)
+		}
+		if strings.Count(out, "shared") != 1 || strings.Count(out, "  Limitation: first two only") != 2 || strings.Count(out, "  Limitation: third only") != 1 {
+			t.Fatalf("caveat scope lost: %s", out)
+		}
+	}
+	var encoded bytes.Buffer
+	if e := Render(&encoded, r, "json"); e != nil {
+		t.Fatal(e)
+	}
+	var got Report
+	if e := json.Unmarshal(encoded.Bytes(), &got); e != nil {
+		t.Fatal(e)
+	}
+	after, e := json.Marshal(got)
+	if e != nil {
+		t.Fatal(e)
+	}
+	if !bytes.Equal(before, after) {
+		t.Fatal("compaction changed JSON facts or caveats")
+	}
+	// Mixed matches must retain which address is unmatched and all ambiguity candidates.
+	h.Matches["192.0.2.2"] = trace.Match{Method: "addresses-ambiguous", Candidates: []string{"leaf-a", "leaf-b"}}
+	var mixed bytes.Buffer
+	if e := Render(&mixed, r, "text"); e != nil {
+		t.Fatal(e)
+	}
+	if !strings.Contains(mixed.String(), "192.0.2.1=unmatched; 192.0.2.2=leaf-a, leaf-b (addresses-ambiguous)") {
+		t.Fatal("mixed identity attribution lost")
+	}
+	h.Matches["192.0.2.2"] = trace.Match{Device: "leaf", Method: "address", Candidates: []string{"leaf"}}
+	var matched bytes.Buffer
+	if e := Render(&matched, r, "text"); e != nil {
+		t.Fatal(e)
+	}
+	if !strings.Contains(matched.String(), "192.0.2.2=leaf (address)") {
+		t.Fatal("matched identity lost")
+	}
+}

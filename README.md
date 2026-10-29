@@ -109,7 +109,11 @@ override inherited aliases.
 Configuration applies to `enrich`; inspection commands have their own flags.
 
 Text/Markdown measurements use at most three fractional digits; JSON retains
-full precision. Reports go to stdout, diagnostics to stderr. `enrich -v` adds diagnostics;
+full precision. Text/Markdown show duplicate address/name values once, compact
+fully unmatched identity rows, and print limitations shared by every finding once.
+Mixed inventory matches retain each address's identity or ambiguity; JSON retains
+all original fields and per-finding limitations.
+Reports go to stdout, diagnostics to stderr. `enrich -v` adds diagnostics;
 `--log-format json` makes those machine-readable and `--quiet` suppresses them.
 Errors remain visible. `--no-color`, `NO_COLOR`, non-TTY output and `TERM=dumb`
 disable report styling. JSON and Markdown always contain source text without
@@ -143,6 +147,10 @@ neither ECMP nor a network fault. The JSON kind `ecmp`, rule `v0.1/ecmp`, severi
 `warn` and `--fail-on ecmp` remain stable; `warn` calls attention to interpretation
 limits. A multiple-responder finding at one TTL references only that hop's source
 evidence.
+When comparing saved flows, the finding points to the first TTL with differing
+known responding address sets and cites those flow observations. Missing replies
+or different capture lengths alone do not establish path variation. This TTL
+does not locate the forwarding decision that produced the difference.
 
 `phantom-loss` means response loss decreases downstream; it does not prove CoPP.
 `real-loss` is a persistent response-loss pattern, not proof of a faulty link.

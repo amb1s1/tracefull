@@ -102,22 +102,44 @@ func render(w io.Writer, r Report, format string, table TableRenderer) error {
 	for _, d := range r.Devices {
 		fmt.Fprintf(&b, "\nDevice %s | platform: %s | role: %s | site: %s\nNotes: %s\n", escape(d.Name), escape(d.Platform), escape(d.Role), escape(d.Site), escape(d.Notes))
 	}
-	b.WriteString("\nFindings\n")
-	for _, f := range r.Findings {
-		fmt.Fprintf(&b, "- %s %s at hop %d", f.Severity, escape(FindingLabel(f.Kind)), f.Hop)
-		if f.Flow != "" {
-			fmt.Fprintf(&b, " flow %s", escape(f.Flow))
-		}
-		fmt.Fprintf(&b, ": %s [%s]\n  Evidence: %s\n", escape(f.Text), f.Rule, escape(strings.Join(f.Evidence, ", ")))
-		for _, n := range f.Limitations {
-			fmt.Fprintf(&b, "  Limitation: %s\n", escape(n))
-		}
-	}
-	if len(r.Findings) == 0 {
-		b.WriteString("No findings from the available observations.\n")
-	}
+	renderFindings(&b, r.Findings, escape)
 	_, e := io.WriteString(w, b.String())
 	return e
+}
+
+func renderFindings(b *strings.Builder, findings []verdict.Finding, escape func(string) string) {
+	counts := map[string]int{}
+	shared := []string{}
+	for _, f := range findings {
+		seen := map[string]bool{}
+		for _, n := range f.Limitations {
+			if !seen[n] {
+				counts[n]++
+				seen[n] = true
+			}
+		}
+	}
+	b.WriteString("\nFindings\n")
+	for _, f := range findings {
+		fmt.Fprintf(b, "- %s %s at hop %d", f.Severity, escape(FindingLabel(f.Kind)), f.Hop)
+		if f.Flow != "" {
+			fmt.Fprintf(b, " flow %s", escape(f.Flow))
+		}
+		fmt.Fprintf(b, ": %s [%s]\n  Evidence: %s\n", escape(f.Text), f.Rule, escape(strings.Join(f.Evidence, ", ")))
+		for _, n := range f.Limitations {
+			if len(findings) > 1 && counts[n] == len(findings) {
+				shared = trace.AddUnique(shared, n)
+			} else {
+				fmt.Fprintf(b, "  Limitation: %s\n", escape(n))
+			}
+		}
+	}
+	for _, n := range shared {
+		fmt.Fprintf(b, "\nLimitation applying to all findings: %s\n", escape(n))
+	}
+	if len(findings) == 0 {
+		b.WriteString("No findings from the available observations.\n")
+	}
 }
 func boolValue(v *bool) string {
 	if v == nil {
@@ -129,13 +151,11 @@ func renderHops(b *strings.Builder, hops []trace.Hop, format string, escape func
 	headers := []string{"hop", "address / name", "loss %", "sent", "avg ms", "best ms", "worst ms", "PMTU bytes", "identity"}
 	rows := [][]string{}
 	for _, h := range hops {
-		ids := []string{}
-		for _, a := range h.Addresses {
-			if m, ok := h.Matches[a]; ok {
-				ids = append(ids, a+"="+m.Device+" ("+m.Method+" "+strings.Join(m.Candidates, ",")+")")
-			}
+		names := append([]string{}, h.Addresses...)
+		for _, name := range h.Names {
+			names = trace.AddUnique(names, name)
 		}
-		rows = append(rows, []string{fmt.Sprint(h.TTL), escape(strings.Join(append(append([]string{}, h.Addresses...), h.Names...), ", ")), Number(h.Loss), Number(h.Sent), Number(h.Avg), Number(h.Best), Number(h.Worst), Number(h.PMTU), escape(strings.Join(ids, "; "))})
+		rows = append(rows, []string{fmt.Sprint(h.TTL), escape(strings.Join(names, ", ")), Number(h.Loss), Number(h.Sent), Number(h.Avg), Number(h.Best), Number(h.Worst), Number(h.PMTU), escape(hopIdentity(h))})
 	}
 	b.WriteString("\n")
 	if table != nil {
@@ -164,6 +184,31 @@ func renderHops(b *strings.Builder, hops []trace.Hop, format string, escape func
 			fmt.Fprintf(b, "  Hop %d: %s\n", h.TTL, escape(n))
 		}
 	}
+}
+
+func hopIdentity(h trace.Hop) string {
+	ids := []string{}
+	unmatched := 0
+	for _, a := range h.Addresses {
+		m, ok := h.Matches[a]
+		if !ok {
+			continue
+		}
+		if m.Method == "unmatched" && m.Device == "" && len(m.Candidates) == 0 {
+			unmatched++
+			ids = append(ids, a+"=unmatched")
+			continue
+		}
+		label := m.Device
+		if label == "" {
+			label = strings.Join(m.Candidates, ", ")
+		}
+		ids = append(ids, a+"="+label+" ("+m.Method+")")
+	}
+	if unmatched > 0 && unmatched == len(h.Addresses) {
+		return "unmatched"
+	}
+	return strings.Join(ids, "; ")
 }
 
 func timeValue(s *string) string {
