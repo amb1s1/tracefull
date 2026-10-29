@@ -36,6 +36,9 @@ for tool selection, limits, evidence and failure handling.
 
 ## Commands
 
+Device collection is under development. Its [session primitives](docs/collection.md)
+have local tests, but `collect` and platform drivers are not available yet.
+
 | Command | Behavior |
 | --- | --- |
 | `enrich --from FILE` | Parse, enrich, interpret and render a saved trace. Use `-` for stdin. |

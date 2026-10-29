@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased — collection foundations
+
+- Add policy-checked wrapper and native SSH session primitives, with verified
+  host keys, one jump host, bounded output, cancellation and synthetic local tests.
+  No collection CLI or validated device drivers are available yet.
+
 ## Unreleased — investigation
 
 - Add `investigate` orchestration for installed traceroute, MTR and Linux tracepath,

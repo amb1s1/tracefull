@@ -3,8 +3,9 @@
 tracefull is a Go CLI under implementation for interpreting traces, identifying devices, and
 collecting attributed read-only evidence. **Active scope: saved-trace enrichment
 and local-tool investigation.**
-v0.1 is merged. The user also authorized the local-tool `investigate` feature;
-device collection and native probing milestones remain design only.
+v0.1 and local-tool investigation are merged. The user authorized continuation
+into v0.2 device collection. Native probing remains design only. Collection
+sessions are under implementation; device driver support requires real captures.
 
 ## Read only what the task needs
 

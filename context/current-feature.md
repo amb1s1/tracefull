@@ -1,10 +1,74 @@
-# Current feature — local tool investigation
+# Current feature — v0.2 device collection
+
+## Collection status and contract
+
+In progress on `codex/v0.2-collect`. The user authorized continuation after
+investigation review/push/CI/merge, and confirmed default routing context unless
+an explicit VRF is supplied. Unsupported VRFs fail without a silent fallback.
+Investigation PR #2 merged as `54e646f` after all six push/PR runtime and quality
+jobs passed at `36d0310`. Tests, build and an IPv6 dry-run passed on the merged
+checkout. That feature is Complete; no release or production deployment occurred.
+
+Acceptance for v0.2 remains the roadmap's native SSH and wrapper sessions,
+validated platform commands/parsers, two-phase discovery, owner sweep,
+cross-device observations, attributed evidence and live collection view.
+No production access is authorized by implementation work.
+
+Slices: shared bounded session lifecycle and wrapper arguments; driver policy and
+capture-backed parsers; discovery/collection orchestration; CLI/schema/live view;
+failure and integration checks, docs and review. Both preview and execution use
+one planner. Phase-2 commands remain deferred until interfaces are discovered.
+Unknown platforms have no execution policy and cannot execute extras.
+
+Verification uses synthetic local processes/SSH servers for lifecycle tests,
+then real scrubbed platform captures for parser validation, followed by all
+existing local and CI gates. No synthetic output will be labelled a device
+capture. Evidence retains private permissions and exclusive creation; a single
+counter sample remains cumulative, without invented rates or incident times.
+
+The user identified the first target as an NVIDIA Cumulus switch accessible by
+native SSH. Its version and captures remain unverified. A bounded, read-only
+capture plan is awaiting explicit device-access authorization; private target
+details and raw captures stay outside this repository. Driver support must not
+be claimed until real scrubbed captures pass validation.
+
+## Collection progress
+
+- Shared bounded local process execution now serves investigation and wrappers.
+  Investigation retains its existing environment filtering and regression tests.
+- Wrapper templates tokenize before substitution, keep `{cmd}` as one argument,
+  reject shell syntax and require a command policy. Preview and execution use
+  the same expansion. Per-session execution is serial, bounded and cancellable.
+- Native SSH verifies target and jump host keys, supports one jump, agent-first
+  identity authentication and separate exec channels on one connection. No
+  passwords/prompts or automatic reconnects. Timeouts/truncation close the
+  connection and preserve captured output. Sessions require explicit policies.
+- Local synthetic SSH/process tests cover output, failures, wrong host keys,
+  authentication order, jump forwarding, hanging handshakes, output caps,
+  cancellation and queued commands. They do not validate device drivers.
+- The first agent/identity regression failed because Go's SSH client skips
+  duplicate auth-method names. One ordered public-key list corrected it; the
+  regression now passes. No broadening of authentication or retries was needed.
+
+The session slice is Ready for review. `make check` passed after fixing unchecked
+test cleanup calls: unit/CLI/schema/golden tests, race, vet, formatting, coverage,
+lint, docs and build. Session coverage is 86.1%; parser/verdict coverage remains
+92.6%/99.4%. Four Linux/macOS cross-builds passed, without runtime claims.
+The scan found no reachable vulnerabilities or imported-package advisories;
+the unused OpenPGP module advisory is recorded in dependency notes. No new fuzz
+mutation run was needed because parsers did not change; existing fuzz seeds pass.
+
+Next: authorized Cumulus captures and a capture-backed command policy/parser.
+The `collect` CLI, driver policies/parsers, orchestration, schema, owner sweep,
+cross-device checks and live view remain unfinished. v0.2 is not Complete.
+
+# Local tool investigation record
 
 ## Status
 
-Ready for review on `codex/investigate`: the user-authorized investigation workflow
-is implemented, locally verified and reviewed. Remote CI and integration remain
-pending for this feature. v0.1 is Complete: PR #1 merged as `56c3e1c`
+Complete: the investigation workflow merged through PR #2 as `54e646f`, with
+Linux/macOS and quality checks passing at `36d0310`. The merged checkout passed
+tests, build and offline IPv6 dry-run. v0.1 is Complete: PR #1 merged as `56c3e1c`
 after review, Linux/macOS/quality CI passed at `ee8ca8b`, and the merged checkout
 passed unit tests, build and an offline Dublin CLI smoke test. No release or
 production verification occurred.

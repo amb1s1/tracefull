@@ -12,6 +12,8 @@ addresses, JSON, DNS, clocks, hashing, file I/O and tests.
 | go.yaml.in/yaml/v3 3.0.5 | Strict known-field inventory decoding; maintained YAML project path. | MIT / Apache-2.0 |
 | jsonschema/v6 6.0.3 | Draft 2020-12 validation in tests; no runtime network schema loading. | Apache-2.0 |
 | cancelreader 0.2.2 | Interrupt a blocked Unix stdin read; already in the terminal dependency graph. Standard os.Stdin.Close alone failed the macOS process test. Regular files bypass descriptor polling. | MIT |
+| golang.org/x/crypto 0.58.0 | Native SSH, agent keys and known-host verification for collection sessions; inspected installed client authentication and connection APIs. | BSD-3-Clause |
+| go-shellwords 1.0.16 | Wrapper tokenization before substitution; no transitive dependencies. Parser environment, command and comment expansion are explicitly disabled, with shell syntax rejected before parsing. Avoids a custom quote parser. | MIT |
 
 Source/API references used for compatibility checks: installed module source,
 [Fang](https://github.com/charmbracelet/fang),
@@ -25,6 +27,11 @@ Initial scanning found reachable issues in older transitive `x/text` and
 `goldmark` versions. The module pins patched versions and a compatible newer
 `x/net`; the corrected scan reported no vulnerabilities. Repeat the scan when
 updating dependencies; this result is time-specific.
+
+The collection-session scan on 2026-10-29 found no reachable vulnerabilities and
+none in imported packages. It reports GO-2026-5932 at module level for the
+unmaintained `golang.org/x/crypto/openpgp` package, which tracefull does not import.
+That advisory has no fixed version; it does not apply to the SSH packages used here.
 
 Checking tools are pinned in the Makefile: staticcheck v0.8.2, golangci-lint
 v2.15.0 and govulncheck v1.9.0. To update them, review release compatibility,
