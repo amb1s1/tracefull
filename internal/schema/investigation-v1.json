@@ -1,0 +1,274 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "1"
+    },
+    "kind": {
+      "const": "investigation"
+    },
+    "plan": {
+      "$ref": "#/$defs/plan"
+    },
+    "evidence_dir": {
+      "type": "string"
+    },
+    "started_at": {
+      "type": "string"
+    },
+    "ended_at": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "complete",
+        "partial",
+        "failed",
+        "interrupted"
+      ]
+    },
+    "error": {
+      "type": "string"
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/result"
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "kind",
+    "plan",
+    "evidence_dir",
+    "started_at",
+    "ended_at",
+    "status",
+    "error",
+    "results"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "command": {
+      "type": "object",
+      "properties": {
+        "tool": {
+          "enum": [
+            "traceroute",
+            "mtr",
+            "tracepath"
+          ]
+        },
+        "executable": {
+          "type": "string"
+        },
+        "args": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "enum": [
+            "planned",
+            "deferred",
+            "unsupported",
+            "unavailable",
+            "ok",
+            "failed",
+            "timeout",
+            "cancelled",
+            "truncated",
+            "parse_failed"
+          ]
+        },
+        "reason": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "tool",
+        "executable",
+        "args",
+        "status",
+        "reason"
+      ],
+      "additionalProperties": false
+    },
+    "plan": {
+      "type": "object",
+      "properties": {
+        "target": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "resolution_required": {
+          "type": "boolean"
+        },
+        "timeout_seconds": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "tool_timeout_seconds": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "max_output_bytes_per_stream": {
+          "const": 1048576
+        },
+        "commands": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/command"
+          }
+        }
+      },
+      "required": [
+        "target",
+        "address",
+        "resolution_required",
+        "timeout_seconds",
+        "tool_timeout_seconds",
+        "max_output_bytes_per_stream",
+        "commands"
+      ],
+      "additionalProperties": false
+    },
+    "evidence": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "additionalProperties": false
+    },
+    "result": {
+      "type": "object",
+      "properties": {
+        "tool": {
+          "enum": [
+            "traceroute",
+            "mtr",
+            "tracepath"
+          ]
+        },
+        "executable": {
+          "type": "string"
+        },
+        "args": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "enum": [
+            "planned",
+            "deferred",
+            "unsupported",
+            "unavailable",
+            "ok",
+            "failed",
+            "timeout",
+            "cancelled",
+            "truncated",
+            "parse_failed"
+          ]
+        },
+        "reason": {
+          "type": "string"
+        },
+        "started_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "ended_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "exit_code": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "stdout": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/evidence"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "stderr": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/evidence"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "input": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/evidence"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "report": {
+          "anyOf": [
+            {
+              "$ref": "report-v1.json"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "tool",
+        "executable",
+        "args",
+        "status",
+        "reason",
+        "started_at",
+        "ended_at",
+        "exit_code",
+        "stdout",
+        "stderr",
+        "input",
+        "report"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
