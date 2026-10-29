@@ -87,3 +87,20 @@ func TestTimeoutContinuationAndOrphan(t *testing.T) {
 		t.Fatal("orphan responder silently attached")
 	}
 }
+
+func TestMacOSTraceroute6Header(t *testing.T) {
+	// Synthetic IPv6 form emitted by the macOS traceroute6 command.
+	input := []byte("traceroute6 to dst (2001:db8::2), 30 hops max, 12 byte packets\n1 2001:db8::1 1 ms\n2 2001:db8::2 2 ms\n")
+	if !(Parser{}).Detect(input) {
+		t.Fatal("IPv6 header not detected")
+	}
+	got, err := (Parser{}).Parse(input)
+	if err != nil || got.DestAddr != "2001:db8::2" || got.Dest != "dst" {
+		t.Fatal(got, err)
+	}
+	for _, n := range got.Notes {
+		if strings.Contains(n, "Unparsed") {
+			t.Fatal(n)
+		}
+	}
+}

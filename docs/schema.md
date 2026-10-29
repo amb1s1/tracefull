@@ -4,6 +4,11 @@
 It is the implemented v0.1 contract; the broader design specification includes
 future device/probing fields that are not part of this version's output.
 
+`investigate` wraps separate saved reports in its own version 1 envelope, exported
+with `tracefull schema --kind investigation`. See
+[investigation evidence and schemas](investigate.md). The saved-report schema
+and its units remain unchanged.
+
 RTT values (`best`, `avg`, `worst`, `stdev`) are milliseconds. PMTU is bytes.
 `loss_pct` is percent. Sample counts and UDP ports are integers. Unknown numeric,
 boolean and time values are null. Unknown string identities are empty strings.

@@ -5,3 +5,5 @@
 /parser.cover
 /verdict.cover
 /.tools/
+/tracefull-evidence-*/
+/.tracefull-evidence-*/

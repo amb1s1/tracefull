@@ -1,10 +1,84 @@
-# v0.1 — saved-trace enrichment
+# Current feature — local tool investigation
 
 ## Status
 
-Ready for review: runtime support and CI now target Linux and macOS only.
-PR #1 is open; the local review and final CI/integration checks are in progress.
-The overall feature is not Complete.
+Ready for review on `codex/investigate`: the user-authorized investigation workflow
+is implemented, locally verified and reviewed. Remote CI and integration remain
+pending for this feature. v0.1 is Complete: PR #1 merged as `56c3e1c`
+after review, Linux/macOS/quality CI passed at `ee8ca8b`, and the merged checkout
+passed unit tests, build and an offline Dublin CLI smoke test. No release or
+production verification occurred.
+
+## Investigation scope and acceptance
+
+1. `investigate TARGET` plans and sequentially runs available traceroute, MTR and
+   Linux tracepath tools. Explicit compile-time registration; no shell, sudo,
+   arbitrary command flags, SSH or native probe implementation.
+2. Accept IP literals and hostnames; resolve hostnames once for the execution and
+   pin one numeric address across tools. Dry-run performs no DNS or execution;
+   unresolved hostname plans are explicitly deferred.
+3. Bound the run to five minutes, each tool to two minutes, each stdout/stderr
+   stream to 1 MiB, default max hops 30 and MTR cycles 100. Validate overrides.
+   Cancel process groups and preserve partial evidence on interruption.
+4. Create a new private evidence directory (0700) with exclusive files (0600),
+   raw stdout/stderr, parser inputs and an investigation JSON report. Reject an
+   existing explicit directory. Record argv, timing, exit status and failures.
+5. Render one text/Markdown/JSON report with tool coverage and separate attributed
+   per-tool reports. Do not combine samples across tools. Report unavailable,
+   failed, timed-out, truncated and unparseable tools. Exit 3 if none succeeds;
+   exit 0 when at least one succeeds, with partial coverage explicit. An overall
+   deadline also uses exit 3 with partial evidence preserved. Usage/write errors
+   use 2 and signal exits retain 130/143.
+
+Implementation slices: planner and process runner; evidence and report pipeline;
+CLI/schema/docs; offline tests, full checks and review. Use fake executables and
+resolvers, never contact external targets during development. rDNS/ASN remain
+opt-in. Investigation options use explicit flags; existing enrichment config
+continues to apply only to `enrich`.
+
+This feature moves external-tool orchestration ahead of the original collection
+roadmap without authorizing device access or the remaining future milestones.
+Paris/Dublin remain saved-input parsers until execution adapters are separately
+implemented. There are no unresolved product decisions for this initial scope.
+
+## Investigation verification — 2026-10-29
+
+- `make check TOOLS_DIR=/tmp/tracefull-tools` passed unit and actual CLI tests,
+  schema validation, existing goldens, formatting, vet, race, staticcheck,
+  golangci-lint, Markdown checks and build. Parser coverage is 92.6%; verdict
+  coverage is 99.4%, both above the existing 90% gates.
+- `make fuzz` passed 2,610,424 executions in its 30-second fuzz window.
+  `make scan TOOLS_DIR=/tmp/tracefull-tools` found no vulnerabilities.
+  `make cross` compiled Linux/macOS on amd64/arm64; these are not runtime tests.
+- Fake processes/executables verified bounded output, process-group cancellation,
+  partial evidence, exclusive file creation, evidence digests and CLI exit codes.
+  A regression test caught and corrected an embedded buffer method bypassing the
+  output cap; the final runner exposes only the capped writer.
+- The rebuilt CLI ran numeric and hostname dry-run examples and exported the
+  investigation schema. Numeric dry-run found installed traceroute/MTR; hostname
+  dry-run deferred execution without DNS. Tracepath is unsupported on macOS.
+- No diagnostic packets, device access, publication or deployment occurred.
+  Linux runtime, real-tool network behavior, new-feature CI and merge remain
+  unverified. The next action is review of the local investigation commits.
+
+### Review and user-run evidence
+
+- The user supplied a macOS run on 2026-10-29: traceroute and MTR completed,
+  while tracepath was correctly reported unsupported. All 17 MTR rows matched
+  the supplied raw JSON for address, sample count, loss and displayed RTT values.
+  This is user-recorded real-tool evidence, not an independently repeated run
+  or a forwarding-cause diagnosis. Private captures are not committed.
+- Review found that sudo-created private evidence in a non-hidden directory can
+  make Go's recursive package discovery fail with permission denied. New default
+  directories use `.tracefull-evidence-*`, which Go skips. Explicit paths and
+  existing evidence are unchanged. A regression covers default report creation.
+  Full checks run in a clean checkout; the original blocked invocation is not
+  counted as a pass.
+- Push, PR, CI and merge after successful review/checks are authorized, followed
+  by work toward v0.2 collection. Real device captures and the routing-context
+  contract are requested before implementing affected platform behavior.
+
+## Completed v0.1 record
 
 ## Scope and acceptance
 

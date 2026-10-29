@@ -494,6 +494,12 @@ secrets in config — the tool has no field for a password or token by design.
 
 ## 13. Roadmap
 
+The user authorized local-tool `investigate` as the next feature after merging
+v0.1, ahead of the original device collection ordering. Its implemented contract
+is maintained in [investigation behavior](../docs/investigate.md). This extracts
+the external-tool orchestration portion of probing; SSH collection and native
+probing below remain future scope.
+
 | Milestone | Scope |
 |---|---|
 | **v0.1 — enrich** | `enrich --from`, all parsers, inventory, rDNS/ASN, verdict engine, text/json/markdown, `explain` (glamour), `schema`, lipgloss theme and fang help. No device access, no native probing. Ships the value for people with zero device access. |
