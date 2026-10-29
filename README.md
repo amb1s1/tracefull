@@ -4,6 +4,9 @@ tracefull interprets saved traces, matches hop addresses to inventory devices,
 and reports what the observations support. v0.1 reads files; it does not send
 probes, open SSH sessions, or collect device output.
 
+Supported operating systems: Linux and macOS. Windows execution is outside the
+supported scope; saved Windows `tracert` output can still be imported.
+
 ## Build and try it
 
 Requires Go 1.27.3. From this checkout:
@@ -167,7 +170,7 @@ make tools                 # install pinned checking tools into .tools/
 make check                 # tests, gofmt, vet, race, coverage, lint, docs, build
 make fuzz                  # 30-second offline parser mutation run
 make scan                  # govulncheck; needs vulnerability database access
-make cross                 # compile six OS/architecture pairs; does not run them
+make cross                 # compile Linux/macOS × amd64/arm64; does not run them
 ```
 
 Python 3 and Make are used by development checks. Routine Go tests are offline
@@ -183,9 +186,11 @@ the diff. Parser snapshots use the same opt-in variable with
 `go test ./internal/importer -run TestParserGoldens`; their inputs are labeled
 synthetic cases in the test file. Ordinary tests never regenerate expectations.
 
-Runtime verification so far is macOS arm64 only. Cross-compilation and a configured
-CI matrix do not establish Linux/Windows runtime support. Windows console
-interrupt handling is not locally verified. No live devices, external probe
+Local runtime verification covers macOS arm64. GitHub Actions Linux and macOS
+runtime jobs passed race tests, vet and build at revision `04668cd`; see
+[that run](https://github.com/amb1s1/tracefull/actions/runs/40958720082).
+Cross-compilation covers Linux/macOS × amd64/arm64 and does not establish runtime
+verification for every architecture. No live devices, external probe
 traffic, release artifacts or production behavior were tested.
 
 Layout: `cmd/tracefull/commands` contains CLI adapters; `internal/app` composes the

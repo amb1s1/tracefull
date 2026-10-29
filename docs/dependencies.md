@@ -35,5 +35,6 @@ not the subsequent race test.
 
 Unix stdout uses a duplicated nonblocking descriptor owned by Go's poller so
 cancellation can interrupt a full pipe. Cleanup restores shared descriptor flags
-and closes the duplicate. Process tests cover this behavior on the local host;
-Windows uses its file-close path and still needs native validation.
+and closes the duplicate. Process tests cover this behavior on the local host.
+Linux and macOS are the supported runtime targets. Windows-specific fallback code
+and transitive dependencies may remain, but do not imply Windows support.

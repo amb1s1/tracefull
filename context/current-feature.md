@@ -2,9 +2,9 @@
 
 ## Status
 
-Ready for review: v0.1, report readability and flow-attribution fixes are
-implemented and verified locally. External review,
-remote CI and integration remain pending; the overall feature is not Complete.
+Ready for review: runtime support and CI now target Linux and macOS only.
+The revised remote run, external review and integration remain pending; the
+overall feature is not Complete.
 
 ## Scope and acceptance
 
@@ -40,7 +40,10 @@ remote CI and integration remain pending; the overall feature is not Complete.
   only when the imported tool explicitly identifies its configured limit.
 - Destination-only loss takes precedence over real-loss. Different flow paths
   are evaluated separately. Intermediate response loss does not establish CoPP.
-- No release, push, PR, deployment or production verification is authorized.
+- Pushes to `codex/v0.1-enrich` are authorized. No PR, merge, release, deployment
+  or production verification is authorized.
+- Runtime scope: Linux and macOS only (user decision, 2026-10-29). Windows
+  execution is unsupported; importing saved `tracert` text remains in scope.
 
 ## v0.1 contract choices
 
@@ -83,15 +86,18 @@ remain part of the automated suite.
   pipeline, UI and CLI changes on `codex/v0.1-enrich`. See `git log --oneline`.
   Key implementation commits: `f989f06`, `7831ec5`, `dc433dc`, `dfd2650`,
   `fbb43d5`, `097bc13`, `d9f0885`, `822f559`, `b96307c`.
-- CI: workflow configured with pinned action revisions; no remote CI ran.
-  Linux/Windows native runtime and Windows console cancellation remain unverified.
-- Merge/publication: no push, PR, merge, release or deployment occurred.
+- CI: at `04668cd`, Linux and macOS runtime jobs passed race tests, vet and build.
+  Windows failed parser/report golden comparisons and is outside the newly
+  selected runtime scope. The quality job passed; the run failed solely on Windows.
+  Latest full-run status is recorded below.
+- Delivery: `codex/v0.1-enrich` was pushed to origin with user authorization.
+  No PR, merge, release or deployment occurred.
   Production/live-device verification: not performed; not authorized or needed
   for the saved-file milestone. DNS behavior is verified with fakes, not a live
   service availability test.
 - No implementation blockers remain. Unsupported localized text, unrecoverable
   flow/sample metadata, and later-milestone features are documented in README.
-  Next action: review the local branch; publishing/integration needs authorization.
+  Next action: verify the revised CI matrix; review/integration remain pending.
 
 ## History
 
@@ -187,3 +193,24 @@ Verification on 2026-10-29:
   capture produced no cross-flow finding. These are tests, not live observations.
 - Review/CI/integration remain pending. No publication, deployment or live-device
   verification occurred. Next action: review the local branch.
+
+## Follow-up — Linux and macOS runtime scope
+
+- The user explicitly excluded Windows runtime support on 2026-10-29 after the
+  first remote run failed on `windows-latest`. This is a product scope decision,
+  not an assertion that Windows tests passed.
+- Remove Windows from the runtime matrix and cross-build targets; retain all
+  Linux/macOS tests and gates. Keep `tracert` import and its regression fixtures.
+- Align README, dependency notes and the specification with Linux/macOS scope.
+  Existing Windows fallback files and transitive dependencies need no deletion.
+- Verify docs, four cross-build targets and the local check suite; commit, push
+  and inspect the new CI run. No unresolved decisions.
+
+Verification on 2026-10-29:
+
+- `make check TOOLS_DIR=/tmp/tracefull-tools` passed unchanged Linux/macOS gates
+  locally, including parser/report goldens and saved `tracert` fixtures.
+- `make cross` passed all four Linux/macOS × amd64/arm64 builds.
+- Prior remote run `40958720082` completed: Linux runtime, macOS runtime and
+  quality passed; Windows runtime failed. Its failure is retained as historical
+  evidence. A fresh run is required for the revised platform matrix.

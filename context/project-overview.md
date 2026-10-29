@@ -56,7 +56,7 @@ produced it.
 - **Bring your own access.** Native SSH (agent, keys, jump hosts) *or* any wrapper
   command (`netsh`, `nssh`, `tsh ssh`, …) via a template. No credentials on the command
   line, ever.
-- **Single static binary**, Linux/macOS/Windows (device collection and parsing everywhere;
+- **Single static binary**, Linux/macOS (device collection and parsing on supported systems;
   native probing where the OS allows).
 
 ### Non-goals (v1)
@@ -164,7 +164,7 @@ cmd/tracefull/root/     root command; explicit command registration and dispatch
 cmd/tracefull/commands/<name>/  one package per subcommand: New() *cobra.Command
 internal/trace/         Trace, Hop, Probe types; merge of multi-flow / multi-cycle runs
 internal/probe/         native prober: icmp/udp/tcp senders, receiver, flow-id control,
-                        PMTU mode; platform build tags (linux, darwin, windows)
+                        PMTU mode; platform build tags (linux, darwin)
 internal/parse/         dialect contract, detection, parsing, explicit registry
 internal/parse/<dialect>/  traceroute, tracert, tracepath, mtr, paris, dublin
 internal/enrich/        rDNS, ASN, address tagging, inventory matching
@@ -264,8 +264,8 @@ says so when fewer samples were taken.
   definitions exactly so numbers are comparable.
 - PMTU mode: send with DF at the maximum size, on ICMP Fragmentation Needed read the
   next-hop MTU and resend; record per-hop PMTU like tracepath.
-- Privilege: needs `CAP_NET_RAW` (Linux), root or an admin-granted BPF device (macOS), or
-  admin (Windows). When unavailable: fall back to `--external` if a tool is present, else
+- Privilege: needs `CAP_NET_RAW` (Linux), root or an admin-granted BPF device (macOS).
+  When unavailable: fall back to `--external` if a tool is present, else
   exit 3 with the exact capability to grant (`setcap cap_net_raw+ep`). Unprivileged ICMP
   datagram sockets (`ping_group_range`) are supported on Linux for ICMP mode.
 - Concurrency: outstanding probes window (`-N` equivalent) default 16; a per-hop send
@@ -510,7 +510,7 @@ secrets in config — the tool has no field for a password or token by design.
   `SECURITY.md` (private disclosure address; note that the tool never writes to devices),
   `CHANGELOG.md` (keep-a-changelog).
 - CI (GitHub Actions): `go vet`, `staticcheck`, `golangci-lint`, `go test -race`,
-  `govulncheck`, build matrix linux/darwin/windows × amd64/arm64, allowlist test as a
+  `govulncheck`, build matrix linux/darwin × amd64/arm64, allowlist test as a
   separate required check.
 - Release: goreleaser, signed checksums, SBOM, Homebrew tap, `go install` path, Docker
   image with `CAP_NET_RAW` documented.
@@ -533,8 +533,9 @@ secrets in config — the tool has no field for a password or token by design.
 4. **Driver pre-commands** that change terminal paging are harmless but are technically
    not "show" commands. Proposal: explicitly whitelisted per driver as `session-setup`,
    shown in dry-run like everything else.
-5. **Windows native probing:** ship it in v0.3 or document `--external tracert` only?
-   Proposal: `--external` only until someone needs it.
+5. **Runtime platforms — resolved:** Linux and macOS only, per the user's
+   2026-10-29 decision. Windows execution and native probing are outside scope.
+   Importing saved Windows `tracert` text remains supported.
 6. **Structured output from devices** (`| json`, `| display json`) where available gives
    better parsers but a second code path per platform. Proposal: v1 parses text only;
    drivers may opt into JSON per command later behind the same `Parse*` interface.

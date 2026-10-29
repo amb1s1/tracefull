@@ -5,7 +5,7 @@ import tempfile
 from pathlib import Path
 
 with tempfile.TemporaryDirectory(prefix="tracefull-cross-") as tmp:
-    for goos in ("linux", "darwin", "windows"):
+    for goos in ("linux", "darwin"):
         for arch in ("amd64", "arm64"):
             env = dict(os.environ, GOOS=goos, GOARCH=arch, CGO_ENABLED="0")
             binary = Path(tmp) / f"tracefull-{goos}-{arch}"
