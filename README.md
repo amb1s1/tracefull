@@ -40,7 +40,7 @@ contain a SHA-256 digest and line/JSON-pointer references into that input.
 
 | Dialect | Supported representation | Interpretation limits |
 | --- | --- | --- |
-| Linux/BSD/macOS traceroute | Numeric or hostname/IP rows, IPv4/IPv6, multiple responders, stars, annotations; headerless rows with `--dest` | EOF is not evidence of a completed run. Unparsed extension lines produce notes. Save header/stderr with the capture. |
+| Linux/BSD/macOS traceroute | Numeric or hostname/IP rows, IPv4/IPv6, multiple responders (including wrapped rows), stars, annotations; headerless rows with `--dest` | EOF is not evidence of a completed run. Unparsed extension lines produce notes. Save header/stderr with the capture. |
 | Windows tracert | English text, numeric or hostname/IP rows, timeout rows, `<1 ms` | Censored RTTs stay unknown; localized headings are unsupported. |
 | tracepath | PMTU, retries, `asymm`, `reached`, `Resume`, no-reply rows | Retry statistics are not combined; asymmetry is an imported hint. |
 | MTR | Report/wide/both-address/ASN text (`-r`, `-rw`, `-rwb`, `-rwz`) and upstream `--json` | Text normally lacks destination metadata: supply `--dest IP`. Hostname-only identity stays unresolved without a numeric address. Zero sent probes do not become zero loss. |
@@ -108,7 +108,8 @@ merging; contradictory values in one layer fail. Command-line format choices
 override inherited aliases.
 Configuration applies to `enrich`; inspection commands have their own flags.
 
-Reports go to stdout, diagnostics to stderr. `enrich -v` adds diagnostics;
+Text/Markdown measurements use at most three fractional digits; JSON retains
+full precision. Reports go to stdout, diagnostics to stderr. `enrich -v` adds diagnostics;
 `--log-format json` makes those machine-readable and `--quiet` suppresses them.
 Errors remain visible. `--no-color`, `NO_COLOR`, non-TTY output and `TERM=dumb`
 disable report styling. JSON and Markdown always contain source text without

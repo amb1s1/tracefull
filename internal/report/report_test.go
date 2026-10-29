@@ -106,3 +106,36 @@ func TestGolden(t *testing.T) {
 		})
 	}
 }
+
+func TestDisplayPrecisionPreservesJSON(t *testing.T) {
+	for _, tc := range []struct {
+		value float64
+		want  string
+	}{{11.199999999999998, "11.2"}, {66.66666666666667, "66.667"}, {17.822666666666667, "17.823"}, {10.103, "10.103"}, {0, "0"}, {-0.0001, "0"}} {
+		if got := Number(&tc.value); got != tc.want {
+			t.Errorf("%v: got %s want %s", tc.value, got, tc.want)
+		}
+	}
+	r := sample()
+	r.Hops[0].Avg = trace.Ptr(11.199999999999998)
+	for _, format := range []string{"text", "markdown"} {
+		var b bytes.Buffer
+		if e := Render(&b, r, format); e != nil {
+			t.Fatal(e)
+		}
+		if strings.Contains(b.String(), "11.199999999999998") || !strings.Contains(b.String(), "11.2") {
+			t.Fatal("unrounded display")
+		}
+	}
+	var b bytes.Buffer
+	if e := Render(&b, r, "json"); e != nil {
+		t.Fatal(e)
+	}
+	var got Report
+	if e := json.Unmarshal(b.Bytes(), &got); e != nil {
+		t.Fatal(e)
+	}
+	if *got.Hops[0].Avg != *r.Hops[0].Avg {
+		t.Fatal("display rounding changed JSON measurement")
+	}
+}

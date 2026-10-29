@@ -2,7 +2,8 @@
 
 ## Status
 
-Ready for review. v0.1 is implemented and verified locally. External review,
+Ready for review: v0.1 and the multiline macOS traceroute regression are
+implemented and verified locally. External review,
 remote CI and integration remain pending; the overall feature is not Complete.
 
 ## Scope and acceptance
@@ -100,3 +101,33 @@ remain part of the automated suite.
 - 2026-10-29: completed the v0.1 pipeline, corrected dependency vulnerabilities,
   parser edge cases, alias precedence and Unix stream cancellation; local checks
   passed. Marked Ready for review, with CI and platform-runtime gaps explicit.
+
+## Follow-up regression — multiline traceroute
+
+- Accept indented responder continuations as part of the preceding TTL, including
+  IPv6 and hostname/IP rows. Recompute statistics over every recorded probe and
+  retain each contributing line reference. Keep unrecognized extensions visible.
+- Limit text/Markdown numbers to three fractional digits; keep JSON precision.
+- Verify the scrubbed real capture has 15 hops, three probes at every hop, and
+  multiple responders at TTLs 9, 11, 13, 14 and 15. Add synthetic boundary tests.
+- Rebuild the local binary and reprocess the original file offline. Preserve the
+  user's untracked `trace.txt`; commit only code, scrubbed fixture and documentation.
+
+Verification on 2026-10-29:
+
+- Reproduced skipped responders and IPv6 continuation misclassification with
+  failing regression tests before correcting the parser.
+- `make check TOOLS_DIR=/tmp/tracefull-tools` passed after the fix, including
+  schema/goldens, CLI integration, race, formatting, vet and both linters.
+  Parser coverage is now 92.5%; verdict coverage remains 99.3%.
+- `make fuzz` passed 2,131,713 executions with the scrubbed capture added as a
+  seed. No failure corpus was produced.
+- `make scan TOOLS_DIR=/tmp/tracefull-tools` reported no vulnerabilities;
+  `make cross` compiled all six candidate platform/architecture combinations.
+  Cross-compilation does not verify runtime behavior.
+- Rebuilt `bin/tracefull` and reprocessed the original capture with DNS disabled:
+  15 hops, 45 probes, no skipped lines, and multiple-responder observations at
+  TTLs 9, 11, 13, 14 and 15. Three samples do not support a loss classification;
+  multiple responders alone do not prove ECMP.
+- Text/Markdown rounding and unchanged JSON precision have regression coverage.
+  The original untracked capture remains untouched and outside the commits.

@@ -5,6 +5,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"os"
 	"path/filepath"
 	"strings"
@@ -102,5 +103,49 @@ func TestCLIShorthandOverridesEnvironmentAlias(t *testing.T) {
 	out, _, e := execute(t, "enrich", "--from", "-", "--markdown")
 	if e != nil || !strings.HasPrefix(out, "# tracefull") {
 		t.Fatalf("alias precedence: %v", e)
+	}
+}
+
+func TestWrappedCapturePipeline(t *testing.T) {
+	t.Setenv("XDG_CONFIG_HOME", t.TempDir())
+	out, _, e := execute(t, "enrich", "--from", "../../../internal/parse/traceroute/testdata/macos-multiple-responders.txt", "--json", "--no-rdns")
+	if e != nil {
+		t.Fatal(e)
+	}
+	var got struct {
+		Hops []struct {
+			TTL  int `json:"ttl"`
+			Sent int `json:"sent"`
+		}
+		Findings []struct {
+			Kind string `json:"kind"`
+			Hop  int    `json:"hop"`
+		}
+		Notes []string
+	}
+	if e = json.Unmarshal([]byte(out), &got); e != nil {
+		t.Fatal(e)
+	}
+	if len(got.Hops) != 15 {
+		t.Fatal("missing hops")
+	}
+	for _, h := range got.Hops {
+		if h.Sent != 3 {
+			t.Fatalf("hop %d has %d samples", h.TTL, h.Sent)
+		}
+	}
+	multipath := []int{}
+	for _, f := range got.Findings {
+		if f.Kind == "ecmp" {
+			multipath = append(multipath, f.Hop)
+		}
+	}
+	if fmt.Sprint(multipath) != "[9 11 13 14 15]" {
+		t.Fatalf("missing responder findings: %v", multipath)
+	}
+	for _, n := range got.Notes {
+		if strings.Contains(n, "Unparsed") {
+			t.Fatal(n)
+		}
 	}
 }

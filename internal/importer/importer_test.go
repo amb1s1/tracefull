@@ -97,6 +97,11 @@ func FuzzParse(f *testing.F) {
 	for _, tc := range cases {
 		f.Add([]byte(tc.input))
 	}
+	capture, e := os.ReadFile("../parse/traceroute/testdata/macos-multiple-responders.txt")
+	if e != nil {
+		f.Fatal(e)
+	}
+	f.Add(capture)
 	f.Add([]byte("garbage"))
 	f.Fuzz(func(t *testing.T, b []byte) {
 		if len(b) > 1<<20 {

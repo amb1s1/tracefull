@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"strconv"
 	"strings"
 	"unicode"
 
@@ -47,6 +48,13 @@ func Escape(s string) string {
 func Number[T int | float64](n *T) string {
 	if n == nil {
 		return "?"
+	}
+	if v, ok := any(*n).(float64); ok {
+		out := strings.TrimRight(strings.TrimRight(strconv.FormatFloat(v, 'f', 3, 64), "0"), ".")
+		if out == "-0" {
+			return "0"
+		}
+		return out
 	}
 	return fmt.Sprint(*n)
 }
