@@ -7,11 +7,13 @@ require (
 	charm.land/lipgloss/v2 v2.0.6
 	github.com/charmbracelet/fang v1.0.0
 	github.com/charmbracelet/x/term v0.2.2
+	github.com/mattn/go-shellwords v1.0.16
 	github.com/muesli/cancelreader v0.2.2
 	github.com/santhosh-tekuri/jsonschema/v6 v6.0.3
 	github.com/spf13/cobra v1.10.2
 	github.com/spf13/pflag v1.0.9
 	go.yaml.in/yaml/v3 v3.0.5
+	golang.org/x/crypto v0.58.0
 	golang.org/x/sys v0.49.0
 )
 
