@@ -1,0 +1,466 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "1"
+    },
+    "tracefull_version": {
+      "type": "string"
+    },
+    "dest": {
+      "type": "string"
+    },
+    "dest_addr": {
+      "type": "string"
+    },
+    "source_addr": {
+      "type": "string"
+    },
+    "started_at": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "probe": {
+      "type": "object",
+      "properties": {
+        "tool": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "flows": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "cycles": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        }
+      },
+      "required": [
+        "tool",
+        "type",
+        "flows",
+        "cycles"
+      ],
+      "additionalProperties": false
+    },
+    "dest_reached": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "max_hops": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "complete": {
+      "type": "boolean"
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "hops": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/hop"
+      }
+    },
+    "paths": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "hops": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/hop"
+            }
+          },
+          "dest_reached": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "source_port": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 0,
+            "maximum": 65535
+          },
+          "dest_port": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 0,
+            "maximum": 65535
+          },
+          "started_at": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "ended_at": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "hops",
+          "dest_reached",
+          "source_port",
+          "dest_port",
+          "started_at",
+          "ended_at"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "source": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "name",
+        "sha256",
+        "bytes"
+      ],
+      "additionalProperties": false
+    },
+    "dns_observed_at": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string"
+          },
+          "hop": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "flow": {
+            "type": "string"
+          },
+          "severity": {
+            "enum": [
+              "info",
+              "warn",
+              "problem"
+            ]
+          },
+          "text": {
+            "type": "string"
+          },
+          "rule": {
+            "type": "string"
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "limitations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "kind",
+          "hop",
+          "flow",
+          "severity",
+          "text",
+          "rule",
+          "evidence",
+          "limitations"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "devices": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "platform": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "site": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          },
+          "addresses": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "name",
+          "address",
+          "platform",
+          "role",
+          "site",
+          "notes",
+          "addresses"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "ended_at": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "tracefull_version",
+    "dest",
+    "dest_addr",
+    "source_addr",
+    "started_at",
+    "probe",
+    "dest_reached",
+    "max_hops",
+    "complete",
+    "notes",
+    "hops",
+    "paths",
+    "source",
+    "dns_observed_at",
+    "findings",
+    "devices",
+    "ended_at"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/amb1s1/tracefull/schema/v1",
+  "$defs": {
+    "hop": {
+      "type": "object",
+      "properties": {
+        "ttl": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 255
+        },
+        "addresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "names": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rdns": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "asn": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "matches": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "device": {
+                "type": "string"
+              },
+              "method": {
+                "type": "string"
+              },
+              "candidates": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "device",
+              "method",
+              "candidates"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "sent": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "lost": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "loss_pct": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "best": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "avg": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "worst": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "stdev": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "pmtu": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "ttl",
+        "addresses",
+        "names",
+        "rdns",
+        "asn",
+        "matches",
+        "sent",
+        "lost",
+        "loss_pct",
+        "best",
+        "avg",
+        "worst",
+        "stdev",
+        "pmtu",
+        "tags",
+        "notes",
+        "evidence"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
