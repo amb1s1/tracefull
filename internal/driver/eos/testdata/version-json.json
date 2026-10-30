@@ -1,0 +1,20 @@
+{
+  "mfgName": "Arista",
+  "modelName": "DCS-7010TX-48C-F",
+  "hardwareRevision": "11.05",
+  "serialNumber": "REDACTED",
+  "systemMacAddress": "02:00:00:00:00:01",
+  "hwMacAddress": "02:00:00:00:00:01",
+  "configMacAddress": "00:00:00:00:00:00",
+  "version": "4.33.4M",
+  "architecture": "x86_64",
+  "internalVersion": "4.33.4M-42444412.4334M",
+  "internalBuildId": "7929ddbc-0c94-4536-a774-167ea4b4eab8",
+  "imageFormatVersion": "3.0",
+  "imageOptimization": "Strata-4GB",
+  "bootupTimestamp": 1777032068.8452945,
+  "uptime": 16286686.67,
+  "memTotal": 8084896,
+  "memFree": 5579760,
+  "isIntlVersion": false
+}

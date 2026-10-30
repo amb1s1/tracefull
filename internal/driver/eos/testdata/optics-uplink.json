@@ -1,0 +1,17 @@
+{
+  "interfaces": {
+    "Ethernet49": {
+      "slot": "Ethernet49",
+      "channel": "1",
+      "vendorSn": "REDACTED",
+      "mediaType": "10GBASE-LR",
+      "narrowBand": false,
+      "updateTime": 1793318891.8764515,
+      "temperature": 47.765625,
+      "voltage": 3.2887,
+      "txBias": 34.934,
+      "txPower": -2.0134935455473055,
+      "rxPower": -2.3515164280658922
+    }
+  }
+}

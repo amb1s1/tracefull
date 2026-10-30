@@ -1,0 +1,64 @@
+{
+  "interfaces": {
+    "Ethernet1": {
+      "name": "Ethernet1",
+      "forwardingModel": "bridged",
+      "lineProtocolStatus": "up",
+      "interfaceStatus": "connected",
+      "hardware": "ethernet",
+      "interfaceAddress": [],
+      "physicalAddress": "02:00:00:00:00:05",
+      "burnedInAddress": "02:00:00:00:00:05",
+      "description": "",
+      "bandwidth": 1000000000,
+      "mtu": 9214,
+      "l3MtuConfigured": false,
+      "l2Mru": 0,
+      "lastStatusChangeTimestamp": 1785597434.2380192,
+      "interfaceStatistics": {
+        "updateInterval": 300.0,
+        "inBitsRate": 1544.2275716985173,
+        "inPktsRate": 0.931372776824901,
+        "outBitsRate": 8067.697427369934,
+        "outPktsRate": 9.180714243153165
+      },
+      "interfaceCounters": {
+        "inOctets": 1749143932,
+        "inUcastPkts": 9473380,
+        "inMulticastPkts": 678062,
+        "inBroadcastPkts": 0,
+        "inDiscards": 0,
+        "inTotalPkts": 10151442,
+        "outOctets": 23032610365,
+        "outUcastPkts": 8430629,
+        "outMulticastPkts": 220937272,
+        "outBroadcastPkts": 191787,
+        "outDiscards": 0,
+        "outTotalPkts": 229559688,
+        "linkStatusChanges": 10,
+        "lastClear": 1777032068.8423464,
+        "totalInErrors": 0,
+        "inputErrorsDetail": {
+          "runtFrames": 0,
+          "giantFrames": 0,
+          "fcsErrors": 0,
+          "alignmentErrors": 0,
+          "symbolErrors": 0,
+          "rxPause": 0
+        },
+        "totalOutErrors": 0,
+        "outputErrorsDetail": {
+          "collisions": 0,
+          "lateCollisions": 0,
+          "deferredTransmissions": 0,
+          "txPause": 0
+        },
+        "counterRefreshTime": 1793318831.8560617
+      },
+      "duplex": "duplexFull",
+      "autoNegotiate": "success",
+      "loopbackMode": "loopbackNone",
+      "lanes": 0
+    }
+  }
+}

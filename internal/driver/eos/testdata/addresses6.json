@@ -1,0 +1,112 @@
+{
+  "interfaces": {
+    "Loopback0": {
+      "name": "Loopback0",
+      "interfaceStatus": "connected",
+      "lineProtocolStatus": "up",
+      "mtu": 65535,
+      "linkLocal": {
+        "address": "fe80::2",
+        "subnet": "fe80::0/64",
+        "active": true,
+        "leastpref": false,
+        "dadfailed": false
+      },
+      "state": "enabled",
+      "addresses": [
+        {
+          "address": "2001:db8:2::7",
+          "subnet": "2001:db8:2::0/64",
+          "active": true,
+          "leastpref": false,
+          "dadfailed": false
+        }
+      ],
+      "globalAddressesAreVirtual": false,
+      "multicastGroupAddresses": [
+        "ff02::1",
+        "ff02::2",
+        "ff02::1:ff00:1",
+        "ff02::1:ff00:0"
+      ],
+      "dadStatus": "unsupported",
+      "dadAttempts": 0,
+      "ndReachableTime": 2147483000,
+      "ndRetransmitInterval": 1000,
+      "ndCacheExpiryTime": 14400,
+      "enhancedDad": true,
+      "autoConfigStatus": "stateless",
+      "neighborDiscoverDetails": {
+        "ndAdvertisedReachableTime": 2147483000,
+        "ndRouterAdvSuppressed": true,
+        "ndRouterAdvRetransmitInterval": 1000,
+        "ndRouterAdvInterval": 200000,
+        "routerAdvLifetime": 1800,
+        "routerPreference": "Medium",
+        "routerAdvHopLimit": 64
+      },
+      "urpf": "disable",
+      "vrf": "default",
+      "addrSource": "manual",
+      "maxMssIngress": 0,
+      "maxMssEgress": 0,
+      "acceptUnsolicitedNa": false,
+      "urpfV4V6Mismatch": false,
+      "mtuConfigError": false
+    },
+    "Vlan2602": {
+      "name": "Vlan2602",
+      "interfaceStatus": "connected",
+      "lineProtocolStatus": "up",
+      "mtu": 1500,
+      "linkLocal": {
+        "address": "fe80::9",
+        "subnet": "fe80::0/64",
+        "active": true,
+        "leastpref": false,
+        "dadfailed": false
+      },
+      "state": "enabled",
+      "addresses": [
+        {
+          "address": "2001:db8:3::a",
+          "subnet": "2001:db8:3::0/64",
+          "active": true,
+          "leastpref": false,
+          "dadfailed": false
+        }
+      ],
+      "globalAddressesAreVirtual": false,
+      "multicastGroupAddresses": [
+        "ff02::1:ff07:abc7",
+        "ff02::1",
+        "ff02::1:ff00:4",
+        "ff02::2"
+      ],
+      "dadStatus": "enabled",
+      "dadAttempts": 1,
+      "ndReachableTime": 2147483000,
+      "ndRetransmitInterval": 1000,
+      "ndCacheExpiryTime": 14400,
+      "enhancedDad": true,
+      "autoConfigStatus": "stateless",
+      "neighborDiscoverDetails": {
+        "ndAdvertisedReachableTime": 1,
+        "ndRouterAdvSuppressed": true,
+        "ndRouterAdvRetransmitInterval": 1000,
+        "ndRouterAdvInterval": 200000,
+        "routerAdvLifetime": 1800,
+        "routerPreference": "Medium",
+        "routerAdvHopLimit": 64
+      },
+      "urpf": "disable",
+      "vrf": "default",
+      "addrSource": "manual",
+      "maxMssIngress": 0,
+      "maxMssEgress": 0,
+      "acceptUnsolicitedNa": false,
+      "urpfV4V6Mismatch": false,
+      "mtuConfigError": false
+    }
+  }
+}

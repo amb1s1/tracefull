@@ -1,0 +1,141 @@
+{
+  "interfaces": {
+    "Loopback0": {
+      "name": "Loopback0",
+      "interfaceStatus": "connected",
+      "lineProtocolStatus": "up",
+      "mtu": 65535,
+      "interfaceAddressBrief": {
+        "ipAddr": {
+          "address": "192.0.2.1",
+          "maskLen": 32
+        }
+      },
+      "ipv4Routable240": false,
+      "ipv4Routable0": false,
+      "enabled": true,
+      "description": "",
+      "interfaceAddress": {
+        "primaryIp": {
+          "address": "192.0.2.1",
+          "maskLen": 32
+        },
+        "secondaryIps": {},
+        "secondaryIpsOrderedList": [],
+        "virtualIp": {
+          "address": "0.0.0.0",
+          "maskLen": 0
+        },
+        "virtualSecondaryIps": {},
+        "virtualSecondaryIpsOrderedList": [],
+        "broadcastAddress": "255.255.255.255",
+        "dhcp": false
+      },
+      "proxyArp": false,
+      "proxyArpAllowDefault": false,
+      "localProxyArp": false,
+      "gratuitousArp": false,
+      "arpAgingTimeout": 14400,
+      "isVrrpBackup": false,
+      "vrf": "default",
+      "urpf": "disable",
+      "addresslessForwarding": "isInvalid",
+      "v4IntfForwarding": true,
+      "directedBroadcastEnabled": false,
+      "maxMssIngress": 0,
+      "maxMssEgress": 0
+    },
+    "Management1": {
+      "name": "Management1",
+      "interfaceStatus": "notconnect",
+      "lineProtocolStatus": "down",
+      "mtu": 1500,
+      "interfaceAddressBrief": {
+        "ipAddr": {
+          "address": "0.0.0.0",
+          "maskLen": 0
+        }
+      },
+      "ipv4Routable240": false,
+      "ipv4Routable0": false,
+      "enabled": true,
+      "description": "",
+      "interfaceAddress": {
+        "primaryIp": {
+          "address": "0.0.0.0",
+          "maskLen": 0
+        },
+        "secondaryIps": {},
+        "secondaryIpsOrderedList": [],
+        "virtualIp": {
+          "address": "0.0.0.0",
+          "maskLen": 0
+        },
+        "virtualSecondaryIps": {},
+        "virtualSecondaryIpsOrderedList": [],
+        "broadcastAddress": "255.255.255.255",
+        "dhcp": false
+      },
+      "proxyArp": false,
+      "proxyArpAllowDefault": false,
+      "localProxyArp": false,
+      "gratuitousArp": false,
+      "arpAgingTimeout": 14400,
+      "routedAddr": "02:00:00:00:00:02",
+      "isVrrpBackup": false,
+      "vrf": "default",
+      "urpf": "disable",
+      "addresslessForwarding": "isInvalid",
+      "v4IntfForwarding": false,
+      "directedBroadcastEnabled": false,
+      "maxMssIngress": 0,
+      "maxMssEgress": 0
+    },
+    "Vlan2602": {
+      "name": "Vlan2602",
+      "interfaceStatus": "connected",
+      "lineProtocolStatus": "up",
+      "mtu": 1500,
+      "interfaceAddressBrief": {
+        "ipAddr": {
+          "address": "0.0.0.0",
+          "maskLen": 0
+        }
+      },
+      "ipv4Routable240": false,
+      "ipv4Routable0": false,
+      "enabled": true,
+      "description": "",
+      "interfaceAddress": {
+        "primaryIp": {
+          "address": "0.0.0.0",
+          "maskLen": 0
+        },
+        "secondaryIps": {},
+        "secondaryIpsOrderedList": [],
+        "virtualIp": {
+          "address": "0.0.0.0",
+          "maskLen": 0
+        },
+        "virtualSecondaryIps": {},
+        "virtualSecondaryIpsOrderedList": [],
+        "broadcastAddress": "255.255.255.255",
+        "dhcp": false
+      },
+      "proxyArp": false,
+      "proxyArpAllowDefault": false,
+      "localProxyArp": false,
+      "gratuitousArp": false,
+      "arpAgingTimeout": 14400,
+      "routedAddr": "02:00:00:00:00:01",
+      "isVrrpBackup": false,
+      "vrf": "default",
+      "urpf": "disable",
+      "addresslessForwarding": "isInvalid",
+      "v4IntfForwarding": false,
+      "directedBroadcastEnabled": false,
+      "maxMssIngress": 0,
+      "maxMssEgress": 0
+    }
+  }
+}

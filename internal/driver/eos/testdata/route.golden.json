@@ -1,0 +1,19 @@
+[
+  {
+    "prefix": "::/0",
+    "protocol": "static",
+    "context": "default",
+    "selected": true,
+    "installed": true,
+    "next_hops": [
+      {
+        "address": "2001:db8:3::d",
+        "interface": "Vlan2602",
+        "active": true,
+        "installed": true,
+        "evidence": "json:/vrfs/default/routes/::~10/vias/0"
+      }
+    ],
+    "evidence": "json:/vrfs/default/routes/::~10"
+  }
+]
