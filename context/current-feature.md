@@ -1,8 +1,61 @@
 # Current feature — v0.2 device collection
 
-## Active slice — Junos dynamic route validation
+## Active slice — EOS route validation
 
-Workflow at handoff: Ready for review on `codex/junos-dynamic-routes`.
+Workflow at handoff: Ready for review on `codex/eos-route-validation`.
+EOS currently has only an IPv6 static-route capture. Use the authorized EOS target
+to validate IPv4 and available dynamic-route responses, including next-hop scope,
+selection and explicitly reported hardware-programming state.
+
+Acceptance and slices:
+
+- Gather bounded read-only version/route observations with strict host keys,
+  25-second command deadlines and 1 MiB per stream; no probes or configuration
+  changes. Keep raw captures and identifying maps outside Git.
+- Scrub actual route captures and preserve provenance. Correct only behavior
+  demonstrated by captures or meaningful regression/failure tests.
+- Preserve unknown measurements, route/next-hop attribution, context, command
+  policy, schema and CLI/domain separation. Do not infer installed forwarding
+  state from missing fields or substitute another route after a failure.
+- Verify route facts, malformed/partial responses, discovery, schema and actual
+  CLI replay. Run full local checks and bounded EOS fuzzing; review, commit,
+  verify CI and integrate under existing authorization.
+
+Six bounded authorized reads rechecked EOS 4.33.4M, two empty IPv4 lookups, the
+IPv6 static default and both routing summaries. All 12 private stream hashes
+verified. The summaries reported no BGP, IS-IS or OSPF routes in either default table, so
+dynamic-route validation is blocked on capture availability. The complete empty
+IPv4 lookup is retained with provenance; it contains no identifying fields.
+
+Six synthetic regressions reproduced missing/null VRF/route containers becoming
+successful empty observations, null route records becoming invented routes, and
+null/anonymous next hops inheriting active/installed state. The parser now rejects
+these structures while preserving valid empty lookups and unknown optional state.
+This bounded correction does not expand commands, schema or platform claims.
+Pipeline/schema tests cover empty lookup and static-route interface discovery;
+actual CLI replay covers empty success and retained malformed evidence/exit 3 in
+JSON, text and Markdown. Missing platform/reverse captures remain separate
+blockers for the full v0.2 milestone.
+
+Local verification on Go 1.27.3/macOS passed: `make check` (unit/regression,
+CLI replay, schema, formatting, vet, race, coverage, staticcheck, golangci-lint,
+docs and build), the documented dry-run/schema commands, `make scan cross`, and
+1,664,204 EOS fuzz executions in a 30-second budget. Coverage: parsers 92.6%,
+verdicts 99.4%, drivers 93.7%. No reachable/imported-package vulnerabilities; one
+unused required-module advisory remains. Cross-builds do not verify runtime.
+Review covered null-container handling, valid empty/unknown facts, interface
+discovery, raw evidence/exit status, provenance and unchanged command/schema
+boundaries. The Markdown replay assertion was corrected to account for existing
+HTML escaping; the renderer was unchanged. No remaining issue was found in this
+slice. CI and integration are pending at this handoff; the PR records their result.
+Read-only SSH captures and offline CLI replay are separate checks: the new CLI
+was not run against the EOS device. No release, deployment or probes occurred.
+
+## Completed slice — Junos dynamic route validation
+
+Workflow: Complete. [PR #8](https://github.com/amb1s1/tracefull/pull/8) merged as
+`782419c`; all six pre-merge and three post-merge CI checks passed. Integrated
+package tests, main binary rebuild and documented dry-run passed.
 The Junos parser has connected-route and empty IPv6 captures. Validate dynamic
 route observations using the previously authorized Junos target, without guessing
 next-hop layouts or treating RIB state as hardware installation.

@@ -202,11 +202,11 @@ func version(data []byte, f *driver.Facts) error {
 }
 func route(data []byte, f *driver.Facts) error {
 	var doc struct {
-		VRFs map[string]struct {
-			Routes map[string]struct {
+		VRFs map[string]*struct {
+			Routes map[string]*struct {
 				RouteType, RouteAction               string
 				HardwareProgrammed, KernelProgrammed *bool
-				Vias                                 []struct{ NexthopAddr, Interface string }
+				Vias                                 []*struct{ NexthopAddr, Interface string }
 			}
 		}
 	}
@@ -217,11 +217,17 @@ func route(data []byte, f *driver.Facts) error {
 		return fmt.Errorf("missing VRF route object")
 	}
 	for _, vrf := range keys(doc.VRFs) {
+		if doc.VRFs[vrf] == nil || doc.VRFs[vrf].Routes == nil {
+			return fmt.Errorf("missing routes object for VRF %q", vrf)
+		}
 		for _, prefix := range keys(doc.VRFs[vrf].Routes) {
 			if _, e := netip.ParsePrefix(prefix); e != nil {
 				return e
 			}
 			row := doc.VRFs[vrf].Routes[prefix]
+			if row == nil {
+				return fmt.Errorf("null route %q", prefix)
+			}
 			ref := "json:/vrfs/" + driver.JSONPart(vrf) + "/routes/" + driver.JSONPart(prefix)
 			r := driver.Route{Prefix: prefix, Protocol: row.RouteType, Context: vrf, Installed: row.HardwareProgrammed, NextHops: []driver.NextHop{}, Evidence: ref}
 			if row.RouteAction != "" {
@@ -229,6 +235,9 @@ func route(data []byte, f *driver.Facts) error {
 				r.Selected = &selected
 			}
 			for i, n := range row.Vias {
+				if n == nil || n.NexthopAddr == "" && n.Interface == "" {
+					return fmt.Errorf("missing next-hop identity at %s/vias/%d", ref, i)
+				}
 				if n.NexthopAddr != "" {
 					if _, e := netip.ParseAddr(n.NexthopAddr); e != nil {
 						return e

@@ -16,6 +16,7 @@ func TestCollectExecutable(t *testing.T) {
 	if out, err := exec.Command("go", "build", "-o", bin, ".").CombinedOutput(); err != nil {
 		t.Fatalf("%v %s", err, out)
 	}
+	t.Run("eos-route", func(t *testing.T) { testEOSRouteExecutable(t, bin) })
 	t.Run("junos-route", func(t *testing.T) { testJunosRouteExecutable(t, bin) })
 	t.Run("isis", func(t *testing.T) { testISISExecutable(t, bin) })
 	t.Run("optics", func(t *testing.T) { testOpticsExecutable(t, bin) })
