@@ -32,7 +32,7 @@ func New() *cobra.Command {
 	f.StringVar(&o.KnownHosts, "known-hosts", "", "SSH known_hosts path (default ~/.ssh/known_hosts)")
 	f.BoolVar(&o.InsecureHostKey, "insecure-host-key", false, "Explicitly disable SSH host-key verification")
 	f.StringVar(&o.Wrapper, "ssh-cmd", "", "Wrapper argv template; {cmd} must be a single argument")
-	f.BoolVar(&o.Sudo, "sudo", false, "Use sudo -n for the Cumulus FRR and LLDP read commands")
+	f.BoolVar(&o.Sudo, "sudo", false, "Use sudo -n for the Cumulus/Linux-FRR FRR, LLDP and optics read commands")
 	f.DurationVar(&o.ConnectTimeout, "connect-timeout", o.ConnectTimeout, "SSH connection deadline")
 	f.DurationVar(&o.CommandTimeout, "cmd-timeout", o.CommandTimeout, "Per-command deadline")
 	f.DurationVar(&o.Timeout, "timeout", o.Timeout, "Overall collection deadline (maximum 30m)")

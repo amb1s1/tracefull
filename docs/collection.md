@@ -27,7 +27,7 @@ For an authorized device, substitute your actual saved trace and inventory:
 ```
 
 The second command opens SSH and performs the planned reads. `--sudo` explicitly
-selects `sudo -n` for FRR and LLDP; it never prompts or falls back after a denial.
+selects `sudo -n` for FRR, LLDP and optics; it never prompts or falls back after a denial.
 Do not run the entire CLI under sudo merely to grant these remote reads.
 Default context is `default`. Cumulus and Linux/FRR additionally accept explicit
 `--vrf mgmt`; other contexts fail without falling back. Management mode uses
@@ -62,13 +62,36 @@ SSH command string is exact; wrappers also show the exact local argv.
 | lldp | `/usr/sbin/lldpctl -f json` | One raw snapshot, parsed neighbors filtered to discovered interfaces. |
 | version | `cat /etc/os-release`, `cat /proc/uptime` | Cumulus version and uptime seconds. |
 | cpu | `cat /proc/loadavg` | Load averages, not utilization percentages. |
-| optics, reverse | Explicitly unsupported | Require validated formats and, for live reverse probing, separate authorization. |
+| optics | `ethtool -m INTERFACE` | Captured OSFP revision 4.0 format: module temperature and per-channel RX/TX dBm. Missing/nonfinite power stays null; other formats fail parsing. Non-module interfaces can fail the read, producing partial coverage. |
+| reverse | Explicitly unsupported | Requires validated formats and separate live probing authorization. |
+
+Optics is opt-in through `--collect optics` (with address/route discovery), or
+included in `--collect all`. It uses the existing `--sudo` selection; a failed
+read never retries with different privileges. The same implementation is shared
+by Linux/FRR, with runtime evidence limited to the Cumulus validation environment.
+The module temperature is repeated for each reported lane; it is not a separate
+sensor reading per lane. Thresholds and alarm flags stay in raw evidence, and no
+optic-health verdict is inferred. A management-only run may select eth0, which
+returned no module data in the validation capture; this is a recorded read failure.
+
+```sh
+./bin/tracefull collect --from trace.txt --inventory inventory.yaml \
+  --collect optics --sudo --dry-run
+```
+
+The command is documented in NVIDIA's
+[transceiver monitoring guide](https://docs.nvidia.com/networking-ethernet-software/cumulus-linux-516/Monitoring-and-Troubleshooting/Troubleshooting-Network-Interfaces/Monitoring-Interfaces-and-Transceivers-with-ethtool/).
+A native Cumulus validation run parsed 64 lanes across eight switch-port modules;
+eth0 returned a failed module read, so coverage remained partial. All output
+stream digests verified. Only the captured OSFP format is enabled; this does not
+establish SFP/QSFP or other
+CMIS-revision support. Commands and source digests are in fixture provenance.
 
 The other profiles and validated formats have distinct limits:
 
 | Inventory platform | Captured formats | Interpretation limits |
 | --- | --- | --- |
-| `frr`, `linux` | Shared iproute2/procfs/FRR/lldpd formats validated on Cumulus Linux 5.16.0 / FRR 10.0.3; adds FRR `show version` | Both select the Linux/FRR profile. Requires `ip`, `vtysh` and lldpd for their groups. OS branding is not restricted to Cumulus, but other distributions/builds have no runtime validation. No kernel-route fallback if FRR is missing. |
+| `frr`, `linux` | Shared iproute2/procfs/FRR/lldpd formats validated on Cumulus Linux 5.16.0 / FRR 10.0.3; adds FRR `show version` | Both select the Linux/FRR profile. Requires `ip`, `vtysh`, lldpd and `ethtool` for their groups. OS branding is not restricted to Cumulus, but other distributions/builds have no runtime validation. No kernel-route fallback if FRR is missing. |
 | `junos` | Terse addresses, detailed connected IPv4 route, empty IPv6 lookup, extensive physical/logical counters, LLDP, version, uptime, master RE load and per-lane DOM JSON | Address routing-instance membership is unknown. Active RIB selection does not establish hardware installation. Physical MTU includes link framing. Logical owners also select their physical parent for observation. |
 | `arista-eos` (`eos`) | IPv4/IPv6 interfaces, IPv6 static default route, counters, LLDP, version/uptime, CPU/load and Ethernet DOM JSON | Hardware-programmed state comes from explicit fields. CPU utilization has an unspecified sampling interval. SVI-to-physical-port mapping is unavailable, so an SVI alone cannot select uplink optics. Empty DOM remains unknown. |
 | `cisco-ios-xr` (`iosxr`) | IPv4/IPv6 brief interfaces, connected IPv6 route, counters, LLDP, version/uptime, CPU utilization and per-lane optics text | Connected route and no-route layouts only; other route layouts fail with raw output retained. IPv6 context/prefix and hardware installation remain unknown. CPU percent is separate from load average. This is not an IOS-XE alias. |

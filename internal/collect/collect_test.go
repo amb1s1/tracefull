@@ -63,6 +63,8 @@ func (s *fakeSession) Run(ctx context.Context, cmd string) (device.Result, error
 	}
 	var file string
 	switch {
+	case strings.Contains(cmd, "ethtool -m "):
+		file = "optics-osfp.txt"
 	case cmd == "ip -j -d address show":
 		file = "addresses-detailed.json"
 	case strings.Contains(cmd, "route vrf mgmt"):
