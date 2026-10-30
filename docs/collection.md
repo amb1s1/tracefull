@@ -92,7 +92,7 @@ The other profiles and validated formats have distinct limits:
 | Inventory platform | Captured formats | Interpretation limits |
 | --- | --- | --- |
 | `frr`, `linux` | Shared iproute2/procfs/FRR/lldpd formats validated on Cumulus Linux 5.16.0 / FRR 10.0.3; adds FRR `show version` | Both select the Linux/FRR profile. Requires `ip`, `vtysh`, lldpd and `ethtool` for their groups. OS branding is not restricted to Cumulus, but other distributions/builds have no runtime validation. No kernel-route fallback if FRR is missing. |
-| `junos` | Terse addresses, detailed connected IPv4 route, empty IPv6 lookup, extensive physical/logical counters, LLDP, version, uptime, master RE load and per-lane DOM JSON | Address routing-instance membership is unknown. Active RIB selection does not establish hardware installation. Physical MTU includes link framing. Logical owners also select their physical parent for observation. |
+| `junos` | Terse addresses, detailed connected/IS-IS IPv4 routes, empty IPv6 lookup, extensive physical/logical counters, LLDP, version, uptime, master RE load and per-lane DOM JSON | Address routing-instance membership is unknown. Active RIB selection does not establish hardware installation. Physical MTU includes link framing. Logical owners also select their physical parent for observation. |
 | `arista-eos` (`eos`) | IPv4/IPv6 interfaces, IPv6 static default route, counters, LLDP, version/uptime, CPU/load and Ethernet DOM JSON | Hardware-programmed state comes from explicit fields. CPU utilization has an unspecified sampling interval. SVI-to-physical-port mapping is unavailable, so an SVI alone cannot select uplink optics. Empty DOM remains unknown. |
 | `cisco-ios-xr` (`iosxr`) | IPv4/IPv6 brief interfaces, connected IPv6 and IPv4/IPv6 IS-IS routes, counters, LLDP, version/uptime, CPU utilization and per-lane optics text | Connected, no-route and captured primary IS-IS descriptor layouts only; other route layouts fail with raw output retained. IPv6 interface context/prefix and hardware installation remain unknown. CPU percent is separate from load average. This is not an IOS-XE alias. |
 
@@ -114,6 +114,16 @@ trigger forwarding-path/PMTU comparisons. IPv6 link-local next hops retain their
 separate interface scope. Labels stay in raw evidence; no MPLS path is inferred.
 Backup, recursive, tunnel and other uncaptured descriptor layouts fail parsing.
 BGP and other dynamic protocols remain unsupported on this driver.
+
+The Junos IS-IS capture retains two next hops, one carrying the explicit
+`selected-next-hop` marker. The unmarked next hop stays unknown. Route-driven
+interface discovery uses the selected next hop and its physical parent; it does
+not infer that all listed paths forward traffic. Missing route selection also
+remains unknown. Active route tags follow Juniper's
+[`show route` reference](https://www.juniper.net/documentation/us/en/software/junos/cli-reference/topics/ref/command/show-route.html):
+`*`/`+` mean active and `-` means last active. Malformed/duplicate markers or unknown
+tags fail parsing with raw output retained. Hardware installation stays null;
+other dynamic formats remain unvalidated on the supplied Junos target.
 
 Junos and IOS-XR optics preserve lane IDs, temperature in Celsius and RX/TX dBm;
 missing readings remain null. EOS DOM uses its reported channel. These snapshots
