@@ -44,8 +44,10 @@ commands succeeded; the eth0 module read failed and the report correctly remaine
 partial. The eight OSFP modules yielded 64 lane records; all 22 stdout/stderr
 stream digests verified. This is later device evidence, not proof of the saved
 trace's path or optic health. No configuration changes or probes occurred.
-Private originals remain outside Git. CI/integration are pending; no release or
-deployment is included. Full v0.2 retains the platform and format gaps below.
+Private originals remain outside Git. Driver and pipeline commits are `6f5c0ad`
+and `783b0a5`. [PR #5](https://github.com/amb1s1/tracefull/pull/5) is authoritative
+for subsequent CI/integration status. No release or deployment is included.
+Full v0.2 retains the platform and format gaps below.
 
 ## Completed slice — explicit management VRF
 
