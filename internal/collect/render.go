@@ -87,7 +87,10 @@ func Render(w io.Writer, r Report, format string) error {
 				fmt.Fprintf(&b, " — %s", escape(c.Reason))
 			}
 			if c.Stdout != nil {
-				fmt.Fprintf(&b, " [raw: %s]", escape(c.Stdout.Path))
+				fmt.Fprintf(&b, " [stdout: %s]", escape(c.Stdout.Path))
+			}
+			if c.Stderr != nil {
+				fmt.Fprintf(&b, " [stderr: %s]", escape(c.Stderr.Path))
 			}
 			b.WriteByte('\n')
 			if c.Facts == nil {
@@ -95,12 +98,12 @@ func Render(w io.Writer, r Report, format string) error {
 			}
 			f := c.Facts
 			for _, a := range f.Addresses {
-				fmt.Fprintf(&b, "  Address %s on %s (master: %s; routing context: %s)\n", escape(a.Address), escape(a.Interface), escape(a.Master), escape(contextValue(a.RoutingContext)))
+				fmt.Fprintf(&b, "  Address %s on %s (master: %s; routing context: %s)\n", escape(knownText(a.Address)), escape(knownText(a.Interface)), escape(knownText(a.Master)), escape(contextValue(a.RoutingContext)))
 			}
 			for _, route := range f.Routes {
-				fmt.Fprintf(&b, "  Route %s via %s | context: %s | selected: %s | installed: %s\n", escape(route.Prefix), escape(route.Protocol), escape(route.Context), value(route.Selected), value(route.Installed))
+				fmt.Fprintf(&b, "  Route %s | protocol: %s | context: %s | selected: %s | installed: %s\n", escape(knownText(route.Prefix)), escape(knownText(route.Protocol)), escape(knownText(route.Context)), value(route.Selected), value(route.Installed))
 				for _, n := range route.NextHops {
-					fmt.Fprintf(&b, "    Next hop %s on %s | active: %s | installed: %s\n", escape(n.Address), escape(n.Interface), value(n.Active), value(n.Installed))
+					fmt.Fprintf(&b, "    Next hop %s on %s | active: %s | installed: %s\n", escape(knownText(n.Address)), escape(knownText(n.Interface)), value(n.Active), value(n.Installed))
 				}
 			}
 			for _, x := range f.Counters {
@@ -154,7 +157,7 @@ func contextValue(v *string) string {
 	if v == nil {
 		return "unknown"
 	}
-	return *v
+	return knownText(*v)
 }
 
 func knownLayer(layer string) string {
@@ -162,4 +165,12 @@ func knownLayer(layer string) string {
 		return "unknown"
 	}
 	return layer
+}
+
+// Empty metadata does not distinguish an omitted value from an absent property.
+func knownText(v string) string {
+	if v == "" {
+		return "unknown"
+	}
+	return v
 }

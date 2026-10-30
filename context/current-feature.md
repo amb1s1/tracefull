@@ -1,8 +1,47 @@
 # Current feature — v0.2 device collection
 
-## Active slice — Cumulus/Linux-FRR optics
+## Active slice — collection report clarity
 
-Workflow at handoff: Ready for review on `codex/cumulus-optics`. Continue v0.2 by implementing the existing
+Workflow at handoff: Ready for review on `codex/collection-report-clarity`.
+The real optical collection report exposed two misleading labels: failed reads
+referenced only stdout although their diagnostics were in stderr, and `via bgp`
+presented the route protocol as if it were a next-hop address.
+
+Acceptance and implementation slices:
+
+- Label each available stdout/stderr evidence reference in text and Markdown,
+  including stderr-only failures. Keep raw output separate from rendering.
+- Label the route protocol explicitly; display absent address, interface, master
+  and route-context fields as unknown without inferring local delivery or health.
+- Keep JSON/schema, command plans, execution and findings unchanged. Escape all
+  untrusted fields in human-readable views and leave the computed report intact.
+- Add renderer regression tests and exercise text/Markdown through the actual CLI
+  with the existing capture replay. Run full local checks, review the diff, commit,
+  push, verify CI, merge and check integrated behavior under existing authorization.
+
+Affected packages: `internal/collect` rendering and CLI integration tests; collection
+documentation. No unresolved product decisions. An absent string is shown as
+`unknown` because the model does not distinguish omitted metadata from absence.
+No new device reads or probes are needed. Full v0.2 capture gaps remain below.
+
+Local verification passed on Go 1.27.3/macOS: `make check` (tests, actual CLI
+capture replay in JSON/text/Markdown, schema, formatting, vet, race, coverage,
+staticcheck, golangci-lint, docs and build) and `make scan cross`. Coverage remains
+92.6% parsers, 99.4% verdicts and 93.2% drivers. The scan found no reachable or
+imported-package vulnerabilities; one unused required-module advisory remains.
+Linux/macOS amd64/arm64 cross-builds passed without runtime claims. The documented
+collection dry-run also passed. Regression tests reproduced the original labels
+before the fix and verify missing stream references, unknown metadata, escaping,
+and unchanged report/JSON values. Review found no remaining issues in this slice.
+No parser changed; routine fuzz seeds ran locally and CI retains the full timed
+fuzz suite. CI and integration are pending at this handoff; the branch's PR records
+their subsequent result. No release or production run is part of this fix.
+
+## Completed slice — Cumulus/Linux-FRR optics
+
+Workflow: Complete. PR #5 merged as `6958c60`; all six pre-merge and three
+post-merge CI checks passed. Integrated package tests, build and offline optics
+preview passed in the main checkout. This slice implements the existing
 optics group for the capture-validated Cumulus/Linux-FRR environment. The user
 has granted read-only device access; no active probes or configuration changes
 are in scope. PR #4 merged as `a1ffd69`; all pre/post-merge CI passed and the

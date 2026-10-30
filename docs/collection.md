@@ -187,6 +187,12 @@ host attribution through its device record, command/argv, UTC start/end, elapsed
 seconds, exit status, raw stdout/stderr file digests and parsed facts. A fact's
 `evidence` is a line/JSON pointer relative to that command's stdout. Finding
 references include the raw filename. `trace.input` preserves original trace bytes.
+Text and Markdown label available `stdout` and `stderr` file paths separately;
+use the stderr reference to inspect a failed command's diagnostic output. Paths
+are relative to the displayed evidence directory. Route protocols are labelled
+`protocol`, separately from next-hop addresses and interfaces. Missing address,
+interface, master, protocol or routing-context metadata displays as `unknown`;
+it does not establish local delivery, lack of a master, or forwarding health.
 
 Evidence uses a new directory (0700) and exclusive files (0600). Default directory
 names are hidden `.tracefull-collection-*`, preventing Go from scanning raw captures
