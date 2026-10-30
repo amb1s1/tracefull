@@ -29,8 +29,23 @@ For an authorized device, substitute your actual saved trace and inventory:
 The second command opens SSH and performs the planned reads. `--sudo` explicitly
 selects `sudo -n` for FRR and LLDP; it never prompts or falls back after a denial.
 Do not run the entire CLI under sudo merely to grant these remote reads.
-Default context is `default`. Other `--vrf` values fail without falling back.
+Default context is `default`. Cumulus and Linux/FRR additionally accept explicit
+`--vrf mgmt`; other contexts fail without falling back. Management mode uses
+`ip -j -d address show` and `show ip/ipv6 route vrf mgmt ADDRESS json`.
+Typed VRF membership requires matching member/VRF table IDs in the same snapshot.
+Missing or conflicting metadata stays unknown; a management route response with
+another or absent context becomes `parse_failed`, with raw output retained.
+No kernel lookup or automatic context switch replaces a failed FRR command.
+
+```sh
+./bin/tracefull collect --from trace.txt --inventory inventory.yaml \
+  --vrf mgmt --sudo --dry-run
+```
 The matched address's interface master is reported separately from routing context.
+An untyped master interface can itself be a VRF; absence of a parent master does
+not establish default context. Such contexts remain unknown. Route-driven
+interface discovery uses only routes that report the requested context; matched
+address ownership observations remain available separately.
 
 Preview and execution share a planner. Preview performs no DNS, connections,
 wrapper execution or evidence writes. Interface-dependent commands are `deferred`.
@@ -41,9 +56,9 @@ SSH command string is exact; wrappers also show the exact local argv.
 
 | Group | Cumulus implementation | Limits |
 | --- | --- | --- |
-| ingress | `ip -j address show` | Exact address ownership, not subnet ownership. |
-| route | `vtysh -c 'show ip/ipv6 route ADDRESS json'` | Numeric destination, default context; retains prefix, protocol, selection, FIB state and scoped next-hop interface. IPv6 FRR output is capture-tested; IPv4 command construction is tested but its output variant has no live capture yet. |
-| counters | `ip -j -s link show dev INTERFACE` | Owning and selected egress interfaces. Cumulative errors/drops, state and MTU; speed and CRC-specific counters remain unknown. The captured whole-link JSON validates the parser; per-interface selection is tested offline. |
+| ingress | `ip -j address show`; adds `-d` in management mode | Exact address ownership, not subnet ownership. Detailed metadata identifies typed VRF membership. |
+| route | `vtysh -c 'show ip/ipv6 route ADDRESS json'` | Numeric destination; default or explicit management context. Retains prefix, protocol, selection, FIB state and scoped next-hop interface. Captures cover default IPv6 BGP, management IPv6 local and management IPv4 unreachable-default output. Unreachable/reject flags remain in raw evidence; an empty egress does not establish forwarding or reachability. |
+| counters | `ip -j -s link show dev INTERFACE` | Owning and selected egress interfaces. Cumulative errors/drops, state and MTU; speed and CRC-specific counters remain unknown. The whole-link capture validates the parser; a user-run native collection also completed nine per-interface reads on the Cumulus validation switch. |
 | lldp | `/usr/sbin/lldpctl -f json` | One raw snapshot, parsed neighbors filtered to discovered interfaces. |
 | version | `cat /etc/os-release`, `cat /proc/uptime` | Cumulus version and uptime seconds. |
 | cpu | `cat /proc/loadavg` | Load averages, not utilization percentages. |
@@ -63,7 +78,8 @@ The command policies accept only full reviewed command shapes. Fixed `| json` an
 redirection and shell expansion are rejected. Junos, EOS and IOS-XR do not use
 `--sudo`; Linux/FRR uses the same explicit `sudo -n` selection as Cumulus.
 Their IPv4/IPv6 planners are tested offline, but captures establish only the
-output variants listed above. Nondefault contexts fail before connecting.
+output variants listed above. Junos, EOS and IOS-XR still reject nondefault
+contexts before connecting.
 
 Junos and IOS-XR optics preserve lane IDs, temperature in Celsius and RX/TX dBm;
 missing readings remain null. EOS DOM uses its reported channel. These snapshots
@@ -152,6 +168,7 @@ references include the raw filename. `trace.input` preserves original trace byte
 Evidence uses a new directory (0700) and exclusive files (0600). Default directory
 names are hidden `.tracefull-collection-*`, preventing Go from scanning raw captures
 as packages. An existing explicit directory fails. Nothing silently overwrites it.
+Default collection directories are also ignored by Git.
 Evidence-write/finalization errors are returned. Keep raw device evidence private.
 
 Exit 0 means at least one usable command and no overall failure; `status` still
@@ -180,10 +197,13 @@ servers for transport failures. Replay is not live verification of the new CLI.
 No implementation test contacts a real device or sends diagnostic probes.
 
 Full v0.2 still requires real captures for NX-OS, IOS-XE and RouterOS,
-plus remaining optics/reverse formats. Nondefault routing contexts
-are unsupported. Reverse probing requires separate authorization. Native SSH
-execution of this CLI on real devices remains unverified; the recorded captures
-used a separate bounded OpenSSH runner.
+plus remaining optics/reverse formats. Contexts beyond `default` and the explicit
+Cumulus/Linux-FRR `mgmt` mode remain unsupported. Reverse probing requires separate
+authorization. A user-run native Cumulus collection verified the original default
+mode. Management capture validation was followed by a native Cumulus CLI run on
+October 30, 2026: six successful read-only commands, one discovered interface
+(eth0), and verified raw output digests. Linux/FRR management mode also passed
+CLI replay on the shared captures; other Linux distributions remain unverified.
 Collection configuration follows defaults < user config < project config <
 `TRACEFULL_*` environment < explicit flags. Keys mirror this command’s flags;
 unknown keys fail, and secrets are unsupported. Inventory SSH user/jump defaults

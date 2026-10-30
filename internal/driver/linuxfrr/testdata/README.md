@@ -5,7 +5,9 @@ host. Cumulus Linux 5.16.0 runs Linux 6.1 and FRR 10.0.3. The real scrubbed inpu
 are shared from [Cumulus testdata](../../cumulus/testdata/README.md), including
 `frr-version.txt`, `frr-route.json`, iproute2 JSON, procfs and lldpd output.
 Their original source hashes and commands remain in that directory's provenance.
-No additional device access or duplicate/fabricated captures were needed.
+The management-mode extension shares the additional detailed-address and FRR
+IPv4/IPv6 management captures, with their October 30 UTC provenance. No duplicate
+or fabricated captures were needed.
 
 `frr-version.golden.json` pins the parsed FRR identity. Tests also replay all shared
 formats and the existing reviewed route golden. Synthetic non-Cumulus OS labels

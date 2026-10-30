@@ -21,3 +21,12 @@ invented. The FRR copyright notice is preserved.
 malformed/missing-field cases are explicitly labelled in the tests. The unprivileged
 FRR and LLDP failures were retained privately; production code must report such
 failures instead of silently escalating privileges.
+
+
+Additional management captures were recorded on October 30, 2026 (UTC); each new
+provenance entry records its capture time. `addresses-detailed.json` retains the
+same 12 interface names with typed VRF and slave table metadata. `frr-route-mgmt.json`
+is an IPv6 local /128 via eth0; `frr-route-mgmt4.json` is the IPv4 lookup of
+127.0.0.1 that returned an unreachable default route, not a successful forwarding
+path. CIDR keys and values use the existing consistent address mapping. The
+separate kernel lookups remain private corroboration; the driver uses FRR only.

@@ -18,7 +18,7 @@ func (Driver) Platform() string { return "nvidia-cumulus" }
 var ifaceName = regexp.MustCompile(`^[A-Za-z0-9][A-Za-z0-9_.:-]{0,62}$`)
 
 func (d Driver) Plan(groups []string, p driver.Params) ([]driver.Command, error) {
-	if p.VRF != "" && p.VRF != "default" {
+	if p.VRF != "" && p.VRF != "default" && p.VRF != "mgmt" {
 		return nil, fmt.Errorf("cumulus routing context %q is not capture-validated; no fallback", p.VRF)
 	}
 	wanted := map[string]bool{}
@@ -36,7 +36,11 @@ func (d Driver) Plan(groups []string, p driver.Params) ([]driver.Command, error)
 		commands = append(commands, driver.Command{Name: name, Group: group, Text: text, Status: "planned"})
 	}
 	if wanted["ingress"] {
-		add("addresses", "ingress", "ip -j address show")
+		if p.VRF == "mgmt" {
+			add("addresses-detailed", "ingress", "ip -j -d address show")
+		} else {
+			add("addresses", "ingress", "ip -j address show")
+		}
 	}
 	if wanted["route"] {
 		addr, err := netip.ParseAddr(p.Destination)
@@ -48,7 +52,11 @@ func (d Driver) Plan(groups []string, p driver.Params) ([]driver.Command, error)
 		if addr.Is6() {
 			family = "ipv6"
 		}
-		add("route", "route", sudo(p)+"vtysh -c 'show "+family+" route "+addr.Unmap().String()+" json'")
+		name := "route"
+		if p.VRF == "mgmt" {
+			name = "route-mgmt"
+		}
+		add(name, "route", routePrefix(family, p)+addr.String()+" json'")
 	}
 	if wanted["version"] {
 		add("version", "version", "cat /etc/os-release")
@@ -108,11 +116,14 @@ func sudo(p driver.Params) string {
 // Validate matches full fixed commands or validates each typed substitution.
 // No arbitrary show-prefix, setup exception or pipeline is allowed.
 func (Driver) Validate(command string, p driver.Params) error {
-	if p.VRF != "" && p.VRF != "default" {
+	if p.VRF != "" && p.VRF != "default" && p.VRF != "mgmt" {
 		return fmt.Errorf("unsupported routing context")
 	}
 	switch command {
-	case "ip -j address show", "cat /etc/os-release", "cat /proc/uptime", "cat /proc/loadavg":
+	case "cat /etc/os-release", "cat /proc/uptime", "cat /proc/loadavg":
+		return nil
+	}
+	if (p.VRF == "mgmt" && command == "ip -j -d address show") || (p.VRF != "mgmt" && command == "ip -j address show") {
 		return nil
 	}
 	if command == sudo(p)+"/usr/sbin/lldpctl -f json" {
@@ -122,7 +133,7 @@ func (Driver) Validate(command string, p driver.Params) error {
 		return nil
 	}
 	for _, family := range []string{"ip", "ipv6"} {
-		prefix := sudo(p) + "vtysh -c 'show " + family + " route "
+		prefix := routePrefix(family, p)
 		if value, ok := strings.CutPrefix(command, prefix); ok {
 			if value, ok = strings.CutSuffix(value, " json'"); ok {
 				a, err := netip.ParseAddr(value)
@@ -133,4 +144,12 @@ func (Driver) Validate(command string, p driver.Params) error {
 		}
 	}
 	return fmt.Errorf("command is outside the Cumulus read-only policy")
+}
+
+func routePrefix(family string, p driver.Params) string {
+	prefix := sudo(p) + "vtysh -c 'show " + family + " route "
+	if p.VRF == "mgmt" {
+		prefix += "vrf mgmt "
+	}
+	return prefix
 }

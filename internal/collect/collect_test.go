@@ -63,6 +63,10 @@ func (s *fakeSession) Run(ctx context.Context, cmd string) (device.Result, error
 	}
 	var file string
 	switch {
+	case cmd == "ip -j -d address show":
+		file = "addresses-detailed.json"
+	case strings.Contains(cmd, "route vrf mgmt"):
+		file = "frr-route-mgmt.json"
 	case cmd == "ip -j address show":
 		file = "addresses.json"
 	case cmd == "vtysh -c 'show version'" || cmd == "sudo -n vtysh -c 'show version'":

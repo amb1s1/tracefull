@@ -62,6 +62,27 @@
       "source_stdout_sha256": "bbe91d42b8ae6ff1b7cbe7fd97a05675cdd12db4e9373a7fc25a08162d906181",
       "excerpt": true,
       "source_command": "sudo -n /usr/sbin/lldpctl -f json"
+    },
+    {
+      "file": "addresses-detailed.json",
+      "source_stdout_sha256": "684c412d492fa0af70c120d0451e3d91a09d79832e5763281bb233a3fcd71834",
+      "excerpt": true,
+      "source_command": "ip -j -d address show",
+      "captured_utc": "2026-10-30T13:44:18.834626+00:00"
+    },
+    {
+      "file": "frr-route-mgmt.json",
+      "source_stdout_sha256": "44f3803be8449cd4ddd941ac0c91b33dbb11d288b45135da30cc4747fd4b70f5",
+      "excerpt": false,
+      "source_command": "sudo -n vtysh -c 'show ipv6 route vrf mgmt <destination> json'",
+      "captured_utc": "2026-10-30T13:44:24.105269+00:00"
+    },
+    {
+      "file": "frr-route-mgmt4.json",
+      "source_stdout_sha256": "8c93ca3e7ae2468100441b4df22ed8167ce5c03d4aa9733d0de8c60c7a8d200c",
+      "excerpt": false,
+      "source_command": "sudo -n vtysh -c 'show ip route vrf mgmt 127.0.0.1 json'",
+      "captured_utc": "2026-10-30T13:47:18.704371+00:00"
     }
   ]
 }

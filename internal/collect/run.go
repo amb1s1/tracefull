@@ -236,7 +236,7 @@ func runDevice(ctx context.Context, p Prepared, dp DevicePlan, index int, dir st
 			}
 		}
 		if phase == 0 {
-			r.Interfaces = interfaces(dp.HopAddresses, r.Commands)
+			r.Interfaces = interfaces(dp.HopAddresses, r.Commands, p.Plan.Context)
 			if expander, ok := drv.(interface{ ExpandInterfaces([]string) []string }); ok {
 				r.Interfaces = expander.ExpandInterfaces(r.Interfaces)
 			}
@@ -298,7 +298,7 @@ func execute(ctx context.Context, drv driver.Driver, session device.Session, c P
 	r.Facts = &facts
 	return r, nil
 }
-func interfaces(hops []string, commands []CommandResult) []string {
+func interfaces(hops []string, commands []CommandResult, context string) []string {
 	out := []string{}
 	for _, c := range commands {
 		if c.Facts == nil {
@@ -310,7 +310,7 @@ func interfaces(hops []string, commands []CommandResult) []string {
 			}
 		}
 		for _, r := range c.Facts.Routes {
-			if r.Selected == nil || !*r.Selected || (r.Installed != nil && !*r.Installed) {
+			if r.Context != context || r.Selected == nil || !*r.Selected || (r.Installed != nil && !*r.Installed) {
 				continue
 			}
 			for _, n := range r.NextHops {
@@ -346,7 +346,7 @@ func evaluate(p Prepared, devices []DeviceResult) []Finding {
 					continue
 				}
 				found = append(found, a.Address)
-				if a.Master != "" {
+				if a.Master != "" && (a.RoutingContext == nil || *a.RoutingContext != p.Plan.Context) {
 					out = append(out, finding("interface-context", d.Name, "Matched address "+a.Address+" belongs to "+a.Interface+" with master "+a.Master+"; requested routing context is "+p.Plan.Context+". Do not infer the trace's routing context from this lookup.", []string{c.Stdout.Path + "#" + a.Evidence}))
 				}
 			}
