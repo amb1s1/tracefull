@@ -35,6 +35,15 @@ type Options struct {
 
 // Build keeps the ordered pipeline visible; each blocking stage owns its cleanup.
 func Build(ctx context.Context, o Options, stdin io.ReadCloser, resolver enrich.Resolver) (report.Report, error) {
+	return build(ctx, o, stdin, resolver, loadInventory)
+}
+
+// BuildWithInventory uses the same inventory snapshot as device planning. This
+// avoids mixing identity and connection defaults from separate file reads.
+func BuildWithInventory(ctx context.Context, o Options, stdin io.ReadCloser, inv inventory.Inventory, notes []string) (report.Report, error) {
+	return build(ctx, o, stdin, nil, func(Options) (inventory.Inventory, []string, error) { return inv, notes, nil })
+}
+func build(ctx context.Context, o Options, stdin io.ReadCloser, resolver enrich.Resolver, inventorySource func(Options) (inventory.Inventory, []string, error)) (report.Report, error) {
 	r := report.Report{}
 	if o.From == "" {
 		return r, fmt.Errorf("--from is required")
@@ -65,7 +74,7 @@ func Build(ctx context.Context, o Options, stdin io.ReadCloser, resolver enrich.
 			return r, e
 		}
 	}
-	inv, notes, e := loadInventory(o)
+	inv, notes, e := inventorySource(o)
 	if e != nil {
 		return r, e
 	}
@@ -168,6 +177,14 @@ func loadInventory(o Options) (inventory.Inventory, []string, error) {
 func ValidateInventory(o Options) error {
 	_, _, err := loadInventory(o)
 	return err
+}
+
+// Inventory loads the same inventory/defaults used by the saved-trace pipeline.
+func Inventory(o Options) (inventory.Inventory, []string, error) { return loadInventory(o) }
+
+// ReadInput retains the bounded, cancellable input contract for collection.
+func ReadInput(ctx context.Context, path string, stdin io.ReadCloser) ([]byte, error) {
+	return read(ctx, path, stdin)
 }
 func CheckFindings(r report.Report, kinds []string) bool {
 	for _, f := range r.Findings {
