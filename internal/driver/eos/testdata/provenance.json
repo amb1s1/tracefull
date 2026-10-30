@@ -89,6 +89,14 @@
       "started_unix": 1793319872.763082,
       "ended_unix": 1793319874.778591,
       "excerpt": true
+    },
+    {
+      "file": "route4-empty.json",
+      "source_stdout_sha256": "689425eec9198e03ee4b95af79a54941b3de0c6feb15578e6aeac2190b157640",
+      "source_command": "show ip route 1.1.1.1 | json",
+      "started_unix": 1793380519.596252,
+      "ended_unix": 1793380521.173714,
+      "excerpt": false
     }
   ]
 }

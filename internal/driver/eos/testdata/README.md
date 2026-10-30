@@ -15,3 +15,13 @@ Empty route/optics responses are retained as observations, never manufactured
 success cases. Command exit zero does not establish a usable measurement. Tests
 label synthetic malformed/missing-field variants separately. Copyright notices
 in source version output are retained.
+
+The complete `route4-empty.json` response was captured October 30, 2026 from
+`show ip route 1.1.1.1 | json` on the same EOS 4.33.4M target. It contains no
+identifying fields and needs no substitutions. The empty `routes` object is a
+valid lookup observation; missing/null route containers are synthetic failure
+tests. Six bounded reads also rechecked version, a second empty IPv4 lookup,
+IPv4/IPv6 summaries and the IPv6 static default. All 12 private stream hashes
+verified. Summaries reported no BGP, IS-IS or OSPF routes; dynamic-route captures
+remain unavailable on this target. Those other raw reads remain private and are
+not additional parser fixtures. No probes or configuration changes ran.

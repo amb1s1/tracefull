@@ -136,6 +136,8 @@ func TestPolicyAndMissingFields(t *testing.T) {
 	}
 }
 func FuzzParse(f *testing.F) {
+	f.Add("route", fixture(f, "route4-empty"))
+	f.Add("route", []byte(`{"vrfs":{"default":{"routes":{"::/0":{"vias":[null]}}}}}`))
 	for name, file := range captures {
 		f.Add(name, fixture(f, file))
 	}
