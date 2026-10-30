@@ -14,3 +14,7 @@ formats and the existing reviewed route golden. Synthetic non-Cumulus OS labels
 exercise branding independence only; they do not establish runtime validation on
 Ubuntu, Debian, containers or other FRR builds. Missing executables, permissions
 and unrecognized output remain explicit failures, without changing the policy.
+
+The optics parser also reuses the captured OSFP revision 4.0 module output.
+CLI replay covers the Linux/FRR profile; this does not validate optics on other
+module formats or Linux distributions.

@@ -149,7 +149,7 @@ func TestPlanAndPolicy(t *testing.T) {
 			unsupported++
 		}
 	}
-	if deferred != 2 || unsupported != 2 {
+	if deferred != 3 || unsupported != 1 {
 		t.Fatal(plan)
 	}
 	p.Interfaces = []string{"swp51", "eth0", "swp51"}
@@ -208,7 +208,7 @@ func TestPlanAndPolicy(t *testing.T) {
 }
 
 func FuzzParse(f *testing.F) {
-	for name, file := range map[string]string{"addresses-detailed": "addresses-detailed.json", "route-mgmt": "frr-route-mgmt.json", "addresses": "addresses.json", "route": "frr-route.json", "counters-eth0": "counters.json", "lldp": "lldp.json", "version": "os-release.txt", "cpu": "loadavg.txt", "uptime": "uptime.txt"} {
+	for name, file := range map[string]string{"optics-swp49": "optics-osfp.txt", "addresses-detailed": "addresses-detailed.json", "route-mgmt": "frr-route-mgmt.json", "addresses": "addresses.json", "route": "frr-route.json", "counters-eth0": "counters.json", "lldp": "lldp.json", "version": "os-release.txt", "cpu": "loadavg.txt", "uptime": "uptime.txt"} {
 		data, err := os.ReadFile(filepath.Join("testdata", file))
 		if err != nil {
 			f.Fatal(err)
