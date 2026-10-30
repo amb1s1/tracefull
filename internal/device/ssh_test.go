@@ -7,6 +7,7 @@ import (
 	"crypto/x509"
 	"encoding/binary"
 	"encoding/pem"
+	"errors"
 	"fmt"
 	"io"
 	"net"
@@ -23,6 +24,23 @@ import (
 	"golang.org/x/crypto/ssh/agent"
 	"golang.org/x/crypto/ssh/knownhosts"
 )
+
+type closeErrorConn struct {
+	net.Conn
+	err error
+}
+
+func (c closeErrorConn) Close() error { return c.err }
+
+func TestConnectionCloseErrors(t *testing.T) {
+	unexpected := errors.New("synthetic close failure")
+	if err := closeConnection(closeErrorConn{err: unexpected}, nil); !errors.Is(err, unexpected) {
+		t.Fatalf("unexpected cleanup error discarded: %v", err)
+	}
+	if err := closeConnection(closeErrorConn{err: net.ErrClosed}, nil); err != nil {
+		t.Fatalf("already-closed transport reported as failure: %v", err)
+	}
+}
 
 func testKey(t *testing.T) (ssh.Signer, string) {
 	t.Helper()
@@ -334,7 +352,9 @@ func TestSSHJump(t *testing.T) {
 	if err != nil || r.Status != "ok" {
 		t.Fatal(r, err)
 	}
-	_ = s.Close()
+	if err := s.Close(); err != nil {
+		t.Fatalf("successful jump session did not close cleanly: %v", err)
+	}
 	wrong, _ := testKey(t)
 	if err := os.WriteFile(jump.KnownHosts, []byte(knownhosts.Line([]string{jump.Address}, wrong.PublicKey())+"\n"), 0600); err != nil {
 		t.Fatal(err)

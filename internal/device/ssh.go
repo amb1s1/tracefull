@@ -116,6 +116,9 @@ func hostKeys(o SSHOptions) (ssh.HostKeyCallback, error) {
 	if o.KnownHosts == "" {
 		return nil, fmt.Errorf("known-hosts file required unless insecure host keys are explicitly enabled")
 	}
+	if err := regularSSHFile(o.KnownHosts); err != nil {
+		return nil, fmt.Errorf("known-hosts file: %w", err)
+	}
 	return knownhosts.New(o.KnownHosts)
 }
 
@@ -167,6 +170,9 @@ func authentication(ctx context.Context, o SSHOptions) ([]ssh.AuthMethod, func()
 }
 
 func readKey(path string) (ssh.Signer, error) {
+	if err := regularSSHFile(path); err != nil {
+		return nil, fmt.Errorf("SSH identity: %w", err)
+	}
 	f, err := os.Open(path)
 	if err != nil {
 		return nil, fmt.Errorf("open SSH identity: %w", err)
@@ -184,6 +190,20 @@ func readKey(path string) (ssh.Signer, error) {
 		return nil, fmt.Errorf("SSH identity must be usable without a password prompt: %w", err)
 	}
 	return key, nil
+}
+
+// Local SSH configuration is file-based. Pipes/devices can wait indefinitely
+// before the context-aware network connection has even started. Stat follows
+// symlinks so conventional links to regular key and known-hosts files still work.
+func regularSSHFile(path string) error {
+	info, err := os.Stat(path)
+	if err != nil {
+		return err
+	}
+	if !info.Mode().IsRegular() {
+		return fmt.Errorf("%q must be a regular file", path)
+	}
+	return nil
 }
 
 type sshOutput struct {
@@ -274,5 +294,12 @@ func closeConnection(conn net.Conn, jump *SSHSession) error {
 	if jump != nil {
 		err = jump.Close()
 	}
-	return errors.Join(err, conn.Close())
+	closeErr := conn.Close()
+	// Closing the jump intentionally tears down its forwarded channels. Their
+	// subsequent close may observe EOF or the already-closed transport; neither
+	// means a successful collection lost evidence during cleanup.
+	if errors.Is(closeErr, net.ErrClosed) || (jump != nil && errors.Is(closeErr, io.EOF)) {
+		closeErr = nil
+	}
+	return errors.Join(err, closeErr)
 }

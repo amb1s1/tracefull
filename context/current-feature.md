@@ -2,6 +2,11 @@
 
 ## Status and acceptance
 
+Local review completed against merged investigation `54e646f`, covering command
+policy, session bounds, evidence attribution, partial results and parser
+uncertainty. Three reproduced defects were corrected with regression tests;
+results are recorded below. Integration and full-milestone gaps remain pending.
+
 Multi-platform slice Ready for review on `codex/v0.2-collect`. v0.1 and investigation are merged; the user
 explicitly authorized continuation into collection. No native probing is in scope.
 Full v0.2 requires native/wrapper sessions, capture-validated platform drivers,
@@ -66,6 +71,36 @@ this new `collect` executable. The original trace and older root-owned evidence 
 the user's checkout remain untouched. Development and checks use this worktree.
 
 ## Verification and delivery
+
+### Local review corrections
+
+- Equivalent endpoint spellings bypassed session serialization (for example,
+  `192.0.2.1` versus `192.0.2.1:22`). The guard now normalizes host/port and IP
+  spellings while preserving distinct ports and case-sensitive IPv6 zones.
+  `TestEndpointAliasesShareSessionGate` failed before correction; queued aliases
+  now wait or cancel, and can proceed after the first session closes.
+- A named pipe selected as an identity or known-hosts file blocked SSH setup past
+  its connection deadline. Those paths now require regular files, retaining
+  symlinks to regular files. `TestSSHRejectsNamedPipeFiles` reproduced both hangs;
+  it and the symlink/loopback-authentication tests now pass.
+- Successful jump-host sessions returned an expected closed-transport error on
+  cleanup, causing collection to report partial coverage. `TestSSHJump` now checks
+  close success and reproduced the fault. Expected closed/EOF results from tunnel
+  teardown are normalized; unexpected close errors remain visible and tested.
+
+After corrections, `make check` passed on macOS: unit/CLI replay/schema tests,
+formatting, vet, race, coverage, staticcheck, golangci-lint, Markdown validation and
+build. Coverage gates passed: parsers 92.6%, verdicts 99.4%, drivers 92.5%.
+The documented collection dry-run and schema commands passed with the built CLI.
+`make scan` found no reachable or imported-package vulnerabilities; one advisory
+remains in a required module outside imported packages. `make cross` compiled
+Linux/macOS on amd64/arm64; those cross-builds are not runtime verification.
+No additional device access, collection CI, push, merge or publication occurred.
+There are no unresolved findings from this local review; the capture gaps below
+still prevent full v0.2 completion. Status remains Ready for review pending
+integration. The next delivery step is pushing the branch and running CI.
+
+### Implementation verification
 
 Tests cover real scrubbed parser inputs, malformed/null fields, strict policies,
 wrapper argv, host-key/authentication failures, jump forwarding, bounds, cancellation,

@@ -114,6 +114,8 @@ Native SSH verifies target and jump host keys. Auth order is agent keys, then
 explicit `--identity` files, or default `~/.ssh/id_ed25519`, `id_ecdsa`, `id_rsa`
 when no identity is supplied. Missing/encrypted default files are skipped; explicit
 missing/encrypted identities fail. Load encrypted keys into your agent yourself.
+Identity and known-hosts paths must refer to regular files; symlinks to regular
+files are accepted. Pipes and device files are rejected before reading.
 No passwords, interactive prompts, SSH-config interpretation or credential retries.
 `--jump` supports one host, using the same user/authentication as the target.
 `--insecure-host-key` is an explicit opt-out, never an automatic fallback.
@@ -129,7 +131,9 @@ Defaults: four parallel devices, five-minute overall deadline, five-second SSH
 connection deadline, 25-second command deadline, 1 MiB per stdout/stderr stream.
 Maximums: 32 workers, 30-minute overall deadline, five-minute connection/command
 deadlines, 256 devices per pass, 256 discovered interfaces per device, 32 extras.
-Commands per device are serial; identical literal endpoints also serialize.
+Commands per device are serial; equivalent literal endpoints also serialize,
+including implicit port 22, explicit ports and alternate IP spellings. Distinct
+ports and case-sensitive IPv6 interface zones remain separate endpoints.
 Different DNS aliases cannot be correlated by the offline planner.
 
 Timeout/truncation closes native SSH with no reconnect. Wrapper cancellation
