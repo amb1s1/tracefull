@@ -39,7 +39,7 @@ func frrVersionCommand(p driver.Params) string {
 	return prefix + "vtysh -c 'show version'"
 }
 func (Driver) Validate(command string, p driver.Params) error {
-	if p.VRF != "" && p.VRF != "default" {
+	if p.VRF != "" && p.VRF != "default" && p.VRF != "mgmt" {
 		return fmt.Errorf("unsupported Linux/FRR routing context")
 	}
 	if command == frrVersionCommand(p) {

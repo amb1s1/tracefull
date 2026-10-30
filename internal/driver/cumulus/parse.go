@@ -19,10 +19,18 @@ func (Driver) Parse(name string, data []byte) (driver.Facts, error) {
 	}
 	var err error
 	switch {
-	case name == "addresses":
-		err = parseAddresses(data, &f)
-	case name == "route":
+	case name == "addresses" || name == "addresses-detailed":
+		err = parseAddresses(data, &f, name == "addresses-detailed")
+	case name == "route" || name == "route-mgmt":
 		err = parseRoute(data, &f)
+		if err == nil && name == "route-mgmt" {
+			for _, r := range f.Routes {
+				if r.Context != "mgmt" {
+					err = fmt.Errorf("management lookup returned unknown or conflicting routing context")
+					break
+				}
+			}
+		}
 	case strings.HasPrefix(name, "counters-"):
 		err = parseCounters(data, &f)
 	case name == "lldp":
@@ -56,6 +64,7 @@ type link struct {
 	Name      string   `json:"ifname"`
 	Master    string   `json:"master"`
 	Flags     []string `json:"flags"`
+	LinkInfo  linkInfo `json:"linkinfo"`
 	MTU       *uint64  `json:"mtu"`
 	State     string   `json:"operstate"`
 	Addresses []struct {
@@ -83,10 +92,17 @@ func links(data []byte) ([]link, error) {
 	}
 	return rows, nil
 }
-func parseAddresses(data []byte, f *driver.Facts) error {
+func parseAddresses(data []byte, f *driver.Facts, detailed bool) error {
 	rows, err := links(data)
 	if err != nil {
 		return err
+	}
+	byName := make(map[string]link, len(rows))
+	for _, row := range rows {
+		if _, exists := byName[row.Name]; exists {
+			return fmt.Errorf("duplicate interface name")
+		}
+		byName[row.Name] = row
 	}
 	for i, row := range rows {
 		for j, addr := range row.Addresses {
@@ -105,7 +121,12 @@ func parseAddresses(data []byte, f *driver.Facts) error {
 				v := "default"
 				routingContext = &v
 			}
-			f.Addresses = append(f.Addresses, driver.Address{RoutingContext: routingContext, Interface: row.Name, Address: a.Unmap().String(), PrefixLength: addr.PrefixLength, Master: row.Master, Evidence: fmt.Sprintf("json:/%d/addr_info/%d", i, j)})
+			ref := fmt.Sprintf("json:/%d/addr_info/%d", i, j)
+			if detailed {
+				routingContext = detailedContext(row, byName)
+				ref = fmt.Sprintf("json:/%d", i)
+			}
+			f.Addresses = append(f.Addresses, driver.Address{RoutingContext: routingContext, Interface: row.Name, Address: a.Unmap().String(), PrefixLength: addr.PrefixLength, Master: row.Master, Evidence: ref})
 		}
 	}
 	return nil

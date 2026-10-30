@@ -116,6 +116,8 @@ func FuzzParse(f *testing.F) {
 	f.Add("frr-version", capture(f, "frr-version.txt"))
 	f.Add("version", capture(f, "os-release.txt"))
 	f.Add("route", capture(f, "frr-route.json"))
+	f.Add("route-mgmt", capture(f, "frr-route-mgmt.json"))
+	f.Add("addresses-detailed", capture(f, "addresses-detailed.json"))
 	f.Fuzz(func(t *testing.T, name string, data []byte) {
 		a, e := (Driver{}).Parse(name, data)
 		b, e2 := (Driver{}).Parse(name, data)

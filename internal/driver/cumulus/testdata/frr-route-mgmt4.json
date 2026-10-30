@@ -1,0 +1,34 @@
+{
+  "0.0.0.0/0": [
+    {
+      "protocol": "kernel",
+      "selected": true,
+      "destSelected": true,
+      "distance": 255,
+      "metric": 8192,
+      "installed": true,
+      "nexthopGroupId": 42,
+      "uptime": "25w0d08h",
+      "routeUptimeEstablishedEpoch": 1778218934,
+      "prefix": "0.0.0.0/0",
+      "prefixLen": 0,
+      "vrfId": 117,
+      "vrfName": "mgmt",
+      "table": 1001,
+      "internalStatus": 16,
+      "internalFlags": 8,
+      "internalNextHopNum": 1,
+      "internalNextHopActiveNum": 1,
+      "installedNexthopGroupId": 42,
+      "nexthops": [
+        {
+          "flags": 3,
+          "fib": true,
+          "unreachable": true,
+          "reject": true,
+          "active": true
+        }
+      ]
+    }
+  ]
+}
