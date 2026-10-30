@@ -128,8 +128,8 @@ Document Go/tool versions, install/run commands, layout, environment variables,
 sanitized config, and focused/golden-update commands in the README when added.
 Do not assume custom test flags exist. Check Markdown links/format for docs changes.
 
-The 90% verdict/parser coverage gates and lint checks are configured in the
-Makefile; driver gates and release checks await their milestones. Checking-tool
+The 90% verdict/parser/driver coverage gates and lint checks are configured in the
+Makefile; release checks await their milestone. Checking-tool
 versions and their update process are recorded in docs/dependencies.md. Vulnerability
 database access is separate from offline tests. Report unavailable/failed scans
 accurately; test runtime support before claiming it.

@@ -1,0 +1,455 @@
+[
+  {
+    "ifindex": 1,
+    "ifname": "lo",
+    "flags": [
+      "LOOPBACK",
+      "UP",
+      "LOWER_UP"
+    ],
+    "mtu": 65536,
+    "qdisc": "noqueue",
+    "operstate": "UNKNOWN",
+    "linkmode": "DEFAULT",
+    "group": "default",
+    "txqlen": 1000,
+    "link_type": "loopback",
+    "address": "00:00:00:00:00:00",
+    "broadcast": "00:00:00:00:00:00",
+    "stats64": {
+      "rx": {
+        "bytes": 2436266940,
+        "packets": 26674420,
+        "errors": 0,
+        "dropped": 0,
+        "over_errors": 0,
+        "multicast": 0
+      },
+      "tx": {
+        "bytes": 2436266940,
+        "packets": 26674420,
+        "errors": 0,
+        "dropped": 0,
+        "carrier_errors": 0,
+        "collisions": 0
+      }
+    }
+  },
+  {
+    "ifindex": 2,
+    "ifname": "eth0",
+    "flags": [
+      "BROADCAST",
+      "MULTICAST",
+      "UP",
+      "LOWER_UP"
+    ],
+    "mtu": 1500,
+    "qdisc": "mq",
+    "master": "mgmt",
+    "operstate": "UP",
+    "linkmode": "DEFAULT",
+    "group": "default",
+    "txqlen": 1000,
+    "link_type": "ether",
+    "address": "02:00:00:00:00:01",
+    "broadcast": "ff:ff:ff:ff:ff:ff",
+    "ifalias": "scrubbed link description",
+    "stats64": {
+      "rx": {
+        "bytes": 18886441909,
+        "packets": 172650358,
+        "errors": 0,
+        "dropped": 0,
+        "over_errors": 0,
+        "multicast": 18713360
+      },
+      "tx": {
+        "bytes": 101445625257,
+        "packets": 286570756,
+        "errors": 0,
+        "dropped": 0,
+        "carrier_errors": 0,
+        "collisions": 0
+      }
+    }
+  },
+  {
+    "ifindex": 99,
+    "ifname": "swp49",
+    "flags": [
+      "BROADCAST",
+      "MULTICAST",
+      "UP",
+      "LOWER_UP"
+    ],
+    "mtu": 9100,
+    "qdisc": "pfifo_fast",
+    "operstate": "UP",
+    "linkmode": "DEFAULT",
+    "group": "default",
+    "txqlen": 1000,
+    "link_type": "ether",
+    "address": "02:00:00:00:00:02",
+    "broadcast": "ff:ff:ff:ff:ff:ff",
+    "ifalias": "scrubbed link description",
+    "stats64": {
+      "rx": {
+        "bytes": 11247655422578356,
+        "packets": 2835977667066,
+        "errors": 0,
+        "dropped": 22168,
+        "over_errors": 0,
+        "multicast": 718198
+      },
+      "tx": {
+        "bytes": 8910891087241207,
+        "packets": 2682807010835,
+        "errors": 0,
+        "dropped": 0,
+        "carrier_errors": 0,
+        "collisions": 0
+      }
+    }
+  },
+  {
+    "ifindex": 100,
+    "ifname": "swp50",
+    "flags": [
+      "BROADCAST",
+      "MULTICAST",
+      "UP",
+      "LOWER_UP"
+    ],
+    "mtu": 9100,
+    "qdisc": "pfifo_fast",
+    "operstate": "UP",
+    "linkmode": "DEFAULT",
+    "group": "default",
+    "txqlen": 1000,
+    "link_type": "ether",
+    "address": "02:00:00:00:00:03",
+    "broadcast": "ff:ff:ff:ff:ff:ff",
+    "ifalias": "scrubbed link description",
+    "stats64": {
+      "rx": {
+        "bytes": 10673205247973327,
+        "packets": 2756076290273,
+        "errors": 0,
+        "dropped": 16473,
+        "over_errors": 0,
+        "multicast": 731052
+      },
+      "tx": {
+        "bytes": 8882058037524121,
+        "packets": 2758819855824,
+        "errors": 0,
+        "dropped": 0,
+        "carrier_errors": 0,
+        "collisions": 0
+      }
+    }
+  },
+  {
+    "ifindex": 101,
+    "ifname": "swp51",
+    "flags": [
+      "BROADCAST",
+      "MULTICAST",
+      "UP",
+      "LOWER_UP"
+    ],
+    "mtu": 9100,
+    "qdisc": "pfifo_fast",
+    "operstate": "UP",
+    "linkmode": "DEFAULT",
+    "group": "default",
+    "txqlen": 1000,
+    "link_type": "ether",
+    "address": "02:00:00:00:00:04",
+    "broadcast": "ff:ff:ff:ff:ff:ff",
+    "ifalias": "scrubbed link description",
+    "stats64": {
+      "rx": {
+        "bytes": 10144730234452190,
+        "packets": 2669490829735,
+        "errors": 0,
+        "dropped": 9273,
+        "over_errors": 0,
+        "multicast": 722396
+      },
+      "tx": {
+        "bytes": 9080818048128641,
+        "packets": 2808346922893,
+        "errors": 0,
+        "dropped": 0,
+        "carrier_errors": 0,
+        "collisions": 0
+      }
+    }
+  },
+  {
+    "ifindex": 102,
+    "ifname": "swp52",
+    "flags": [
+      "BROADCAST",
+      "MULTICAST",
+      "UP",
+      "LOWER_UP"
+    ],
+    "mtu": 9100,
+    "qdisc": "pfifo_fast",
+    "operstate": "UP",
+    "linkmode": "DEFAULT",
+    "group": "default",
+    "txqlen": 1000,
+    "link_type": "ether",
+    "address": "02:00:00:00:00:05",
+    "broadcast": "ff:ff:ff:ff:ff:ff",
+    "ifalias": "scrubbed link description",
+    "stats64": {
+      "rx": {
+        "bytes": 9571453705420968,
+        "packets": 2592118399077,
+        "errors": 0,
+        "dropped": 11558,
+        "over_errors": 0,
+        "multicast": 730954
+      },
+      "tx": {
+        "bytes": 9094478791170558,
+        "packets": 2724285563625,
+        "errors": 0,
+        "dropped": 0,
+        "carrier_errors": 0,
+        "collisions": 0
+      }
+    }
+  },
+  {
+    "ifindex": 103,
+    "ifname": "swp53",
+    "flags": [
+      "BROADCAST",
+      "MULTICAST",
+      "UP",
+      "LOWER_UP"
+    ],
+    "mtu": 9100,
+    "qdisc": "pfifo_fast",
+    "operstate": "UP",
+    "linkmode": "DEFAULT",
+    "group": "default",
+    "txqlen": 1000,
+    "link_type": "ether",
+    "address": "02:00:00:00:00:06",
+    "broadcast": "ff:ff:ff:ff:ff:ff",
+    "ifalias": "scrubbed link description",
+    "stats64": {
+      "rx": {
+        "bytes": 9869800195980172,
+        "packets": 2666818554243,
+        "errors": 0,
+        "dropped": 12387,
+        "over_errors": 0,
+        "multicast": 729631
+      },
+      "tx": {
+        "bytes": 9027240386155986,
+        "packets": 2713987446570,
+        "errors": 0,
+        "dropped": 0,
+        "carrier_errors": 0,
+        "collisions": 0
+      }
+    }
+  },
+  {
+    "ifindex": 104,
+    "ifname": "swp54",
+    "flags": [
+      "BROADCAST",
+      "MULTICAST",
+      "UP",
+      "LOWER_UP"
+    ],
+    "mtu": 9100,
+    "qdisc": "pfifo_fast",
+    "operstate": "UP",
+    "linkmode": "DEFAULT",
+    "group": "default",
+    "txqlen": 1000,
+    "link_type": "ether",
+    "address": "02:00:00:00:00:07",
+    "broadcast": "ff:ff:ff:ff:ff:ff",
+    "ifalias": "scrubbed link description",
+    "stats64": {
+      "rx": {
+        "bytes": 10473687190800693,
+        "packets": 2676363415852,
+        "errors": 0,
+        "dropped": 11739,
+        "over_errors": 0,
+        "multicast": 730946
+      },
+      "tx": {
+        "bytes": 8705962704510548,
+        "packets": 2681989592993,
+        "errors": 0,
+        "dropped": 0,
+        "carrier_errors": 0,
+        "collisions": 0
+      }
+    }
+  },
+  {
+    "ifindex": 105,
+    "ifname": "swp55",
+    "flags": [
+      "BROADCAST",
+      "MULTICAST",
+      "UP",
+      "LOWER_UP"
+    ],
+    "mtu": 9100,
+    "qdisc": "pfifo_fast",
+    "operstate": "UP",
+    "linkmode": "DEFAULT",
+    "group": "default",
+    "txqlen": 1000,
+    "link_type": "ether",
+    "address": "02:00:00:00:00:08",
+    "broadcast": "ff:ff:ff:ff:ff:ff",
+    "ifalias": "scrubbed link description",
+    "stats64": {
+      "rx": {
+        "bytes": 9968469029858919,
+        "packets": 2665080006043,
+        "errors": 0,
+        "dropped": 11597,
+        "over_errors": 0,
+        "multicast": 730855
+      },
+      "tx": {
+        "bytes": 8763564336022954,
+        "packets": 2757883910379,
+        "errors": 0,
+        "dropped": 0,
+        "carrier_errors": 0,
+        "collisions": 0
+      }
+    }
+  },
+  {
+    "ifindex": 106,
+    "ifname": "swp56",
+    "flags": [
+      "BROADCAST",
+      "MULTICAST",
+      "UP",
+      "LOWER_UP"
+    ],
+    "mtu": 9100,
+    "qdisc": "pfifo_fast",
+    "operstate": "UP",
+    "linkmode": "DEFAULT",
+    "group": "default",
+    "txqlen": 1000,
+    "link_type": "ether",
+    "address": "02:00:00:00:00:09",
+    "broadcast": "ff:ff:ff:ff:ff:ff",
+    "ifalias": "scrubbed link description",
+    "stats64": {
+      "rx": {
+        "bytes": 10512733077425320,
+        "packets": 2715221189981,
+        "errors": 0,
+        "dropped": 11790,
+        "over_errors": 0,
+        "multicast": 731167
+      },
+      "tx": {
+        "bytes": 9556669112485673,
+        "packets": 2828384647536,
+        "errors": 0,
+        "dropped": 0,
+        "carrier_errors": 0,
+        "collisions": 0
+      }
+    }
+  },
+  {
+    "ifindex": 117,
+    "ifname": "mgmt",
+    "flags": [
+      "NOARP",
+      "MASTER",
+      "UP",
+      "LOWER_UP"
+    ],
+    "mtu": 65575,
+    "qdisc": "noqueue",
+    "operstate": "UP",
+    "linkmode": "DEFAULT",
+    "group": "default",
+    "txqlen": 1000,
+    "link_type": "ether",
+    "address": "02:00:00:00:00:0a",
+    "broadcast": "ff:ff:ff:ff:ff:ff",
+    "stats64": {
+      "rx": {
+        "bytes": 13944338566,
+        "packets": 153816463,
+        "errors": 0,
+        "dropped": 0,
+        "over_errors": 0,
+        "multicast": 0
+      },
+      "tx": {
+        "bytes": 17767418,
+        "packets": 95959,
+        "errors": 0,
+        "dropped": 1,
+        "carrier_errors": 0,
+        "collisions": 0
+      }
+    }
+  },
+  {
+    "ifindex": 119,
+    "ifname": "tenant-a",
+    "flags": [
+      "NOARP",
+      "MASTER",
+      "UP",
+      "LOWER_UP"
+    ],
+    "mtu": 65575,
+    "qdisc": "noqueue",
+    "operstate": "UP",
+    "linkmode": "DEFAULT",
+    "group": "default",
+    "txqlen": 1000,
+    "link_type": "ether",
+    "address": "02:00:00:00:00:0b",
+    "broadcast": "ff:ff:ff:ff:ff:ff",
+    "stats64": {
+      "rx": {
+        "bytes": 10343946833,
+        "packets": 123613814,
+        "errors": 0,
+        "dropped": 0,
+        "over_errors": 0,
+        "multicast": 0
+      },
+      "tx": {
+        "bytes": 266360976,
+        "packets": 1878220,
+        "errors": 0,
+        "dropped": 1,
+        "carrier_errors": 0,
+        "collisions": 0
+      }
+    }
+  }
+]

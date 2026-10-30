@@ -8,6 +8,7 @@ with tempfile.TemporaryDirectory(prefix="tracefull-coverage-") as tmp:
     for name, packages, covered in (
         ("parsers", ["./internal/importer", "./internal/parse/..."], "./internal/parse/..."),
         ("verdicts", ["./internal/verdict"], "./internal/verdict"),
+        ("drivers", ["./internal/driver/..."], "./internal/driver/..."),
     ):
         profile = str(Path(tmp) / (name + ".out"))
         subprocess.run(["go", "test", *packages, "-coverpkg=" + covered,

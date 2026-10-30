@@ -1,0 +1,13 @@
+[
+  {
+    "dst": "2001:db8:c::1e",
+    "from": "::",
+    "gateway": "fe80::1f",
+    "dev": "swp51",
+    "protocol": "bgp",
+    "prefsrc": "2001:db8:3::6",
+    "metric": 20,
+    "flags": [],
+    "pref": "medium"
+  }
+]
