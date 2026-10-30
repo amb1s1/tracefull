@@ -8,6 +8,7 @@ addresses, JSON, DNS, clocks, hashing, file I/O and tests.
 | --- | --- | --- |
 | Cobra 1.10.2 / pflag 1.0.9 | Fresh command/flag state and explicit registration; domain packages remain independent. | Apache-2.0 / BSD-3-Clause |
 | Fang 1.0.0 | Styled help, completion, version flag and manpage generation. | MIT |
+| Bubble Tea v2.1.1 / Bubbles v2.2.1 | Live collection model, spinner and report viewport; inspected installed APIs and MIT licenses. Reuses the Charm terminal stack instead of implementing raw terminal handling. | MIT |
 | Lip Gloss v2.0.6 / Glamour v2.0.1 | Terminal tables/theme and explanation rendering. A coherent v2 stack avoids incompatible ANSI APIs in the older releases. | MIT |
 | go.yaml.in/yaml/v3 3.0.5 | Strict known-field inventory decoding; maintained YAML project path. | MIT / Apache-2.0 |
 | jsonschema/v6 6.0.3 | Draft 2020-12 validation in tests; no runtime network schema loading. | Apache-2.0 |
@@ -45,3 +46,8 @@ cancellation can interrupt a full pipe. Cleanup restores shared descriptor flags
 and closes the duplicate. Process tests cover this behavior on the local host.
 Linux and macOS are the supported runtime targets. Windows-specific fallback code
 and transitive dependencies may remain, but do not imply Windows support.
+
+The collection view requires Bubble Tea’s newer Ultraviolet, x/ansi, runewidth
+and terminfo versions. Those four transitive upgrades are recorded in go.mod;
+existing rendering and terminal tests are rerun with the new graph. Only spinner
+and viewport Bubbles packages are imported; no clipboard package is used.

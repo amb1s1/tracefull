@@ -1,0 +1,7 @@
+# Documentation-only inventory for offline preview; these are not real devices.
+devices:
+  - name: example-cumulus
+    address: 192.0.2.1
+    platform: nvidia-cumulus
+    site: lab
+    role: leaf

@@ -4,7 +4,10 @@
 
 - Add policy-checked wrapper and native SSH session primitives, with verified
   host keys, one jump host, bounded output, cancellation and synthetic local tests.
-  No collection CLI or validated device drivers are available yet.
+- Add `collect`, Cumulus 5.16 capture-backed parsers, two-phase interface discovery,
+  owner sweep, private evidence, versioned output, qualified route/MTU comparisons
+  and terminal collection progress. Other platform drivers and optics/reverse
+  remain unavailable pending captures.
 
 ## Unreleased — investigation
 
@@ -18,5 +21,5 @@
 - Add opt-in rDNS/ASN, qualified findings, text/JSON/Markdown reports and schema.
 - Add local regression, schema, process, race, coverage, fuzz and vulnerability checks.
 
-The saved-trace milestone merged through PR #1. Investigation is under local
+The saved-trace milestone merged through PR #1. Investigation merged through PR #2. Collection is under local
 development/review. No release has been published.

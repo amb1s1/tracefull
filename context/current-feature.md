@@ -1,73 +1,90 @@
 # Current feature — v0.2 device collection
 
-## Collection status and contract
+## Status and acceptance
 
-In progress on `codex/v0.2-collect`. The user authorized continuation after
-investigation review/push/CI/merge, and confirmed default routing context unless
-an explicit VRF is supplied. Unsupported VRFs fail without a silent fallback.
-Investigation PR #2 merged as `54e646f` after all six push/PR runtime and quality
-jobs passed at `36d0310`. Tests, build and an IPv6 dry-run passed on the merged
-checkout. That feature is Complete; no release or production deployment occurred.
+Cumulus slice Ready for review on `codex/v0.2-collect`. v0.1 and investigation are merged; the user
+explicitly authorized continuation into collection. No native probing is in scope.
+Full v0.2 requires native/wrapper sessions, capture-validated platform drivers,
+command policy, dry-run, evidence, owner sweep, cross-device observations and a
+live view. The Cumulus slice is implemented; the multi-platform milestone is not
+Complete. Other drivers and optics/reverse formats need real captures.
 
-Acceptance for v0.2 remains the roadmap's native SSH and wrapper sessions,
-validated platform commands/parsers, two-phase discovery, owner sweep,
-cross-device observations, attributed evidence and live collection view.
-No production access is authorized by implementation work.
+## Implemented slices
 
-Slices: shared bounded session lifecycle and wrapper arguments; driver policy and
-capture-backed parsers; discovery/collection orchestration; CLI/schema/live view;
-failure and integration checks, docs and review. Both preview and execution use
-one planner. Phase-2 commands remain deferred until interfaces are discovered.
-Unknown platforms have no execution policy and cannot execute extras.
+- Explicit command and driver registries, policy-checked native SSH and wrapper
+  sessions, agent-first/default/explicit keys, strict host keys, one jump, bounded
+  serial commands and parallel devices. No password prompts, privilege fallback
+  or automatic reconnects after command failure.
+- Cumulus Linux 5.16 / FRR 10.0 capture-backed JSON/text parsers for addresses,
+  route facts, counters, LLDP, OS version, uptime and load. Scrubbed real captures
+  and provenance are committed with parser tests; synthetic failures are labelled.
+- `collect` connects saved-trace matching to a shared offline/execution plan,
+  two-phase interface discovery, owner sweep, private evidence and a separate
+  version-1 collection envelope. Unknown platforms cannot execute commands.
+- Qualified route/MTU comparisons keep flows separate and require comparable
+  ownership/context/FIB evidence. Cumulative counters do not become rates.
+  Link-local next hops retain interfaces; they do not imply global responder identity.
+- Text/Markdown/JSON output; terminal progress and report viewport; config layers
+  follow defaults < user config < project config < environment < flags.
+  CLI adapters and UI remain separate from domain logic.
 
-Verification uses synthetic local processes/SSH servers for lifecycle tests,
-then real scrubbed platform captures for parser validation, followed by all
-existing local and CI gates. No synthetic output will be labelled a device
-capture. Evidence retains private permissions and exclusive creation; a single
-counter sample remains cumulative, without invented rates or incident times.
+## Decisions and limits
 
-The user identified the first target as an NVIDIA Cumulus switch accessible by
-native SSH. Its version and captures remain unverified. The user authorized a
-bounded read-only capture plan. The first SSH handshake failed strict host-key
-verification because the IP has no trusted key. No device command executed.
-Capture-backed driver validation is Blocked pending a trusted canonical hostname
-or independently verified host key. Private target details and raw captures stay
-outside this repository; host-key verification was not weakened.
+The user selected default routing context unless an explicit VRF is supplied.
+Unvalidated contexts fail without fallback. A matched interface master is not the
+same as the requested lookup context. `--sudo` explicitly selects noninteractive
+sudo for FRR/LLDP; a denial never changes credentials or privileges.
 
-## Collection progress
+Owner sweep uses an address-only pass, closes those sessions, then collects unique
+owners with the same credentials. This bounds open connections while deciding
+ambiguity globally. The dry-run includes conditional follow-up commands. Existing
+inventory ambiguity/mapping precedence remains intact; sweep uniqueness is scoped
+to successful observations within the selected inventory/site/role.
 
-- Shared bounded local process execution now serves investigation and wrappers.
-  Investigation retains its existing environment filtering and regression tests.
-- Wrapper templates tokenize before substitution, keep `{cmd}` as one argument,
-  reject shell syntax and require a command policy. Preview and execution use
-  the same expansion. Per-session execution is serial, bounded and cancellable.
-- Native SSH verifies target and jump host keys, supports one jump, agent-first
-  identity authentication and separate exec channels on one connection. No
-  passwords/prompts or automatic reconnects. Timeouts/truncation close the
-  connection and preserve captured output. Sessions require explicit policies.
-- Local synthetic SSH/process tests cover output, failures, wrong host keys,
-  authentication order, jump forwarding, hanging handshakes, output caps,
-  cancellation and queued commands. They do not validate device drivers.
-- The first agent/identity regression failed because Go's SSH client skips
-  duplicate auth-method names. One ordered public-key list corrected it; the
-  regression now passes. No broadening of authentication or retries was needed.
+Structured Cumulus output was chosen from the explicitly authorized real capture
+commands, replacing the draft text-only proposal for this driver. This reduces
+heuristics and preserves typed nulls and JSON-pointer evidence. Existing saved-trace
+schema/version remains unchanged. The collection envelope has its own schema.
 
-The session slice is Ready for review. `make check` passed after fixing unchecked
-test cleanup calls: unit/CLI/schema/golden tests, race, vet, formatting, coverage,
-lint, docs and build. Session coverage is 86.1%; parser/verdict coverage remains
-92.6%/99.4%. Four Linux/macOS cross-builds passed, without runtime claims.
-The scan found no reachable vulnerabilities or imported-package advisories;
-the unused OpenPGP module advisory is recorded in dependency notes. No new fuzz
-mutation run was needed because parsers did not change; existing fuzz seeds pass.
+Selected-interface counters use the captured whole-link JSON format; the selector
+is tested offline but has no separate live CLI verification. IPv4 FRR command
+planning is tested; the captured FRR route output is IPv6. Nondefault VRFs, optics,
+reverse traces and the other six platform families remain unavailable. Do not
+present this slice as full v0.2 support.
 
-Next: authorized Cumulus captures and a capture-backed command policy/parser.
-The `collect` CLI, driver policies/parsers, orchestration, schema, owner sweep,
-cross-device checks and live view remain unfinished. v0.2 is not Complete.
+## Capture authorization and evidence
 
-Local session commits: `e675258` (shared process runner), `abee317` (wrapper),
-`7c08f40` (native SSH) and `f4002c4` (contracts/docs). This branch has not been
-pushed and has no CI or integration result yet. The session slice is Ready for
-review; the whole collection milestone remains incomplete.
+The user authorized a bounded read-only Cumulus capture, then explicitly extended
+it for noninteractive sudo FRR and LLDP reads. Strict host verification initially
+failed. After the user trusted the IP against an existing hostname key, reads
+succeeded. Unprivileged FRR/LLDP failures were preserved; approved sudo reads
+supplied the missing formats. No configuration was changed and no reverse probes
+were sent. Raw captures and identifying maps remain private outside Git.
+
+These are saved observations from the approved commands, not live verification of
+this new `collect` executable. The original trace and older root-owned evidence in
+the user's checkout remain untouched. Development and checks use this worktree.
+
+## Verification and delivery
+
+Tests cover real scrubbed parser inputs, malformed/null fields, strict policies,
+wrapper argv, host-key/authentication failures, jump forwarding, bounds, cancellation,
+partial results, owner ambiguity, evidence-write errors, schema conformance and
+actual CLI replay. Local terminal verification uses synthetic wrappers only.
+Driver coverage now has the same 90% gate as parsers and verdicts; the new parser
+has its own bounded fuzz target. Final check/fuzz/scan/cross results are recorded
+below when finished. CI has not run for this branch.
+
+Local session commits: `e675258`, `abee317`, `7c08f40`, `f4002c4`, `c632d70`.
+Cumulus/pipeline/UI slices passed local checks and are committed as `8933586`,
+`bb75759`, `7606280`, `5362948`, `f363773`, `cf57394` and `cd09c08`.
+No collection push, PR, merge, release or deployment has occurred. Full-milestone
+completion still needs additional platform captures. The user supplied and
+authorized Junos, EOS and IOS-XR targets. Strictly verified reads recorded Junos
+24.4R2-S5.3, EOS 4.33.4M and IOS-XR 25.4.2; raw captures remain private. IOS-XR
+is an explicitly requested additional driver, distinct from the planned IOS-XE.
+Those driver implementations follow the reviewed Cumulus slice. Linux/FRR, NX-OS,
+IOS-XE and RouterOS captures are still unavailable.
 
 # Local tool investigation record
 
@@ -372,3 +389,21 @@ Verification on 2026-10-29:
   or other snapshots change.
 - Await final local and PR checks before merging. The user also authorized the
   next feature: orchestration of local tools through an investigation command.
+
+## Cumulus slice verification — 2026-10-29
+
+`make check TOOLS_DIR=/tmp/tracefull-tools` passed after fixing one lint message
+and an integration-fixture XDG directory collision with the test binary. Tests
+include unit/CLI/schema/golden checks, race, vet, formatting, both linters, docs
+and build. Coverage: parsers 92.6%, verdicts 99.4%, drivers 98.5%; collection
+78.8% and session 88.2% are supplementary measurements, not new gates.
+
+`make fuzz` passed 2,098,741 importer and 2,562,625 Cumulus executions. A follow-up
+Cumulus fuzz run adds actual scrubbed captures as seeds. `make scan` found no
+reachable/imported-package vulnerabilities; the unused OpenPGP module advisory
+remains. `make cross` compiled Linux/macOS amd64/arm64, without runtime claims.
+
+The documented offline dry-run and embedded schema commands ran successfully.
+A local pseudo-terminal replay verified progress, final viewport, q-to-exit,
+exit 0 and a complete evidence report. It used a synthetic wrapper and sent no
+network traffic. The new CLI has not been run against production devices.

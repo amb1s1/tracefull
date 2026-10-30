@@ -5,7 +5,8 @@ collecting attributed read-only evidence. **Active scope: saved-trace enrichment
 and local-tool investigation.**
 v0.1 and local-tool investigation are merged. The user authorized continuation
 into v0.2 device collection. Native probing remains design only. Collection
-sessions are under implementation; device driver support requires real captures.
+sessions and a Cumulus driver are implemented locally; other driver support
+requires real captures. Collection is not yet a completed milestone.
 
 ## Read only what the task needs
 
