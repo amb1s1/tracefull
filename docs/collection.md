@@ -31,6 +31,10 @@ selects `sudo -n` for FRR and LLDP; it never prompts or falls back after a denia
 Do not run the entire CLI under sudo merely to grant these remote reads.
 Default context is `default`. Other `--vrf` values fail without falling back.
 The matched address's interface master is reported separately from routing context.
+An untyped master interface can itself be a VRF; absence of a parent master does
+not establish default context. Such contexts remain unknown. Route-driven
+interface discovery uses only routes that report the requested context; matched
+address ownership observations remain available separately.
 
 Preview and execution share a planner. Preview performs no DNS, connections,
 wrapper execution or evidence writes. Interface-dependent commands are `deferred`.
@@ -43,7 +47,7 @@ SSH command string is exact; wrappers also show the exact local argv.
 | --- | --- | --- |
 | ingress | `ip -j address show` | Exact address ownership, not subnet ownership. |
 | route | `vtysh -c 'show ip/ipv6 route ADDRESS json'` | Numeric destination, default context; retains prefix, protocol, selection, FIB state and scoped next-hop interface. IPv6 FRR output is capture-tested; IPv4 command construction is tested but its output variant has no live capture yet. |
-| counters | `ip -j -s link show dev INTERFACE` | Owning and selected egress interfaces. Cumulative errors/drops, state and MTU; speed and CRC-specific counters remain unknown. The captured whole-link JSON validates the parser; per-interface selection is tested offline. |
+| counters | `ip -j -s link show dev INTERFACE` | Owning and selected egress interfaces. Cumulative errors/drops, state and MTU; speed and CRC-specific counters remain unknown. The whole-link capture validates the parser; a user-run native collection also completed nine per-interface reads on the Cumulus validation switch. |
 | lldp | `/usr/sbin/lldpctl -f json` | One raw snapshot, parsed neighbors filtered to discovered interfaces. |
 | version | `cat /etc/os-release`, `cat /proc/uptime` | Cumulus version and uptime seconds. |
 | cpu | `cat /proc/loadavg` | Load averages, not utilization percentages. |
@@ -152,6 +156,7 @@ references include the raw filename. `trace.input` preserves original trace byte
 Evidence uses a new directory (0700) and exclusive files (0600). Default directory
 names are hidden `.tracefull-collection-*`, preventing Go from scanning raw captures
 as packages. An existing explicit directory fails. Nothing silently overwrites it.
+Default collection directories are also ignored by Git.
 Evidence-write/finalization errors are returned. Keep raw device evidence private.
 
 Exit 0 means at least one usable command and no overall failure; `status` still

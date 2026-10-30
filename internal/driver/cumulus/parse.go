@@ -53,10 +53,11 @@ func (Driver) Parse(name string, data []byte) (driver.Facts, error) {
 }
 
 type link struct {
-	Name      string  `json:"ifname"`
-	Master    string  `json:"master"`
-	MTU       *uint64 `json:"mtu"`
-	State     string  `json:"operstate"`
+	Name      string   `json:"ifname"`
+	Master    string   `json:"master"`
+	Flags     []string `json:"flags"`
+	MTU       *uint64  `json:"mtu"`
+	State     string   `json:"operstate"`
 	Addresses []struct {
 		Local        string `json:"local"`
 		PrefixLength *int   `json:"prefixlen"`
@@ -97,7 +98,10 @@ func parseAddresses(data []byte, f *driver.Facts) error {
 				return fmt.Errorf("invalid interface prefix length")
 			}
 			var routingContext *string
-			if row.Master == "" {
+			// A VRF device itself has no master. Plain address output cannot
+			// distinguish that master interface from a bridge or bond; retain
+			// unknown until detailed link metadata can establish its context.
+			if row.Master == "" && row.Flags != nil && !slices.Contains(row.Flags, "MASTER") {
 				v := "default"
 				routingContext = &v
 			}

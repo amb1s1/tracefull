@@ -1,5 +1,53 @@
 # Current feature — v0.2 device collection
 
+## Active slice — explicit management VRF
+
+In progress on `codex/mgmt-vrf`. The user requested continuation after a real
+Cumulus collection completed with 14 successful commands and nine interfaces.
+Its matched management address had master `mgmt`, while the default-context
+lookup selected a fabric route. Raw captures remain private. PR #3 is merged as
+`98e53aa`; all pre-merge and post-merge checks passed. The user-run collection
+now provides live CLI evidence for the captured default-context Cumulus commands.
+
+Scope and acceptance:
+
+- Preserve default context unless explicitly selected. Add `--vrf mgmt` only to
+  capture-validated Cumulus/Linux-FRR plans; other contexts/platforms continue to
+  fail without fallback. No automatic context switching or new probes.
+- Attribute addresses to VRFs only with interface-type/membership evidence.
+  VRF-device addresses must not be labelled default solely because they have no
+  master. Missing or conflicting context evidence remains unknown.
+- Validate the management lookup backend against actual output before enabling
+  it. Record kernel versus FRR interpretation limits; never hide a failed FRR
+  lookup by silently substituting a different context or source.
+- Keep route-driven interface discovery and comparisons within the requested context.
+  Preserve command policy, raw evidence, existing schema and CLI/domain boundaries.
+- Add capture-backed and failure tests, schema/CLI replay checks, race/vet/lint,
+  coverage, parser fuzzing and documentation. Commit reviewed slices locally.
+
+Implementation slices: correct existing unknown-context handling and ignore
+private collection directories; validate new captures and implement typed context
+handling; connect explicit management planning to collection and reporting; run
+checks and review. A four-command bounded read-only capture plan was prepared
+outside Git. Authorization for those additional VRF-specific reads is pending.
+Independent offline work continues using the existing real captures. The route
+backend decision remains open until the management lookup outputs are available.
+
+The independent correction slice is Ready for review: plain Cumulus/Linux-FRR
+address captures no longer label master interfaces or records missing flags as
+default; route-driven interface discovery requires the requested context; hidden
+collection directories are ignored by Git. Existing captured VRF-device records
+reproduced the incorrect default attribution before the fix. No JSON fields or
+versions changed, and management command execution remains unavailable.
+
+Local verification passed: `make check`, `make scan cross`, actual CLI replay and
+two 30-second parser fuzz runs (Cumulus 1,259,955 executions; Linux/FRR 2,119,386).
+Coverage is 92.6% parsers, 99.4% verdicts and 92.5% drivers. The scanner found no
+reachable/imported-package vulnerabilities and one unused required-module
+advisory. Cross-builds do not establish runtime support. CLI replay confirms that
+VRF-device context stays null and `--vrf mgmt --dry-run` still fails before any
+device execution. No new SSH, CI, push, merge or publication occurred in this slice.
+
 ## Status and acceptance
 
 Local review completed against merged investigation `54e646f`, covering command
@@ -54,8 +102,9 @@ commands, replacing the draft text-only proposal for this driver. This reduces
 heuristics and preserves typed nulls and JSON-pointer evidence. Existing saved-trace
 schema/version remains unchanged. The collection envelope has its own schema.
 
-Selected-interface counters use the captured whole-link JSON format; the selector
-is tested offline but has no separate live CLI verification. IPv4 FRR command
+Selected-interface counters use the captured whole-link JSON format. The later
+user-run native CLI collection also completed nine per-interface reads on the
+Cumulus validation switch. IPv4 FRR command
 planning is tested; the captured FRR route output is IPv6. Nondefault VRFs, Cumulus optics and reverse traces remain unavailable. The three
 new platform slices and remaining gaps are recorded below. Do not
 present this slice as full v0.2 support.
@@ -69,8 +118,9 @@ succeeded. Unprivileged FRR/LLDP failures were preserved; approved sudo reads
 supplied the missing formats. No configuration was changed and no reverse probes
 were sent. Raw captures and identifying maps remain private outside Git.
 
-These are saved observations from the approved commands, not live verification of
-this new `collect` executable. The original trace and older root-owned evidence in
+Those initial captures are saved observations of the approved commands. The later
+user-run native CLI validation is recorded separately in the active slice above.
+The original trace and older root-owned evidence in
 the user's checkout remain untouched. Development and checks use this worktree.
 
 ## Verification and delivery
