@@ -20,7 +20,16 @@ func validate(policy Policy, command string) error {
 	if policy == nil {
 		return fmt.Errorf("device has no command policy")
 	}
-	if command == "" || len(command) > 4096 || strings.ContainsAny(command, ";&<>$`|") || strings.ContainsFunc(command, unicode.IsControl) {
+	syntax := command
+	// These are fixed remote CLI display suffixes, not general shell pipelines.
+	// The complete original command must still pass the platform policy below.
+	for _, suffix := range []string{" | json", " | display json"} {
+		if strings.HasSuffix(syntax, suffix) {
+			syntax = strings.TrimSuffix(syntax, suffix)
+			break
+		}
+	}
+	if command == "" || len(command) > 4096 || strings.ContainsAny(syntax, ";&<>$`|") || strings.ContainsFunc(command, unicode.IsControl) {
 		return fmt.Errorf("command contains unsupported syntax")
 	}
 	return policy(command)

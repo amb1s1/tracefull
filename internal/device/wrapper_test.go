@@ -131,3 +131,21 @@ func TestWrapperNoExpansion(t *testing.T) {
 		t.Fatal("substitution executed")
 	}
 }
+
+func TestFixedDisplaySuffixPolicy(t *testing.T) {
+	// A deliberately permissive test policy isolates the common syntax boundary.
+	allow := func(string) error { return nil }
+	for _, cmd := range []string{"show version | json", "show version | display json"} {
+		if err := validate(allow, cmd); err != nil {
+			t.Fatal(err)
+		}
+		if err := validate(testPolicy, cmd); err == nil {
+			t.Fatal("suffix bypassed full platform policy")
+		}
+	}
+	for _, cmd := range []string{"show version | sh", "show version | display json | json", "show version | json | display json", "show version; id | json", "show $(id) | json", "show version\n | json", "show version | json > /tmp/out"} {
+		if err := validate(allow, cmd); err == nil {
+			t.Fatalf("accepted %q", cmd)
+		}
+	}
+}

@@ -20,11 +20,12 @@ type Driver interface {
 	Parse(string, []byte) (Facts, error)
 }
 type Address struct {
-	Interface    string `json:"interface"`
-	Address      string `json:"address"`
-	PrefixLength *int   `json:"prefix_length"`
-	Master       string `json:"master"`
-	Evidence     string `json:"evidence"`
+	Interface      string  `json:"interface"`
+	Address        string  `json:"address"`
+	PrefixLength   *int    `json:"prefix_length"`
+	Master         string  `json:"master"`
+	RoutingContext *string `json:"routing_context"`
+	Evidence       string  `json:"evidence"`
 }
 type NextHop struct {
 	Address   string `json:"address"`
@@ -45,6 +46,7 @@ type Route struct {
 type Counter struct {
 	Interface string  `json:"interface"`
 	State     string  `json:"state"`
+	MTULayer  string  `json:"mtu_layer"`
 	MTUBytes  *uint64 `json:"mtu_bytes"`
 	RXErrors  *uint64 `json:"rx_errors"`
 	TXErrors  *uint64 `json:"tx_errors"`
@@ -66,16 +68,28 @@ type Version struct {
 	Version  string `json:"version"`
 	Evidence string `json:"evidence"`
 }
+type Optical struct {
+	Interface          string   `json:"interface"`
+	Lane               string   `json:"lane"`
+	TemperatureCelsius *float64 `json:"temperature_celsius"`
+	RXPowerDBM         *float64 `json:"rx_power_dbm"`
+	TXPowerDBM         *float64 `json:"tx_power_dbm"`
+	Evidence           string   `json:"evidence"`
+}
 type CPU struct {
-	Load1    *float64 `json:"load_1"`
-	Load5    *float64 `json:"load_5"`
-	Load15   *float64 `json:"load_15"`
-	Evidence string   `json:"evidence"`
+	Utilization1  *float64 `json:"utilization_1_pct"`
+	Utilization5  *float64 `json:"utilization_5_pct"`
+	Utilization15 *float64 `json:"utilization_15_pct"`
+	Load1         *float64 `json:"load_1"`
+	Load5         *float64 `json:"load_5"`
+	Load15        *float64 `json:"load_15"`
+	Evidence      string   `json:"evidence"`
 }
 type Facts struct {
 	Addresses      []Address  `json:"addresses"`
 	Routes         []Route    `json:"routes"`
 	Counters       []Counter  `json:"counters"`
+	Optics         []Optical  `json:"optics"`
 	Neighbors      []Neighbor `json:"neighbors"`
 	Version        *Version   `json:"version"`
 	CPU            *CPU       `json:"cpu"`
@@ -85,5 +99,5 @@ type Facts struct {
 }
 
 func Empty() Facts {
-	return Facts{Addresses: []Address{}, Routes: []Route{}, Counters: []Counter{}, Neighbors: []Neighbor{}, Notes: []string{}}
+	return Facts{Optics: []Optical{}, Addresses: []Address{}, Routes: []Route{}, Counters: []Counter{}, Neighbors: []Neighbor{}, Notes: []string{}}
 }

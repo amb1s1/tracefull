@@ -85,7 +85,7 @@ func comparisons(p Prepared, devices []DeviceResult) []Finding {
 							continue
 						}
 						for _, counter := range c.Facts.Counters {
-							if !slices.Contains(egress, counter.Interface) || counter.MTUBytes == nil || uint64(*pmtu) <= *counter.MTUBytes {
+							if counter.MTULayer != "ip" || !slices.Contains(egress, counter.Interface) || counter.MTUBytes == nil || uint64(*pmtu) <= *counter.MTUBytes {
 								continue
 							}
 							refs := append(slices.Clone(mtuRefs), routeFiles[ri]+"#"+r.Evidence, c.Stdout.Path+"#"+counter.Evidence)
@@ -122,7 +122,7 @@ func ownedInContext(h trace.Hop, d DeviceResult, context string) bool {
 				continue
 			}
 			for _, a := range c.Facts.Addresses {
-				if a.Address == ip && (a.Master == context || (context == "default" && a.Master == "")) {
+				if a.Address == ip && (a.RoutingContext != nil && *a.RoutingContext == context) {
 					return true
 				}
 			}

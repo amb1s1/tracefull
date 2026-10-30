@@ -96,7 +96,12 @@ func parseAddresses(data []byte, f *driver.Facts) error {
 			if addr.PrefixLength != nil && (*addr.PrefixLength < 0 || *addr.PrefixLength > a.BitLen()) {
 				return fmt.Errorf("invalid interface prefix length")
 			}
-			f.Addresses = append(f.Addresses, driver.Address{Interface: row.Name, Address: a.Unmap().String(), PrefixLength: addr.PrefixLength, Master: row.Master, Evidence: fmt.Sprintf("json:/%d/addr_info/%d", i, j)})
+			var routingContext *string
+			if row.Master == "" {
+				v := "default"
+				routingContext = &v
+			}
+			f.Addresses = append(f.Addresses, driver.Address{RoutingContext: routingContext, Interface: row.Name, Address: a.Unmap().String(), PrefixLength: addr.PrefixLength, Master: row.Master, Evidence: fmt.Sprintf("json:/%d/addr_info/%d", i, j)})
 		}
 	}
 	return nil
@@ -107,7 +112,7 @@ func parseCounters(data []byte, f *driver.Facts) error {
 		return err
 	}
 	for i, row := range rows {
-		f.Counters = append(f.Counters, driver.Counter{Interface: row.Name, State: row.State, MTUBytes: row.MTU, RXErrors: row.Stats.RX.Errors, TXErrors: row.Stats.TX.Errors, RXDrops: row.Stats.RX.Dropped, TXDrops: row.Stats.TX.Dropped, Evidence: fmt.Sprintf("json:/%d", i)})
+		f.Counters = append(f.Counters, driver.Counter{MTULayer: "ip", Interface: row.Name, State: row.State, MTUBytes: row.MTU, RXErrors: row.Stats.RX.Errors, TXErrors: row.Stats.TX.Errors, RXDrops: row.Stats.RX.Dropped, TXDrops: row.Stats.TX.Dropped, Evidence: fmt.Sprintf("json:/%d", i)})
 	}
 	f.Notes = append(f.Notes, "Counters are cumulative snapshots, not rates or evidence of an incident time. Speed and CRC-specific counters are unknown in this capture format.")
 	return nil

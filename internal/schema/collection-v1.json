@@ -126,6 +126,16 @@
         "master": {
           "type": "string"
         },
+        "routing_context": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
         "evidence": {
           "type": "string"
         }
@@ -135,6 +145,7 @@
         "address",
         "prefix_length",
         "master",
+        "routing_context",
         "evidence"
       ],
       "additionalProperties": false
@@ -243,6 +254,9 @@
         "state": {
           "type": "string"
         },
+        "mtu_layer": {
+          "type": "string"
+        },
         "mtu_bytes": {
           "anyOf": [
             {
@@ -316,6 +330,7 @@
       "required": [
         "interface",
         "state",
+        "mtu_layer",
         "mtu_bytes",
         "rx_errors",
         "tx_errors",
@@ -381,9 +396,95 @@
       ],
       "additionalProperties": false
     },
+    "optical": {
+      "type": "object",
+      "properties": {
+        "interface": {
+          "type": "string"
+        },
+        "lane": {
+          "type": "string"
+        },
+        "temperature_celsius": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "rx_power_dbm": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "tx_power_dbm": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "evidence": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "interface",
+        "lane",
+        "temperature_celsius",
+        "rx_power_dbm",
+        "tx_power_dbm",
+        "evidence"
+      ],
+      "additionalProperties": false
+    },
     "cpu": {
       "type": "object",
       "properties": {
+        "utilization_1_pct": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "utilization_5_pct": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "utilization_15_pct": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
         "load_1": {
           "anyOf": [
             {
@@ -422,6 +523,9 @@
         }
       },
       "required": [
+        "utilization_1_pct",
+        "utilization_5_pct",
+        "utilization_15_pct",
         "load_1",
         "load_5",
         "load_15",
@@ -454,6 +558,12 @@
           "type": "array",
           "items": {
             "$ref": "#/$defs/neighbor"
+          }
+        },
+        "optics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/optical"
           }
         },
         "version": {
@@ -502,6 +612,7 @@
         "routes",
         "counters",
         "neighbors",
+        "optics",
         "version",
         "cpu",
         "uptime_seconds",

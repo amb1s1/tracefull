@@ -95,7 +95,7 @@ func Render(w io.Writer, r Report, format string) error {
 			}
 			f := c.Facts
 			for _, a := range f.Addresses {
-				fmt.Fprintf(&b, "  Address %s on %s (master: %s)\n", escape(a.Address), escape(a.Interface), escape(a.Master))
+				fmt.Fprintf(&b, "  Address %s on %s (master: %s; routing context: %s)\n", escape(a.Address), escape(a.Interface), escape(a.Master), escape(contextValue(a.RoutingContext)))
 			}
 			for _, route := range f.Routes {
 				fmt.Fprintf(&b, "  Route %s via %s | context: %s | selected: %s | installed: %s\n", escape(route.Prefix), escape(route.Protocol), escape(route.Context), value(route.Selected), value(route.Installed))
@@ -104,16 +104,22 @@ func Render(w io.Writer, r Report, format string) error {
 				}
 			}
 			for _, x := range f.Counters {
-				fmt.Fprintf(&b, "  %s: state=%s MTU=%s bytes speed=%s bit/s; cumulative RX/TX errors=%s/%s drops=%s/%s\n", escape(x.Interface), escape(x.State), value(x.MTUBytes), value(x.SpeedBPS), value(x.RXErrors), value(x.TXErrors), value(x.RXDrops), value(x.TXDrops))
+				fmt.Fprintf(&b, "  %s: state=%s MTU=%s bytes (layer=%s) speed=%s bit/s; cumulative RX/TX errors=%s/%s drops=%s/%s\n", escape(x.Interface), escape(x.State), value(x.MTUBytes), escape(knownLayer(x.MTULayer)), value(x.SpeedBPS), value(x.RXErrors), value(x.TXErrors), value(x.RXDrops), value(x.TXDrops))
 			}
 			for _, n := range f.Neighbors {
 				fmt.Fprintf(&b, "  LLDP %s: %s port %s\n", escape(n.Interface), escape(n.Name), escape(n.PortID))
+			}
+			for _, o := range f.Optics {
+				fmt.Fprintf(&b, "  DOM %s lane %s: temperature=%s °C RX=%s dBm TX=%s dBm\n", escape(o.Interface), escape(o.Lane), report.Number(o.TemperatureCelsius), report.Number(o.RXPowerDBM), report.Number(o.TXPowerDBM))
 			}
 			if f.Version != nil {
 				fmt.Fprintf(&b, "  OS: %s %s\n", escape(f.Version.OS), escape(f.Version.Version))
 			}
 			if f.UptimeSeconds != nil {
 				fmt.Fprintf(&b, "  Uptime: %s seconds\n", report.Number(f.UptimeSeconds))
+			}
+			if f.CPU != nil && (f.CPU.Utilization1 != nil || f.CPU.Utilization5 != nil || f.CPU.Utilization15 != nil) {
+				fmt.Fprintf(&b, "  CPU utilization (1/5/15m): %s%% / %s%% / %s%%\n", report.Number(f.CPU.Utilization1), report.Number(f.CPU.Utilization5), report.Number(f.CPU.Utilization15))
 			}
 			if f.CPU != nil {
 				fmt.Fprintf(&b, "  Load average (1/5/15m): %s / %s / %s\n", report.Number(f.CPU.Load1), report.Number(f.CPU.Load5), report.Number(f.CPU.Load15))
@@ -139,4 +145,18 @@ func value[T bool | uint64](v *T) string {
 		return "?"
 	}
 	return fmt.Sprint(*v)
+}
+
+func contextValue(v *string) string {
+	if v == nil {
+		return "unknown"
+	}
+	return *v
+}
+
+func knownLayer(layer string) string {
+	if layer == "" {
+		return "unknown"
+	}
+	return layer
 }
