@@ -37,9 +37,10 @@ for tool selection, limits, evidence and failure handling.
 
 ## Commands
 
-Device collection is in progress with a capture-backed Cumulus driver. See
-[collection behavior and remaining limits](docs/collection.md); other platform
-drivers, optics and reverse probing are unavailable.
+Device collection is in progress with capture-backed Cumulus, Linux/FRR, Junos, EOS and
+IOS-XR drivers, including selected per-lane optics formats. See
+[collection behavior and remaining limits](docs/collection.md). Other planned
+platforms and reverse probing remain unavailable.
 
 | Command | Behavior |
 | --- | --- |

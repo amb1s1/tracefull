@@ -6,8 +6,12 @@
   host keys, one jump host, bounded output, cancellation and synthetic local tests.
 - Add `collect`, Cumulus 5.16 capture-backed parsers, two-phase interface discovery,
   owner sweep, private evidence, versioned output, qualified route/MTU comparisons
-  and terminal collection progress. Other platform drivers and optics/reverse
-  remain unavailable pending captures.
+  and terminal collection progress.
+- Add capture-backed Linux/FRR, Junos, EOS and IOS-XR drivers, per-lane DOM, explicit address
+  context and MTU framing, and separate CPU utilization/load fields. Other planned
+  drivers and reverse probing remain unavailable.
+- Reject control characters in parsed IP zone identifiers; retain the fuzz failure
+  as a saved regression case.
 
 ## Unreleased — investigation
 

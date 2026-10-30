@@ -2,12 +2,12 @@
 
 ## Status and acceptance
 
-Cumulus slice Ready for review on `codex/v0.2-collect`. v0.1 and investigation are merged; the user
+Multi-platform slice Ready for review on `codex/v0.2-collect`. v0.1 and investigation are merged; the user
 explicitly authorized continuation into collection. No native probing is in scope.
 Full v0.2 requires native/wrapper sessions, capture-validated platform drivers,
 command policy, dry-run, evidence, owner sweep, cross-device observations and a
-live view. The Cumulus slice is implemented; the multi-platform milestone is not
-Complete. Other drivers and optics/reverse formats need real captures.
+live view. Cumulus, Linux/FRR, Junos, EOS and IOS-XR slices are implemented locally; the full milestone
+is not Complete. Remaining platforms and reverse formats need real captures.
 
 ## Implemented slices
 
@@ -48,8 +48,8 @@ schema/version remains unchanged. The collection envelope has its own schema.
 
 Selected-interface counters use the captured whole-link JSON format; the selector
 is tested offline but has no separate live CLI verification. IPv4 FRR command
-planning is tested; the captured FRR route output is IPv6. Nondefault VRFs, optics,
-reverse traces and the other six platform families remain unavailable. Do not
+planning is tested; the captured FRR route output is IPv6. Nondefault VRFs, Cumulus optics and reverse traces remain unavailable. The three
+new platform slices and remaining gaps are recorded below. Do not
 present this slice as full v0.2 support.
 
 ## Capture authorization and evidence
@@ -83,8 +83,9 @@ completion still needs additional platform captures. The user supplied and
 authorized Junos, EOS and IOS-XR targets. Strictly verified reads recorded Junos
 24.4R2-S5.3, EOS 4.33.4M and IOS-XR 25.4.2; raw captures remain private. IOS-XR
 is an explicitly requested additional driver, distinct from the planned IOS-XE.
-Those driver implementations follow the reviewed Cumulus slice. Linux/FRR, NX-OS,
-IOS-XE and RouterOS captures are still unavailable.
+Those driver implementations follow the reviewed Cumulus slice. Linux/FRR was
+subsequently validated from the same Cumulus captures at the user’s direction.
+NX-OS, IOS-XE and RouterOS captures remain unavailable.
 
 # Local tool investigation record
 
@@ -407,3 +408,115 @@ The documented offline dry-run and embedded schema commands ran successfully.
 A local pseudo-terminal replay verified progress, final viewport, q-to-exit,
 exit 0 and a complete evidence report. It used a synthetic wrapper and sent no
 network traffic. The new CLI has not been run against production devices.
+
+## Junos, EOS and IOS-XR slice — 2026-10-29
+
+Scope: the user supplied and authorized three targets. Bounded, strict-host-key
+OpenSSH reads captured Junos 24.4R2-S5.3, EOS 4.33.4M and IOS-XR 25.4.2 without
+configuration changes, sudo or probes. Raw bytes and anonymization maps remain
+private outside Git. Scrubbed fixtures preserve source hashes/times and mark
+excerpts; omitted rows cannot establish device-wide absence.
+
+Acceptance: explicit platform registration, exact read-only command policies,
+default context without fallback, capture-backed parsers, private attributed
+evidence, pipeline/CLI replay, failure and unknown-value tests, schema conformance,
+90% driver coverage, bounded fuzzing and full local checks. Implementation slices:
+shared facts/policy; one driver per platform; pipeline reconciliation; docs/checks.
+
+Decisions: IOS-XR is distinct from IOS-XE. Fixed remote JSON display suffixes are
+allowed only under complete platform policies. Address families are reconciled
+together before ownership misses are reported. Junos terse and XR IPv6 brief
+context remains null; Junos physical MTU is link-layer, and EOS/XR framing remains
+unknown. RIB selection cannot imply hardware installation. XR dynamic route
+layouts fail explicitly until captured. Optics remain per lane, and CPU load and
+utilization use separate fields. No guessed aggregation or SVI uplink mapping.
+
+Local verification passed (details below). Initial capture replay exposed EOS address-field shape
+differences, now corrected. Importer fuzzing found a control byte accepted in an
+IPv6 zone identifier; normalized address validation now rejects it, preserving
+safe zone names and the minimized regression corpus. No checks were weakened.
+
+Remaining blockers: NX-OS, IOS-XE and RouterOS captures; unvalidated
+command variants, remaining DOM formats and reverse traces. The new CLI has
+not been production-tested. Collection has not been pushed or run in remote CI,
+merged, published or deployed. Full v0.2 remains incomplete.
+
+Verification results for the multi-platform slice:
+
+- `make check TOOLS_DIR=/tmp/tracefull-tools` passed unit/CLI/schema/goldens,
+  formatting, vet, race, staticcheck, golangci-lint, docs and build. Coverage:
+  parsers 92.6%, verdicts 99.4%, drivers 92.0% before the final EOS CPU addition.
+- Full fuzz run passed after retaining/fixing the importer failure: 2,578,170
+  importer, 1,129,889 Cumulus, 132,417 Junos, 897,597 EOS and 356,040 IOS-XR cases.
+  The reviewed EOS SVI speed correction passed another 611,784 mutations.
+- Vulnerability scan found no reachable or imported-package vulnerabilities;
+  one advisory remains in an unused required module. Four Linux/macOS cross-builds
+  passed; these are compilation checks, not runtime verification.
+- Actual CLI replay covered each new platform in text, Markdown and JSON.
+  Pipeline replay checked two-phase discovery, parent interfaces, per-lane DOM,
+  address-family reconciliation, private evidence and strict schema conformance.
+  The documented dry-run and collection schema commands also passed offline.
+- Fixture privacy review checked all source hashes against retained private bytes.
+  IOS-XR fixture line endings/trailing padding are normalized for repository diffs;
+  tests verify equivalent LF/CRLF parsing, with original bytes retained privately.
+- EOS CPU was independently finishable using the already authorized target. One
+  bounded `show processes top once | json` read supplied a thirtieth capture;
+  only CPU/time fields are retained in the scrubbed excerpt. Reported utilization
+  is 100 minus idle with unknown sampling interval; load averages remain separate.
+  Final checks after this addition are recorded below.
+
+Review corrections include full platform policy after fixed JSON suffix handling,
+unknown FIB/context qualifications, SVI speed remaining null, distinct CPU units,
+Junos malformed nested JSON rejection and source-attributed route goldens.
+Local commits: `a4254a1` (importer regression), `762fa58` (shared facts/policy),
+`088f96a` (Junos), `1bbcf9b` (IOS-XR), `38774db` (EOS), `fffd997` (integration).
+The user confirmed that no captures or targets are available for the remaining
+four platform families. They remain blocked; do not fabricate fixtures or claim
+platform support. No new production configuration, probing or CLI execution occurred.
+
+## Linux/FRR validation decision
+
+The user explicitly selected the same NVIDIA Cumulus switch for Linux/FRR because
+it runs FRR. This resolves the Linux/FRR capture gap. Inventory `linux` and `frr`
+select one explicit Linux/FRR profile, sharing the tested iproute2/procfs/FRR/lldpd
+commands and parsers with Cumulus. The version group adds the already captured
+FRRouting 10.0.3 identity. OS-release branding is independent from the Cumulus
+profile's strict identity check. No new device connection was needed.
+
+Validation remains scoped to Cumulus Linux 5.16.0, Linux 6.1 and FRR 10.0.3;
+this does not claim runtime verification on every Linux distribution or FRR build.
+Missing FRR/lldpd and permissions remain explicit command failures; no guessed
+kernel-route fallback or privilege escalation. Both profile names are tested
+through the full evidence pipeline and actual CLI replay. The remaining capture
+blockers are NX-OS, IOS-XE and RouterOS, plus the previously recorded missing
+formats and reverse probing. The user has no targets/captures for those platforms.
+
+## Final local verification and handoff
+
+Ready for review on `codex/v0.2-collect`. The final Linux/FRR revision passed
+`make check TOOLS_DIR=/tmp/tracefull-tools`: unit, regression, CLI, schema/golden,
+formatting, vet, race, staticcheck, golangci-lint, docs and build. Coverage is
+92.6% parsers, 99.4% verdicts and 92.5% drivers. All six parser fuzz targets passed
+bounded runs; the final EOS CPU run passed 875,681 cases and Linux/FRR passed
+437,321. The minimized importer failure is committed and now passes.
+
+The final vulnerability scan found no reachable or imported-package issues; one
+unused required-module advisory remains. Final Linux/macOS amd64/arm64 builds
+passed without asserting runtime execution. CLI replay covers every profile;
+an additional EOS CPU text/JSON replay verified 3.1% reported utilization with an
+unknown interval and separate 0.73/0.65/0.6 load averages from the saved capture.
+These are offline replay results, not current device health.
+
+EOS CPU is committed as `8ca0f0b`; Linux/FRR as `749c2a2`. All 30 new platform
+fixture provenance entries were checked against retained private source hashes;
+shared Cumulus fixtures retain their existing provenance. No raw private captures,
+credentials or identifying maps were staged. IOS-XR whitespace normalization is
+explicitly documented and tested, rather than disabling whitespace checks.
+
+Collection CI has not run; no collection push, PR, merge, release or deployment
+occurred. The new CLI has not been exercised on production devices. Read-only
+capture observations are recorded separately from local implementation tests.
+Full v0.2 remains blocked on the unavailable platforms and recorded format gaps;
+do not advance to native probing or mark the milestone Complete. Exact next action:
+review the implemented collection slice on this local branch. Future platform
+work resumes when real captures or authorized targets are supplied.

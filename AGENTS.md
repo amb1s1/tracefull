@@ -1,12 +1,12 @@
 # tracefull — repository instructions
 
 tracefull is a Go CLI under implementation for interpreting traces, identifying devices, and
-collecting attributed read-only evidence. **Active scope: saved-trace enrichment
-and local-tool investigation.**
+collecting attributed read-only evidence. **Active scope: saved-trace enrichment,
+local-tool investigation and read-only device collection.**
 v0.1 and local-tool investigation are merged. The user authorized continuation
 into v0.2 device collection. Native probing remains design only. Collection
-sessions and a Cumulus driver are implemented locally; other driver support
-requires real captures. Collection is not yet a completed milestone.
+sessions and Cumulus, Linux/FRR, Junos, EOS and IOS-XR drivers are implemented locally;
+remaining driver support requires real captures. Collection is not yet a completed milestone.
 
 ## Read only what the task needs
 
