@@ -23,6 +23,7 @@ import (
 	"github.com/amb1s1/tracefull/internal/driver/eos"
 	"github.com/amb1s1/tracefull/internal/driver/iosxr"
 	"github.com/amb1s1/tracefull/internal/driver/junos"
+	"github.com/amb1s1/tracefull/internal/driver/linuxfrr"
 	"github.com/amb1s1/tracefull/internal/inventory"
 	"github.com/amb1s1/tracefull/internal/report"
 	"github.com/amb1s1/tracefull/internal/trace"
@@ -52,6 +53,8 @@ func Registry(platform string) (driver.Driver, bool) {
 		return cumulus.Driver{}, true
 	case "arista-eos", "eos":
 		return eos.Driver{}, true
+	case "frr", "linux":
+		return linuxfrr.Driver{}, true
 	case "junos":
 		return junos.Driver{}, true
 	case "cisco-ios-xr", "iosxr":

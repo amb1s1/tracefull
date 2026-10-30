@@ -105,7 +105,7 @@ func TestPlatformCapturePipelines(t *testing.T) {
 }
 
 func TestPlatformRegistry(t *testing.T) {
-	for _, p := range []string{"junos", "arista-eos", "eos", "cisco-ios-xr", "iosxr"} {
+	for _, p := range []string{"frr", "linux", "junos", "arista-eos", "eos", "cisco-ios-xr", "iosxr"} {
 		d, ok := Registry(p)
 		if !ok || d.Platform() == "" {
 			t.Fatal(p)
@@ -114,7 +114,7 @@ func TestPlatformRegistry(t *testing.T) {
 			t.Fatal("VRF fallback")
 		}
 	}
-	for _, p := range []string{"cisco-ios-xe", "cisco-nxos", "frr", "linux", "routeros"} {
+	for _, p := range []string{"cisco-ios-xe", "cisco-nxos", "routeros"} {
 		if _, ok := Registry(p); ok {
 			t.Fatal("unvalidated driver", p)
 		}
@@ -144,5 +144,38 @@ func TestPlatformRegistry(t *testing.T) {
 		if err = w.Close(); err != nil {
 			t.Fatal(err)
 		}
+	}
+}
+
+func TestLinuxFRRSharedPipeline(t *testing.T) {
+	for _, platform := range []string{"linux", "frr"} {
+		t.Run(platform, func(t *testing.T) {
+			p := prepare(t, nil)
+			d := p.Plan.Devices[0].Device
+			d.Platform = platform
+			dp, err := devicePlan(p, d, p.Plan.Devices[0].HopAddresses, false)
+			if err != nil {
+				t.Fatal(err)
+			}
+			p.Plan.Devices = []DevicePlan{dp}
+			s := &fakeSession{t: t}
+			r, err := Run(context.Background(), p, factory(s))
+			if err != nil || r.Status != "complete" {
+				t.Fatal(r.Status, err)
+			}
+			found := false
+			for _, c := range r.Devices[0].Commands {
+				if c.Name == "frr-version" {
+					found = true
+					if c.Facts == nil || c.Facts.Version.Version != "10.0.3" {
+						t.Fatal(c)
+					}
+				}
+			}
+			if !found || !s.closed {
+				t.Fatal("missing FRR identity or unclosed session")
+			}
+			validateReport(t, r)
+		})
 	}
 }

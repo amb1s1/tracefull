@@ -104,6 +104,8 @@ esac
 
 func testPlatformExecutables(t *testing.T, bin string) {
 	for _, tc := range []struct{ platform, dialect, command, file, version string }{
+		{"frr", "cumulus", "vtysh -c 'show version'", "frr-version.txt", "10.0.3"},
+		{"linux", "cumulus", "vtysh -c 'show version'", "frr-version.txt", "10.0.3"},
 		{"arista-eos", "eos", "show version | json", "version-json.json", "4.33.4M"},
 		{"junos", "junos", "show version | display json", "version-json.json", "24.4R2-S5.3"},
 		{"cisco-ios-xr", "iosxr", "show version", "version.txt", "25.4.2"},
@@ -115,7 +117,7 @@ func testPlatformExecutables(t *testing.T, bin string) {
 				t.Fatal(err)
 			}
 			wrapper := filepath.Join(dir, "replay")
-			script := "#!/bin/sh\ncase \"$2\" in\n " + "\"" + tc.command + "\") exec /bin/cat \"$CAPTURES/" + tc.file + "\" ;;\n \"show system uptime | display json\") exec /bin/cat \"$CAPTURES/uptime.json\" ;;\n *) exit 9 ;;\nesac\n"
+			script := "#!/bin/sh\ncase \"$2\" in\n " + "\"" + tc.command + "\") exec /bin/cat \"$CAPTURES/" + tc.file + "\" ;;\n \"show system uptime | display json\") exec /bin/cat \"$CAPTURES/uptime.json\" ;;\n \"cat /etc/os-release\") exec /bin/cat \"$CAPTURES/os-release.txt\" ;;\n \"cat /proc/uptime\") exec /bin/cat \"$CAPTURES/uptime.txt\" ;;\n *) exit 9 ;;\nesac\n"
 			for name, data := range map[string]string{"replay": script, "inventory.yaml": "devices:\n  - name: device-a\n    address: 192.0.2.1\n    platform: " + tc.platform + "\n", "trace.txt": "traceroute to 192.0.2.2 (192.0.2.2), 30 hops max\n1 192.0.2.1 1 ms\n"} {
 				if err = os.WriteFile(filepath.Join(dir, name), []byte(data), 0700); err != nil {
 					t.Fatal(err)
