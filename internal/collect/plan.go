@@ -20,6 +20,9 @@ import (
 	"github.com/amb1s1/tracefull/internal/device"
 	"github.com/amb1s1/tracefull/internal/driver"
 	"github.com/amb1s1/tracefull/internal/driver/cumulus"
+	"github.com/amb1s1/tracefull/internal/driver/eos"
+	"github.com/amb1s1/tracefull/internal/driver/iosxr"
+	"github.com/amb1s1/tracefull/internal/driver/junos"
 	"github.com/amb1s1/tracefull/internal/inventory"
 	"github.com/amb1s1/tracefull/internal/report"
 	"github.com/amb1s1/tracefull/internal/trace"
@@ -47,6 +50,12 @@ func Registry(platform string) (driver.Driver, bool) {
 	switch platform {
 	case "nvidia-cumulus", "cumulus":
 		return cumulus.Driver{}, true
+	case "arista-eos", "eos":
+		return eos.Driver{}, true
+	case "junos":
+		return junos.Driver{}, true
+	case "cisco-ios-xr", "iosxr":
+		return iosxr.Driver{}, true
 	}
 	return nil, false
 }

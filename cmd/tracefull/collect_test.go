@@ -16,6 +16,7 @@ func TestCollectExecutable(t *testing.T) {
 	if out, err := exec.Command("go", "build", "-o", bin, ".").CombinedOutput(); err != nil {
 		t.Fatalf("%v %s", err, out)
 	}
+	t.Run("platforms", func(t *testing.T) { testPlatformExecutables(t, bin) })
 	fixture, err := filepath.Abs("../../internal/driver/cumulus/testdata")
 	if err != nil {
 		t.Fatal(err)
@@ -98,5 +99,43 @@ esac
 	out, err = c.Output()
 	if err != nil || !json.Valid(out) {
 		t.Fatalf("schema: %v %s", err, out)
+	}
+}
+
+func testPlatformExecutables(t *testing.T, bin string) {
+	for _, tc := range []struct{ platform, dialect, command, file, version string }{
+		{"arista-eos", "eos", "show version | json", "version-json.json", "4.33.4M"},
+		{"junos", "junos", "show version | display json", "version-json.json", "24.4R2-S5.3"},
+		{"cisco-ios-xr", "iosxr", "show version", "version.txt", "25.4.2"},
+	} {
+		t.Run(tc.platform, func(t *testing.T) {
+			dir := t.TempDir()
+			fixture, err := filepath.Abs("../../internal/driver/" + tc.dialect + "/testdata")
+			if err != nil {
+				t.Fatal(err)
+			}
+			wrapper := filepath.Join(dir, "replay")
+			script := "#!/bin/sh\ncase \"$2\" in\n " + "\"" + tc.command + "\") exec /bin/cat \"$CAPTURES/" + tc.file + "\" ;;\n \"show system uptime | display json\") exec /bin/cat \"$CAPTURES/uptime.json\" ;;\n *) exit 9 ;;\nesac\n"
+			for name, data := range map[string]string{"replay": script, "inventory.yaml": "devices:\n  - name: device-a\n    address: 192.0.2.1\n    platform: " + tc.platform + "\n", "trace.txt": "traceroute to 192.0.2.2 (192.0.2.2), 30 hops max\n1 192.0.2.1 1 ms\n"} {
+				if err = os.WriteFile(filepath.Join(dir, name), []byte(data), 0700); err != nil {
+					t.Fatal(err)
+				}
+			}
+			for _, format := range []string{"--json", "--markdown", "--no-live"} {
+				c := exec.Command(bin, "collect", "--from", "trace.txt", "--inventory", "inventory.yaml", "--collect", "version", "--ssh-cmd", wrapper+" {address} {cmd}", format)
+				c.Dir = dir
+				c.Env = []string{"HOME=" + dir, "XDG_CONFIG_HOME=" + filepath.Join(dir, "config"), "PATH=/usr/bin:/bin", "NO_COLOR=1", "CAPTURES=" + fixture}
+				out, err := c.CombinedOutput()
+				if err != nil || !strings.Contains(string(out), tc.version) {
+					t.Fatalf("%v: %s", err, out)
+				}
+				if format == "--json" && !json.Valid(out) {
+					t.Fatal("invalid JSON")
+				}
+				if strings.Contains(string(out), "\x1b") {
+					t.Fatal("ANSI leaked")
+				}
+			}
+		})
 	}
 }

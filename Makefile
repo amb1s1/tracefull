@@ -19,6 +19,9 @@ coverage:
 fuzz:
 	go test ./internal/importer -run '^$$' -fuzz FuzzParse -fuzztime 30s -parallel 4
 	go test ./internal/driver/cumulus -run '^$$' -fuzz FuzzParse -fuzztime 30s -parallel 4
+	go test ./internal/driver/junos -run '^$$' -fuzz FuzzParse -fuzztime 30s -parallel 4
+	go test ./internal/driver/eos -run '^$$' -fuzz FuzzParse -fuzztime 30s -parallel 4
+	go test ./internal/driver/iosxr -run '^$$' -fuzz FuzzParse -fuzztime 30s -parallel 4
 
 tools:
 	CGO_ENABLED=0 GOBIN=$(TOOLS_DIR) go install honnef.co/go/tools/cmd/staticcheck@v0.8.2

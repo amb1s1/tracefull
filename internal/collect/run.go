@@ -206,10 +206,10 @@ func runDevice(ctx context.Context, p Prepared, dp DevicePlan, index int, dir st
 	commands := dp.Commands
 	for phase := 0; phase < 2; phase++ {
 		for _, c := range commands {
-			if phase == 0 && (c.Group == "counters" || c.Group == "lldp") {
+			if phase == 0 && (c.Group == "counters" || c.Group == "lldp" || c.Group == "optics") {
 				continue
 			}
-			if phase == 1 && c.Group != "counters" && c.Group != "lldp" {
+			if phase == 1 && c.Group != "counters" && c.Group != "lldp" && c.Group != "optics" {
 				continue
 			}
 			cr := CommandResult{PlannedCommand: c}
@@ -237,6 +237,9 @@ func runDevice(ctx context.Context, p Prepared, dp DevicePlan, index int, dir st
 		}
 		if phase == 0 {
 			r.Interfaces = interfaces(dp.HopAddresses, r.Commands)
+			if expander, ok := drv.(interface{ ExpandInterfaces([]string) []string }); ok {
+				r.Interfaces = expander.ExpandInterfaces(r.Interfaces)
+			}
 			params.Interfaces = r.Interfaces
 			plannedCommands, e := drv.Plan(p.Options.Groups, params)
 			if e != nil {
@@ -307,11 +310,11 @@ func interfaces(hops []string, commands []CommandResult) []string {
 			}
 		}
 		for _, r := range c.Facts.Routes {
-			if r.Selected == nil || !*r.Selected || r.Installed == nil || !*r.Installed {
+			if r.Selected == nil || !*r.Selected || (r.Installed != nil && !*r.Installed) {
 				continue
 			}
 			for _, n := range r.NextHops {
-				if n.Active != nil && *n.Active && n.Installed != nil && *n.Installed && n.Interface != "" {
+				if n.Active != nil && *n.Active && (n.Installed == nil || *n.Installed) && n.Interface != "" {
 					out = append(out, n.Interface)
 				}
 			}
@@ -324,11 +327,20 @@ func evaluate(p Prepared, devices []DeviceResult) []Finding {
 	out := []Finding{}
 	for i, d := range devices {
 		wanted := p.Plan.Devices[i].HopAddresses
+		found := []string{}
+		refs := []string{}
+		complete := true
+		reads := 0
 		for _, c := range d.Commands {
-			if c.Name != "addresses" || c.Status != "ok" || c.Facts == nil {
+			if c.Group != "ingress" {
 				continue
 			}
-			found := []string{}
+			reads++
+			if c.Status != "ok" || c.Facts == nil || c.Stdout == nil {
+				complete = false
+				continue
+			}
+			refs = append(refs, c.Stdout.Path)
 			for _, a := range c.Facts.Addresses {
 				if !slices.Contains(wanted, a.Address) {
 					continue
@@ -338,9 +350,11 @@ func evaluate(p Prepared, devices []DeviceResult) []Finding {
 					out = append(out, finding("interface-context", d.Name, "Matched address "+a.Address+" belongs to "+a.Interface+" with master "+a.Master+"; requested routing context is "+p.Plan.Context+". Do not infer the trace's routing context from this lookup.", []string{c.Stdout.Path + "#" + a.Evidence}))
 				}
 			}
+		}
+		if complete && reads > 0 {
 			for _, ip := range wanted {
 				if !slices.Contains(found, ip) {
-					out = append(out, finding("owner-not-observed", d.Name, "Matched address "+ip+" was absent from the collected address snapshot; inventory identity or observation timing may differ.", []string{c.Stdout.Path}))
+					out = append(out, finding("owner-not-observed", d.Name, "Matched address "+ip+" was absent from the collected address snapshots; inventory identity, context visibility or observation timing may differ.", slices.Clone(refs)))
 				}
 			}
 		}
