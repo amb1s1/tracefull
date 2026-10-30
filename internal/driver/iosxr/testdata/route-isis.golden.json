@@ -1,0 +1,73 @@
+{
+  "route4-isis-single": [
+    {
+      "prefix": "192.0.2.69/32",
+      "protocol": "isis 1",
+      "context": "default",
+      "selected": true,
+      "installed": null,
+      "next_hops": [
+        {
+          "address": "198.51.100.4",
+          "interface": "FourHundredGigE0/0/0/4",
+          "active": true,
+          "installed": null,
+          "evidence": "line:9"
+        }
+      ],
+      "evidence": "line:5"
+    }
+  ],
+  "route4-isis-multipath": [
+    {
+      "prefix": "192.0.2.70/32",
+      "protocol": "isis 1",
+      "context": "default",
+      "selected": true,
+      "installed": null,
+      "next_hops": [
+        {
+          "address": "198.51.100.4",
+          "interface": "FourHundredGigE0/0/0/4",
+          "active": true,
+          "installed": null,
+          "evidence": "line:9"
+        },
+        {
+          "address": "198.51.100.8",
+          "interface": "FourHundredGigE0/0/0/5",
+          "active": true,
+          "installed": null,
+          "evidence": "line:17"
+        }
+      ],
+      "evidence": "line:5"
+    }
+  ],
+  "route6-isis-multipath": [
+    {
+      "prefix": "2001:db8:30::32/127",
+      "protocol": "isis 1",
+      "context": "default",
+      "selected": true,
+      "installed": null,
+      "next_hops": [
+        {
+          "address": "fe80::1",
+          "interface": "FourHundredGigE0/0/0/4",
+          "active": true,
+          "installed": null,
+          "evidence": "line:9"
+        },
+        {
+          "address": "fe80::2",
+          "interface": "FourHundredGigE0/0/0/5",
+          "active": true,
+          "installed": null,
+          "evidence": "line:17"
+        }
+      ],
+      "evidence": "line:5"
+    }
+  ]
+}

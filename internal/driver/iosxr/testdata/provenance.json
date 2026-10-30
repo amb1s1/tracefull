@@ -73,6 +73,30 @@
       "started_unix": 1793318837.04322,
       "ended_unix": 1793318843.6779819,
       "excerpt": false
+    },
+    {
+      "file": "route6-isis-multipath.txt",
+      "source_stdout_sha256": "c724a0ed31ca045352bbb5e7b7a626a5c9dc563cc345e0ba51462b067d82b3e0",
+      "source_command": "show route ipv6 2001:db8:30::32 detail",
+      "started_unix": 1793376664.5823848,
+      "ended_unix": 1793376668.6950521,
+      "excerpt": false
+    },
+    {
+      "file": "route4-isis-single.txt",
+      "source_stdout_sha256": "fb5a785f710a99d4e89c5c6e41b80f62a713ac09eb28ab6c55a2a1a9174695bd",
+      "source_command": "show route ipv4 192.0.2.69 detail",
+      "started_unix": 1793376668.695903,
+      "ended_unix": 1793376672.705576,
+      "excerpt": false
+    },
+    {
+      "file": "route4-isis-multipath.txt",
+      "source_stdout_sha256": "8a19ed72d07e03492b1e7030ef0d52edacf0689f5f879b4d79ef4c0bca0a3788",
+      "source_command": "show route ipv4 192.0.2.70 detail",
+      "started_unix": 1793376672.706271,
+      "ended_unix": 1793376676.8635252,
+      "excerpt": false
     }
   ]
 }

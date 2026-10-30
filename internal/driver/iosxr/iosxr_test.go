@@ -140,6 +140,9 @@ func TestPolicyAndFailures(t *testing.T) {
 	}
 }
 func FuzzParse(f *testing.F) {
+	for _, file := range isisCaptures {
+		f.Add("route", fixture(f, file))
+	}
 	for name, file := range captures {
 		f.Add(name, fixture(f, file))
 	}

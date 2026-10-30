@@ -1,8 +1,66 @@
 # Current feature — v0.2 device collection
 
-## Active slice — collection report clarity
+## Active slice — IOS-XR dynamic route observations
 
-Workflow at handoff: Ready for review on `codex/collection-report-clarity`.
+Workflow at handoff: Ready for review on `codex/iosxr-dynamic-routes`.
+The existing IOS-XR driver accepts only connected/no-route responses. Extend it
+only with real dynamic-route formats captured from the previously authorized
+IOS-XR validation target under the user's standing read-only permission.
+
+Acceptance and slices:
+
+- Collect bounded default-context route lookups with verified host keys, no
+  probes/configuration changes, 25-second deadlines and 1 MiB per stream. Keep
+  originals private; scrub fixtures and preserve capture provenance.
+- Parse only observed route and next-hop layouts. Distinguish RIB selection from
+  hardware installation; unresolved gateways/interfaces remain unknown. Reject
+  unsupported or malformed layouts without inventing success or falling back.
+- Preserve explicit driver registration, command policy, default context, evidence,
+  schema and CLI/domain separation. Verify downstream interface discovery.
+- Add capture-backed regression/failure tests and actual CLI replay, run local
+  checks and bounded driver fuzzing, review, commit, CI and integrate.
+
+First determine whether the authorized target returns usable dynamic-route
+captures. Missing captures are blockers, not permission to synthesize a format.
+Other v0.2 platform gaps and reverse probing remain outside this slice.
+
+Captured October 30, 2026, 16:09–16:11 UTC: three missing-route lookups,
+IPv4/IPv6 summaries and IS-IS tables, then version and three route-detail reads.
+The summaries supplied actual prefixes for the targeted lookups. IOS-XR 25.4.2
+returned IPv4 single/two-path and IPv6 two-path IS-IS descriptors. All 22 private
+output hashes verified. Three complete scrubbed route fixtures preserve original
+source digests and times; private originals and address maps remain outside Git.
+No probes or configuration changes ran.
+
+The driver now accepts those primary IS-IS descriptor layouts. `from` is the
+originator, not another next hop. The RIB installation record establishes selection;
+hardware installation stays null. Missing selection stays unknown and suppresses
+route-driven interface discovery. Unsupported backup/recursive/tunnel attributes,
+malformed addresses, truncated blocks and contradictory route records fail parsing.
+MPLS labels remain raw evidence. BGP/other dynamic protocols remain unsupported.
+No command-policy, JSON/schema or default-context behavior changed.
+
+Local verification passed: `make check` (unit/capture/golden/schema tests, actual
+CLI replay in JSON/text/Markdown, formatting, vet, race, coverage, both linters,
+docs and build), `make scan cross`, and 781,980 IOS-XR fuzz executions in 30 seconds.
+Coverage: parsers 92.6%, verdicts 99.4%, drivers 93.5%. No reachable/imported-package
+vulnerabilities; one unused required-module advisory remains. Cross-builds are
+compilation checks only. The first pipeline test used a null hop-address list;
+the schema check caught it, the setup now uses an empty array, and full checks
+passed afterward. Review covered originator/next-hop distinction, unknown FIB
+state, downstream discovery, strict unsupported-format rejection and fixture privacy.
+CI/integration are pending at this handoff; the branch's PR records their outcome.
+Real SSH captures and offline CLI replay are separate validation results; the new
+CLI has not been run against this IOS-XR device. No release/deployment is included.
+
+## Completed slice — collection report clarity
+
+Workflow: Complete. [PR #6](https://github.com/amb1s1/tracefull/pull/6) merged as
+`569ec30`; six pre-merge and three post-merge CI checks passed. Integrated package
+tests, build and documented dry-run passed. The user-run Cumulus snapshot on
+October 30, 2026, 16:05:13–16:05:26 UTC confirmed the labels and retained partial
+coverage (10 successful commands, one eth0 optics failure, 64 lanes). All 22
+output hashes verified; no forwarding or optic-health conclusion follows.
 The real optical collection report exposed two misleading labels: failed reads
 referenced only stdout although their diagnostics were in stderr, and `via bgp`
 presented the route protocol as if it were a next-hop address.
