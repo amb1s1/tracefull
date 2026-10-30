@@ -1,0 +1,1772 @@
+{
+  "interface-information": [
+    {
+      "attributes": {
+        "xmlns": "http://xml.juniper.net/junos/24.4R0/junos-interface",
+        "junos:style": "normal"
+      },
+      "physical-interface": [
+        {
+          "name": [
+            {
+              "data": "et-0/0/0"
+            }
+          ],
+          "admin-status": [
+            {
+              "data": "up",
+              "attributes": {
+                "junos:format": "Enabled"
+              }
+            }
+          ],
+          "oper-status": [
+            {
+              "data": "up"
+            }
+          ],
+          "local-index": [
+            {
+              "data": "160"
+            }
+          ],
+          "snmp-index": [
+            {
+              "data": "578"
+            }
+          ],
+          "generation": [
+            {
+              "data": "163"
+            }
+          ],
+          "description": [
+            {
+              "data": "scrubbed description"
+            }
+          ],
+          "link-level-type": [
+            {
+              "data": "Ethernet"
+            }
+          ],
+          "mtu": [
+            {
+              "data": "9216"
+            }
+          ],
+          "mru": [
+            {
+              "data": "9224"
+            }
+          ],
+          "source-filtering": [
+            {
+              "data": "disabled"
+            }
+          ],
+          "speed": [
+            {
+              "data": "400Gbps"
+            }
+          ],
+          "bpdu-error": [
+            {
+              "data": "none"
+            }
+          ],
+          "ld-pdu-error": [
+            {
+              "data": "none"
+            }
+          ],
+          "l2pt-error": [
+            {
+              "data": "none"
+            }
+          ],
+          "loopback": [
+            {
+              "data": "disabled"
+            }
+          ],
+          "if-flow-control": [
+            {
+              "data": "enabled"
+            }
+          ],
+          "if-device-flags": [
+            {
+              "ifdf-present": [
+                {
+                  "data": [
+                    null
+                  ]
+                }
+              ],
+              "ifdf-running": [
+                {
+                  "data": [
+                    null
+                  ]
+                }
+              ]
+            }
+          ],
+          "ifd-specific-config-flags": [
+            {
+              "internal-flags": [
+                {
+                  "data": "0x100200"
+                }
+              ]
+            }
+          ],
+          "if-config-flags": [
+            {
+              "iff-snmp-traps": [
+                {
+                  "data": [
+                    null
+                  ]
+                }
+              ],
+              "internal-flags": [
+                {
+                  "data": "0x4000"
+                }
+              ]
+            }
+          ],
+          "if-media-flags": [
+            {
+              "ifmf-none": [
+                {
+                  "data": [
+                    null
+                  ]
+                }
+              ]
+            }
+          ],
+          "physical-interface-cos-information": [
+            {
+              "physical-interface-cos-hw-max-queues": [
+                {
+                  "data": "8"
+                }
+              ],
+              "physical-interface-cos-use-max-queues": [
+                {
+                  "data": "8"
+                }
+              ],
+              "physical-interface-schedulers": [
+                {
+                  "data": "0"
+                }
+              ]
+            }
+          ],
+          "up-hold-time": [
+            {
+              "data": "0"
+            }
+          ],
+          "down-hold-time": [
+            {
+              "data": "0"
+            }
+          ],
+          "damp-half-life": [
+            {
+              "data": "0"
+            }
+          ],
+          "damp-max-suppress": [
+            {
+              "data": "0"
+            }
+          ],
+          "damp-reuse-level": [
+            {
+              "data": "0"
+            }
+          ],
+          "damp-suppress-level": [
+            {
+              "data": "0"
+            }
+          ],
+          "damp-suppress-state": [
+            {
+              "data": "unsuppressed"
+            }
+          ],
+          "current-physical-address": [
+            {
+              "data": "02:00:00:00:00:0a"
+            }
+          ],
+          "hardware-physical-address": [
+            {
+              "data": "02:00:00:00:00:0a"
+            }
+          ],
+          "interface-flapped": [
+            {
+              "data": "2026-10-22 12:51:41 UTC (1w0d 11:15 ago)",
+              "attributes": {
+                "junos:seconds": "645331"
+              }
+            }
+          ],
+          "statistics-cleared": [
+            {
+              "data": "Never"
+            }
+          ],
+          "traffic-statistics": [
+            {
+              "attributes": {
+                "junos:style": "verbose"
+              },
+              "input-bytes": [
+                {
+                  "data": "652534259"
+                }
+              ],
+              "input-bps": [
+                {
+                  "data": "4120"
+                }
+              ],
+              "output-bytes": [
+                {
+                  "data": "355329761"
+                }
+              ],
+              "output-bps": [
+                {
+                  "data": "4400"
+                }
+              ],
+              "input-packets": [
+                {
+                  "data": "7046307"
+                }
+              ],
+              "input-pps": [
+                {
+                  "data": "9"
+                }
+              ],
+              "output-packets": [
+                {
+                  "data": "6619270"
+                }
+              ],
+              "output-pps": [
+                {
+                  "data": "10"
+                }
+              ]
+            }
+          ],
+          "lsi-traffic-statistics": [
+            {
+              "attributes": {
+                "junos:style": "verbose"
+              },
+              "input-bytes": [
+                {
+                  "data": "0"
+                }
+              ],
+              "input-bps": [
+                {
+                  "data": "0"
+                }
+              ],
+              "input-packets": [
+                {
+                  "data": "0"
+                }
+              ],
+              "input-pps": [
+                {
+                  "data": "0"
+                }
+              ]
+            }
+          ],
+          "input-error-list": [
+            {
+              "input-errors": [
+                {
+                  "data": "0"
+                }
+              ],
+              "input-drops": [
+                {
+                  "data": "0"
+                }
+              ],
+              "framing-errors": [
+                {
+                  "data": "0"
+                }
+              ],
+              "input-runts": [
+                {
+                  "data": "0"
+                }
+              ],
+              "input-discards": [
+                {
+                  "data": "0"
+                }
+              ],
+              "input-l3-incompletes": [
+                {
+                  "data": "0"
+                }
+              ],
+              "input-l2-channel-errors": [
+                {
+                  "data": "0"
+                }
+              ],
+              "input-l2-mismatch-timeouts": [
+                {
+                  "data": "0"
+                }
+              ],
+              "input-fifo-errors": [
+                {
+                  "data": "0"
+                }
+              ],
+              "input-resource-errors": [
+                {
+                  "data": "0"
+                }
+              ]
+            }
+          ],
+          "output-error-list": [
+            {
+              "carrier-transitions": [
+                {
+                  "data": "3"
+                }
+              ],
+              "output-errors": [
+                {
+                  "data": "0"
+                }
+              ],
+              "output-collisions": [
+                {
+                  "data": "0"
+                }
+              ],
+              "output-drops": [
+                {
+                  "data": "0"
+                }
+              ],
+              "aged-packets": [
+                {
+                  "data": "0"
+                }
+              ],
+              "mtu-errors": [
+                {
+                  "data": "0"
+                }
+              ],
+              "hs-link-crc-errors": [
+                {
+                  "data": "0"
+                }
+              ],
+              "output-fifo-errors": [
+                {
+                  "data": "0"
+                }
+              ],
+              "output-resource-errors": [
+                {
+                  "data": "0"
+                }
+              ]
+            }
+          ],
+          "queue-counters": [
+            {
+              "attributes": {
+                "junos:style": "brief"
+              },
+              "interface-cos-short-summary": [
+                {
+                  "intf-cos-queue-type": [
+                    {
+                      "data": "Egress queues"
+                    }
+                  ],
+                  "intf-cos-num-queues-supported": [
+                    {
+                      "data": "8"
+                    }
+                  ],
+                  "intf-cos-num-queues-in-use": [
+                    {
+                      "data": "5"
+                    }
+                  ]
+                }
+              ],
+              "queue": [
+                {
+                  "queue-number": [
+                    {
+                      "data": "0"
+                    }
+                  ],
+                  "forwarding-class-name": [
+                    {
+                      "data": "BE"
+                    }
+                  ],
+                  "queue-counters-queued-packets": [
+                    {
+                      "data": "2"
+                    }
+                  ],
+                  "queue-counters-trans-packets": [
+                    {
+                      "data": "2"
+                    }
+                  ],
+                  "queue-counters-total-drop-packets": [
+                    {
+                      "data": "0"
+                    }
+                  ]
+                },
+                {
+                  "queue-number": [
+                    {
+                      "data": "1"
+                    }
+                  ],
+                  "forwarding-class-name": [
+                    {
+                      "data": "CS1"
+                    }
+                  ],
+                  "queue-counters-queued-packets": [
+                    {
+                      "data": "0"
+                    }
+                  ],
+                  "queue-counters-trans-packets": [
+                    {
+                      "data": "0"
+                    }
+                  ],
+                  "queue-counters-total-drop-packets": [
+                    {
+                      "data": "0"
+                    }
+                  ]
+                },
+                {
+                  "queue-number": [
+                    {
+                      "data": "2"
+                    }
+                  ],
+                  "forwarding-class-name": [
+                    {
+                      "data": "CS2"
+                    }
+                  ],
+                  "queue-counters-queued-packets": [
+                    {
+                      "data": "0"
+                    }
+                  ],
+                  "queue-counters-trans-packets": [
+                    {
+                      "data": "0"
+                    }
+                  ],
+                  "queue-counters-total-drop-packets": [
+                    {
+                      "data": "0"
+                    }
+                  ]
+                },
+                {
+                  "queue-number": [
+                    {
+                      "data": "3"
+                    }
+                  ],
+                  "forwarding-class-name": [
+                    {
+                      "data": "CS3"
+                    }
+                  ],
+                  "queue-counters-queued-packets": [
+                    {
+                      "data": "66"
+                    }
+                  ],
+                  "queue-counters-trans-packets": [
+                    {
+                      "data": "66"
+                    }
+                  ],
+                  "queue-counters-total-drop-packets": [
+                    {
+                      "data": "0"
+                    }
+                  ]
+                },
+                {
+                  "queue-number": [
+                    {
+                      "data": "7"
+                    }
+                  ],
+                  "forwarding-class-name": [
+                    {
+                      "data": "CS6, CS7"
+                    }
+                  ],
+                  "queue-counters-queued-packets": [
+                    {
+                      "data": "6619197"
+                    }
+                  ],
+                  "queue-counters-trans-packets": [
+                    {
+                      "data": "6619197"
+                    }
+                  ],
+                  "queue-counters-total-drop-packets": [
+                    {
+                      "data": "0"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "queue-num-forwarding-class-name-map": [
+            {
+              "queue-number": [
+                {
+                  "data": "0"
+                }
+              ],
+              "forwarding-class-name": [
+                {
+                  "data": "BE"
+                }
+              ]
+            },
+            {
+              "queue-number": [
+                {
+                  "data": "1"
+                }
+              ],
+              "forwarding-class-name": [
+                {
+                  "data": "CS1"
+                }
+              ]
+            },
+            {
+              "queue-number": [
+                {
+                  "data": "2"
+                }
+              ],
+              "forwarding-class-name": [
+                {
+                  "data": "CS2"
+                }
+              ]
+            },
+            {
+              "queue-number": [
+                {
+                  "data": "3"
+                }
+              ],
+              "forwarding-class-name": [
+                {
+                  "data": "CS3"
+                }
+              ]
+            },
+            {
+              "queue-number": [
+                {
+                  "data": "7"
+                }
+              ],
+              "forwarding-class-name": [
+                {
+                  "data": "CS6, CS7"
+                }
+              ]
+            }
+          ],
+          "active-alarms": [
+            {
+              "interface-alarms": [
+                {
+                  "alarm-not-present": [
+                    {
+                      "data": [
+                        null
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "active-defects": [
+            {
+              "interface-alarms": [
+                {
+                  "alarm-not-present": [
+                    {
+                      "data": [
+                        null
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "ethernet-pcs-statistics": [
+            {
+              "attributes": {
+                "junos:style": "verbose"
+              },
+              "bit-error-seconds": [
+                {
+                  "data": "0"
+                }
+              ],
+              "errored-blocks-seconds": [
+                {
+                  "data": "0"
+                }
+              ]
+            }
+          ],
+          "ethernet-fec-mode": [
+            {
+              "attributes": {
+                "junos:style": "verbose"
+              },
+              "enabled_fec_mode": [
+                {
+                  "data": "FEC119"
+                }
+              ],
+              "fec_codeword_size": [
+                {
+                  "data": "544"
+                }
+              ],
+              "fec_codeword_rate": [
+                {
+                  "data": "0.945"
+                }
+              ]
+            }
+          ],
+          "ethernet-fec-statistics": [
+            {
+              "attributes": {
+                "junos:style": "verbose"
+              },
+              "fec_ccw_count": [
+                {
+                  "data": "6538395"
+                }
+              ],
+              "fec_nccw_count": [
+                {
+                  "data": "44981"
+                }
+              ],
+              "fec_ccw_error_rate": [
+                {
+                  "data": "0"
+                }
+              ],
+              "fec_nccw_error_rate": [
+                {
+                  "data": "0"
+                }
+              ]
+            }
+          ],
+          "ethernet-mac-statistics": [
+            {
+              "attributes": {
+                "junos:style": "verbose"
+              },
+              "input-bytes": [
+                {
+                  "data": "771735820"
+                }
+              ],
+              "output-bytes": [
+                {
+                  "data": "472377855"
+                }
+              ],
+              "input-packets": [
+                {
+                  "data": "7046321"
+                }
+              ],
+              "output-packets": [
+                {
+                  "data": "6619283"
+                }
+              ],
+              "input-unicasts": [
+                {
+                  "data": "6501407"
+                }
+              ],
+              "output-unicasts": [
+                {
+                  "data": "6497960"
+                }
+              ],
+              "input-broadcasts": [
+                {
+                  "data": "295"
+                }
+              ],
+              "output-broadcasts": [
+                {
+                  "data": "297"
+                }
+              ],
+              "input-multicasts": [
+                {
+                  "data": "544619"
+                }
+              ],
+              "output-multicasts": [
+                {
+                  "data": "121026"
+                }
+              ],
+              "input-crc-errors": [
+                {
+                  "data": "0"
+                }
+              ],
+              "output-crc-errors": [
+                {
+                  "data": "0"
+                }
+              ],
+              "input-fifo-errors": [
+                {
+                  "data": "0"
+                }
+              ],
+              "output-fifo-errors": [
+                {
+                  "data": "0"
+                }
+              ],
+              "input-mac-control-frames": [
+                {
+                  "data": "0"
+                }
+              ],
+              "output-mac-control-frames": [
+                {
+                  "data": "0"
+                }
+              ],
+              "input-mac-pause-frames": [
+                {
+                  "data": "0"
+                }
+              ],
+              "output-mac-pause-frames": [
+                {
+                  "data": "0"
+                }
+              ],
+              "input-oversized-frames": [
+                {
+                  "data": "0"
+                }
+              ],
+              "input-jabber-frames": [
+                {
+                  "data": "0"
+                }
+              ],
+              "input-fragment-frames": [
+                {
+                  "data": "0"
+                }
+              ],
+              "input-vlan-tagged-frames": [
+                {
+                  "data": "0"
+                }
+              ],
+              "input-code-violations": [
+                {
+                  "data": "0"
+                }
+              ]
+            }
+          ],
+          "ethernet-filter-statistics": [
+            {
+              "attributes": {
+                "junos:style": "verbose"
+              },
+              "input-packets": [
+                {
+                  "data": "7046253"
+                }
+              ],
+              "input-reject-count": [
+                {
+                  "data": "0"
+                }
+              ],
+              "input-reject-destination-address-count": [
+                {
+                  "data": "0"
+                }
+              ],
+              "input-reject-source-address-count": [
+                {
+                  "data": "0"
+                }
+              ],
+              "output-packets": [
+                {
+                  "data": "6619222"
+                }
+              ],
+              "output-packet-pad-count": [
+                {
+                  "data": "0"
+                }
+              ],
+              "output-packet-error-count": [
+                {
+                  "data": "0"
+                }
+              ],
+              "cam-destination-filter-count": [
+                {
+                  "data": "0"
+                }
+              ],
+              "cam-source-filter-count": [
+                {
+                  "data": "0"
+                }
+              ]
+            }
+          ],
+          "ethernet-prbs-mode": [
+            {
+              "attributes": {
+                "junos:style": "verbose"
+              },
+              "prbs-mode": [
+                {
+                  "data": "Disabled"
+                }
+              ]
+            }
+          ],
+          "pfe-information": [
+            {
+              "destination-slot": [
+                {
+                  "data": "0"
+                }
+              ],
+              "destination-mask": [
+                {
+                  "data": "0x00"
+                }
+              ]
+            }
+          ],
+          "cos-header": [
+            {
+              "data": [
+                null
+              ]
+            }
+          ],
+          "cos-information": [
+            {
+              "cos-stream-information": [
+                {
+                  "cos-direction": [
+                    {
+                      "data": "Output"
+                    }
+                  ],
+                  "cos-queue-configuration": [
+                    {
+                      "cos-queue-number": [
+                        {
+                          "data": "0"
+                        }
+                      ],
+                      "cos-queue-forwarding-class": [
+                        {
+                          "data": "BE"
+                        }
+                      ],
+                      "cos-queue-bandwidth": [
+                        {
+                          "data": "30"
+                        }
+                      ],
+                      "cos-queue-bandwidth-bps": [
+                        {
+                          "data": "120000000000"
+                        }
+                      ],
+                      "cos-queue-buffer": [
+                        {
+                          "data": "30"
+                        }
+                      ],
+                      "cos-queue-buffer-bytes": [
+                        {
+                          "data": "0"
+                        }
+                      ],
+                      "cos-queue-priority": [
+                        {
+                          "data": "medium-low"
+                        }
+                      ],
+                      "cos-queue-limit": [
+                        {
+                          "data": "none"
+                        }
+                      ]
+                    },
+                    {
+                      "cos-queue-number": [
+                        {
+                          "data": "1"
+                        }
+                      ],
+                      "cos-queue-forwarding-class": [
+                        {
+                          "data": "CS1"
+                        }
+                      ],
+                      "cos-queue-bandwidth": [
+                        {
+                          "data": "30"
+                        }
+                      ],
+                      "cos-queue-bandwidth-bps": [
+                        {
+                          "data": "120000000000"
+                        }
+                      ],
+                      "cos-queue-buffer": [
+                        {
+                          "data": "30"
+                        }
+                      ],
+                      "cos-queue-buffer-bytes": [
+                        {
+                          "data": "0"
+                        }
+                      ],
+                      "cos-queue-priority": [
+                        {
+                          "data": "low"
+                        }
+                      ],
+                      "cos-queue-limit": [
+                        {
+                          "data": "none"
+                        }
+                      ]
+                    },
+                    {
+                      "cos-queue-number": [
+                        {
+                          "data": "2"
+                        }
+                      ],
+                      "cos-queue-forwarding-class": [
+                        {
+                          "data": "CS2"
+                        }
+                      ],
+                      "cos-queue-bandwidth": [
+                        {
+                          "data": "30"
+                        }
+                      ],
+                      "cos-queue-bandwidth-bps": [
+                        {
+                          "data": "120000000000"
+                        }
+                      ],
+                      "cos-queue-buffer": [
+                        {
+                          "data": "30"
+                        }
+                      ],
+                      "cos-queue-buffer-bytes": [
+                        {
+                          "data": "0"
+                        }
+                      ],
+                      "cos-queue-priority": [
+                        {
+                          "data": "medium-low"
+                        }
+                      ],
+                      "cos-queue-limit": [
+                        {
+                          "data": "none"
+                        }
+                      ]
+                    },
+                    {
+                      "cos-queue-number": [
+                        {
+                          "data": "3"
+                        }
+                      ],
+                      "cos-queue-forwarding-class": [
+                        {
+                          "data": "CS3"
+                        }
+                      ],
+                      "cos-queue-bandwidth": [
+                        {
+                          "data": "5"
+                        }
+                      ],
+                      "cos-queue-bandwidth-bps": [
+                        {
+                          "data": "20000000000"
+                        }
+                      ],
+                      "cos-queue-buffer": [
+                        {
+                          "data": "5"
+                        }
+                      ],
+                      "cos-queue-buffer-bytes": [
+                        {
+                          "data": "0"
+                        }
+                      ],
+                      "cos-queue-priority": [
+                        {
+                          "data": "medium-high"
+                        }
+                      ],
+                      "cos-queue-limit": [
+                        {
+                          "data": "none"
+                        }
+                      ]
+                    },
+                    {
+                      "cos-queue-number": [
+                        {
+                          "data": "7"
+                        }
+                      ],
+                      "cos-queue-forwarding-class": [
+                        {
+                          "data": "CS6, CS7"
+                        }
+                      ],
+                      "cos-queue-bandwidth": [
+                        {
+                          "data": "5"
+                        }
+                      ],
+                      "cos-queue-bandwidth-bps": [
+                        {
+                          "data": "20000000000"
+                        }
+                      ],
+                      "cos-queue-buffer": [
+                        {
+                          "data": "5"
+                        }
+                      ],
+                      "cos-queue-buffer-bytes": [
+                        {
+                          "data": "0"
+                        }
+                      ],
+                      "cos-queue-priority": [
+                        {
+                          "data": "high"
+                        }
+                      ],
+                      "cos-queue-limit": [
+                        {
+                          "data": "none"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "precl-statistics": [
+            {
+              "precl-information": [
+                {
+                  "precl-per-class-statistics": [
+                    {
+                      "precl-traffic-class": [
+                        {
+                          "data": "real-time"
+                        }
+                      ],
+                      "precl-rx-packets": [
+                        {
+                          "data": "0"
+                        }
+                      ],
+                      "precl-tx-packets": [
+                        {
+                          "data": "0"
+                        }
+                      ],
+                      "precl-dropped-packets": [
+                        {
+                          "data": "0"
+                        }
+                      ]
+                    },
+                    {
+                      "precl-traffic-class": [
+                        {
+                          "data": "network-control"
+                        }
+                      ],
+                      "precl-rx-packets": [
+                        {
+                          "data": "7010648"
+                        }
+                      ],
+                      "precl-tx-packets": [
+                        {
+                          "data": "7010648"
+                        }
+                      ],
+                      "precl-dropped-packets": [
+                        {
+                          "data": "0"
+                        }
+                      ]
+                    },
+                    {
+                      "precl-traffic-class": [
+                        {
+                          "data": "best-effort"
+                        }
+                      ],
+                      "precl-rx-packets": [
+                        {
+                          "data": "35656"
+                        }
+                      ],
+                      "precl-tx-packets": [
+                        {
+                          "data": "35656"
+                        }
+                      ],
+                      "precl-dropped-packets": [
+                        {
+                          "data": "0"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "macsec-statistics": [
+            {
+              "macsec-tx-sc-protected": [
+                {
+                  "data": "0"
+                }
+              ],
+              "macsec-tx-sc-encrypted": [
+                {
+                  "data": "0"
+                }
+              ],
+              "macsec-tx-sc-protectedbytes": [
+                {
+                  "data": "0"
+                }
+              ],
+              "macsec-tx-sc-encryptedbytes": [
+                {
+                  "data": "0"
+                }
+              ],
+              "macsec-rx-sc-ok": [
+                {
+                  "data": "0"
+                }
+              ],
+              "macsec-rx-sc-validatedbytes": [
+                {
+                  "data": "0"
+                }
+              ],
+              "macsec-rx-sc-decryptedbytes": [
+                {
+                  "data": "0"
+                }
+              ]
+            }
+          ],
+          "link-degrade-information": [
+            {
+              "lnk-degrd-mon": [
+                {
+                  "data": "Disable"
+                }
+              ]
+            }
+          ],
+          "interface-transmit-statistics": [
+            {
+              "data": "Disabled"
+            }
+          ],
+          "logical-interface": [
+            {
+              "name": [
+                {
+                  "data": "et-0/0/0.0"
+                }
+              ],
+              "local-index": [
+                {
+                  "data": "346"
+                }
+              ],
+              "snmp-index": [
+                {
+                  "data": "549"
+                }
+              ],
+              "generation": [
+                {
+                  "data": "162"
+                }
+              ],
+              "if-config-flags": [
+                {
+                  "iff-up": [
+                    {
+                      "data": [
+                        null
+                      ]
+                    }
+                  ],
+                  "iff-snmp-traps": [
+                    {
+                      "data": [
+                        null
+                      ]
+                    }
+                  ],
+                  "internal-flags": [
+                    {
+                      "data": "0x4004000"
+                    }
+                  ]
+                }
+              ],
+              "encapsulation": [
+                {
+                  "data": "ENET2"
+                }
+              ],
+              "policer-overhead": [
+                {}
+              ],
+              "traffic-statistics": [
+                {
+                  "attributes": {
+                    "junos:style": "verbose",
+                    "junos:indent": "2"
+                  },
+                  "input-bytes": [
+                    {
+                      "data": "652524711"
+                    }
+                  ],
+                  "output-bytes": [
+                    {
+                      "data": "355319793"
+                    }
+                  ],
+                  "input-packets": [
+                    {
+                      "data": "7046279"
+                    }
+                  ],
+                  "output-packets": [
+                    {
+                      "data": "6619242"
+                    }
+                  ]
+                }
+              ],
+              "local-traffic-statistics": [
+                {
+                  "input-bytes": [
+                    {
+                      "data": "316940512"
+                    }
+                  ],
+                  "output-bytes": [
+                    {
+                      "data": "19917755"
+                    }
+                  ],
+                  "input-packets": [
+                    {
+                      "data": "592753"
+                    }
+                  ],
+                  "output-packets": [
+                    {
+                      "data": "169203"
+                    }
+                  ]
+                }
+              ],
+              "transit-traffic-statistics": [
+                {
+                  "input-bytes": [
+                    {
+                      "data": "335584199"
+                    }
+                  ],
+                  "input-bps": [
+                    {
+                      "data": "4120"
+                    }
+                  ],
+                  "output-bytes": [
+                    {
+                      "data": "335402038"
+                    }
+                  ],
+                  "output-bps": [
+                    {
+                      "data": "4400"
+                    }
+                  ],
+                  "input-packets": [
+                    {
+                      "data": "6453526"
+                    }
+                  ],
+                  "input-pps": [
+                    {
+                      "data": "9"
+                    }
+                  ],
+                  "output-packets": [
+                    {
+                      "data": "6450039"
+                    }
+                  ],
+                  "output-pps": [
+                    {
+                      "data": "10"
+                    }
+                  ],
+                  "ipv4-transit-statistics": [
+                    {
+                      "input-bytes": [
+                        {
+                          "data": "335583352"
+                        }
+                      ],
+                      "input-bps": [
+                        {
+                          "data": "4120"
+                        }
+                      ],
+                      "output-bytes": [
+                        {
+                          "data": "315484325"
+                        }
+                      ],
+                      "output-bps": [
+                        {
+                          "data": "4120"
+                        }
+                      ],
+                      "input-packets": [
+                        {
+                          "data": "6453526"
+                        }
+                      ],
+                      "input-pps": [
+                        {
+                          "data": "9"
+                        }
+                      ],
+                      "output-packets": [
+                        {
+                          "data": "6280837"
+                        }
+                      ],
+                      "output-pps": [
+                        {
+                          "data": "9"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "filter-information": [
+                {}
+              ],
+              "address-family": [
+                {
+                  "address-family-name": [
+                    {
+                      "data": "inet"
+                    }
+                  ],
+                  "mtu": [
+                    {
+                      "data": "9202"
+                    }
+                  ],
+                  "max-local-cache": [
+                    {
+                      "data": "100000"
+                    }
+                  ],
+                  "new-hold-limit": [
+                    {
+                      "data": "100000"
+                    }
+                  ],
+                  "intf-curr-cnt": [
+                    {
+                      "data": "1"
+                    }
+                  ],
+                  "intf-unresolved-cnt": [
+                    {
+                      "data": "0"
+                    }
+                  ],
+                  "intf-dropcnt": [
+                    {
+                      "data": "0"
+                    }
+                  ],
+                  "generation": [
+                    {
+                      "data": "193"
+                    }
+                  ],
+                  "route-table": [
+                    {
+                      "data": "0"
+                    }
+                  ],
+                  "address-family-flags": [
+                    {
+                      "ifff-is-primary": [
+                        {
+                          "data": [
+                            null
+                          ]
+                        }
+                      ],
+                      "ifff-sample-input": [
+                        {
+                          "data": [
+                            null
+                          ]
+                        }
+                      ],
+                      "ifff-sample-output": [
+                        {
+                          "data": [
+                            null
+                          ]
+                        }
+                      ],
+                      "ifff-sendbcast-pkt-to-re": [
+                        {
+                          "data": [
+                            null
+                          ]
+                        }
+                      ],
+                      "internal-flags": [
+                        {
+                          "data": "0x0"
+                        }
+                      ]
+                    }
+                  ],
+                  "filter-information": [
+                    {}
+                  ],
+                  "policer-information": [
+                    {}
+                  ],
+                  "interface-address": [
+                    {
+                      "ifa-flags": [
+                        {
+                          "ifaf-current-preferred": [
+                            {
+                              "data": [
+                                null
+                              ]
+                            }
+                          ],
+                          "ifaf-current-primary": [
+                            {
+                              "data": [
+                                null
+                              ]
+                            }
+                          ]
+                        }
+                      ],
+                      "ifa-destination": [
+                        {
+                          "data": "192.0.2.4/31"
+                        }
+                      ],
+                      "ifa-local": [
+                        {
+                          "data": "192.0.2.4"
+                        }
+                      ],
+                      "ifa-broadcast": [
+                        {
+                          "data": "Unspecified"
+                        }
+                      ],
+                      "generation": [
+                        {
+                          "data": "151"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "address-family-name": [
+                    {
+                      "data": "iso"
+                    }
+                  ],
+                  "mtu": [
+                    {
+                      "data": "9199"
+                    }
+                  ],
+                  "generation": [
+                    {
+                      "data": "194"
+                    }
+                  ],
+                  "route-table": [
+                    {
+                      "data": "0"
+                    }
+                  ],
+                  "address-family-flags": [
+                    {
+                      "ifff-is-primary": [
+                        {
+                          "data": [
+                            null
+                          ]
+                        }
+                      ],
+                      "internal-flags": [
+                        {
+                          "data": "0x0"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "address-family-name": [
+                    {
+                      "data": "mpls"
+                    }
+                  ],
+                  "mtu": [
+                    {
+                      "data": "9190"
+                    }
+                  ],
+                  "maximum-labels": [
+                    {
+                      "data": "3"
+                    }
+                  ],
+                  "generation": [
+                    {
+                      "data": "195"
+                    }
+                  ],
+                  "route-table": [
+                    {
+                      "data": "0"
+                    }
+                  ],
+                  "address-family-flags": [
+                    {
+                      "ifff-is-primary": [
+                        {
+                          "data": [
+                            null
+                          ]
+                        }
+                      ],
+                      "internal-flags": [
+                        {
+                          "data": "0x10000000"
+                        }
+                      ]
+                    }
+                  ],
+                  "filter-information": [
+                    {
+                      "filter-input": [
+                        {
+                          "data": "MPLS_SAMPLE"
+                        }
+                      ],
+                      "filter-output": [
+                        {
+                          "data": "MPLS_SAMPLE"
+                        }
+                      ]
+                    }
+                  ],
+                  "policer-information": [
+                    {}
+                  ]
+                },
+                {
+                  "address-family-name": [
+                    {
+                      "data": "multiservice"
+                    }
+                  ],
+                  "mtu": [
+                    {
+                      "data": "Unlimited"
+                    }
+                  ],
+                  "generation": [
+                    {
+                      "data": "196"
+                    }
+                  ],
+                  "route-table": [
+                    {
+                      "data": "0"
+                    }
+                  ],
+                  "address-family-flags": [
+                    {
+                      "ifff-is-primary": [
+                        {
+                          "data": [
+                            null
+                          ]
+                        }
+                      ],
+                      "internal-flags": [
+                        {
+                          "data": "0x0"
+                        }
+                      ]
+                    }
+                  ],
+                  "filter-information": [
+                    {}
+                  ],
+                  "policer-information": [
+                    {
+                      "policer-input": [
+                        {
+                          "data": "__default_arp_policer__"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

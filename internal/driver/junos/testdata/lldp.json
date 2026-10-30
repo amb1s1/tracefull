@@ -1,0 +1,159 @@
+{
+  "lldp-neighbors-information": [
+    {
+      "attributes": {
+        "junos:style": "brief"
+      },
+      "lldp-neighbor-information": [
+        {
+          "lldp-local-port-id": [
+            {
+              "data": "fxp0"
+            }
+          ],
+          "lldp-local-parent-interface-name": [
+            {
+              "data": "-"
+            }
+          ],
+          "lldp-remote-chassis-id-subtype": [
+            {
+              "data": "Mac address"
+            }
+          ],
+          "lldp-remote-chassis-id": [
+            {
+              "data": "02:00:00:00:00:08"
+            }
+          ],
+          "lldp-remote-port-id-subtype": [
+            {
+              "data": "Interface name"
+            }
+          ],
+          "lldp-remote-port-id": [
+            {
+              "data": "ether6"
+            }
+          ],
+          "lldp-remote-system-name": [
+            {
+              "data": "peer-4"
+            }
+          ]
+        },
+        {
+          "lldp-local-port-id": [
+            {
+              "data": "fxp0"
+            }
+          ],
+          "lldp-local-parent-interface-name": [
+            {
+              "data": "-"
+            }
+          ],
+          "lldp-remote-chassis-id-subtype": [
+            {
+              "data": "Mac address"
+            }
+          ],
+          "lldp-remote-chassis-id": [
+            {
+              "data": "02:00:00:00:00:08"
+            }
+          ],
+          "lldp-remote-port-id-subtype": [
+            {
+              "data": "Interface name"
+            }
+          ],
+          "lldp-remote-port-id": [
+            {
+              "data": "vlan2602"
+            }
+          ],
+          "lldp-remote-system-name": [
+            {
+              "data": "peer-4"
+            }
+          ]
+        },
+        {
+          "lldp-local-port-id": [
+            {
+              "data": "et-0/0/0"
+            }
+          ],
+          "lldp-local-parent-interface-name": [
+            {
+              "data": "-"
+            }
+          ],
+          "lldp-remote-chassis-id-subtype": [
+            {
+              "data": "Mac address"
+            }
+          ],
+          "lldp-remote-chassis-id": [
+            {
+              "data": "02:00:00:00:00:09"
+            }
+          ],
+          "lldp-remote-port-id-subtype": [
+            {
+              "data": "Interface name"
+            }
+          ],
+          "lldp-remote-port-id": [
+            {
+              "data": "et-0/0/0"
+            }
+          ],
+          "lldp-remote-system-name": [
+            {
+              "data": "peer-5"
+            }
+          ]
+        },
+        {
+          "lldp-local-port-id": [
+            {
+              "data": "et-0/1/0"
+            }
+          ],
+          "lldp-local-parent-interface-name": [
+            {
+              "data": "-"
+            }
+          ],
+          "lldp-remote-chassis-id-subtype": [
+            {
+              "data": "Mac address"
+            }
+          ],
+          "lldp-remote-chassis-id": [
+            {
+              "data": "02:00:00:00:00:09"
+            }
+          ],
+          "lldp-remote-port-id-subtype": [
+            {
+              "data": "Interface name"
+            }
+          ],
+          "lldp-remote-port-id": [
+            {
+              "data": "et-0/0/17"
+            }
+          ],
+          "lldp-remote-system-name": [
+            {
+              "data": "peer-5"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

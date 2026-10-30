@@ -1,0 +1,490 @@
+{
+  "interface-information": [
+    {
+      "attributes": {
+        "xmlns": "http://xml.juniper.net/junos/24.4R0/junos-interface",
+        "junos:style": "normal"
+      },
+      "logical-interface": [
+        {
+          "name": [
+            {
+              "data": "et-0/0/0.0"
+            }
+          ],
+          "local-index": [
+            {
+              "data": "346"
+            }
+          ],
+          "snmp-index": [
+            {
+              "data": "549"
+            }
+          ],
+          "generation": [
+            {
+              "data": "162"
+            }
+          ],
+          "if-config-flags": [
+            {
+              "iff-up": [
+                {
+                  "data": [
+                    null
+                  ]
+                }
+              ],
+              "iff-snmp-traps": [
+                {
+                  "data": [
+                    null
+                  ]
+                }
+              ],
+              "internal-flags": [
+                {
+                  "data": "0x4004000"
+                }
+              ]
+            }
+          ],
+          "encapsulation": [
+            {
+              "data": "ENET2"
+            }
+          ],
+          "policer-overhead": [
+            {}
+          ],
+          "traffic-statistics": [
+            {
+              "attributes": {
+                "junos:style": "verbose",
+                "junos:indent": "2"
+              },
+              "input-bytes": [
+                {
+                  "data": "652525826"
+                }
+              ],
+              "output-bytes": [
+                {
+                  "data": "355320833"
+                }
+              ],
+              "input-packets": [
+                {
+                  "data": "7046300"
+                }
+              ],
+              "output-packets": [
+                {
+                  "data": "6619262"
+                }
+              ]
+            }
+          ],
+          "local-traffic-statistics": [
+            {
+              "input-bytes": [
+                {
+                  "data": "316944289"
+                }
+              ],
+              "output-bytes": [
+                {
+                  "data": "19917755"
+                }
+              ],
+              "input-packets": [
+                {
+                  "data": "592757"
+                }
+              ],
+              "output-packets": [
+                {
+                  "data": "169203"
+                }
+              ]
+            }
+          ],
+          "transit-traffic-statistics": [
+            {
+              "input-bytes": [
+                {
+                  "data": "335581537"
+                }
+              ],
+              "input-bps": [
+                {
+                  "data": "4464"
+                }
+              ],
+              "output-bytes": [
+                {
+                  "data": "335403078"
+                }
+              ],
+              "output-bps": [
+                {
+                  "data": "4160"
+                }
+              ],
+              "input-packets": [
+                {
+                  "data": "6453543"
+                }
+              ],
+              "input-pps": [
+                {
+                  "data": "10"
+                }
+              ],
+              "output-packets": [
+                {
+                  "data": "6450059"
+                }
+              ],
+              "output-pps": [
+                {
+                  "data": "10"
+                }
+              ],
+              "ipv4-transit-statistics": [
+                {
+                  "input-bytes": [
+                    {
+                      "data": "335584392"
+                    }
+                  ],
+                  "input-bps": [
+                    {
+                      "data": "4160"
+                    }
+                  ],
+                  "output-bytes": [
+                    {
+                      "data": "315485365"
+                    }
+                  ],
+                  "output-bps": [
+                    {
+                      "data": "4160"
+                    }
+                  ],
+                  "input-packets": [
+                    {
+                      "data": "6453546"
+                    }
+                  ],
+                  "input-pps": [
+                    {
+                      "data": "10"
+                    }
+                  ],
+                  "output-packets": [
+                    {
+                      "data": "6280857"
+                    }
+                  ],
+                  "output-pps": [
+                    {
+                      "data": "10"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "filter-information": [
+            {}
+          ],
+          "address-family": [
+            {
+              "address-family-name": [
+                {
+                  "data": "inet"
+                }
+              ],
+              "mtu": [
+                {
+                  "data": "9202"
+                }
+              ],
+              "max-local-cache": [
+                {
+                  "data": "100000"
+                }
+              ],
+              "new-hold-limit": [
+                {
+                  "data": "100000"
+                }
+              ],
+              "intf-curr-cnt": [
+                {
+                  "data": "1"
+                }
+              ],
+              "intf-unresolved-cnt": [
+                {
+                  "data": "0"
+                }
+              ],
+              "intf-dropcnt": [
+                {
+                  "data": "0"
+                }
+              ],
+              "generation": [
+                {
+                  "data": "193"
+                }
+              ],
+              "route-table": [
+                {
+                  "data": "0"
+                }
+              ],
+              "address-family-flags": [
+                {
+                  "ifff-is-primary": [
+                    {
+                      "data": [
+                        null
+                      ]
+                    }
+                  ],
+                  "ifff-sample-input": [
+                    {
+                      "data": [
+                        null
+                      ]
+                    }
+                  ],
+                  "ifff-sample-output": [
+                    {
+                      "data": [
+                        null
+                      ]
+                    }
+                  ],
+                  "ifff-sendbcast-pkt-to-re": [
+                    {
+                      "data": [
+                        null
+                      ]
+                    }
+                  ],
+                  "internal-flags": [
+                    {
+                      "data": "0x0"
+                    }
+                  ]
+                }
+              ],
+              "filter-information": [
+                {}
+              ],
+              "policer-information": [
+                {}
+              ],
+              "interface-address": [
+                {
+                  "ifa-flags": [
+                    {
+                      "ifaf-current-preferred": [
+                        {
+                          "data": [
+                            null
+                          ]
+                        }
+                      ],
+                      "ifaf-current-primary": [
+                        {
+                          "data": [
+                            null
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "ifa-destination": [
+                    {
+                      "data": "192.0.2.4/31"
+                    }
+                  ],
+                  "ifa-local": [
+                    {
+                      "data": "192.0.2.4"
+                    }
+                  ],
+                  "ifa-broadcast": [
+                    {
+                      "data": "Unspecified"
+                    }
+                  ],
+                  "generation": [
+                    {
+                      "data": "151"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "address-family-name": [
+                {
+                  "data": "iso"
+                }
+              ],
+              "mtu": [
+                {
+                  "data": "9199"
+                }
+              ],
+              "generation": [
+                {
+                  "data": "194"
+                }
+              ],
+              "route-table": [
+                {
+                  "data": "0"
+                }
+              ],
+              "address-family-flags": [
+                {
+                  "ifff-is-primary": [
+                    {
+                      "data": [
+                        null
+                      ]
+                    }
+                  ],
+                  "internal-flags": [
+                    {
+                      "data": "0x0"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "address-family-name": [
+                {
+                  "data": "mpls"
+                }
+              ],
+              "mtu": [
+                {
+                  "data": "9190"
+                }
+              ],
+              "maximum-labels": [
+                {
+                  "data": "3"
+                }
+              ],
+              "generation": [
+                {
+                  "data": "195"
+                }
+              ],
+              "route-table": [
+                {
+                  "data": "0"
+                }
+              ],
+              "address-family-flags": [
+                {
+                  "ifff-is-primary": [
+                    {
+                      "data": [
+                        null
+                      ]
+                    }
+                  ],
+                  "internal-flags": [
+                    {
+                      "data": "0x10000000"
+                    }
+                  ]
+                }
+              ],
+              "filter-information": [
+                {
+                  "filter-input": [
+                    {
+                      "data": "MPLS_SAMPLE"
+                    }
+                  ],
+                  "filter-output": [
+                    {
+                      "data": "MPLS_SAMPLE"
+                    }
+                  ]
+                }
+              ],
+              "policer-information": [
+                {}
+              ]
+            },
+            {
+              "address-family-name": [
+                {
+                  "data": "multiservice"
+                }
+              ],
+              "mtu": [
+                {
+                  "data": "Unlimited"
+                }
+              ],
+              "generation": [
+                {
+                  "data": "196"
+                }
+              ],
+              "route-table": [
+                {
+                  "data": "0"
+                }
+              ],
+              "address-family-flags": [
+                {
+                  "ifff-is-primary": [
+                    {
+                      "data": [
+                        null
+                      ]
+                    }
+                  ],
+                  "internal-flags": [
+                    {
+                      "data": "0x0"
+                    }
+                  ]
+                }
+              ],
+              "filter-information": [
+                {}
+              ],
+              "policer-information": [
+                {
+                  "policer-input": [
+                    {
+                      "data": "__default_arp_policer__"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

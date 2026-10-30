@@ -1,0 +1,86 @@
+{
+  "platform": "Junos 24.4R2-S5.3",
+  "source": "Authorized read-only real-device captures; private originals retained outside Git",
+  "files": [
+    {
+      "file": "version-json.json",
+      "source_stdout_sha256": "f56b49b640a42729ae861cf2c154be49e7f23ced5c9c60e30bd33ce30cd5b90c",
+      "source_command": "show version | display json",
+      "started_unix": 1793318754.041018,
+      "ended_unix": 1793318756.51686,
+      "excerpt": true
+    },
+    {
+      "file": "addresses.json",
+      "source_stdout_sha256": "3647cc934b73559d0b943e29ea91f26e943a3bce6d6dca9c3b4ed70fe24f5a21",
+      "source_command": "show interfaces terse | display json",
+      "started_unix": 1793318756.5178409,
+      "ended_unix": 1793318762.4849222,
+      "excerpt": true
+    },
+    {
+      "file": "route6.json",
+      "source_stdout_sha256": "8c9f19f83b9bdb73a6553b0c48c006914e17b2460cd33e470575391cfe65ebb1",
+      "source_command": "show route table inet6.0 2001:db8:4::f | display json",
+      "started_unix": 1793318762.4852211,
+      "ended_unix": 1793318765.528022,
+      "excerpt": false
+    },
+    {
+      "file": "uptime.json",
+      "source_stdout_sha256": "7b923f69265f5b88026d035b01f327e85f7bf631a1f8d75c8859fb017a1ff6e6",
+      "source_command": "show system uptime | display json",
+      "started_unix": 1793318765.5289779,
+      "ended_unix": 1793318769.616789,
+      "excerpt": false
+    },
+    {
+      "file": "cpu.json",
+      "source_stdout_sha256": "7f0313b8b1b32ed0e9ddd24863c87425ba35099d4a13fe0e6097d30a1d302b8c",
+      "source_command": "show chassis routing-engine | display json",
+      "started_unix": 1793318769.617755,
+      "ended_unix": 1793318771.70376,
+      "excerpt": false
+    },
+    {
+      "file": "lldp.json",
+      "source_stdout_sha256": "db9ec3e1b679fb9837f00769467d65d7b676f486203904d3a341b09487eb889c",
+      "source_command": "show lldp neighbors | display json",
+      "started_unix": 1793318771.704874,
+      "ended_unix": 1793318775.491786,
+      "excerpt": false
+    },
+    {
+      "file": "route4-connected.json",
+      "source_stdout_sha256": "f66acbb00e9dce86eed8e21b5f534abd4c4dff530a3a77ca6ddcb71db0674772",
+      "source_command": "show route table inet.0 192.0.2.5 detail | display json",
+      "started_unix": 1793318827.853647,
+      "ended_unix": 1793318830.01089,
+      "excerpt": false
+    },
+    {
+      "file": "counters-physical.json",
+      "source_stdout_sha256": "7a977e86fe456dea2ca644c576bf382723ed9007ea13a7050d360130dbedf321",
+      "source_command": "show interfaces et-0/0/0 extensive | display json",
+      "started_unix": 1793318830.01187,
+      "ended_unix": 1793318832.909128,
+      "excerpt": false
+    },
+    {
+      "file": "counters-logical.json",
+      "source_stdout_sha256": "6202b0c143d504ea9c2733569a1a12b1cbc0b89ef4d36f5b6d05c431adef2e5e",
+      "source_command": "show interfaces et-0/0/0.0 extensive | display json",
+      "started_unix": 1793318832.909833,
+      "ended_unix": 1793318835.483059,
+      "excerpt": false
+    },
+    {
+      "file": "optics.json",
+      "source_stdout_sha256": "076c08bc0c627f673391c126fe584d2ce584ac4fb1f0a1a17fc8e7dd485c40f8",
+      "source_command": "show interfaces diagnostics optics et-0/0/0 | display json",
+      "started_unix": 1793318835.483351,
+      "ended_unix": 1793318841.1045198,
+      "excerpt": false
+    }
+  ]
+}
