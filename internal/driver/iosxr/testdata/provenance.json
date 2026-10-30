@@ -1,0 +1,78 @@
+{
+  "platform": "Cisco IOS XR 25.4.2",
+  "source": "Authorized read-only real-device captures; private originals retained outside Git",
+  "files": [
+    {
+      "file": "version.txt",
+      "source_stdout_sha256": "47ce27217fdde70f5aaf3adf7841e971ec1a978a9e95f357bf6f78c7bed6bb71",
+      "source_command": "show version",
+      "started_unix": 1793318703.641676,
+      "ended_unix": 1793318708.8541791,
+      "excerpt": false
+    },
+    {
+      "file": "addresses6.txt",
+      "source_stdout_sha256": "a2336a4b7ab9487f3852b940630a135bd1ceed9dcf44a9142292c4aee26d4e92",
+      "source_command": "show ipv6 interface brief",
+      "started_unix": 1793318754.0676138,
+      "ended_unix": 1793318760.153725,
+      "excerpt": false
+    },
+    {
+      "file": "addresses4.txt",
+      "source_stdout_sha256": "0f5eb5aa5cc79955bb796d769680343b2243b93af4fe151000a99f2fa8ae04f3",
+      "source_command": "show ipv4 interface brief",
+      "started_unix": 1793318760.1547341,
+      "ended_unix": 1793318765.438901,
+      "excerpt": false
+    },
+    {
+      "file": "route6.txt",
+      "source_stdout_sha256": "4b6d1212bc3eddbf55e0ed29b6b6aea37b4cea136dc4d1516802d5f3f80c22a1",
+      "source_command": "show route ipv6 2001:db8:4::f detail",
+      "started_unix": 1793318765.4400158,
+      "ended_unix": 1793318770.0242171,
+      "excerpt": false
+    },
+    {
+      "file": "lldp.txt",
+      "source_stdout_sha256": "1061663c48b5dc986256a3c067da6a52155a0a55870664cfcff9f52a650db6e3",
+      "source_command": "show lldp neighbors detail",
+      "started_unix": 1793318770.0244968,
+      "ended_unix": 1793318776.081579,
+      "excerpt": false
+    },
+    {
+      "file": "cpu.txt",
+      "source_stdout_sha256": "551f4647abc24224d26c5a042f1ed87c39894f65bf8dc3f3009c459071c8cedf",
+      "source_command": "show processes cpu",
+      "started_unix": 1793318776.082334,
+      "ended_unix": 1793318782.978375,
+      "excerpt": true
+    },
+    {
+      "file": "route6-connected.txt",
+      "source_stdout_sha256": "df59ee6e7a86810257d7e7bcb8c207453591b9d1a582b1f530309e47fd5e73f3",
+      "source_command": "show route ipv6 2001:db8:9::22 detail",
+      "started_unix": 1793318827.853472,
+      "ended_unix": 1793318832.190103,
+      "excerpt": false
+    },
+    {
+      "file": "counters.txt",
+      "source_stdout_sha256": "e42bcb9faca29a03b5648f6eb322183ae26192c1be26e9173fbf926998639c58",
+      "source_command": "show interfaces FourHundredGigE0/0/0/4",
+      "started_unix": 1793318832.191102,
+      "ended_unix": 1793318837.042815,
+      "excerpt": false
+    },
+    {
+      "file": "optics.txt",
+      "source_stdout_sha256": "50ae3586b256fc366379a15d3cfbd973fa3c654eeccff674a9810932ca195387",
+      "source_command": "show controllers optics 0/0/0/4",
+      "started_unix": 1793318837.04322,
+      "ended_unix": 1793318843.6779819,
+      "excerpt": false
+    }
+  ]
+}

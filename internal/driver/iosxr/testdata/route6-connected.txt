@@ -1,0 +1,26 @@
+
+
+Fri Oct 30 00:07:11.800 UTC
+
+Routing entry for 2001:db8:9::22/127
+  Known via "connected", distance 0, metric 0 (connected)
+  Installed Oct 28 18:02:47.584 for 1d06h
+  Routing Descriptor Blocks
+    directly connected, via FourHundredGigE0/0/0/4
+      Route metric is 0
+      Label: REDACTED
+      Tunnel ID: None
+      Binding Label: None
+      Extended communities count: 0
+      NHID: 0x0 (Ref: 0)
+  Route version is 0x1 (1)
+  No local label
+  IP Precedence: Not Set
+  QoS Group ID: Not Set
+  Flow-tag: Not Set
+  Fwd-class: Not Set
+  Route Priority: RIB_PRIORITY_CONNECTED (4) SVD Type RIB_SVD_TYPE_LOCAL
+  Download Priority 0, Download Version 10
+  Redist Advertisers:
+    6 (protoid=6, clientid=41)
+      Extended communities count: 0

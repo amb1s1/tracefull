@@ -1,0 +1,19 @@
+[
+  {
+    "prefix": "2001:db8:9::22/127",
+    "protocol": "connected",
+    "context": "default",
+    "selected": true,
+    "installed": null,
+    "next_hops": [
+      {
+        "address": "",
+        "interface": "FourHundredGigE0/0/0/4",
+        "active": true,
+        "installed": null,
+        "evidence": "line:9"
+      }
+    ],
+    "evidence": "line:5"
+  }
+]
