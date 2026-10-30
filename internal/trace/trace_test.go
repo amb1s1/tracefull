@@ -55,3 +55,25 @@ func TestUnresolvedDestinationIdentity(t *testing.T) {
 		t.Fatal("hostname-only row cannot prove no destination response")
 	}
 }
+
+func TestAddressZoneControls(t *testing.T) {
+	// netip accepts zones containing controls; normalization must reject them in
+	// aggregate hops, individual flows and source/destination identity alike.
+	h := NewHop(1, "line:1")
+	h.AddAddress("fe80::1%en0")
+	for _, change := range []func(*Trace){
+		func(v *Trace) { v.Hops[0].Addresses = []string{"::%\x1b"} },
+		func(v *Trace) { v.Paths = []Path{{Hops: []Hop{{Addresses: []string{"fe80::1%\n"}}}}} },
+		func(v *Trace) { v.DestAddr = "::1%\x00" },
+		func(v *Trace) { v.SourceAddr = "::1%\r" },
+	} {
+		v := Trace{Hops: []Hop{h}}
+		change(&v)
+		if _, err := Finish(v); err == nil {
+			t.Fatal("control zone accepted")
+		}
+	}
+	if _, err := Finish(Trace{Hops: []Hop{h}}); err != nil {
+		t.Fatal("safe interface zone rejected", err)
+	}
+}

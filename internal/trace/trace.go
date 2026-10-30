@@ -6,6 +6,8 @@ import (
 	"math"
 	"net/netip"
 	"sort"
+	"strings"
+	"unicode"
 )
 
 type Probe struct {
@@ -109,6 +111,9 @@ func (h *Hop) Samples(rtts []float64, lost int) {
 	h.Stdev = Ptr(math.Sqrt(variance / float64(len(rtts))))
 }
 func Finish(t Trace) (Trace, error) {
+	if err := addressControls(t); err != nil {
+		return t, err
+	}
 	if len(t.Hops) == 0 {
 		return t, fmt.Errorf("no usable hops")
 	}
@@ -162,4 +167,25 @@ func Finish(t Trace) (Trace, error) {
 		t.Reached = Ptr(false)
 	}
 	return t, nil
+}
+
+// netip permits arbitrary zone strings, including control characters. Keep those
+// bytes in raw evidence rather than accepting them as normalized IP identity.
+func addressControls(t Trace) error {
+	values := []string{t.DestAddr, t.SourceAddr}
+	add := func(hops []Hop) {
+		for _, h := range hops {
+			values = append(values, h.Addresses...)
+		}
+	}
+	add(t.Hops)
+	for _, p := range t.Paths {
+		add(p.Hops)
+	}
+	for _, s := range values {
+		if strings.ContainsFunc(s, unicode.IsControl) {
+			return fmt.Errorf("control character in IP address")
+		}
+	}
+	return nil
 }
