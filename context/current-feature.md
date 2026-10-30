@@ -2,7 +2,9 @@
 
 ## Active slice — explicit management VRF
 
-Ready for review on `codex/mgmt-vrf`. The user requested continuation after a real
+Workflow at PR handoff: Ready for review on `codex/mgmt-vrf`.
+[PR #4](https://github.com/amb1s1/tracefull/pull/4) tracks CI and integration.
+The user requested continuation after a real
 Cumulus collection completed with 14 successful commands and nine interfaces.
 Its matched management address had master `mgmt`, while the default-context
 lookup selected a fabric route. Raw captures remain private. PR #3 is merged as
@@ -55,8 +57,10 @@ The actual native Cumulus CLI completed six read-only commands on October 30,
 selected only eth0, and retained verified hashes for all 12 output streams.
 No configuration changes or probes occurred. This validates that device/build
 and command set, not other distributions, forwarding health or historical paths.
-Raw evidence remains private. New-feature CI and merge are pending; no release
-or deployment has occurred.
+Raw evidence remains private. Driver and pipeline commits are `5a6d600` and
+`8571b91`. PR #4 is authoritative for subsequent CI and merge status. No release
+or deployment is included. Full v0.2 remains incomplete because of the platform
+and format gaps recorded below.
 
 ## Status and acceptance
 
