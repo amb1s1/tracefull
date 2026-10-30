@@ -192,12 +192,12 @@ func counters(lines []string, f *driver.Facts) error {
 }
 func route(lines []string, f *driver.Facts) error {
 	r := driver.Route{Context: "default", NextHops: []driver.NextHop{}}
-	yes := true
+	yes, noRoute := true, false
 	for i, l := range lines {
 		line := strings.TrimSpace(l)
 		if line == "% Network not in table" {
-			f.Notes = append(f.Notes, "No matching route was returned in the requested default context.")
-			return nil
+			noRoute = true
+			continue
 		}
 		if prefix, ok := strings.CutPrefix(line, "Routing entry for "); ok {
 			if r.Prefix != "" {
@@ -209,9 +209,15 @@ func route(lines []string, f *driver.Facts) error {
 			r.Prefix, r.Evidence = prefix, ref(i)
 		}
 		if m := protocolRE.FindStringSubmatch(line); m != nil {
+			if r.Protocol != "" {
+				return fmt.Errorf("multiple route protocols")
+			}
 			r.Protocol = m[1]
 		}
 		if strings.HasPrefix(line, "Installed ") {
+			if r.Selected != nil {
+				return fmt.Errorf("multiple route installation records")
+			}
 			r.Selected = &yes
 		}
 		if strings.HasPrefix(line, "directly connected, via ") {
@@ -222,14 +228,31 @@ func route(lines []string, f *driver.Facts) error {
 			r.NextHops = append(r.NextHops, driver.NextHop{Interface: iface, Active: &yes, Evidence: ref(i)})
 		}
 	}
+	if noRoute {
+		if r.Prefix != "" || r.Protocol != "" || r.Selected != nil || len(r.NextHops) > 0 {
+			return fmt.Errorf("conflicting route and no-route observations")
+		}
+		f.Notes = append(f.Notes, "No matching route was returned in the requested default context.")
+		return nil
+	}
 	if r.Prefix == "" {
 		return fmt.Errorf("missing route entry")
 	}
+	if isisProtocol.MatchString(r.Protocol) {
+		var err error
+		r.NextHops, err = isisNextHops(lines, r)
+		if err != nil {
+			return err
+		}
+		f.Routes = append(f.Routes, r)
+		f.Notes = append(f.Notes, "IS-IS next hops are later RIB observations; hardware installation and the saved trace's forwarding path remain unknown. MPLS labels and other attributes are retained only in raw evidence.")
+		return nil
+	}
 	if r.Protocol != "connected" || len(r.NextHops) == 0 {
-		return fmt.Errorf("unvalidated IOS XR route layout; only connected RIB entries are supported")
+		return fmt.Errorf("unvalidated IOS XR route layout; only connected and captured IS-IS RIB entries are supported")
 	}
 	f.Routes = append(f.Routes, r)
-	f.Notes = append(f.Notes, "The validated IOS XR route format is a connected RIB entry. Hardware installation and dynamic next-hop layouts remain unvalidated.")
+	f.Notes = append(f.Notes, "The validated IOS XR route format is a connected RIB entry. Hardware installation remains unknown.")
 	return nil
 }
 func lldp(lines []string, f *driver.Facts) error {

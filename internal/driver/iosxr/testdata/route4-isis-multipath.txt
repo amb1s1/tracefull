@@ -1,0 +1,33 @@
+
+
+Fri Oct 30 16:11:16.495 UTC
+
+Routing entry for 192.0.2.70/32
+  Known via "isis 1", distance 115, metric 80, labeled SR, type level-2
+  Installed Oct 28 18:02:42.934 for 1d22h
+  Routing Descriptor Blocks
+    198.51.100.4, from 192.0.2.70, via FourHundredGigE0/0/0/4
+      Route metric is 80
+      Label: 0x2e656 (190038)
+      Tunnel ID: None
+      Binding Label: None
+      Extended communities count: 0
+      Path id:2	      Path ref count:0
+      NHID: 0x2 (Ref: 5)
+    198.51.100.8, from 192.0.2.70, via FourHundredGigE0/0/0/5
+      Route metric is 80
+      Label: 0x2e656 (190038)
+      Tunnel ID: None
+      Binding Label: None
+      Extended communities count: 0
+      Path id:1	      Path ref count:0
+      NHID: 0x1 (Ref: 5)
+  Route version is 0x3 (3)
+  Local Label: 0x2e656 (190038)
+  IP Precedence: Not Set
+  QoS Group ID: Not Set
+  Flow-tag: Not Set
+  Fwd-class: Not Set
+  Route Priority: RIB_PRIORITY_NON_RECURSIVE_MEDIUM (9) SVD Type RIB_SVD_TYPE_LOCAL
+  Download Priority 1, Download Version 18
+  No advertising protos.

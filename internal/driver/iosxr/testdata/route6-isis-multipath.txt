@@ -1,0 +1,33 @@
+
+
+Fri Oct 30 16:11:08.329 UTC
+
+Routing entry for 2001:db8:30::32/127
+  Known via "isis 1", distance 115, metric 105, type level-2
+  Installed Oct 29 18:44:06.437 for 21:27:01
+  Routing Descriptor Blocks
+    fe80::1, from 2001:db8:30::33, via FourHundredGigE0/0/0/4
+      Route metric is 105
+      Label: None
+      Tunnel ID: None
+      Binding Label: None
+      Extended communities count: 0
+      Path id:2	      Path ref count:0
+      NHID: 0x20003 (Ref: 5)
+    fe80::2, from 2001:db8:30::33, via FourHundredGigE0/0/0/5
+      Route metric is 105
+      Label: None
+      Tunnel ID: None
+      Binding Label: None
+      Extended communities count: 0
+      Path id:1	      Path ref count:0
+      NHID: 0x20002 (Ref: 5)
+  Route version is 0x2 (2)
+  No local label
+  IP Precedence: Not Set
+  QoS Group ID: Not Set
+  Flow-tag: Not Set
+  Fwd-class: Not Set
+  Route Priority: RIB_PRIORITY_NON_RECURSIVE_LOW (11) SVD Type RIB_SVD_TYPE_LOCAL
+  Download Priority 2, Download Version 23
+  No advertising protos.
