@@ -2,7 +2,9 @@ package collect
 
 import (
 	"context"
+	"net"
 	"net/netip"
+	"strconv"
 	"strings"
 	"sync"
 
@@ -15,13 +17,7 @@ func serializeHosts(factory Factory) Factory {
 	var mu sync.Mutex
 	gates := map[string]chan struct{}{}
 	return func(ctx context.Context, dp DevicePlan, p device.Policy) (device.Session, error) {
-		key := strings.ToLower(dp.Device.Address)
-		if prefix, e := netip.ParsePrefix(key); e == nil {
-			key = prefix.Addr().Unmap().String()
-		}
-		if addr, e := netip.ParseAddr(key); e == nil {
-			key = addr.Unmap().String()
-		}
+		key := endpointKey(dp.Device.Address)
 		mu.Lock()
 		gate := gates[key]
 		if gate == nil {
@@ -48,6 +44,28 @@ func serializeHosts(factory Factory) Factory {
 		}
 		return &hostSession{Session: session, release: func() { <-gate }}, nil
 	}
+}
+
+func endpointKey(address string) string {
+	if prefix, err := netip.ParsePrefix(address); err == nil {
+		address = prefix.Addr().String()
+	}
+	host, port, err := net.SplitHostPort(address)
+	if err != nil {
+		host, port = address, "22"
+	}
+	if addr, err := netip.ParseAddr(host); err == nil {
+		// Preserve case-sensitive IPv6 interface zones while normalizing the IP.
+		host = addr.Unmap().String()
+	} else {
+		host = strings.ToLower(host)
+	}
+	if port == "ssh" {
+		port = "22"
+	} else if n, err := strconv.ParseUint(port, 10, 16); err == nil {
+		port = strconv.FormatUint(n, 10)
+	}
+	return net.JoinHostPort(host, port)
 }
 
 type hostSession struct {
