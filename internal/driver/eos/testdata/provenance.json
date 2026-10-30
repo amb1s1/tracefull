@@ -81,6 +81,14 @@
       "started_unix": 1793318890.8952541,
       "ended_unix": 1793318892.424345,
       "excerpt": false
+    },
+    {
+      "file": "cpu.json",
+      "source_stdout_sha256": "eb2859b0ea48f074eb8d3ecf343b1c117bddb71b00407aac4cda1b162893b85c",
+      "source_command": "show processes top once | json",
+      "started_unix": 1793319872.763082,
+      "ended_unix": 1793319874.778591,
+      "excerpt": true
     }
   ]
 }

@@ -39,7 +39,11 @@ func (d Driver) Plan(groups []string, p driver.Params) ([]driver.Command, error)
 		if !wanted[g] {
 			continue
 		}
-		if g == "cpu" || g == "reverse" {
+		if g == "cpu" {
+			out = append(out, driver.Planned("cpu", g, "show processes top once | json"))
+			continue
+		}
+		if g == "reverse" {
 			out = append(out, driver.Unavailable(g, false))
 			continue
 		}
@@ -77,7 +81,7 @@ func (Driver) Validate(cmd string, p driver.Params) error {
 		return fmt.Errorf("unsupported EOS routing context")
 	}
 	switch cmd {
-	case "show version | json", "show ip interface | json", "show ipv6 interface | json", "show lldp neighbors detail | json":
+	case "show processes top once | json", "show version | json", "show ip interface | json", "show ipv6 interface | json", "show lldp neighbors detail | json":
 		return nil
 	}
 	if v, ok := strings.CutPrefix(cmd, "show interfaces "); ok {

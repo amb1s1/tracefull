@@ -77,6 +77,7 @@ type Optical struct {
 	Evidence           string   `json:"evidence"`
 }
 type CPU struct {
+	Utilization   *float64 `json:"utilization_pct"`
 	Utilization1  *float64 `json:"utilization_1_pct"`
 	Utilization5  *float64 `json:"utilization_5_pct"`
 	Utilization15 *float64 `json:"utilization_15_pct"`

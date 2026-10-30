@@ -520,6 +520,18 @@
         },
         "evidence": {
           "type": "string"
+        },
+        "utilization_pct": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            {
+              "type": "null"
+            }
+          ]
         }
       },
       "required": [
@@ -529,7 +541,8 @@
         "load_1",
         "load_5",
         "load_15",
-        "evidence"
+        "evidence",
+        "utilization_pct"
       ],
       "additionalProperties": false
     },

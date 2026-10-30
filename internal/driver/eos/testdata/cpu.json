@@ -1,0 +1,24 @@
+{
+  "timeInfo": {
+    "currentTime": 1793319874.3837988,
+    "upTime": 16287805.54,
+    "users": 0,
+    "loadAvg": [
+      0.73,
+      0.65,
+      0.6
+    ]
+  },
+  "cpuInfo": {
+    "%Cpu(s)": {
+      "user": 1.6,
+      "system": 1.6,
+      "nice": 0.0,
+      "idle": 96.9,
+      "ioWait": 0.0,
+      "hwIrq": 0.0,
+      "swIrq": 0.0,
+      "stolen": 0.0
+    }
+  }
+}

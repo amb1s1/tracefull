@@ -2,6 +2,7 @@ package eos
 
 import (
 	"encoding/json"
+	"math"
 	"os"
 	"path/filepath"
 	"reflect"
@@ -20,7 +21,7 @@ func fixture(t testing.TB, name string) []byte {
 	return b
 }
 
-var captures = map[string]string{"version": "version-json", "addresses4": "addresses4", "addresses6": "addresses6", "route": "route6", "lldp": "lldp", "counters-Ethernet49": "counters-uplink", "counters-Vlan2602": "counters-vlan", "optics-Ethernet49": "optics-uplink", "optics-Ethernet1": "optics"}
+var captures = map[string]string{"cpu": "cpu", "version": "version-json", "addresses4": "addresses4", "addresses6": "addresses6", "route": "route6", "lldp": "lldp", "counters-Ethernet49": "counters-uplink", "counters-Vlan2602": "counters-vlan", "optics-Ethernet49": "optics-uplink", "optics-Ethernet1": "optics"}
 
 func TestCaptures(t *testing.T) {
 	d := Driver{}
@@ -33,6 +34,10 @@ func TestCaptures(t *testing.T) {
 			t.Fatal(e)
 		}
 		switch name {
+		case "cpu":
+			if f.CPU.Utilization1 != nil || math.Abs(*f.CPU.Utilization-3.1) > 1e-9 || *f.CPU.Load1 != 0.73 || *f.CPU.Load5 != 0.65 || *f.CPU.Load15 != 0.6 {
+				t.Fatal(f.CPU)
+			}
 		case "version":
 			if f.Version.Version != "4.33.4M" || *f.UptimeSeconds != 16286686.67 {
 				t.Fatal(f)
@@ -170,5 +175,17 @@ func TestRouteGolden(t *testing.T) {
 	}
 	if !reflect.DeepEqual(a, b) {
 		t.Fatalf("route facts differ from reviewed golden:\n%s", got)
+	}
+}
+
+func TestCPUUnknownAndMalformed(t *testing.T) {
+	for _, data := range []string{`{"cpuInfo":{"%Cpu(s)":{"idle":101}}}`, `{"cpuInfo":{"%Cpu(s)":{"idle":-1}}}`, `{"cpuInfo":{},"timeInfo":{"loadAvg":[1,2]}}`, `{"cpuInfo":{},"timeInfo":{"loadAvg":[1,-1,3]}}`, `{"cpuInfo":[]}`} {
+		if _, err := (Driver{}).Parse("cpu", []byte(data)); err == nil {
+			t.Fatal(data)
+		}
+	}
+	f, err := (Driver{}).Parse("cpu", []byte(`{"cpuInfo":{}}`))
+	if err != nil || f.CPU.Utilization != nil || f.CPU.Load1 != nil {
+		t.Fatal(f, err)
 	}
 }

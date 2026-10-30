@@ -47,7 +47,7 @@ func TestPlatformCapturePipelines(t *testing.T) {
 		files                                   map[string]string
 	}{
 		{"arista-eos", "eos", "2001:db8:3::a", "2001:db8:4::f", "Vlan2602", map[string]string{
-			"show ip interface | json": "addresses4.json", "show ipv6 interface | json": "addresses6.json", "show ipv6 route 2001:db8:4::f | json": "route6.json", "show version | json": "version-json.json", "show interfaces Vlan2602 | json": "counters-vlan.json", "show lldp neighbors detail | json": "lldp.json",
+			"show processes top once | json": "cpu.json", "show ip interface | json": "addresses4.json", "show ipv6 interface | json": "addresses6.json", "show ipv6 route 2001:db8:4::f | json": "route6.json", "show version | json": "version-json.json", "show interfaces Vlan2602 | json": "counters-vlan.json", "show lldp neighbors detail | json": "lldp.json",
 		}},
 		{"junos", "junos", "192.0.2.4", "192.0.2.5", "et-0/0/0", map[string]string{
 			"show interfaces terse | display json": "addresses.json", "show route table inet.0 192.0.2.5 detail | display json": "route4-connected.json", "show version | display json": "version-json.json", "show system uptime | display json": "uptime.json", "show chassis routing-engine | display json": "cpu.json", "show interfaces et-0/0/0 extensive | display json": "counters-physical.json", "show interfaces et-0/0/0.0 extensive | display json": "counters-logical.json", "show interfaces diagnostics optics et-0/0/0 | display json": "optics.json", "show lldp neighbors | display json": "lldp.json",

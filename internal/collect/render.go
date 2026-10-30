@@ -118,6 +118,9 @@ func Render(w io.Writer, r Report, format string) error {
 			if f.UptimeSeconds != nil {
 				fmt.Fprintf(&b, "  Uptime: %s seconds\n", report.Number(f.UptimeSeconds))
 			}
+			if f.CPU != nil && f.CPU.Utilization != nil {
+				fmt.Fprintf(&b, "  CPU reported utilization (window unknown): %s%%\n", report.Number(f.CPU.Utilization))
+			}
 			if f.CPU != nil && (f.CPU.Utilization1 != nil || f.CPU.Utilization5 != nil || f.CPU.Utilization15 != nil) {
 				fmt.Fprintf(&b, "  CPU utilization (1/5/15m): %s%% / %s%% / %s%%\n", report.Number(f.CPU.Utilization1), report.Number(f.CPU.Utilization5), report.Number(f.CPU.Utilization15))
 			}

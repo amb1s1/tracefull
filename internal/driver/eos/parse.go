@@ -21,6 +21,8 @@ func (Driver) Parse(name string, data []byte) (driver.Facts, error) {
 	}
 	var err error
 	switch {
+	case name == "cpu":
+		err = cpu(data, &f)
 	case name == "version":
 		err = version(data, &f)
 	case name == "route":
@@ -275,5 +277,41 @@ func lldp(data []byte, f *driver.Facts) error {
 			f.Neighbors = append(f.Neighbors, n)
 		}
 	}
+	return nil
+}
+
+func cpu(data []byte, f *driver.Facts) error {
+	var doc struct {
+		CPUInfo  map[string]struct{ Idle *float64 }
+		TimeInfo struct{ LoadAvg []float64 }
+	}
+	if err := json.Unmarshal(data, &doc); err != nil {
+		return err
+	}
+	if doc.CPUInfo == nil {
+		return fmt.Errorf("missing CPU information")
+	}
+	c := &driver.CPU{Evidence: "json:/cpuInfo"}
+	if idle := doc.CPUInfo["%Cpu(s)"].Idle; idle != nil {
+		if *idle < 0 || *idle > 100 {
+			return fmt.Errorf("invalid CPU idle percent")
+		}
+		value := 100 - *idle
+		c.Utilization = &value
+	}
+	if len(doc.TimeInfo.LoadAvg) > 0 {
+		if len(doc.TimeInfo.LoadAvg) != 3 {
+			return fmt.Errorf("expected three load averages")
+		}
+		for _, v := range doc.TimeInfo.LoadAvg {
+			if v < 0 {
+				return fmt.Errorf("negative CPU load")
+			}
+		}
+		c.Load1, c.Load5, c.Load15 = &doc.TimeInfo.LoadAvg[0], &doc.TimeInfo.LoadAvg[1], &doc.TimeInfo.LoadAvg[2]
+		c.Evidence = "file"
+	}
+	f.CPU = c
+	f.Notes = append(f.Notes, "Reported CPU utilization is 100 minus idle; its sampling interval is unspecified and is not assigned to a 1/5/15-minute window. Load averages are separate observations.")
 	return nil
 }
