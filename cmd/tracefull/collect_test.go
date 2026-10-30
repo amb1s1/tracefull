@@ -16,6 +16,7 @@ func TestCollectExecutable(t *testing.T) {
 	if out, err := exec.Command("go", "build", "-o", bin, ".").CombinedOutput(); err != nil {
 		t.Fatalf("%v %s", err, out)
 	}
+	t.Run("management", func(t *testing.T) { testManagementExecutable(t, bin) })
 	t.Run("platforms", func(t *testing.T) { testPlatformExecutables(t, bin) })
 	fixture, err := filepath.Abs("../../internal/driver/cumulus/testdata")
 	if err != nil {

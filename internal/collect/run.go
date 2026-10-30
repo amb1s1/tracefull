@@ -346,7 +346,7 @@ func evaluate(p Prepared, devices []DeviceResult) []Finding {
 					continue
 				}
 				found = append(found, a.Address)
-				if a.Master != "" {
+				if a.Master != "" && (a.RoutingContext == nil || *a.RoutingContext != p.Plan.Context) {
 					out = append(out, finding("interface-context", d.Name, "Matched address "+a.Address+" belongs to "+a.Interface+" with master "+a.Master+"; requested routing context is "+p.Plan.Context+". Do not infer the trace's routing context from this lookup.", []string{c.Stdout.Path + "#" + a.Evidence}))
 				}
 			}

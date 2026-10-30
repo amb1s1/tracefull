@@ -2,7 +2,7 @@
 
 ## Active slice — explicit management VRF
 
-In progress on `codex/mgmt-vrf`. The user requested continuation after a real
+Ready for review on `codex/mgmt-vrf`. The user requested continuation after a real
 Cumulus collection completed with 14 successful commands and nine interfaces.
 Its matched management address had master `mgmt`, while the default-context
 lookup selected a fabric route. Raw captures remain private. PR #3 is merged as
@@ -28,25 +28,35 @@ Scope and acceptance:
 Implementation slices: correct existing unknown-context handling and ignore
 private collection directories; validate new captures and implement typed context
 handling; connect explicit management planning to collection and reporting; run
-checks and review. A four-command bounded read-only capture plan was prepared
-outside Git. Authorization for those additional VRF-specific reads is pending.
-Independent offline work continues using the existing real captures. The route
-backend decision remains open until the management lookup outputs are available.
+checks and review. The user granted standing read-only device authorization.
+Bounded verified-host reads on October 30 (UTC) captured detailed addresses, FRR
+management IPv6 and IPv4 lookups, and two kernel lookup formats. FRR returned an
+explicit management context, so it remains the sole route backend. No fallback
+or probe was added. Raw captures and identifying maps remain outside Git.
 
-The independent correction slice is Ready for review: plain Cumulus/Linux-FRR
-address captures no longer label master interfaces or records missing flags as
-default; route-driven interface discovery requires the requested context; hidden
-collection directories are ignored by Git. Existing captured VRF-device records
-reproduced the incorrect default attribution before the fix. No JSON fields or
-versions changed, and management command execution remains unavailable.
+The independent uncertainty corrections are committed as `a0ae2f5` and `dab6db4`.
+Management implementation adds detailed typed context attribution and exact
+management command policies for Cumulus/Linux-FRR. A local IPv6 route selects
+only eth0 in the capture replay. Unknown/mismatched FRR context fails parsing;
+missing or conflicting interface metadata remains null. Existing schema and
+default command shapes are unchanged. Unsupported contexts remain rejected.
 
-Local verification passed: `make check`, `make scan cross`, actual CLI replay and
-two 30-second parser fuzz runs (Cumulus 1,259,955 executions; Linux/FRR 2,119,386).
-Coverage is 92.6% parsers, 99.4% verdicts and 92.5% drivers. The scanner found no
-reachable/imported-package vulnerabilities and one unused required-module
-advisory. Cross-builds do not establish runtime support. CLI replay confirms that
-VRF-device context stays null and `--vrf mgmt --dry-run` still fails before any
-device execution. No new SSH, CI, push, merge or publication occurred in this slice.
+Local validation passed: `make check` (tests, CLI replay, schema, formatting, vet,
+race, coverage, staticcheck, golangci-lint, docs and build), `make scan cross`, and
+two 30-second fuzz runs (676,059 Cumulus executions; 1,025,574 Linux/FRR).
+Coverage: parsers 92.6%, verdicts 99.4%, drivers 92.8%. No reachable or
+imported-package vulnerabilities; one unused required-module advisory remains.
+Cross-builds cover Linux/macOS amd64/arm64 without claiming runtime verification.
+Review covered context attribution, exact command policies, malformed output,
+no-fallback behavior, evidence privacy, discovery and schema compatibility.
+
+The actual native Cumulus CLI completed six read-only commands on October 30,
+2026, 13:52:24–13:52:32 UTC. It reported the explicit management local IPv6 /128,
+selected only eth0, and retained verified hashes for all 12 output streams.
+No configuration changes or probes occurred. This validates that device/build
+and command set, not other distributions, forwarding health or historical paths.
+Raw evidence remains private. New-feature CI and merge are pending; no release
+or deployment has occurred.
 
 ## Status and acceptance
 
@@ -105,7 +115,8 @@ schema/version remains unchanged. The collection envelope has its own schema.
 Selected-interface counters use the captured whole-link JSON format. The later
 user-run native CLI collection also completed nine per-interface reads on the
 Cumulus validation switch. IPv4 FRR command
-planning is tested; the captured FRR route output is IPv6. Nondefault VRFs, Cumulus optics and reverse traces remain unavailable. The three
+planning is tested; management captures now cover IPv4 and IPv6 output. Other
+nondefault VRFs, Cumulus optics and reverse traces remain unavailable. The three
 new platform slices and remaining gaps are recorded below. Do not
 present this slice as full v0.2 support.
 
