@@ -1,0 +1,66 @@
+[
+  {
+    "interface": "swp49",
+    "lane": "1",
+    "temperature_celsius": 53.96,
+    "rx_power_dbm": 2.36,
+    "tx_power_dbm": 1.35,
+    "evidence": "file"
+  },
+  {
+    "interface": "swp49",
+    "lane": "2",
+    "temperature_celsius": 53.96,
+    "rx_power_dbm": 2.22,
+    "tx_power_dbm": 1.28,
+    "evidence": "file"
+  },
+  {
+    "interface": "swp49",
+    "lane": "3",
+    "temperature_celsius": 53.96,
+    "rx_power_dbm": 2.08,
+    "tx_power_dbm": 2.21,
+    "evidence": "file"
+  },
+  {
+    "interface": "swp49",
+    "lane": "4",
+    "temperature_celsius": 53.96,
+    "rx_power_dbm": 2.81,
+    "tx_power_dbm": 2.35,
+    "evidence": "file"
+  },
+  {
+    "interface": "swp49",
+    "lane": "5",
+    "temperature_celsius": 53.96,
+    "rx_power_dbm": 2.45,
+    "tx_power_dbm": 1.92,
+    "evidence": "file"
+  },
+  {
+    "interface": "swp49",
+    "lane": "6",
+    "temperature_celsius": 53.96,
+    "rx_power_dbm": 2.53,
+    "tx_power_dbm": 1.46,
+    "evidence": "file"
+  },
+  {
+    "interface": "swp49",
+    "lane": "7",
+    "temperature_celsius": 53.96,
+    "rx_power_dbm": 1.6,
+    "tx_power_dbm": 0.8,
+    "evidence": "file"
+  },
+  {
+    "interface": "swp49",
+    "lane": "8",
+    "temperature_celsius": 53.96,
+    "rx_power_dbm": 2.18,
+    "tx_power_dbm": 1.09,
+    "evidence": "file"
+  }
+]

@@ -37,6 +37,7 @@ type fakeSession struct {
 	commands        []string
 	fail, malformed string
 	block           bool
+	started         chan struct{}
 	closed          bool
 }
 
@@ -46,6 +47,9 @@ func (s *fakeSession) Run(ctx context.Context, cmd string) (device.Result, error
 	}
 	s.commands = append(s.commands, cmd)
 	if s.block {
+		if s.started != nil {
+			close(s.started)
+		}
 		<-ctx.Done()
 		return device.Result{Result: process.Result{Status: "cancelled", Error: ctx.Err().Error()}}, nil
 	}
@@ -63,6 +67,8 @@ func (s *fakeSession) Run(ctx context.Context, cmd string) (device.Result, error
 	}
 	var file string
 	switch {
+	case strings.Contains(cmd, "ethtool -m "):
+		file = "optics-osfp.txt"
 	case cmd == "ip -j -d address show":
 		file = "addresses-detailed.json"
 	case strings.Contains(cmd, "route vrf mgmt"):
@@ -238,7 +244,9 @@ func TestPartialAndNoResults(t *testing.T) {
 					t.Fatal("failed address read asserted ownership", r.Findings)
 				}
 			} else if mode == "cancel" {
-				if !errors.Is(err, context.DeadlineExceeded) || r.Status != "interrupted" || !s.closed {
+				// The deadline can expire before acquisition; running-session cleanup
+				// is covered separately with an explicit command-start barrier.
+				if !errors.Is(err, context.DeadlineExceeded) || r.Status != "interrupted" || (s.policy != nil && !s.closed) {
 					t.Fatal(r.Status, err)
 				}
 			} else if !errors.Is(err, ErrNoResults) {

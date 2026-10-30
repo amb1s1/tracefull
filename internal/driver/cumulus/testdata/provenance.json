@@ -83,6 +83,14 @@
       "excerpt": false,
       "source_command": "sudo -n vtysh -c 'show ip route vrf mgmt 127.0.0.1 json'",
       "captured_utc": "2026-10-30T13:47:18.704371+00:00"
+    },
+    {
+      "file": "optics-osfp.txt",
+      "source_stdout_sha256": "293f5a810bf98a5a5059bb3e3b423d46e6913f867e78c44fa4ec599d2be924f2",
+      "excerpt": false,
+      "source_command": "sudo -n ethtool -m swp49",
+      "captured_utc": "2026-10-30T14:27:46.220959+00:00",
+      "scrubbing": "Module serial anonymized; readings, lane IDs and line order retained."
     }
   ]
 }

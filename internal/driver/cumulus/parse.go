@@ -31,6 +31,8 @@ func (Driver) Parse(name string, data []byte) (driver.Facts, error) {
 				}
 			}
 		}
+	case strings.HasPrefix(name, "optics-"):
+		err = parseOptics(strings.TrimPrefix(name, "optics-"), data, &f)
 	case strings.HasPrefix(name, "counters-"):
 		err = parseCounters(data, &f)
 	case name == "lldp":

@@ -80,7 +80,7 @@ func (d Driver) Plan(groups []string, p driver.Params) ([]driver.Command, error)
 		if !wanted[g] {
 			continue
 		}
-		if g == "optics" || g == "reverse" {
+		if g == "reverse" {
 			commands = append(commands, driver.Command{Name: g, Group: g, Status: "unsupported", Reason: "no capture-validated implementation"})
 			continue
 		}
@@ -91,6 +91,11 @@ func (d Driver) Plan(groups []string, p driver.Params) ([]driver.Command, error)
 		if g == "counters" {
 			for _, iface := range interfaces {
 				add("counters-"+iface, g, "ip -j -s link show dev "+iface)
+			}
+		}
+		if g == "optics" {
+			for _, iface := range interfaces {
+				add("optics-"+iface, g, sudo(p)+"ethtool -m "+iface)
 			}
 		}
 		if g == "lldp" {
@@ -130,6 +135,9 @@ func (Driver) Validate(command string, p driver.Params) error {
 		return nil
 	}
 	if iface, ok := strings.CutPrefix(command, "ip -j -s link show dev "); ok && ifaceName.MatchString(iface) {
+		return nil
+	}
+	if iface, ok := strings.CutPrefix(command, sudo(p)+"ethtool -m "); ok && ifaceName.MatchString(iface) {
 		return nil
 	}
 	for _, family := range []string{"ip", "ipv6"} {

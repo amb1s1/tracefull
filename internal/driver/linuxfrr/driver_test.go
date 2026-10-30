@@ -113,6 +113,7 @@ func TestVersionFailuresAndBranding(t *testing.T) {
 	}
 }
 func FuzzParse(f *testing.F) {
+	f.Add("optics-swp49", capture(f, "optics-osfp.txt"))
 	f.Add("frr-version", capture(f, "frr-version.txt"))
 	f.Add("version", capture(f, "os-release.txt"))
 	f.Add("route", capture(f, "frr-route.json"))

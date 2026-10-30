@@ -1,6 +1,64 @@
 # Current feature — v0.2 device collection
 
-## Active slice — explicit management VRF
+## Active slice — Cumulus/Linux-FRR optics
+
+Workflow at handoff: Ready for review on `codex/cumulus-optics`. Continue v0.2 by implementing the existing
+optics group for the capture-validated Cumulus/Linux-FRR environment. The user
+has granted read-only device access; no active probes or configuration changes
+are in scope. PR #4 merged as `a1ffd69`; all pre/post-merge CI passed and the
+main checkout binary passed integrated checks.
+
+Acceptance and slices:
+
+- Capture bounded transceiver reads on the existing Cumulus target, preserve
+  private originals and commit scrubbed real fixtures with provenance.
+- Parse the observed module temperature and per-lane RX/TX dBm into the existing
+  optical facts. Missing/unavailable measurements stay null. Preserve evidence;
+  do not infer optic health, thresholds or unsupported module formats.
+- Add exact read-only command policy and per-discovered-interface planning with
+  the existing explicit sudo option. Keep failed/unsupported reads visible;
+  never retry with different privileges. Dry-run remains offline and deferred
+  until discovery resolves interfaces.
+- Verify parser failures, command injection rejection, pipeline/schema/CLI replay,
+  full local checks, fuzzing and a bounded native read-only CLI run. Review, commit,
+  CI and integrate under the existing authorization.
+
+The real OSFP revision 4.0 capture supplies eight channel power pairs and module
+temperature. Exact `ethtool -m INTERFACE` commands use the existing explicit sudo
+option. An eth0 read returned no module data and remains a failed observation.
+No schema fields or default collection groups change. Other platform gaps
+and reverse traces remain unresolved; native probing remains outside this scope.
+
+Local verification passed: `make check` (tests, actual CLI replay, schema,
+formatting, vet, race, coverage, staticcheck, golangci-lint, docs and build),
+`make scan cross`, and two 30-second driver fuzz runs (499,287 Cumulus executions;
+275,864 Linux/FRR). Coverage is 92.6% parsers, 99.4% verdicts and 93.2% drivers.
+The scanner found no reachable/imported-package vulnerabilities; one unused
+required-module advisory remains. Cross-builds are not runtime verification.
+Review covered units, unknowns, malformed/duplicate fields, exact command policy,
+interface attribution, raw failure retention, fixture privacy and unchanged schema.
+
+Native Cumulus CLI verification ran on October 30, 2026, 14:32:00–14:32:10 UTC.
+Explicit default-context discovery selected eth0 and eight switch ports. Ten
+commands succeeded; the eth0 module read failed and the report correctly remained
+partial. The eight OSFP modules yielded 64 lane records; all 22 stdout/stderr
+stream digests verified. This is later device evidence, not proof of the saved
+trace's path or optic health. No configuration changes or probes occurred.
+Private originals remain outside Git. Driver and pipeline commits are `6f5c0ad`
+and `783b0a5`. [PR #5](https://github.com/amb1s1/tracefull/pull/5) is authoritative
+for subsequent CI/integration status. No release or deployment is included.
+Full v0.2 retains the platform and format gaps below.
+
+CI exposed a timing-dependent assertion in the existing 10 ms collection deadline
+test: expiration before session acquisition correctly skipped the session, but the
+test still required a close. The assertion now requires cleanup only for acquired
+sessions. A command-start barrier separately verifies running cancellation closes
+the session, and an expired-context test verifies no session is acquired. No
+runtime deadline or cleanup behavior changed; checks remain enabled. The focused
+cancellation/deadline tests passed 100 repetitions under the race detector, and
+`make check` passed again after the correction.
+
+## Completed slice — explicit management VRF
 
 Workflow at PR handoff: Ready for review on `codex/mgmt-vrf`.
 [PR #4](https://github.com/amb1s1/tracefull/pull/4) tracks CI and integration.
@@ -103,7 +161,7 @@ is not Complete. Remaining platforms and reverse formats need real captures.
 The user selected default routing context unless an explicit VRF is supplied.
 Unvalidated contexts fail without fallback. A matched interface master is not the
 same as the requested lookup context. `--sudo` explicitly selects noninteractive
-sudo for FRR/LLDP; a denial never changes credentials or privileges.
+sudo for FRR/LLDP/optics; a denial never changes credentials or privileges.
 
 Owner sweep uses an address-only pass, closes those sessions, then collects unique
 owners with the same credentials. This bounds open connections while deciding
@@ -120,7 +178,8 @@ Selected-interface counters use the captured whole-link JSON format. The later
 user-run native CLI collection also completed nine per-interface reads on the
 Cumulus validation switch. IPv4 FRR command
 planning is tested; management captures now cover IPv4 and IPv6 output. Other
-nondefault VRFs, Cumulus optics and reverse traces remain unavailable. The three
+nondefault VRFs and reverse traces remain unavailable. Cumulus OSFP optics is
+covered by the active slice above. The three
 new platform slices and remaining gaps are recorded below. Do not
 present this slice as full v0.2 support.
 

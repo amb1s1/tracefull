@@ -30,3 +30,13 @@ is an IPv6 local /128 via eth0; `frr-route-mgmt4.json` is the IPv4 lookup of
 127.0.0.1 that returned an unreachable default route, not a successful forwarding
 path. CIDR keys and values use the existing consistent address mapping. The
 separate kernel lookups remain private corroboration; the driver uses FRR only.
+
+
+`optics-osfp.txt` is a complete October 30 UTC `sudo -n ethtool -m swp49`
+capture from an OSFP module reporting revision 4.0. Only its serial number is
+anonymized; channel IDs, temperature, dBm/mW readings, thresholds and line order
+are preserved. `optics.golden.json` pins the eight parsed lane records. The
+separate eth0 read failed with no module data; its raw failure remains private.
+Tests label missing/malformed fields and nonfinite power as synthetic mutations,
+not additional validated module formats. Module temperature is shared by lanes;
+thresholds and alarms remain raw evidence only.
