@@ -5,8 +5,9 @@ collecting attributed read-only evidence. **Active scope: saved-trace enrichment
 local-tool investigation and read-only device collection.**
 v0.1 and local-tool investigation are merged. The user authorized continuation
 into v0.2 device collection. Native probing remains design only. Collection
-sessions and Cumulus, Linux/FRR, Junos, EOS and IOS-XR drivers are implemented locally;
-remaining driver support requires real captures. Collection is not yet a completed milestone.
+sessions and Cumulus, Linux/FRR, Junos, EOS and IOS-XR drivers are implemented;
+[PR #3](https://github.com/amb1s1/tracefull/pull/3) records CI and integration.
+Remaining driver support requires real captures. Collection is not yet a completed milestone.
 
 ## Read only what the task needs
 

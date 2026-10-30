@@ -5,13 +5,16 @@
 Local review completed against merged investigation `54e646f`, covering command
 policy, session bounds, evidence attribution, partial results and parser
 uncertainty. Three reproduced defects were corrected with regression tests;
-results are recorded below. Integration and full-milestone gaps remain pending.
+results are recorded below. Collection delivery is tracked in
+[PR #3](https://github.com/amb1s1/tracefull/pull/3); its checks and merge record
+are authoritative for integration status. Full-milestone capture gaps remain open.
 
-Multi-platform slice Ready for review on `codex/v0.2-collect`. v0.1 and investigation are merged; the user
+Workflow at PR handoff: Ready for review on `codex/v0.2-collect`.
+v0.1 and investigation are merged; the user
 explicitly authorized continuation into collection. No native probing is in scope.
 Full v0.2 requires native/wrapper sessions, capture-validated platform drivers,
 command policy, dry-run, evidence, owner sweep, cross-device observations and a
-live view. Cumulus, Linux/FRR, Junos, EOS and IOS-XR slices are implemented locally; the full milestone
+live view. Cumulus, Linux/FRR, Junos, EOS and IOS-XR slices are implemented; the full milestone
 is not Complete. Remaining platforms and reverse formats need real captures.
 
 ## Implemented slices
@@ -95,10 +98,11 @@ The documented collection dry-run and schema commands passed with the built CLI.
 `make scan` found no reachable or imported-package vulnerabilities; one advisory
 remains in a required module outside imported packages. `make cross` compiled
 Linux/macOS on amd64/arm64; those cross-builds are not runtime verification.
-No additional device access, collection CI, push, merge or publication occurred.
-There are no unresolved findings from this local review; the capture gaps below
-still prevent full v0.2 completion. Status remains Ready for review pending
-integration. The next delivery step is pushing the branch and running CI.
+No additional device access or publication occurred during local review.
+There are no unresolved findings from that review; the capture gaps below still
+prevent full v0.2 completion. The reviewed branch was subsequently pushed and
+PR #3 opened for Linux/macOS runtime and quality checks before merge.
+The local review corrections are committed as `388ac35` and `4afbedd`.
 
 ### Implementation verification
 
@@ -108,13 +112,13 @@ partial results, owner ambiguity, evidence-write errors, schema conformance and
 actual CLI replay. Local terminal verification uses synthetic wrappers only.
 Driver coverage now has the same 90% gate as parsers and verdicts; the new parser
 has its own bounded fuzz target. Final check/fuzz/scan/cross results are recorded
-below when finished. CI has not run for this branch.
+below. Remote CI and integration results are attached to PR #3.
 
 Local session commits: `e675258`, `abee317`, `7c08f40`, `f4002c4`, `c632d70`.
 Cumulus/pipeline/UI slices passed local checks and are committed as `8933586`,
 `bb75759`, `7606280`, `5362948`, `f363773`, `cf57394` and `cd09c08`.
-No collection push, PR, merge, release or deployment has occurred. Full-milestone
-completion still needs additional platform captures. The user supplied and
+Collection is submitted in PR #3. No release or deployment is included.
+Full-milestone completion still needs additional platform captures. The user supplied and
 authorized Junos, EOS and IOS-XR targets. Strictly verified reads recorded Junos
 24.4R2-S5.3, EOS 4.33.4M and IOS-XR 25.4.2; raw captures remain private. IOS-XR
 is an explicitly requested additional driver, distinct from the planned IOS-XE.
@@ -526,9 +530,9 @@ through the full evidence pipeline and actual CLI replay. The remaining capture
 blockers are NX-OS, IOS-XE and RouterOS, plus the previously recorded missing
 formats and reverse probing. The user has no targets/captures for those platforms.
 
-## Final local verification and handoff
+## Pre-integration verification and handoff
 
-Ready for review on `codex/v0.2-collect`. The final Linux/FRR revision passed
+Local handoff state was Ready for review on `codex/v0.2-collect`. The final Linux/FRR revision passed
 `make check TOOLS_DIR=/tmp/tracefull-tools`: unit, regression, CLI, schema/golden,
 formatting, vet, race, staticcheck, golangci-lint, docs and build. Coverage is
 92.6% parsers, 99.4% verdicts and 92.5% drivers. All six parser fuzz targets passed
@@ -548,10 +552,11 @@ shared Cumulus fixtures retain their existing provenance. No raw private capture
 credentials or identifying maps were staged. IOS-XR whitespace normalization is
 explicitly documented and tested, rather than disabling whitespace checks.
 
-Collection CI has not run; no collection push, PR, merge, release or deployment
-occurred. The new CLI has not been exercised on production devices. Read-only
-capture observations are recorded separately from local implementation tests.
+At this pre-integration handoff, collection CI, push and merge had not occurred.
+The later local review corrections and PR #3 delivery supersede that handoff
+state. The new CLI has not been exercised on production devices; read-only
+capture observations remain separate from local implementation tests.
 Full v0.2 remains blocked on the unavailable platforms and recorded format gaps;
-do not advance to native probing or mark the milestone Complete. Exact next action:
-review the implemented collection slice on this local branch. Future platform
-work resumes when real captures or authorized targets are supplied.
+do not advance to native probing or mark the milestone Complete. Platform work
+resumes when real captures or authorized targets are supplied. No release or
+deployment is part of this delivery.
