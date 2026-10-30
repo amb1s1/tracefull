@@ -5,6 +5,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"strings"
 	"testing"
 
 	"github.com/amb1s1/tracefull/internal/collect"
@@ -36,7 +37,7 @@ exec /bin/cat "$CAPTURES/$file"
 				}
 			}
 			marker := filepath.Join(dir, "marker")
-			args := []string{"collect", "--from", "trace.txt", "--inventory", "inventory.yaml", "--collect", "optics", "--sudo", "--json", "--ssh-cmd", filepath.Join(dir, "replay") + " {address} {cmd}"}
+			args := []string{"collect", "--from", "trace.txt", "--inventory", "inventory.yaml", "--collect", "optics", "--sudo", "--ssh-cmd", filepath.Join(dir, "replay") + " {address} {cmd}"}
 			run := func(extra ...string) []byte {
 				c := exec.Command(bin, append(append([]string{}, args...), extra...)...)
 				c.Dir = dir
@@ -47,14 +48,14 @@ exec /bin/cat "$CAPTURES/$file"
 				}
 				return b
 			}
-			if !json.Valid(run("--dry-run")) {
+			if !json.Valid(run("--dry-run", "--json")) {
 				t.Fatal("invalid preview")
 			}
 			if _, err := os.Stat(marker); !os.IsNotExist(err) {
 				t.Fatal("preview executed wrapper")
 			}
 			var r collect.Report
-			if err := json.Unmarshal(run(), &r); err != nil {
+			if err := json.Unmarshal(run("--json"), &r); err != nil {
 				t.Fatal(err)
 			}
 			if r.Status != "partial" || len(r.Devices) != 1 {
@@ -72,6 +73,19 @@ exec /bin/cat "$CAPTURES/$file"
 			}
 			if rows != 64 || failed != 1 {
 				t.Fatal(rows, failed)
+			}
+			for _, format := range []string{"text", "markdown"} {
+				output := string(run("--format", format, "--no-live"))
+				for _, want := range []string{
+					"optics-eth0: failed",
+					"[stdout: device-000-command-002.stdout] [stderr: device-000-command-002.stderr]",
+					"| protocol: bgp | context: default",
+					"master: unknown; routing context: unknown",
+				} {
+					if !strings.Contains(output, want) {
+						t.Fatalf("%s: missing %q in %s", format, want, output)
+					}
+				}
 			}
 		})
 	}
