@@ -81,6 +81,14 @@
       "started_unix": 1793318835.483351,
       "ended_unix": 1793318841.1045198,
       "excerpt": false
+    },
+    {
+      "file": "route4-isis-detail.json",
+      "source_stdout_sha256": "d52fc43d8964529a23413b9d1b9802ffaf1b1f5bacb77e52b7e3fff6a7b8cd1b",
+      "source_command": "show route table inet.0 192.0.2.10 detail | display json",
+      "started_unix": 1793378699.078457,
+      "ended_unix": 1793378701.216151,
+      "excerpt": false
     }
   ]
 }

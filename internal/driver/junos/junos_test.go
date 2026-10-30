@@ -125,6 +125,7 @@ func TestPolicyAndFailures(t *testing.T) {
 	}
 }
 func FuzzParse(f *testing.F) {
+	f.Add("route", fixture(f, "route4-isis-detail"))
 	for name, file := range captures {
 		f.Add(name, fixture(f, file))
 	}

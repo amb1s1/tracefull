@@ -15,3 +15,12 @@ Empty route/optics responses are retained as observations, never manufactured
 success cases. Command exit zero does not establish a usable measurement. Tests
 label synthetic malformed/missing-field variants separately. Copyright notices
 in source version output are retained.
+
+`route4-isis-detail.json` is a complete detail lookup captured October 30, 2026,
+from the same target, with Junos 24.4R2-S5.3 rechecked privately. It preserves two
+next hops and the selection marker present on only one. Addresses and the local
+AS are mapped consistently within this fixture, separately from older captures.
+A bounded protocol-table read supplied the actual destination for the lookup;
+summary/table/version originals remain private. This RIB observation does not
+establish hardware installation or simultaneous multipath forwarding. No probes
+or configuration changes ran. Source time and digest are in `provenance.json`.

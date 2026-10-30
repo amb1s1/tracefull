@@ -1,8 +1,65 @@
 # Current feature — v0.2 device collection
 
-## Active slice — IOS-XR dynamic route observations
+## Active slice — Junos dynamic route validation
 
-Workflow at handoff: Ready for review on `codex/iosxr-dynamic-routes`.
+Workflow at handoff: Ready for review on `codex/junos-dynamic-routes`.
+The Junos parser has connected-route and empty IPv6 captures. Validate dynamic
+route observations using the previously authorized Junos target, without guessing
+next-hop layouts or treating RIB state as hardware installation.
+
+Acceptance and slices:
+
+- Take bounded read-only route/version observations under standing authorization,
+  with strict host keys, 25-second deadlines and 1 MiB per output stream. No probes
+  or changes; private originals and identifying maps stay outside Git.
+- Identify usable dynamic-route formats, scrub actual captures with provenance,
+  and fix only behavior demonstrated by those captures or associated failure tests.
+- Preserve active/unknown route and next-hop state, interface scope, evidence,
+  default context, schema and existing command policy. Unsupported observations
+  must not produce invented forwarding or ownership conclusions.
+- Verify route facts, failures, discovery, schema and actual CLI replay; run local
+  checks and bounded Junos fuzzing, review, commit, CI and integrate.
+
+Capture availability and output shape remain to be established. Other platform
+capture gaps and reverse probing remain outside this slice.
+
+Six authorized reads rechecked Junos 24.4R2-S5.3, two missing-route lookups,
+routing summaries, the default IPv4 IS-IS table and one targeted detail lookup.
+The real detail response contains two next hops but marks only one as selected.
+The complete scrubbed fixture preserves that distinction, its source hash and
+capture time. All 12 private output hashes verified; originals and address/AS
+maps remain outside Git. No probes or configuration changes occurred.
+
+The existing parser already decoded the real IS-IS facts. Regression mutations
+exposed malformed string/empty selection markers becoming active, duplicate
+markers becoming silently unknown, and unknown route tags becoming false.
+Route selection now accepts only the documented active/last-active tags, with
+missing/empty tags remaining unknown. A selected-next-hop marker must match the
+captured `data:[null]` shape; absent/empty marker lists remain unknown. Invalid or
+duplicate markers fail parsing and keep raw evidence. No schema, command policy,
+registration or default-context behavior changed. Route-driven discovery selects
+only the explicitly marked interface and its physical parent; hardware state
+remains null and forwarding comparisons stay withheld.
+
+Local validation passed: `make check` (unit/capture/schema tests, actual CLI replay
+in JSON/text/Markdown, formatting, vet, race, coverage, both linters, docs, build),
+the documented dry-run/schema commands, `make scan cross`, and 80,613 Junos fuzz
+executions in a 30-second budget. Coverage: parsers 92.6%, verdicts 99.4%, drivers
+93.7%. No reachable/imported-package vulnerabilities; one unused required-module
+advisory remains. Cross-builds are not runtime verification. The regressions failed
+before the fix and pass afterward. Review covered marker semantics, unknown state,
+interface discovery, provenance/privacy and unchanged schema/command boundaries.
+CI/integration are pending at this handoff; the branch's PR records their outcome.
+Real SSH capture validation and offline CLI replay are separate: the new CLI has
+not been run against this Junos device. Other dynamic formats remain unvalidated;
+full v0.2 still has the documented platform/reverse gaps. No release/deployment.
+
+
+## Completed slice — IOS-XR dynamic route observations
+
+Workflow: Complete. [PR #7](https://github.com/amb1s1/tracefull/pull/7) merged as
+`1d59f65`. All six pre-merge and three post-merge CI checks passed; integrated
+package tests, the rebuilt main binary and documented dry-run passed.
 The existing IOS-XR driver accepts only connected/no-route responses. Extend it
 only with real dynamic-route formats captured from the previously authorized
 IOS-XR validation target under the user's standing read-only permission.

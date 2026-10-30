@@ -179,9 +179,10 @@ func routes(root node, f *driver.Facts) error {
 				for ei, entry := range r.list("rt-entry") {
 					ref := fmt.Sprintf("json:/route-information/%d/route-table/%d/rt/%d/rt-entry/%d", gi, ti, ri, ei)
 					route := driver.Route{Prefix: prefix, Protocol: entry.value("protocol-name"), Context: context, NextHops: []driver.NextHop{}, Evidence: ref}
-					if tag := entry.value("active-tag"); tag != "" {
-						v := tag == "*" || tag == "+"
-						route.Selected = &v
+					var err error
+					route.Selected, err = routeActive(entry)
+					if err != nil {
+						return err
 					}
 					for ni, nh := range entry.list("nh") {
 						ip := nh.value("to")
@@ -191,9 +192,9 @@ func routes(root node, f *driver.Facts) error {
 							}
 						}
 						n := driver.NextHop{Address: ip, Interface: nh.value("via"), Evidence: fmt.Sprintf("%s/nh/%d", ref, ni)}
-						if len(nh.list("selected-next-hop")) == 1 {
-							yes := true
-							n.Active = &yes
+						n.Active, err = nextHopActive(nh)
+						if err != nil {
+							return err
 						}
 						route.NextHops = append(route.NextHops, n)
 					}

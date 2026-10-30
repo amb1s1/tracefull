@@ -1,0 +1,323 @@
+{
+  "route-information": [
+    {
+      "attributes": {
+        "xmlns": "http://xml.juniper.net/junos/24.4R0/junos-routing"
+      },
+      "route-table": [
+        {
+          "table-name": [
+            {
+              "data": "inet.0"
+            }
+          ],
+          "destination-count": [
+            {
+              "data": "86"
+            }
+          ],
+          "total-route-count": [
+            {
+              "data": "86"
+            }
+          ],
+          "active-route-count": [
+            {
+              "data": "86"
+            }
+          ],
+          "holddown-route-count": [
+            {
+              "data": "0"
+            }
+          ],
+          "hidden-route-count": [
+            {
+              "data": "0"
+            }
+          ],
+          "rt": [
+            {
+              "attributes": {
+                "junos:style": "detail"
+              },
+              "rt-destination": [
+                {
+                  "data": "192.0.2.10"
+                }
+              ],
+              "rt-prefix-length": [
+                {
+                  "data": "32"
+                }
+              ],
+              "rt-entry-count": [
+                {
+                  "data": "1",
+                  "attributes": {
+                    "junos:format": "1 entry"
+                  }
+                }
+              ],
+              "rt-announced-count": [
+                {
+                  "data": "1"
+                }
+              ],
+              "rt-state": [
+                {}
+              ],
+              "rt-entry": [
+                {
+                  "active-tag": [
+                    {
+                      "data": "*"
+                    }
+                  ],
+                  "current-active": [
+                    {
+                      "data": [
+                        null
+                      ]
+                    }
+                  ],
+                  "last-active": [
+                    {
+                      "data": [
+                        null
+                      ]
+                    }
+                  ],
+                  "protocol-name": [
+                    {
+                      "data": "IS-IS"
+                    }
+                  ],
+                  "preference": [
+                    {
+                      "data": "18"
+                    }
+                  ],
+                  "rt-isis-level": [
+                    {
+                      "data": "2"
+                    }
+                  ],
+                  "nhh": [
+                    {
+                      "attributes": {
+                        "junos:indent": "16"
+                      },
+                      "nh-type": [
+                        {
+                          "data": "Router"
+                        }
+                      ],
+                      "nh-index": [
+                        {
+                          "data": "0"
+                        }
+                      ],
+                      "nh-address": [
+                        {
+                          "data": "0xa59ad9c"
+                        }
+                      ],
+                      "nh-reference-count": [
+                        {
+                          "data": "81"
+                        }
+                      ],
+                      "nh-session-id": [
+                        {
+                          "data": "0"
+                        }
+                      ],
+                      "nh-kernel-id": [
+                        {
+                          "data": "0"
+                        }
+                      ]
+                    }
+                  ],
+                  "nh": [
+                    {
+                      "attributes": {
+                        "junos:indent": "16"
+                      },
+                      "nh-string": [
+                        {
+                          "data": "Next hop"
+                        }
+                      ],
+                      "to": [
+                        {
+                          "data": "198.51.100.97"
+                        }
+                      ],
+                      "via": [
+                        {
+                          "data": "et-0/0/0.0"
+                        }
+                      ],
+                      "selected-next-hop": [
+                        {
+                          "data": [
+                            null
+                          ]
+                        }
+                      ],
+                      "session": [
+                        {
+                          "data": "0"
+                        }
+                      ]
+                    },
+                    {
+                      "attributes": {
+                        "junos:indent": "16"
+                      },
+                      "nh-string": [
+                        {
+                          "data": "Next hop"
+                        }
+                      ],
+                      "to": [
+                        {
+                          "data": "198.51.100.99"
+                        }
+                      ],
+                      "via": [
+                        {
+                          "data": "et-0/1/0.0"
+                        }
+                      ],
+                      "session": [
+                        {
+                          "data": "0"
+                        }
+                      ]
+                    }
+                  ],
+                  "rt-entry-state": [
+                    {
+                      "data": "Active Int"
+                    }
+                  ],
+                  "local-as": [
+                    {
+                      "data": "64512"
+                    }
+                  ],
+                  "age": [
+                    {
+                      "data": "3:09:16",
+                      "attributes": {
+                        "junos:seconds": "11356"
+                      }
+                    }
+                  ],
+                  "metric": [
+                    {
+                      "data": "22255"
+                    }
+                  ],
+                  "validation-state": [
+                    {
+                      "data": "unverified"
+                    }
+                  ],
+                  "rt-orr": [
+                    {
+                      "data": "0"
+                    }
+                  ],
+                  "task-name": [
+                    {
+                      "data": "IS-IS"
+                    }
+                  ],
+                  "announce-bits": [
+                    {
+                      "data": "3"
+                    }
+                  ],
+                  "announce-tasks": [
+                    {
+                      "data": "0-KRT 1-RT 2-IS-IS "
+                    }
+                  ],
+                  "as-path": [
+                    {
+                      "data": "AS path: I\nAS path: Recorded"
+                    }
+                  ],
+                  "bgp-path-attributes": [
+                    {
+                      "attr-as-path-effective": [
+                        {
+                          "aspath-effective-string": [
+                            {
+                              "data": "AS path: "
+                            }
+                          ],
+                          "attr-value": [
+                            {
+                              "data": "I"
+                            }
+                          ],
+                          "flags": [
+                            {}
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "thread-name": [
+                    {
+                      "data": "junos-main"
+                    }
+                  ],
+                  "route-record": [
+                    {
+                      "rt-recorded": [
+                        {
+                          "data": "Recorded"
+                        }
+                      ],
+                      "nh-address": [
+                        {
+                          "data": "0xa59ad9c"
+                        }
+                      ],
+                      "as-index": [
+                        {
+                          "data": "1"
+                        }
+                      ],
+                      "as-recorded": [
+                        {
+                          "data": "Recorded"
+                        }
+                      ],
+                      "com-index": [
+                        {
+                          "data": "0"
+                        }
+                      ],
+                      "com-recorded": [
+                        {
+                          "data": "Not-Recorded"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
