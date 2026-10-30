@@ -1,0 +1,903 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "1"
+    },
+    "kind": {
+      "const": "collection"
+    },
+    "plan": {
+      "$ref": "#/$defs/plan"
+    },
+    "trace": {
+      "$ref": "report-v1.json"
+    },
+    "source": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/file"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "evidence_dir": {
+      "type": "string"
+    },
+    "started_at": {
+      "type": "string"
+    },
+    "ended_at": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "complete",
+        "partial",
+        "failed",
+        "interrupted"
+      ]
+    },
+    "error": {
+      "type": "string"
+    },
+    "devices": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/device_result"
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/finding"
+      }
+    },
+    "owner_sweep": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/device_result"
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "kind",
+    "plan",
+    "trace",
+    "source",
+    "evidence_dir",
+    "started_at",
+    "ended_at",
+    "status",
+    "error",
+    "devices",
+    "findings",
+    "owner_sweep"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/amb1s1/tracefull/schema/collection-v1.json",
+  "$defs": {
+    "file": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "additionalProperties": false
+    },
+    "address": {
+      "type": "object",
+      "properties": {
+        "interface": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "prefix_length": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "master": {
+          "type": "string"
+        },
+        "evidence": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "interface",
+        "address",
+        "prefix_length",
+        "master",
+        "evidence"
+      ],
+      "additionalProperties": false
+    },
+    "next_hop": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "interface": {
+          "type": "string"
+        },
+        "active": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "installed": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "evidence": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "address",
+        "interface",
+        "active",
+        "installed",
+        "evidence"
+      ],
+      "additionalProperties": false
+    },
+    "route": {
+      "type": "object",
+      "properties": {
+        "prefix": {
+          "type": "string"
+        },
+        "protocol": {
+          "type": "string"
+        },
+        "context": {
+          "type": "string"
+        },
+        "selected": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "installed": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "next_hops": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/next_hop"
+          }
+        },
+        "evidence": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "prefix",
+        "protocol",
+        "context",
+        "selected",
+        "installed",
+        "next_hops",
+        "evidence"
+      ],
+      "additionalProperties": false
+    },
+    "counter": {
+      "type": "object",
+      "properties": {
+        "interface": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "mtu_bytes": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "rx_errors": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "tx_errors": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "rx_drops": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "tx_drops": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "speed_bps": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "evidence": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "interface",
+        "state",
+        "mtu_bytes",
+        "rx_errors",
+        "tx_errors",
+        "rx_drops",
+        "tx_drops",
+        "speed_bps",
+        "evidence"
+      ],
+      "additionalProperties": false
+    },
+    "neighbor": {
+      "type": "object",
+      "properties": {
+        "interface": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "chassis_id": {
+          "type": "string"
+        },
+        "port_id": {
+          "type": "string"
+        },
+        "management_addresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "evidence": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "interface",
+        "name",
+        "chassis_id",
+        "port_id",
+        "management_addresses",
+        "evidence"
+      ],
+      "additionalProperties": false
+    },
+    "version": {
+      "type": "object",
+      "properties": {
+        "os": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "evidence": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "os",
+        "version",
+        "evidence"
+      ],
+      "additionalProperties": false
+    },
+    "cpu": {
+      "type": "object",
+      "properties": {
+        "load_1": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "load_5": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "load_15": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "evidence": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "load_1",
+        "load_5",
+        "load_15",
+        "evidence"
+      ],
+      "additionalProperties": false
+    },
+    "facts": {
+      "type": "object",
+      "properties": {
+        "addresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/address"
+          }
+        },
+        "routes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/route"
+          }
+        },
+        "counters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/counter"
+          }
+        },
+        "neighbors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/neighbor"
+          }
+        },
+        "version": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/version"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "cpu": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/cpu"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "uptime_seconds": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "uptime_evidence": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "addresses",
+        "routes",
+        "counters",
+        "neighbors",
+        "version",
+        "cpu",
+        "uptime_seconds",
+        "uptime_evidence",
+        "notes"
+      ],
+      "additionalProperties": false
+    },
+    "command": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "group": {
+          "enum": [
+            "ingress",
+            "route",
+            "counters",
+            "lldp",
+            "version",
+            "cpu",
+            "optics",
+            "reverse",
+            "extra"
+          ]
+        },
+        "command": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "planned",
+            "deferred",
+            "unsupported",
+            "conditional"
+          ]
+        },
+        "reason": {
+          "type": "string"
+        },
+        "argv": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "group",
+        "command",
+        "status",
+        "reason",
+        "argv"
+      ],
+      "additionalProperties": false
+    },
+    "transport": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "enum": [
+            "native-ssh",
+            "wrapper"
+          ]
+        },
+        "address": {
+          "type": "string"
+        },
+        "user": {
+          "type": "string"
+        },
+        "jump": {
+          "type": "string"
+        },
+        "known_hosts": {
+          "type": "string"
+        },
+        "insecure_host_key": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "kind",
+        "address",
+        "user",
+        "jump",
+        "known_hosts",
+        "insecure_host_key"
+      ],
+      "additionalProperties": false
+    },
+    "device_plan": {
+      "type": "object",
+      "properties": {
+        "device": {
+          "$ref": "report-v1.json#/properties/devices/items"
+        },
+        "hop_addresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "transport": {
+          "$ref": "#/$defs/transport"
+        },
+        "commands": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/command"
+          }
+        },
+        "conditional_commands": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/command"
+          }
+        },
+        "status": {
+          "enum": [
+            "planned",
+            "unsupported"
+          ]
+        },
+        "reason": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "device",
+        "hop_addresses",
+        "transport",
+        "commands",
+        "conditional_commands",
+        "status",
+        "reason"
+      ],
+      "additionalProperties": false
+    },
+    "plan": {
+      "type": "object",
+      "properties": {
+        "destination": {
+          "type": "string"
+        },
+        "context": {
+          "type": "string"
+        },
+        "devices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/device_plan"
+          }
+        },
+        "sweep_devices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/device_plan"
+          }
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "destination",
+        "context",
+        "devices",
+        "sweep_devices",
+        "notes"
+      ],
+      "additionalProperties": false
+    },
+    "command_result": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "group": {
+          "enum": [
+            "ingress",
+            "route",
+            "counters",
+            "lldp",
+            "version",
+            "cpu",
+            "optics",
+            "reverse",
+            "extra"
+          ]
+        },
+        "command": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "ok",
+            "failed",
+            "cancelled",
+            "timed_out",
+            "timeout",
+            "truncated",
+            "parse_failed",
+            "unsupported",
+            "deferred"
+          ]
+        },
+        "reason": {
+          "type": "string"
+        },
+        "argv": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "started_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "ended_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "elapsed_seconds": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "exit_code": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "stdout": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/file"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "stderr": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/file"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "facts": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/facts"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "group",
+        "command",
+        "status",
+        "reason",
+        "argv",
+        "started_at",
+        "ended_at",
+        "elapsed_seconds",
+        "exit_code",
+        "stdout",
+        "stderr",
+        "facts"
+      ],
+      "additionalProperties": false
+    },
+    "device_result": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "complete",
+            "partial",
+            "failed",
+            "unsupported",
+            "cancelled"
+          ]
+        },
+        "reason": {
+          "type": "string"
+        },
+        "interfaces": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "commands": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/command_result"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "status",
+        "reason",
+        "interfaces",
+        "commands"
+      ],
+      "additionalProperties": false
+    },
+    "finding": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string"
+        },
+        "device": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rule": {
+          "type": "string"
+        },
+        "severity": {
+          "enum": [
+            "info",
+            "warn",
+            "problem"
+          ]
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "kind",
+        "device",
+        "text",
+        "evidence",
+        "rule",
+        "severity",
+        "limitations"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
