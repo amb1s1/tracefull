@@ -7,12 +7,9 @@ import (
 	"log/slog"
 	"net"
 	"os"
-	"sort"
-	"strings"
 	"time"
 
 	"github.com/spf13/cobra"
-	"github.com/spf13/pflag"
 
 	"github.com/amb1s1/tracefull/internal/app"
 	"github.com/amb1s1/tracefull/internal/config"
@@ -55,7 +52,7 @@ func New() *cobra.Command {
 		if e != nil {
 			return e
 		}
-		if e = overlay(c, o.UserConfigDir, o.ProjectDir); e != nil {
+		if e = ui.Overlay(c, o.UserConfigDir, o.ProjectDir); e != nil {
 			return e
 		}
 		if logFormat != "text" && logFormat != "json" {
@@ -115,42 +112,4 @@ func New() *cobra.Command {
 		return nil
 	}
 	return c
-}
-func overlay(c *cobra.Command, user, project string) error {
-	values, e := config.Values(user, project)
-	if e != nil {
-		return e
-	}
-	flags := c.Flags()
-	env := map[string]string{}
-	flags.VisitAll(func(f *pflag.Flag) {
-		key := "TRACEFULL_" + strings.ToUpper(strings.ReplaceAll(f.Name, "-", "_"))
-		if v, ok := os.LookupEnv(key); ok {
-			env[f.Name] = v
-		}
-	})
-	normalized, e := config.Normalize(env)
-	if e != nil {
-		return e
-	}
-	for k, v := range normalized {
-		values[k] = v
-	}
-	keys := []string{}
-	for k := range values {
-		keys = append(keys, k)
-	}
-	sort.Strings(keys)
-	for _, k := range keys {
-		f := flags.Lookup(k)
-		if f == nil || k == "help" {
-			return fmt.Errorf("unknown configuration key %q", k)
-		}
-		if !f.Changed {
-			if e := f.Value.Set(values[k]); e != nil {
-				return fmt.Errorf("config %s: %w", k, e)
-			}
-		}
-	}
-	return nil
 }

@@ -1,0 +1,9 @@
+{
+  "route-information": [
+    {
+      "attributes": {
+        "xmlns": "http://xml.juniper.net/junos/24.4R0/junos-routing"
+      }
+    }
+  ]
+}

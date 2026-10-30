@@ -1,0 +1,31 @@
+
+
+Fri Oct 30 00:07:16.713 UTC
+FourHundredGigE0/0/0/4 is up, line protocol is up
+  Interface state transitions: 1
+  Hardware is FourHundredGigE, address is 0200.0000.000f (bia 0200.0000.000f)
+  Description: REDACTED
+  Internet address is 192.0.2.11/31
+  MTU 9216 bytes, BW 400000000 Kbit (Max: 400000000 Kbit)
+     reliability 255/255, txload 0/255, rxload 0/255
+  Encapsulation ARPA,
+  Full-duplex, 400000Mb/s, 400GBASE-FR4, link type is force-up
+  output flow control is off, input flow control is off
+  Carrier delay (up) is 200 msec
+  loopback not set,
+  Last link flapped 1d06h
+  ARP type ARPA, ARP timeout 04:00:00
+  Last input 00:00:00, output 00:00:00
+  Last clearing of "show interface" counters never
+  5 minute input rate 5000 bits/sec, 10 packets/sec
+  5 minute output rate 6000 bits/sec, 11 packets/sec
+     1103340 packets input, 79034400 bytes, 0 total input drops
+     0 drops for unrecognized upper-level protocol
+     Received 90 broadcast packets, 19781 multicast packets
+              0 runts, 0 giants, 0 throttles, 0 parity
+     0 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored, 0 abort
+     1138773 packets output, 82930272 bytes, 0 total output drops
+     Output 2 broadcast packets, 54188 multicast packets
+     0 output errors, 0 underruns, 0 applique, 0 resets
+     0 output buffer failures, 0 output buffers swapped out
+     1 carrier transitions

@@ -1,0 +1,19 @@
+[
+  {
+    "prefix": "192.0.2.4/31",
+    "protocol": "Direct",
+    "context": "default",
+    "selected": true,
+    "installed": null,
+    "next_hops": [
+      {
+        "address": "",
+        "interface": "et-0/0/0.0",
+        "active": true,
+        "installed": null,
+        "evidence": "json:/route-information/0/route-table/0/rt/0/rt-entry/0/nh/0"
+      }
+    ],
+    "evidence": "json:/route-information/0/route-table/0/rt/0/rt-entry/0"
+  }
+]

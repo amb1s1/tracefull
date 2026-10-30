@@ -1,0 +1,84 @@
+[
+  {
+    "ifindex": 117,
+    "ifname": "mgmt",
+    "flags": [
+      "NOARP",
+      "MASTER",
+      "UP",
+      "LOWER_UP"
+    ],
+    "mtu": 65575,
+    "qdisc": "noqueue",
+    "operstate": "UP",
+    "linkmode": "DEFAULT",
+    "group": "default",
+    "txqlen": 1000,
+    "link_type": "ether",
+    "address": "02:00:00:00:00:0a",
+    "broadcast": "ff:ff:ff:ff:ff:ff",
+    "promiscuity": 0,
+    "allmulti": 0,
+    "min_mtu": 1280,
+    "max_mtu": 65575,
+    "linkinfo": {
+      "info_kind": "vrf",
+      "info_data": {
+        "table": 1001
+      }
+    },
+    "inet6_addr_gen_mode": "eui64",
+    "num_tx_queues": 1,
+    "num_rx_queues": 1,
+    "gso_max_size": 65536,
+    "gso_max_segs": 65535,
+    "tso_max_size": 65536,
+    "tso_max_segs": 65535,
+    "gro_max_size": 65536,
+    "last_change": 1778218857054,
+    "carrier_up_count": 0,
+    "carrier_down_count": 0,
+    "carrier_changes": 0
+  },
+  {
+    "ifindex": 119,
+    "ifname": "tenant-a",
+    "flags": [
+      "NOARP",
+      "MASTER",
+      "UP",
+      "LOWER_UP"
+    ],
+    "mtu": 65575,
+    "qdisc": "noqueue",
+    "operstate": "UP",
+    "linkmode": "DEFAULT",
+    "group": "default",
+    "txqlen": 1000,
+    "link_type": "ether",
+    "address": "02:00:00:00:00:0b",
+    "broadcast": "ff:ff:ff:ff:ff:ff",
+    "promiscuity": 0,
+    "allmulti": 0,
+    "min_mtu": 1280,
+    "max_mtu": 65575,
+    "linkinfo": {
+      "info_kind": "vrf",
+      "info_data": {
+        "table": 1002
+      }
+    },
+    "inet6_addr_gen_mode": "eui64",
+    "num_tx_queues": 1,
+    "num_rx_queues": 1,
+    "gso_max_size": 65536,
+    "gso_max_segs": 65535,
+    "tso_max_size": 65536,
+    "tso_max_segs": 65535,
+    "gro_max_size": 65536,
+    "last_change": 1778218857619,
+    "carrier_up_count": 0,
+    "carrier_down_count": 0,
+    "carrier_changes": 0
+  }
+]

@@ -1,0 +1,18 @@
+
+
+Fri Oct 30 00:05:08.635 UTC
+Cisco IOS XR Software, Version 25.4.2 LNT
+Copyright (c) 2013-2026 by Cisco Systems, Inc.
+
+Build Information:
+ Built By     : REDACTED
+ Built On     : Mon Sep 07 06:10:57 UTC 2026
+ Build Host   : REDACTED
+ Workspace    : REDACTED
+ Version      : 25.4.2
+ Label        : REDACTED
+
+cisco 8000 (Intel(R) Xeon(R) CPU D-1633N @ 2.50GHz)
+cisco 8212-48FH-M (Intel(R) Xeon(R) CPU D-1633N @ 2.50GHz) processor with 64GB of memory
+peer-6 uptime is 1 day, 6 hours, 6 minutes
+Cisco 8212 2RU System w/ 48x 400G QSFP56-DD w/ MACsec

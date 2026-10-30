@@ -3,7 +3,8 @@
 tracefull runs local diagnostic tools or interprets saved traces, matches hop
 addresses to inventory devices, and reports what the observations support.
 `enrich` reads saved files offline by default; `investigate` runs installed tools
-against the target you specify. Neither command opens SSH sessions.
+against the target you specify. `collect` reads device state over SSH from matched
+inventory devices; preview it with `--dry-run` before connecting.
 
 Supported operating systems: Linux and macOS. Windows execution is outside the
 supported scope; saved Windows `tracert` output can still be imported.
@@ -36,17 +37,23 @@ for tool selection, limits, evidence and failure handling.
 
 ## Commands
 
+Device collection is in progress with capture-backed Cumulus, Linux/FRR, Junos, EOS and
+IOS-XR drivers, including selected per-lane optics formats. See
+[collection behavior and remaining limits](docs/collection.md). Other planned
+platforms and reverse probing remain unavailable.
+
 | Command | Behavior |
 | --- | --- |
 | `enrich --from FILE` | Parse, enrich, interpret and render a saved trace. Use `-` for stdin. |
 | `investigate TARGET` | Run installed diagnostic tools and report separate attributed measurements with saved evidence. |
+| `collect --from FILE` | Read device snapshots from matched inventory; `--dry-run` previews without connecting. |
 | `inventory check FILE` | Validate YAML/JSON; report duplicate addresses and unknown platforms. |
 | `explain` | Show implemented rules with examples; Glamour presentation on a terminal. |
-| `schema` | Print the embedded saved-report schema; `--kind investigation` prints the investigation envelope schema. |
+| `schema` | Print the embedded saved-report schema; `--kind investigation` prints the investigation envelope schema, and `--kind collection` prints the collection schema. |
 | `version` / `--version` | Show the development version. |
 | `completion` / `man` | Generate shell completion or manpage output through Cobra/Fang. |
 
-`trace` and `collect` belong to later milestones and are not available.
+Native `trace` belongs to a later milestone and is not available.
 Inputs and inventories are limited to 16 MiB. Input paths must be regular files;
 use stdin for streams. Raw captures remain in their original files. Reports
 contain a SHA-256 digest and line/JSON-pointer references into that input.

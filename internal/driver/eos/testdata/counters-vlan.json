@@ -1,0 +1,40 @@
+{
+  "interfaces": {
+    "Vlan2602": {
+      "name": "Vlan2602",
+      "forwardingModel": "routed",
+      "lineProtocolStatus": "up",
+      "interfaceStatus": "connected",
+      "hardware": "vlan",
+      "interfaceAddress": [],
+      "interfaceAddressIp6": {
+        "linkLocalIp6": {
+          "address": "fe80::9",
+          "subnet": "fe80::0/64",
+          "active": true,
+          "leastpref": false,
+          "dadfailed": false
+        },
+        "globalUnicastIp6s": [
+          {
+            "address": "2001:db8:3::a",
+            "subnet": "2001:db8:3::0/64",
+            "active": true,
+            "leastpref": false,
+            "dadfailed": false
+          }
+        ],
+        "globalAddressesAreVirtual": false,
+        "addrSource": "manual"
+      },
+      "physicalAddress": "02:00:00:00:00:01",
+      "burnedInAddress": "02:00:00:00:00:01",
+      "description": "",
+      "bandwidth": 0,
+      "mtu": 1500,
+      "l3MtuConfigured": false,
+      "l2Mru": 0,
+      "lastStatusChangeTimestamp": 1777032168.1926494
+    }
+  }
+}

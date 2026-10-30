@@ -1,0 +1,695 @@
+{
+  "interface-information": [
+    {
+      "attributes": {
+        "xmlns": "http://xml.juniper.net/junos/24.4R0/junos-interface",
+        "junos:style": "normal"
+      },
+      "physical-interface": [
+        {
+          "name": [
+            {
+              "data": "et-0/0/0"
+            }
+          ],
+          "optics-diagnostics": [
+            {
+              "module-temperature": [
+                {
+                  "data": "51 degrees C / 125 degrees F",
+                  "attributes": {
+                    "junos:celsius": "51.7"
+                  }
+                }
+              ],
+              "module-voltage": [
+                {
+                  "data": "3.2980"
+                }
+              ],
+              "module-max-power": [
+                {
+                  "data": "8.00"
+                }
+              ],
+              "module-temperature-high-alarm": [
+                {
+                  "data": "off"
+                }
+              ],
+              "module-temperature-low-alarm": [
+                {
+                  "data": "off"
+                }
+              ],
+              "module-temperature-high-warn": [
+                {
+                  "data": "off"
+                }
+              ],
+              "module-temperature-low-warn": [
+                {
+                  "data": "off"
+                }
+              ],
+              "module-voltage-high-alarm": [
+                {
+                  "data": "off"
+                }
+              ],
+              "module-voltage-low-alarm": [
+                {
+                  "data": "off"
+                }
+              ],
+              "module-voltage-high-warn": [
+                {
+                  "data": "off"
+                }
+              ],
+              "module-voltage-low-warn": [
+                {
+                  "data": "off"
+                }
+              ],
+              "module-temperature-high-alarm-threshold": [
+                {
+                  "data": "78 degrees C / 172 degrees F",
+                  "attributes": {
+                    "junos:celsius": "78.0"
+                  }
+                }
+              ],
+              "module-temperature-low-alarm-threshold": [
+                {
+                  "data": "-8 degrees C / 18 degrees F",
+                  "attributes": {
+                    "junos:celsius": "-8.0"
+                  }
+                }
+              ],
+              "module-temperature-high-warn-threshold": [
+                {
+                  "data": "73 degrees C / 163 degrees F",
+                  "attributes": {
+                    "junos:celsius": "73.0"
+                  }
+                }
+              ],
+              "module-temperature-low-warn-threshold": [
+                {
+                  "data": "-3 degrees C / 27 degrees F",
+                  "attributes": {
+                    "junos:celsius": "-3.0"
+                  }
+                }
+              ],
+              "module-voltage-high-alarm-threshold": [
+                {
+                  "data": "3.6300"
+                }
+              ],
+              "module-voltage-low-alarm-threshold": [
+                {
+                  "data": "2.9700"
+                }
+              ],
+              "module-voltage-high-warn-threshold": [
+                {
+                  "data": "3.4640"
+                }
+              ],
+              "module-voltage-low-warn-threshold": [
+                {
+                  "data": "3.1340"
+                }
+              ],
+              "laser-bias-current-high-alarm-threshold": [
+                {
+                  "data": "130.000"
+                }
+              ],
+              "laser-bias-current-low-alarm-threshold": [
+                {
+                  "data": "35.000"
+                }
+              ],
+              "laser-bias-current-high-warn-threshold": [
+                {
+                  "data": "125.000"
+                }
+              ],
+              "laser-bias-current-low-warn-threshold": [
+                {
+                  "data": "40.000"
+                }
+              ],
+              "laser-tx-power-high-alarm-threshold": [
+                {
+                  "data": "5.1286"
+                }
+              ],
+              "laser-tx-power-high-alarm-threshold-dbm": [
+                {
+                  "data": "7.10"
+                }
+              ],
+              "laser-tx-power-low-alarm-threshold": [
+                {
+                  "data": "0.3388"
+                }
+              ],
+              "laser-tx-power-low-alarm-threshold-dbm": [
+                {
+                  "data": "-4.70"
+                }
+              ],
+              "laser-tx-power-high-warn-threshold": [
+                {
+                  "data": "3.2359"
+                }
+              ],
+              "laser-tx-power-high-warn-threshold-dbm": [
+                {
+                  "data": "5.10"
+                }
+              ],
+              "laser-tx-power-low-warn-threshold": [
+                {
+                  "data": "0.5370"
+                }
+              ],
+              "laser-tx-power-low-warn-threshold-dbm": [
+                {
+                  "data": "-2.70"
+                }
+              ],
+              "laser-rx-power-high-alarm-threshold": [
+                {
+                  "data": "4.5709"
+                }
+              ],
+              "laser-rx-power-high-alarm-threshold-dbm": [
+                {
+                  "data": "6.60"
+                }
+              ],
+              "laser-rx-power-low-alarm-threshold": [
+                {
+                  "data": "0.0708"
+                }
+              ],
+              "laser-rx-power-low-alarm-threshold-dbm": [
+                {
+                  "data": "-11.50"
+                }
+              ],
+              "laser-rx-power-high-warn-threshold": [
+                {
+                  "data": "4.0738"
+                }
+              ],
+              "laser-rx-power-high-warn-threshold-dbm": [
+                {
+                  "data": "6.10"
+                }
+              ],
+              "laser-rx-power-low-warn-threshold": [
+                {
+                  "data": "0.0794"
+                }
+              ],
+              "laser-rx-power-low-warn-threshold-dbm": [
+                {
+                  "data": "-11.00"
+                }
+              ],
+              "laser-temperature-high-alarm-threshold": [
+                {
+                  "data": "72 degrees C / 162 degrees F",
+                  "attributes": {
+                    "junos:celsius": "72.0"
+                  }
+                }
+              ],
+              "laser-temperature-low-alarm-threshold": [
+                {
+                  "data": "28 degrees C / 82 degrees F",
+                  "attributes": {
+                    "junos:celsius": "28.0"
+                  }
+                }
+              ],
+              "laser-temperature-high-warn-threshold": [
+                {
+                  "data": "70 degrees C / 158 degrees F",
+                  "attributes": {
+                    "junos:celsius": "70.0"
+                  }
+                }
+              ],
+              "laser-temperature-low-warn-threshold": [
+                {
+                  "data": "30 degrees C / 86 degrees F",
+                  "attributes": {
+                    "junos:celsius": "30.0"
+                  }
+                }
+              ],
+              "optics-diagnostics-lane-values": [
+                {
+                  "lane-index": [
+                    {
+                      "data": "0"
+                    }
+                  ],
+                  "laser-bias-current": [
+                    {
+                      "data": "70.099"
+                    }
+                  ],
+                  "laser-output-power": [
+                    {
+                      "data": "1.453"
+                    }
+                  ],
+                  "laser-output-power-dbm": [
+                    {
+                      "data": "1.62"
+                    }
+                  ],
+                  "laser-rx-optical-power": [
+                    {
+                      "data": "1.497"
+                    }
+                  ],
+                  "laser-rx-optical-power-dbm": [
+                    {
+                      "data": "1.75"
+                    }
+                  ],
+                  "laser-bias-current-high-alarm": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-bias-current-low-alarm": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-bias-current-high-warn": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-bias-current-low-warn": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-rx-power-high-alarm": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-rx-power-low-alarm": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-rx-power-high-warn": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-rx-power-low-warn": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-tx-power-high-alarm": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-tx-power-low-alarm": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-tx-power-high-warn": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-tx-power-low-warn": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "tx-loss-of-signal-functionality-alarm": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "rx-loss-of-signal-alarm": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "tx-laser-disabled-alarm": [
+                    {
+                      "data": "off"
+                    }
+                  ]
+                },
+                {
+                  "lane-index": [
+                    {
+                      "data": "1"
+                    }
+                  ],
+                  "laser-bias-current": [
+                    {
+                      "data": "75.099"
+                    }
+                  ],
+                  "laser-output-power": [
+                    {
+                      "data": "1.493"
+                    }
+                  ],
+                  "laser-output-power-dbm": [
+                    {
+                      "data": "1.74"
+                    }
+                  ],
+                  "laser-rx-optical-power": [
+                    {
+                      "data": "1.597"
+                    }
+                  ],
+                  "laser-rx-optical-power-dbm": [
+                    {
+                      "data": "2.03"
+                    }
+                  ],
+                  "laser-bias-current-high-alarm": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-bias-current-low-alarm": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-bias-current-high-warn": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-bias-current-low-warn": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-rx-power-high-alarm": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-rx-power-low-alarm": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-rx-power-high-warn": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-rx-power-low-warn": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-tx-power-high-alarm": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-tx-power-low-alarm": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-tx-power-high-warn": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-tx-power-low-warn": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "tx-loss-of-signal-functionality-alarm": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "rx-loss-of-signal-alarm": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "tx-laser-disabled-alarm": [
+                    {
+                      "data": "off"
+                    }
+                  ]
+                },
+                {
+                  "lane-index": [
+                    {
+                      "data": "2"
+                    }
+                  ],
+                  "laser-bias-current": [
+                    {
+                      "data": "70.199"
+                    }
+                  ],
+                  "laser-output-power": [
+                    {
+                      "data": "1.518"
+                    }
+                  ],
+                  "laser-output-power-dbm": [
+                    {
+                      "data": "1.81"
+                    }
+                  ],
+                  "laser-rx-optical-power": [
+                    {
+                      "data": "1.333"
+                    }
+                  ],
+                  "laser-rx-optical-power-dbm": [
+                    {
+                      "data": "1.25"
+                    }
+                  ],
+                  "laser-bias-current-high-alarm": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-bias-current-low-alarm": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-bias-current-high-warn": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-bias-current-low-warn": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-rx-power-high-alarm": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-rx-power-low-alarm": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-rx-power-high-warn": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-rx-power-low-warn": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-tx-power-high-alarm": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-tx-power-low-alarm": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-tx-power-high-warn": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-tx-power-low-warn": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "tx-loss-of-signal-functionality-alarm": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "rx-loss-of-signal-alarm": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "tx-laser-disabled-alarm": [
+                    {
+                      "data": "off"
+                    }
+                  ]
+                },
+                {
+                  "lane-index": [
+                    {
+                      "data": "3"
+                    }
+                  ],
+                  "laser-bias-current": [
+                    {
+                      "data": "70.199"
+                    }
+                  ],
+                  "laser-output-power": [
+                    {
+                      "data": "1.502"
+                    }
+                  ],
+                  "laser-output-power-dbm": [
+                    {
+                      "data": "1.77"
+                    }
+                  ],
+                  "laser-rx-optical-power": [
+                    {
+                      "data": "1.468"
+                    }
+                  ],
+                  "laser-rx-optical-power-dbm": [
+                    {
+                      "data": "1.67"
+                    }
+                  ],
+                  "laser-bias-current-high-alarm": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-bias-current-low-alarm": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-bias-current-high-warn": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-bias-current-low-warn": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-rx-power-high-alarm": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-rx-power-low-alarm": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-rx-power-high-warn": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-rx-power-low-warn": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-tx-power-high-alarm": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-tx-power-low-alarm": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-tx-power-high-warn": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "laser-tx-power-low-warn": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "tx-loss-of-signal-functionality-alarm": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "rx-loss-of-signal-alarm": [
+                    {
+                      "data": "off"
+                    }
+                  ],
+                  "tx-laser-disabled-alarm": [
+                    {
+                      "data": "off"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

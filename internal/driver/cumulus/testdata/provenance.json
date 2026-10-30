@@ -1,0 +1,67 @@
+{
+  "captured_date": "2026-10-29",
+  "platform": "Cumulus Linux 5.16.0 / FRR 10.0.3",
+  "source": "Authorized read-only capture; private originals retained outside repository",
+  "files": [
+    {
+      "file": "addresses.json",
+      "source_stdout_sha256": "8e981e1e56ce321655708516406d99c153a28f320b54b78259a225228a4b0b65",
+      "excerpt": true,
+      "source_command": "ip -j address show"
+    },
+    {
+      "file": "counters.json",
+      "source_stdout_sha256": "a79d396ff170ea8d43f5bdf4b622f1e5442b8ebe951bbc2cde271ecd6d7f2f12",
+      "excerpt": true,
+      "source_command": "ip -j -s link show"
+    },
+    {
+      "file": "vrfs.json",
+      "source_stdout_sha256": "72b6e993c83d1fd6a69d9d7ec649d9005c1fff1ad3bd247ad05e228f6b6c3319",
+      "excerpt": false,
+      "source_command": "ip -j -d link show type vrf"
+    },
+    {
+      "file": "kernel-route.json",
+      "source_stdout_sha256": "6a9ca14b0b732f62bb7f66a46bca337cc4cdc706917b2ad43acd403c84134e21",
+      "excerpt": false,
+      "source_command": "ip -j -6 route get <destination>"
+    },
+    {
+      "file": "frr-route.json",
+      "source_stdout_sha256": "49fd82c24b0a08b006c5fecaac3618d56f66cc3d3980e27a6b154c8deda0020b",
+      "excerpt": false,
+      "source_command": "sudo -n vtysh -c 'show ipv6 route <destination> json'"
+    },
+    {
+      "file": "os-release.txt",
+      "source_stdout_sha256": "d8863636c139fec7481f351711cebae67801f7d27886ba11d2528fbee60a7ff8",
+      "excerpt": false,
+      "source_command": "cat /etc/os-release"
+    },
+    {
+      "file": "uptime.txt",
+      "source_stdout_sha256": "c82059b3bf5badd1fefaf5bf669a10c48dfe9712830666560ead469abf09e76f",
+      "excerpt": false,
+      "source_command": "cat /proc/uptime"
+    },
+    {
+      "file": "loadavg.txt",
+      "source_stdout_sha256": "5f2bafa8c096a89ad3c36011a07733bfcf14e79a93897ac2edbced8e2ad0c127",
+      "excerpt": false,
+      "source_command": "cat /proc/loadavg"
+    },
+    {
+      "file": "frr-version.txt",
+      "source_stdout_sha256": "7af44cc1edb9398c3294a36e6fe5ab268d602ab5ccc0cdee3eebab5a57bdc012",
+      "excerpt": false,
+      "source_command": "sudo -n vtysh -c 'show version'"
+    },
+    {
+      "file": "lldp.json",
+      "source_stdout_sha256": "bbe91d42b8ae6ff1b7cbe7fd97a05675cdd12db4e9373a7fc25a08162d906181",
+      "excerpt": true,
+      "source_command": "sudo -n /usr/sbin/lldpctl -f json"
+    }
+  ]
+}

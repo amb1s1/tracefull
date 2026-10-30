@@ -1,0 +1,81 @@
+{
+  "addresses": [],
+  "routes": [
+    {
+      "prefix": "::/0",
+      "protocol": "bgp",
+      "context": "default",
+      "selected": true,
+      "installed": true,
+      "next_hops": [
+        {
+          "address": "fe80::20",
+          "interface": "swp52",
+          "active": true,
+          "installed": true,
+          "evidence": "json:/::~10/0/nexthops/0"
+        },
+        {
+          "address": "fe80::21",
+          "interface": "swp55",
+          "active": true,
+          "installed": true,
+          "evidence": "json:/::~10/0/nexthops/1"
+        },
+        {
+          "address": "fe80::22",
+          "interface": "swp56",
+          "active": true,
+          "installed": true,
+          "evidence": "json:/::~10/0/nexthops/2"
+        },
+        {
+          "address": "fe80::23",
+          "interface": "swp49",
+          "active": true,
+          "installed": true,
+          "evidence": "json:/::~10/0/nexthops/3"
+        },
+        {
+          "address": "fe80::24",
+          "interface": "swp54",
+          "active": true,
+          "installed": true,
+          "evidence": "json:/::~10/0/nexthops/4"
+        },
+        {
+          "address": "fe80::25",
+          "interface": "swp50",
+          "active": true,
+          "installed": true,
+          "evidence": "json:/::~10/0/nexthops/5"
+        },
+        {
+          "address": "fe80::1f",
+          "interface": "swp51",
+          "active": true,
+          "installed": true,
+          "evidence": "json:/::~10/0/nexthops/6"
+        },
+        {
+          "address": "fe80::26",
+          "interface": "swp53",
+          "active": true,
+          "installed": true,
+          "evidence": "json:/::~10/0/nexthops/7"
+        }
+      ],
+      "evidence": "json:/::~10/0"
+    }
+  ],
+  "counters": [],
+  "neighbors": [],
+  "optics": [],
+  "version": null,
+  "cpu": null,
+  "uptime_seconds": null,
+  "uptime_evidence": "",
+  "notes": [
+    "Route state is a later lookup in the reported context; it does not establish the earlier probe's forwarding path."
+  ]
+}

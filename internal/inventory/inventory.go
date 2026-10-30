@@ -88,7 +88,7 @@ func Load(b []byte) (Inventory, []string, error) {
 }
 func known(s string) bool {
 	switch s {
-	case "cisco-ios-xe", "cisco-nxos", "arista-eos", "junos", "nvidia-cumulus", "frr", "linux", "mikrotik-routeros", "ios", "nxos", "eos", "cumulus", "routeros":
+	case "cisco-ios-xr", "iosxr", "cisco-ios-xe", "cisco-nxos", "arista-eos", "junos", "nvidia-cumulus", "frr", "linux", "mikrotik-routeros", "ios", "nxos", "eos", "cumulus", "routeros":
 		return true
 	}
 	return false

@@ -1,0 +1,50 @@
+
+
+Fri Oct 30 00:06:15.691 UTC
+Capability codes:
+	(R) Router, (B) Bridge, (T) Telephone, (C) DOCSIS Cable Device
+	(W) WLAN Access Point, (P) Repeater, (S) Station, (O) Other
+
+------------------------------------------------
+Local Interface: FourHundredGigE0/0/0/4
+Chassis id: 0200.0000.000b
+Port id: et-0/0/6
+Port Description: peer-7/0/0/4
+System Name: REDACTED
+
+System Description: REDACTED
+Juniper Networks, Inc. ptx10002-36qdd internet router, JUNOS 23.4R2-S6.9-EVO, Build date: 2025-11-12 06:21:14 UTC Copyright (c) 1996-2025 Juniper Networks, Inc.
+
+Time remaining: 99 seconds
+Hold Time: 120 seconds
+Age: 108219 seconds
+System Capabilities: B,R
+Enabled Capabilities: B,R
+Management Addresses:
+  IPv6 address: 2001:db8:a::28
+
+Peer MAC Address: 02:00:00:00:00:0c
+
+
+------------------------------------------------
+Local Interface: FourHundredGigE0/0/0/5
+Chassis id: 0200.0000.000d
+Port id: et-0/0/6
+Port Description: peer-7/0/0/5
+System Name: REDACTED
+
+System Description: REDACTED
+Juniper Networks, Inc. ptx10002-36qdd internet router, JUNOS 23.4R2-S6.9-EVO, Build date: 2025-11-12 06:21:14 UTC Copyright (c) 1996-2025 Juniper Networks, Inc.
+
+Time remaining: 113 seconds
+Hold Time: 120 seconds
+Age: 108222 seconds
+System Capabilities: B,R
+Enabled Capabilities: B,R
+Management Addresses:
+  IPv6 address: 2001:db8:a::2a
+
+Peer MAC Address: 02:00:00:00:00:0e
+
+
+Total entries displayed: 2

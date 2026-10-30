@@ -1,0 +1,107 @@
+{
+  "::/0": [
+    {
+      "protocol": "bgp",
+      "selected": true,
+      "destSelected": true,
+      "distance": 20,
+      "metric": 0,
+      "installed": true,
+      "nexthopGroupId": 1172731,
+      "uptime": "1d08h50m",
+      "routeUptimeEstablishedEpoch": 1793199399,
+      "prefix": "::/0",
+      "prefixLen": 0,
+      "vrfId": 0,
+      "vrfName": "default",
+      "table": 254,
+      "internalStatus": 16,
+      "internalFlags": 8,
+      "internalNextHopNum": 8,
+      "internalNextHopActiveNum": 8,
+      "installedNexthopGroupId": 1172731,
+      "nexthops": [
+        {
+          "flags": 3,
+          "fib": true,
+          "ip": "fe80::20",
+          "afi": "ipv6",
+          "interfaceIndex": 102,
+          "interfaceName": "swp52",
+          "active": true,
+          "weight": 1
+        },
+        {
+          "flags": 3,
+          "fib": true,
+          "ip": "fe80::21",
+          "afi": "ipv6",
+          "interfaceIndex": 105,
+          "interfaceName": "swp55",
+          "active": true,
+          "weight": 1
+        },
+        {
+          "flags": 3,
+          "fib": true,
+          "ip": "fe80::22",
+          "afi": "ipv6",
+          "interfaceIndex": 106,
+          "interfaceName": "swp56",
+          "active": true,
+          "weight": 1
+        },
+        {
+          "flags": 3,
+          "fib": true,
+          "ip": "fe80::23",
+          "afi": "ipv6",
+          "interfaceIndex": 99,
+          "interfaceName": "swp49",
+          "active": true,
+          "weight": 1
+        },
+        {
+          "flags": 3,
+          "fib": true,
+          "ip": "fe80::24",
+          "afi": "ipv6",
+          "interfaceIndex": 104,
+          "interfaceName": "swp54",
+          "active": true,
+          "weight": 1
+        },
+        {
+          "flags": 3,
+          "fib": true,
+          "ip": "fe80::25",
+          "afi": "ipv6",
+          "interfaceIndex": 100,
+          "interfaceName": "swp50",
+          "active": true,
+          "weight": 1
+        },
+        {
+          "flags": 3,
+          "fib": true,
+          "ip": "fe80::1f",
+          "afi": "ipv6",
+          "interfaceIndex": 101,
+          "interfaceName": "swp51",
+          "active": true,
+          "weight": 1
+        },
+        {
+          "flags": 3,
+          "fib": true,
+          "ip": "fe80::26",
+          "afi": "ipv6",
+          "interfaceIndex": 103,
+          "interfaceName": "swp53",
+          "active": true,
+          "weight": 1
+        }
+      ]
+    }
+  ]
+}

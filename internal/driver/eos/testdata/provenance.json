@@ -1,0 +1,94 @@
+{
+  "platform": "Arista EOS 4.33.4M",
+  "source": "Authorized read-only real-device captures; private originals retained outside Git",
+  "files": [
+    {
+      "file": "version-json.json",
+      "source_stdout_sha256": "d98e836aa69ae0c19ae342d935738136fdc85dad08d41f00c36255ddb4f86e15",
+      "source_command": "show version | json",
+      "started_unix": 1793318754.069588,
+      "ended_unix": 1793318755.588895,
+      "excerpt": false
+    },
+    {
+      "file": "addresses6.json",
+      "source_stdout_sha256": "c54d58c05cc940fe39ccab0470baaacac34996af9ef74765a10f7066a4aa2257",
+      "source_command": "show ipv6 interface | json",
+      "started_unix": 1793318755.5894022,
+      "ended_unix": 1793318758.451814,
+      "excerpt": false
+    },
+    {
+      "file": "addresses4.json",
+      "source_stdout_sha256": "2ac97601cfe277838df5a083248e905b5c03f31d30f4d61403b77598e677f264",
+      "source_command": "show ip interface | json",
+      "started_unix": 1793318758.452375,
+      "ended_unix": 1793318760.0028002,
+      "excerpt": false
+    },
+    {
+      "file": "route6.json",
+      "source_stdout_sha256": "c9d3c7e06d3d102af266dad99e51e8c36002a2e843c0147e0acf490cda740af1",
+      "source_command": "show ipv6 route 2001:db8:4::f | json",
+      "started_unix": 1793318760.003734,
+      "ended_unix": 1793318763.561599,
+      "excerpt": false
+    },
+    {
+      "file": "lldp.json",
+      "source_stdout_sha256": "3c6592a2b9556d4dd35bfc11379c52c9102cf3d2af32dae087e24404f2132a7e",
+      "source_command": "show lldp neighbors detail | json",
+      "started_unix": 1793318763.5618749,
+      "ended_unix": 1793318767.068696,
+      "excerpt": true
+    },
+    {
+      "file": "counters-vlan.json",
+      "source_stdout_sha256": "44307fa811ce3b373c15464537a52aef73d46f87ec04fddde2826f36397e5049",
+      "source_command": "show interfaces Vlan2602 | json",
+      "started_unix": 1793318827.853492,
+      "ended_unix": 1793318829.6855779,
+      "excerpt": false
+    },
+    {
+      "file": "counters-physical.json",
+      "source_stdout_sha256": "d3e75bff04f839325b1db797656b4f483a0e3e0d69e528a9be03b2afd1d14de5",
+      "source_command": "show interfaces Ethernet1 | json",
+      "started_unix": 1793318829.685893,
+      "ended_unix": 1793318831.940483,
+      "excerpt": false
+    },
+    {
+      "file": "optics.json",
+      "source_stdout_sha256": "b349cf10efc9e7fcfa7faf19bc95a832129639dc5edd9eca41a5aa1a1f5706b8",
+      "source_command": "show interfaces Ethernet1 transceiver | json",
+      "started_unix": 1793318831.9408908,
+      "ended_unix": 1793318833.735477,
+      "excerpt": false
+    },
+    {
+      "file": "counters-uplink.json",
+      "source_stdout_sha256": "fc2feb609fc90346028e073f3091b40eff5f98a890818dfcaa58ea42bbceb53a",
+      "source_command": "show interfaces Ethernet49 | json",
+      "started_unix": 1793318888.671442,
+      "ended_unix": 1793318890.894903,
+      "excerpt": false
+    },
+    {
+      "file": "optics-uplink.json",
+      "source_stdout_sha256": "da7c10da5b0954a4454356841aa9d82022a5e8ab18fe12b6a940e2cf3ce720a0",
+      "source_command": "show interfaces Ethernet49 transceiver | json",
+      "started_unix": 1793318890.8952541,
+      "ended_unix": 1793318892.424345,
+      "excerpt": false
+    },
+    {
+      "file": "cpu.json",
+      "source_stdout_sha256": "eb2859b0ea48f074eb8d3ecf343b1c117bddb71b00407aac4cda1b162893b85c",
+      "source_command": "show processes top once | json",
+      "started_unix": 1793319872.763082,
+      "ended_unix": 1793319874.778591,
+      "excerpt": true
+    }
+  ]
+}

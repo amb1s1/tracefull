@@ -7,3 +7,6 @@ var Report []byte
 
 //go:embed investigation-v1.json
 var Investigation []byte
+
+//go:embed collection-v1.json
+var Collection []byte

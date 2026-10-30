@@ -1,0 +1,104 @@
+// Package driver defines attributed facts from read-only device observations.
+package driver
+
+type Params struct {
+	Destination, Source, VRF string
+	Interfaces               []string
+	Sudo                     bool
+}
+type Command struct {
+	Name   string `json:"name"`
+	Group  string `json:"group"`
+	Text   string `json:"command"`
+	Status string `json:"status"`
+	Reason string `json:"reason"`
+}
+type Driver interface {
+	Platform() string
+	Plan([]string, Params) ([]Command, error)
+	Validate(string, Params) error
+	Parse(string, []byte) (Facts, error)
+}
+type Address struct {
+	Interface      string  `json:"interface"`
+	Address        string  `json:"address"`
+	PrefixLength   *int    `json:"prefix_length"`
+	Master         string  `json:"master"`
+	RoutingContext *string `json:"routing_context"`
+	Evidence       string  `json:"evidence"`
+}
+type NextHop struct {
+	Address   string `json:"address"`
+	Interface string `json:"interface"`
+	Active    *bool  `json:"active"`
+	Installed *bool  `json:"installed"`
+	Evidence  string `json:"evidence"`
+}
+type Route struct {
+	Prefix    string    `json:"prefix"`
+	Protocol  string    `json:"protocol"`
+	Context   string    `json:"context"`
+	Selected  *bool     `json:"selected"`
+	Installed *bool     `json:"installed"`
+	NextHops  []NextHop `json:"next_hops"`
+	Evidence  string    `json:"evidence"`
+}
+type Counter struct {
+	Interface string  `json:"interface"`
+	State     string  `json:"state"`
+	MTULayer  string  `json:"mtu_layer"`
+	MTUBytes  *uint64 `json:"mtu_bytes"`
+	RXErrors  *uint64 `json:"rx_errors"`
+	TXErrors  *uint64 `json:"tx_errors"`
+	RXDrops   *uint64 `json:"rx_drops"`
+	TXDrops   *uint64 `json:"tx_drops"`
+	SpeedBPS  *uint64 `json:"speed_bps"`
+	Evidence  string  `json:"evidence"`
+}
+type Neighbor struct {
+	Interface           string   `json:"interface"`
+	Name                string   `json:"name"`
+	ChassisID           string   `json:"chassis_id"`
+	PortID              string   `json:"port_id"`
+	ManagementAddresses []string `json:"management_addresses"`
+	Evidence            string   `json:"evidence"`
+}
+type Version struct {
+	OS       string `json:"os"`
+	Version  string `json:"version"`
+	Evidence string `json:"evidence"`
+}
+type Optical struct {
+	Interface          string   `json:"interface"`
+	Lane               string   `json:"lane"`
+	TemperatureCelsius *float64 `json:"temperature_celsius"`
+	RXPowerDBM         *float64 `json:"rx_power_dbm"`
+	TXPowerDBM         *float64 `json:"tx_power_dbm"`
+	Evidence           string   `json:"evidence"`
+}
+type CPU struct {
+	Utilization   *float64 `json:"utilization_pct"`
+	Utilization1  *float64 `json:"utilization_1_pct"`
+	Utilization5  *float64 `json:"utilization_5_pct"`
+	Utilization15 *float64 `json:"utilization_15_pct"`
+	Load1         *float64 `json:"load_1"`
+	Load5         *float64 `json:"load_5"`
+	Load15        *float64 `json:"load_15"`
+	Evidence      string   `json:"evidence"`
+}
+type Facts struct {
+	Addresses      []Address  `json:"addresses"`
+	Routes         []Route    `json:"routes"`
+	Counters       []Counter  `json:"counters"`
+	Optics         []Optical  `json:"optics"`
+	Neighbors      []Neighbor `json:"neighbors"`
+	Version        *Version   `json:"version"`
+	CPU            *CPU       `json:"cpu"`
+	UptimeSeconds  *float64   `json:"uptime_seconds"`
+	UptimeEvidence string     `json:"uptime_evidence"`
+	Notes          []string   `json:"notes"`
+}
+
+func Empty() Facts {
+	return Facts{Optics: []Optical{}, Addresses: []Address{}, Routes: []Route{}, Counters: []Counter{}, Neighbors: []Neighbor{}, Notes: []string{}}
+}

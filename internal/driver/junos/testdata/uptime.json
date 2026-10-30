@@ -1,0 +1,137 @@
+{
+  "system-uptime-information": [
+    {
+      "attributes": {
+        "xmlns": "http://xml.juniper.net/junos/24.4R2-S5.3/junos"
+      },
+      "current-time": [
+        {
+          "date-time": [
+            {
+              "data": "2026-10-30 00:06:09 UTC",
+              "attributes": {
+                "junos:seconds": "1793318769"
+              }
+            }
+          ]
+        }
+      ],
+      "time-source": [
+        {
+          "data": " NTP CLOCK "
+        }
+      ],
+      "system-booted-time": [
+        {
+          "date-time": [
+            {
+              "data": "2026-10-22 11:28:32 UTC",
+              "attributes": {
+                "junos:seconds": "1792668512"
+              }
+            }
+          ],
+          "time-length": [
+            {
+              "data": "1w0d 12:37",
+              "attributes": {
+                "junos:seconds": "650257"
+              }
+            }
+          ]
+        }
+      ],
+      "protocols-started-time": [
+        {
+          "date-time": [
+            {
+              "data": "2026-10-22 11:29:31 UTC",
+              "attributes": {
+                "junos:seconds": "1792668571"
+              }
+            }
+          ],
+          "time-length": [
+            {
+              "data": "1w0d 12:36",
+              "attributes": {
+                "junos:seconds": "650198"
+              }
+            }
+          ]
+        }
+      ],
+      "last-configured-time": [
+        {
+          "date-time": [
+            {
+              "data": "2026-10-29 21:14:08 UTC",
+              "attributes": {
+                "junos:seconds": "1793308448"
+              }
+            }
+          ],
+          "time-length": [
+            {
+              "data": "02:52:01",
+              "attributes": {
+                "junos:seconds": "10321"
+              }
+            }
+          ],
+          "user": [
+            {
+              "data": "operator"
+            }
+          ]
+        }
+      ],
+      "uptime-information": [
+        {
+          "date-time": [
+            {
+              "data": "12:06AM",
+              "attributes": {
+                "junos:seconds": "1793318769"
+              }
+            }
+          ],
+          "up-time": [
+            {
+              "data": "7 days, 12:38",
+              "attributes": {
+                "junos:seconds": "650280"
+              }
+            }
+          ],
+          "active-user-count": [
+            {
+              "data": "0",
+              "attributes": {
+                "junos:format": "0 users"
+              }
+            }
+          ],
+          "load-average-1": [
+            {
+              "data": "0.32"
+            }
+          ],
+          "load-average-5": [
+            {
+              "data": "0.27"
+            }
+          ],
+          "load-average-15": [
+            {
+              "data": "0.29"
+            }
+          ],
+          "user-table": [
+            {}
+          ]
+        }
+      ]
+    }
+  ]
+}

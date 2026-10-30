@@ -1,0 +1,31 @@
+{
+  "software-information": [
+    {
+      "host-name": [
+        {
+          "data": "peer-3"
+        }
+      ],
+      "product-model": [
+        {
+          "data": "mx304"
+        }
+      ],
+      "product-name": [
+        {
+          "data": "mx304"
+        }
+      ],
+      "os-name": [
+        {
+          "data": "junos"
+        }
+      ],
+      "junos-version": [
+        {
+          "data": "24.4R2-S5.3"
+        }
+      ]
+    }
+  ]
+}

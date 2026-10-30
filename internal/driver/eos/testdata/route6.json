@@ -1,0 +1,28 @@
+{
+  "vrfs": {
+    "default": {
+      "routingDisabled": false,
+      "allRoutesProgrammedHardware": true,
+      "allRoutesProgrammedKernel": true,
+      "defaultRouteState": "reachable",
+      "routes": {
+        "::/0": {
+          "hardwareProgrammed": true,
+          "routeType": "static",
+          "routeLeaked": false,
+          "kernelProgrammed": true,
+          "preference": 1,
+          "metric": 0,
+          "vias": [
+            {
+              "nexthopAddr": "2001:db8:3::d",
+              "interface": "Vlan2602"
+            }
+          ],
+          "routeAction": "forward",
+          "directlyConnected": false
+        }
+      }
+    }
+  }
+}

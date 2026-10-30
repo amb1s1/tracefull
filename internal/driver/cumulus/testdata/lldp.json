@@ -1,0 +1,1149 @@
+{
+  "lldp": [
+    {
+      "interface": [
+        {
+          "name": "eth0",
+          "via": "LLDP",
+          "rid": "4858",
+          "age": "125 days, 06:20:40",
+          "chassis": [
+            {
+              "id": [
+                {
+                  "type": "mac",
+                  "value": "02:00:00:00:00:0c"
+                }
+              ],
+              "name": [
+                {
+                  "value": "peer-1"
+                }
+              ],
+              "descr": [
+                {
+                  "value": "scrubbed system description"
+                }
+              ],
+              "mgmt-ip": [
+                {
+                  "value": "192.0.2.39"
+                }
+              ],
+              "mgmt-iface": [
+                {
+                  "value": "5000000"
+                }
+              ],
+              "capability": [
+                {
+                  "type": "Bridge",
+                  "enabled": true
+                },
+                {
+                  "type": "Router",
+                  "enabled": true
+                }
+              ]
+            }
+          ],
+          "port": [
+            {
+              "id": [
+                {
+                  "type": "ifname",
+                  "value": "Ethernet4"
+                }
+              ],
+              "descr": [
+                {
+                  "value": "scrubbed port description"
+                }
+              ],
+              "ttl": [
+                {
+                  "value": "120"
+                }
+              ],
+              "mfs": [
+                {
+                  "value": "9416"
+                }
+              ]
+            }
+          ],
+          "vlan": [
+            {
+              "vlan-id": "2602",
+              "pvid": true
+            }
+          ],
+          "lldp-med": [
+            {
+              "device-type": [
+                {
+                  "value": "Network Connectivity Device"
+                }
+              ],
+              "capability": [
+                {
+                  "type": "Capabilities",
+                  "available": true
+                }
+              ],
+              "inventory": [
+                {
+                  "serial": [
+                    {
+                      "value": "REDACTED"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "swp49",
+          "via": "LLDP",
+          "rid": "6066",
+          "age": "30 days, 00:21:53",
+          "chassis": [
+            {
+              "id": [
+                {
+                  "type": "mac",
+                  "value": "02:00:00:00:00:0d"
+                }
+              ],
+              "name": [
+                {
+                  "value": "peer-2"
+                }
+              ],
+              "descr": [
+                {
+                  "value": "scrubbed system description"
+                }
+              ],
+              "mgmt-ip": [
+                {
+                  "value": "192.0.2.40"
+                },
+                {
+                  "value": "2001:db8:d::29"
+                }
+              ],
+              "mgmt-iface": [
+                {
+                  "value": "1"
+                },
+                {
+                  "value": "1"
+                }
+              ],
+              "capability": [
+                {
+                  "type": "Bridge",
+                  "enabled": false
+                },
+                {
+                  "type": "Router",
+                  "enabled": true
+                }
+              ]
+            }
+          ],
+          "port": [
+            {
+              "id": [
+                {
+                  "type": "ifname",
+                  "value": "swp1"
+                }
+              ],
+              "descr": [
+                {
+                  "value": "scrubbed port description"
+                }
+              ],
+              "ttl": [
+                {
+                  "value": "120"
+                }
+              ],
+              "mfs": [
+                {
+                  "value": "9100"
+                }
+              ],
+              "auto-negotiation": [
+                {
+                  "supported": true,
+                  "enabled": true,
+                  "current": [
+                    {
+                      "value": "unknown"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "vlan": [
+            {
+              "vlan-id": "10",
+              "pvid": false,
+              "value": "vlan-10"
+            }
+          ],
+          "lldp-med": [
+            {
+              "device-type": [
+                {
+                  "value": "Network Connectivity Device"
+                }
+              ],
+              "capability": [
+                {
+                  "type": "Capabilities",
+                  "available": true
+                },
+                {
+                  "type": "Policy",
+                  "available": true
+                },
+                {
+                  "type": "Location",
+                  "available": true
+                },
+                {
+                  "type": "MDI/PSE",
+                  "available": true
+                },
+                {
+                  "type": "MDI/PD",
+                  "available": true
+                },
+                {
+                  "type": "Inventory",
+                  "available": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "swp50",
+          "via": "LLDP",
+          "rid": "6229",
+          "age": "23 days, 06:28:21",
+          "chassis": [
+            {
+              "id": [
+                {
+                  "type": "mac",
+                  "value": "02:00:00:00:00:0e"
+                }
+              ],
+              "name": [
+                {
+                  "value": "peer-3"
+                }
+              ],
+              "descr": [
+                {
+                  "value": "scrubbed system description"
+                }
+              ],
+              "mgmt-ip": [
+                {
+                  "value": "192.0.2.42"
+                },
+                {
+                  "value": "2001:db8:e::2b"
+                }
+              ],
+              "mgmt-iface": [
+                {
+                  "value": "1"
+                },
+                {
+                  "value": "1"
+                }
+              ],
+              "capability": [
+                {
+                  "type": "Bridge",
+                  "enabled": false
+                },
+                {
+                  "type": "Router",
+                  "enabled": true
+                }
+              ]
+            }
+          ],
+          "port": [
+            {
+              "id": [
+                {
+                  "type": "ifname",
+                  "value": "swp1"
+                }
+              ],
+              "descr": [
+                {
+                  "value": "scrubbed port description"
+                }
+              ],
+              "ttl": [
+                {
+                  "value": "120"
+                }
+              ],
+              "mfs": [
+                {
+                  "value": "9100"
+                }
+              ],
+              "auto-negotiation": [
+                {
+                  "supported": true,
+                  "enabled": true,
+                  "current": [
+                    {
+                      "value": "unknown"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "vlan": [
+            {
+              "vlan-id": "10",
+              "pvid": false,
+              "value": "vlan-10"
+            }
+          ],
+          "lldp-med": [
+            {
+              "device-type": [
+                {
+                  "value": "Network Connectivity Device"
+                }
+              ],
+              "capability": [
+                {
+                  "type": "Capabilities",
+                  "available": true
+                },
+                {
+                  "type": "Policy",
+                  "available": true
+                },
+                {
+                  "type": "Location",
+                  "available": true
+                },
+                {
+                  "type": "MDI/PSE",
+                  "available": true
+                },
+                {
+                  "type": "MDI/PD",
+                  "available": true
+                },
+                {
+                  "type": "Inventory",
+                  "available": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "swp51",
+          "via": "LLDP",
+          "rid": "6236",
+          "age": "23 days, 03:15:40",
+          "chassis": [
+            {
+              "id": [
+                {
+                  "type": "mac",
+                  "value": "02:00:00:00:00:0f"
+                }
+              ],
+              "name": [
+                {
+                  "value": "peer-4"
+                }
+              ],
+              "descr": [
+                {
+                  "value": "scrubbed system description"
+                }
+              ],
+              "mgmt-ip": [
+                {
+                  "value": "192.0.2.44"
+                },
+                {
+                  "value": "2001:db8:f::2d"
+                }
+              ],
+              "mgmt-iface": [
+                {
+                  "value": "1"
+                },
+                {
+                  "value": "1"
+                }
+              ],
+              "capability": [
+                {
+                  "type": "Bridge",
+                  "enabled": false
+                },
+                {
+                  "type": "Router",
+                  "enabled": true
+                }
+              ]
+            }
+          ],
+          "port": [
+            {
+              "id": [
+                {
+                  "type": "ifname",
+                  "value": "swp1"
+                }
+              ],
+              "descr": [
+                {
+                  "value": "scrubbed port description"
+                }
+              ],
+              "ttl": [
+                {
+                  "value": "120"
+                }
+              ],
+              "mfs": [
+                {
+                  "value": "9100"
+                }
+              ],
+              "auto-negotiation": [
+                {
+                  "supported": true,
+                  "enabled": true,
+                  "current": [
+                    {
+                      "value": "unknown"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "vlan": [
+            {
+              "vlan-id": "10",
+              "pvid": false,
+              "value": "vlan-10"
+            }
+          ],
+          "lldp-med": [
+            {
+              "device-type": [
+                {
+                  "value": "Network Connectivity Device"
+                }
+              ],
+              "capability": [
+                {
+                  "type": "Capabilities",
+                  "available": true
+                },
+                {
+                  "type": "Policy",
+                  "available": true
+                },
+                {
+                  "type": "Location",
+                  "available": true
+                },
+                {
+                  "type": "MDI/PSE",
+                  "available": true
+                },
+                {
+                  "type": "MDI/PD",
+                  "available": true
+                },
+                {
+                  "type": "Inventory",
+                  "available": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "swp52",
+          "via": "LLDP",
+          "rid": "6246",
+          "age": "22 days, 06:51:04",
+          "chassis": [
+            {
+              "id": [
+                {
+                  "type": "mac",
+                  "value": "02:00:00:00:00:10"
+                }
+              ],
+              "name": [
+                {
+                  "value": "peer-5"
+                }
+              ],
+              "descr": [
+                {
+                  "value": "scrubbed system description"
+                }
+              ],
+              "mgmt-ip": [
+                {
+                  "value": "192.0.2.46"
+                },
+                {
+                  "value": "2001:db8:10::2f"
+                }
+              ],
+              "mgmt-iface": [
+                {
+                  "value": "1"
+                },
+                {
+                  "value": "1"
+                }
+              ],
+              "capability": [
+                {
+                  "type": "Bridge",
+                  "enabled": false
+                },
+                {
+                  "type": "Router",
+                  "enabled": true
+                }
+              ]
+            }
+          ],
+          "port": [
+            {
+              "id": [
+                {
+                  "type": "ifname",
+                  "value": "swp1"
+                }
+              ],
+              "descr": [
+                {
+                  "value": "scrubbed port description"
+                }
+              ],
+              "ttl": [
+                {
+                  "value": "120"
+                }
+              ],
+              "mfs": [
+                {
+                  "value": "9100"
+                }
+              ],
+              "auto-negotiation": [
+                {
+                  "supported": true,
+                  "enabled": true,
+                  "current": [
+                    {
+                      "value": "unknown"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "vlan": [
+            {
+              "vlan-id": "10",
+              "pvid": false,
+              "value": "vlan-10"
+            }
+          ],
+          "lldp-med": [
+            {
+              "device-type": [
+                {
+                  "value": "Network Connectivity Device"
+                }
+              ],
+              "capability": [
+                {
+                  "type": "Capabilities",
+                  "available": true
+                },
+                {
+                  "type": "Policy",
+                  "available": true
+                },
+                {
+                  "type": "Location",
+                  "available": true
+                },
+                {
+                  "type": "MDI/PSE",
+                  "available": true
+                },
+                {
+                  "type": "MDI/PD",
+                  "available": true
+                },
+                {
+                  "type": "Inventory",
+                  "available": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "swp53",
+          "via": "LLDP",
+          "rid": "6253",
+          "age": "22 days, 05:47:24",
+          "chassis": [
+            {
+              "id": [
+                {
+                  "type": "mac",
+                  "value": "02:00:00:00:00:11"
+                }
+              ],
+              "name": [
+                {
+                  "value": "peer-6"
+                }
+              ],
+              "descr": [
+                {
+                  "value": "scrubbed system description"
+                }
+              ],
+              "mgmt-ip": [
+                {
+                  "value": "192.0.2.48"
+                },
+                {
+                  "value": "2001:db8:11::31"
+                }
+              ],
+              "mgmt-iface": [
+                {
+                  "value": "1"
+                },
+                {
+                  "value": "1"
+                }
+              ],
+              "capability": [
+                {
+                  "type": "Bridge",
+                  "enabled": false
+                },
+                {
+                  "type": "Router",
+                  "enabled": true
+                }
+              ]
+            }
+          ],
+          "port": [
+            {
+              "id": [
+                {
+                  "type": "ifname",
+                  "value": "swp1"
+                }
+              ],
+              "descr": [
+                {
+                  "value": "scrubbed port description"
+                }
+              ],
+              "ttl": [
+                {
+                  "value": "120"
+                }
+              ],
+              "mfs": [
+                {
+                  "value": "9100"
+                }
+              ],
+              "auto-negotiation": [
+                {
+                  "supported": true,
+                  "enabled": true,
+                  "current": [
+                    {
+                      "value": "unknown"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "vlan": [
+            {
+              "vlan-id": "10",
+              "pvid": false,
+              "value": "vlan-10"
+            }
+          ],
+          "lldp-med": [
+            {
+              "device-type": [
+                {
+                  "value": "Network Connectivity Device"
+                }
+              ],
+              "capability": [
+                {
+                  "type": "Capabilities",
+                  "available": true
+                },
+                {
+                  "type": "Policy",
+                  "available": true
+                },
+                {
+                  "type": "Location",
+                  "available": true
+                },
+                {
+                  "type": "MDI/PSE",
+                  "available": true
+                },
+                {
+                  "type": "MDI/PD",
+                  "available": true
+                },
+                {
+                  "type": "Inventory",
+                  "available": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "swp54",
+          "via": "LLDP",
+          "rid": "6259",
+          "age": "22 days, 05:04:44",
+          "chassis": [
+            {
+              "id": [
+                {
+                  "type": "mac",
+                  "value": "02:00:00:00:00:12"
+                }
+              ],
+              "name": [
+                {
+                  "value": "peer-7"
+                }
+              ],
+              "descr": [
+                {
+                  "value": "scrubbed system description"
+                }
+              ],
+              "mgmt-ip": [
+                {
+                  "value": "192.0.2.50"
+                },
+                {
+                  "value": "2001:db8:12::33"
+                }
+              ],
+              "mgmt-iface": [
+                {
+                  "value": "1"
+                },
+                {
+                  "value": "1"
+                }
+              ],
+              "capability": [
+                {
+                  "type": "Bridge",
+                  "enabled": false
+                },
+                {
+                  "type": "Router",
+                  "enabled": true
+                }
+              ]
+            }
+          ],
+          "port": [
+            {
+              "id": [
+                {
+                  "type": "ifname",
+                  "value": "swp1"
+                }
+              ],
+              "descr": [
+                {
+                  "value": "scrubbed port description"
+                }
+              ],
+              "ttl": [
+                {
+                  "value": "120"
+                }
+              ],
+              "mfs": [
+                {
+                  "value": "9100"
+                }
+              ],
+              "auto-negotiation": [
+                {
+                  "supported": true,
+                  "enabled": true,
+                  "current": [
+                    {
+                      "value": "unknown"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "vlan": [
+            {
+              "vlan-id": "10",
+              "pvid": false,
+              "value": "vlan-10"
+            }
+          ],
+          "lldp-med": [
+            {
+              "device-type": [
+                {
+                  "value": "Network Connectivity Device"
+                }
+              ],
+              "capability": [
+                {
+                  "type": "Capabilities",
+                  "available": true
+                },
+                {
+                  "type": "Policy",
+                  "available": true
+                },
+                {
+                  "type": "Location",
+                  "available": true
+                },
+                {
+                  "type": "MDI/PSE",
+                  "available": true
+                },
+                {
+                  "type": "MDI/PD",
+                  "available": true
+                },
+                {
+                  "type": "Inventory",
+                  "available": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "swp55",
+          "via": "LLDP",
+          "rid": "6307",
+          "age": "21 days, 06:51:00",
+          "chassis": [
+            {
+              "id": [
+                {
+                  "type": "mac",
+                  "value": "02:00:00:00:00:13"
+                }
+              ],
+              "name": [
+                {
+                  "value": "peer-8"
+                }
+              ],
+              "descr": [
+                {
+                  "value": "scrubbed system description"
+                }
+              ],
+              "mgmt-ip": [
+                {
+                  "value": "192.0.2.52"
+                },
+                {
+                  "value": "2001:db8:13::35"
+                }
+              ],
+              "mgmt-iface": [
+                {
+                  "value": "1"
+                },
+                {
+                  "value": "1"
+                }
+              ],
+              "capability": [
+                {
+                  "type": "Bridge",
+                  "enabled": false
+                },
+                {
+                  "type": "Router",
+                  "enabled": true
+                }
+              ]
+            }
+          ],
+          "port": [
+            {
+              "id": [
+                {
+                  "type": "ifname",
+                  "value": "swp1"
+                }
+              ],
+              "descr": [
+                {
+                  "value": "scrubbed port description"
+                }
+              ],
+              "ttl": [
+                {
+                  "value": "120"
+                }
+              ],
+              "mfs": [
+                {
+                  "value": "9100"
+                }
+              ],
+              "auto-negotiation": [
+                {
+                  "supported": true,
+                  "enabled": true,
+                  "current": [
+                    {
+                      "value": "unknown"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "vlan": [
+            {
+              "vlan-id": "10",
+              "pvid": false,
+              "value": "vlan-10"
+            }
+          ],
+          "lldp-med": [
+            {
+              "device-type": [
+                {
+                  "value": "Network Connectivity Device"
+                }
+              ],
+              "capability": [
+                {
+                  "type": "Capabilities",
+                  "available": true
+                },
+                {
+                  "type": "Policy",
+                  "available": true
+                },
+                {
+                  "type": "Location",
+                  "available": true
+                },
+                {
+                  "type": "MDI/PSE",
+                  "available": true
+                },
+                {
+                  "type": "MDI/PD",
+                  "available": true
+                },
+                {
+                  "type": "Inventory",
+                  "available": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "swp56",
+          "via": "LLDP",
+          "rid": "6334",
+          "age": "21 days, 05:59:24",
+          "chassis": [
+            {
+              "id": [
+                {
+                  "type": "mac",
+                  "value": "02:00:00:00:00:14"
+                }
+              ],
+              "name": [
+                {
+                  "value": "peer-9"
+                }
+              ],
+              "descr": [
+                {
+                  "value": "scrubbed system description"
+                }
+              ],
+              "mgmt-ip": [
+                {
+                  "value": "192.0.2.54"
+                },
+                {
+                  "value": "2001:db8:14::37"
+                }
+              ],
+              "mgmt-iface": [
+                {
+                  "value": "1"
+                },
+                {
+                  "value": "1"
+                }
+              ],
+              "capability": [
+                {
+                  "type": "Bridge",
+                  "enabled": false
+                },
+                {
+                  "type": "Router",
+                  "enabled": true
+                }
+              ]
+            }
+          ],
+          "port": [
+            {
+              "id": [
+                {
+                  "type": "ifname",
+                  "value": "swp1"
+                }
+              ],
+              "descr": [
+                {
+                  "value": "scrubbed port description"
+                }
+              ],
+              "ttl": [
+                {
+                  "value": "120"
+                }
+              ],
+              "mfs": [
+                {
+                  "value": "9100"
+                }
+              ],
+              "auto-negotiation": [
+                {
+                  "supported": true,
+                  "enabled": true,
+                  "current": [
+                    {
+                      "value": "unknown"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "vlan": [
+            {
+              "vlan-id": "10",
+              "pvid": false,
+              "value": "vlan-10"
+            }
+          ],
+          "lldp-med": [
+            {
+              "device-type": [
+                {
+                  "value": "Network Connectivity Device"
+                }
+              ],
+              "capability": [
+                {
+                  "type": "Capabilities",
+                  "available": true
+                },
+                {
+                  "type": "Policy",
+                  "available": true
+                },
+                {
+                  "type": "Location",
+                  "available": true
+                },
+                {
+                  "type": "MDI/PSE",
+                  "available": true
+                },
+                {
+                  "type": "MDI/PD",
+                  "available": true
+                },
+                {
+                  "type": "Inventory",
+                  "available": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

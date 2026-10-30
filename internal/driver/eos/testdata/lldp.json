@@ -1,0 +1,96 @@
+{
+  "lldpNeighbors": {
+    "Ethernet1": {
+      "lldpNeighborInfo": [
+        {
+          "chassisIdType": "macAddress",
+          "chassisId": "0200.0000.0003",
+          "systemName": "peer-1",
+          "systemDescription": "scrubbed description",
+          "systemCapabilities": {
+            "router": true
+          },
+          "lastContactTime": 1793318738.0723505,
+          "neighborDiscoveryTime": 1785597434.847654,
+          "lastChangeTime": 1785597434.847654,
+          "ttl": 120,
+          "managementAddresses": [
+            {
+              "addressType": "ipv6",
+              "address": "2001:db8:3::10",
+              "interfaceNumType": "ifIndex",
+              "interfaceNum": 2,
+              "oidString": ""
+            }
+          ],
+          "neighborInterfaceInfo": {
+            "interfaceIdType": "macAddress",
+            "interfaceId": "0200.0000.0003",
+            "interfaceId_v2": "0200.0000.0003",
+            "interfaceDescription": "scrubbed description",
+            "vlanNames": {},
+            "unknownOrgDefinedTlvs": [],
+            "ztpBootVlan": 0,
+            "portAndProtocolVlanSupported": {},
+            "portAndProtocolVlanEnabled": {},
+            "protocolIdentityInfo": [],
+            "autoNegAdvertisedCapabilities": [],
+            "unknownTlvs": []
+          }
+        }
+      ]
+    },
+    "Ethernet49": {
+      "lldpNeighborInfo": [
+        {
+          "chassisIdType": "macAddress",
+          "chassisId": "0200.0000.0004",
+          "systemName": "peer-2",
+          "systemDescription": "scrubbed description",
+          "systemCapabilities": {
+            "bridge": true,
+            "router": true
+          },
+          "lastContactTime": 1793318739.0219722,
+          "neighborDiscoveryTime": 1777032171.9977858,
+          "lastChangeTime": 1777032173.998699,
+          "ttl": 120,
+          "managementAddresses": [
+            {
+              "addressType": "ipv4",
+              "address": "192.0.2.2",
+              "interfaceNumType": "ifIndex",
+              "interfaceNum": 5000000,
+              "oidString": ""
+            }
+          ],
+          "neighborInterfaceInfo": {
+            "interfaceIdType": "interfaceName",
+            "interfaceId": "\"Ethernet1\"",
+            "interfaceId_v2": "Ethernet1",
+            "interfaceDescription": "scrubbed description",
+            "linkAggregation8023Status": "capableAndEnabled",
+            "linkAggregation8023InterfaceId": 1000010,
+            "maxFrameSize": 9416,
+            "portVlanId": 2602,
+            "vlanNames": {},
+            "medInfo": {
+              "networkPolicies": [],
+              "serialNumberTlvInfo": "REDACTED"
+            },
+            "unknownOrgDefinedTlvs": [],
+            "ztpBootVlan": 0,
+            "portAndProtocolVlanSupported": {},
+            "portAndProtocolVlanEnabled": {},
+            "protocolIdentityInfo": [],
+            "autoNegAdvertisedCapabilities": [],
+            "unknownTlvs": []
+          }
+        }
+      ]
+    },
+    "Management1": {
+      "lldpNeighborInfo": []
+    }
+  }
+}

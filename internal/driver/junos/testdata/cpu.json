@@ -1,0 +1,210 @@
+{
+  "route-engine-information": [
+    {
+      "attributes": {
+        "xmlns": "http://xml.juniper.net/junos/24.4R0/junos-chassis"
+      },
+      "route-engine": [
+        {
+          "slot": [
+            {
+              "data": "0"
+            }
+          ],
+          "mastership-state": [
+            {
+              "data": "master"
+            }
+          ],
+          "mastership-priority": [
+            {
+              "data": "master (default)"
+            }
+          ],
+          "status": [
+            {
+              "data": "OK"
+            }
+          ],
+          "temperature": [
+            {
+              "data": "44 degrees C / 111 degrees F",
+              "attributes": {
+                "junos:celsius": "44"
+              }
+            }
+          ],
+          "cpu-temperature": [
+            {
+              "data": "44 degrees C / 111 degrees F",
+              "attributes": {
+                "junos:celsius": "44"
+              }
+            }
+          ],
+          "memory-dram-size": [
+            {
+              "data": "98243 MB"
+            }
+          ],
+          "memory-installed-size": [
+            {
+              "data": "(98304 MB installed)"
+            }
+          ],
+          "memory-buffer-utilization": [
+            {
+              "data": "4"
+            }
+          ],
+          "cpu-user": [
+            {
+              "data": "0"
+            }
+          ],
+          "cpu-background": [
+            {
+              "data": "0"
+            }
+          ],
+          "cpu-system": [
+            {
+              "data": "0"
+            }
+          ],
+          "cpu-interrupt": [
+            {
+              "data": "0"
+            }
+          ],
+          "cpu-idle": [
+            {
+              "data": "99"
+            }
+          ],
+          "cpu-user1": [
+            {
+              "data": "1"
+            }
+          ],
+          "cpu-background1": [
+            {
+              "data": "0"
+            }
+          ],
+          "cpu-system1": [
+            {
+              "data": "0"
+            }
+          ],
+          "cpu-interrupt1": [
+            {
+              "data": "0"
+            }
+          ],
+          "cpu-idle1": [
+            {
+              "data": "99"
+            }
+          ],
+          "cpu-user2": [
+            {
+              "data": "1"
+            }
+          ],
+          "cpu-background2": [
+            {
+              "data": "0"
+            }
+          ],
+          "cpu-system2": [
+            {
+              "data": "0"
+            }
+          ],
+          "cpu-interrupt2": [
+            {
+              "data": "0"
+            }
+          ],
+          "cpu-idle2": [
+            {
+              "data": "99"
+            }
+          ],
+          "cpu-user3": [
+            {
+              "data": "1"
+            }
+          ],
+          "cpu-background3": [
+            {
+              "data": "0"
+            }
+          ],
+          "cpu-system3": [
+            {
+              "data": "0"
+            }
+          ],
+          "cpu-interrupt3": [
+            {
+              "data": "0"
+            }
+          ],
+          "cpu-idle3": [
+            {
+              "data": "99"
+            }
+          ],
+          "model": [
+            {
+              "data": "RE 2700 8C 128G"
+            }
+          ],
+          "serial-number": [
+            {
+              "data": "REDACTED"
+            }
+          ],
+          "start-time": [
+            {
+              "data": "2026-10-22 11:28:32 UTC",
+              "attributes": {
+                "junos:seconds": "1792668512"
+              }
+            }
+          ],
+          "up-time": [
+            {
+              "data": "7 days, 12 hours, 37 minutes, 35 seconds",
+              "attributes": {
+                "junos:seconds": "650255"
+              }
+            }
+          ],
+          "last-reboot-reason": [
+            {
+              "data": "0x2000:hypervisor reboot"
+            }
+          ],
+          "load-average-one": [
+            {
+              "data": "0.32"
+            }
+          ],
+          "load-average-five": [
+            {
+              "data": "0.27"
+            }
+          ],
+          "load-average-fifteen": [
+            {
+              "data": "0.29"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

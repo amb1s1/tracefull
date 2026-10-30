@@ -3,6 +3,7 @@ package root
 import (
 	"github.com/spf13/cobra"
 
+	"github.com/amb1s1/tracefull/cmd/tracefull/commands/collect"
 	"github.com/amb1s1/tracefull/cmd/tracefull/commands/enrich"
 	"github.com/amb1s1/tracefull/cmd/tracefull/commands/explain"
 	"github.com/amb1s1/tracefull/cmd/tracefull/commands/inventory"
@@ -13,6 +14,6 @@ import (
 
 func New() *cobra.Command {
 	c := &cobra.Command{Use: "tracefull", Short: "Investigate network paths and interpret saved traces", SilenceErrors: true, SilenceUsage: true}
-	c.AddCommand(enrich.New(), investigate.New(), explain.New(), schema.New(), inventory.New(), version.New())
+	c.AddCommand(collect.New(), enrich.New(), investigate.New(), explain.New(), schema.New(), inventory.New(), version.New())
 	return c
 }
