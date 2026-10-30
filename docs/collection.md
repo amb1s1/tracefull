@@ -94,7 +94,7 @@ The other profiles and validated formats have distinct limits:
 | `frr`, `linux` | Shared iproute2/procfs/FRR/lldpd formats validated on Cumulus Linux 5.16.0 / FRR 10.0.3; adds FRR `show version` | Both select the Linux/FRR profile. Requires `ip`, `vtysh`, lldpd and `ethtool` for their groups. OS branding is not restricted to Cumulus, but other distributions/builds have no runtime validation. No kernel-route fallback if FRR is missing. |
 | `junos` | Terse addresses, detailed connected IPv4 route, empty IPv6 lookup, extensive physical/logical counters, LLDP, version, uptime, master RE load and per-lane DOM JSON | Address routing-instance membership is unknown. Active RIB selection does not establish hardware installation. Physical MTU includes link framing. Logical owners also select their physical parent for observation. |
 | `arista-eos` (`eos`) | IPv4/IPv6 interfaces, IPv6 static default route, counters, LLDP, version/uptime, CPU/load and Ethernet DOM JSON | Hardware-programmed state comes from explicit fields. CPU utilization has an unspecified sampling interval. SVI-to-physical-port mapping is unavailable, so an SVI alone cannot select uplink optics. Empty DOM remains unknown. |
-| `cisco-ios-xr` (`iosxr`) | IPv4/IPv6 brief interfaces, connected IPv6 route, counters, LLDP, version/uptime, CPU utilization and per-lane optics text | Connected route and no-route layouts only; other route layouts fail with raw output retained. IPv6 context/prefix and hardware installation remain unknown. CPU percent is separate from load average. This is not an IOS-XE alias. |
+| `cisco-ios-xr` (`iosxr`) | IPv4/IPv6 brief interfaces, connected IPv6 and IPv4/IPv6 IS-IS routes, counters, LLDP, version/uptime, CPU utilization and per-lane optics text | Connected, no-route and captured primary IS-IS descriptor layouts only; other route layouts fail with raw output retained. IPv6 interface context/prefix and hardware installation remain unknown. CPU percent is separate from load average. This is not an IOS-XE alias. |
 
 The command policies accept only full reviewed command shapes. Fixed `| json` and
 `| display json` suffixes are remote CLI formatting operations; additional pipes,
@@ -103,6 +103,17 @@ redirection and shell expansion are rejected. Junos, EOS and IOS-XR do not use
 Their IPv4/IPv6 planners are tested offline, but captures establish only the
 output variants listed above. Junos, EOS and IOS-XR still reject nondefault
 contexts before connecting.
+
+IOS-XR IS-IS captures include one IPv4 next hop and two IPv4/IPv6 next hops.
+The first descriptor address is the next hop; `from` identifies the originator,
+as described in Cisco's
+[RIB command reference](https://www.cisco.com/c/en/us/td/docs/iosxr/ncs5500/routing/b-ncs5500-routing-cli-reference/b-ncs5500-routing-cli-reference_chapter_0100.html).
+The `Installed` timestamp establishes RIB selection only. Hardware installation
+stays null, so these observations can select interfaces for collection but cannot
+trigger forwarding-path/PMTU comparisons. IPv6 link-local next hops retain their
+separate interface scope. Labels stay in raw evidence; no MPLS path is inferred.
+Backup, recursive, tunnel and other uncaptured descriptor layouts fail parsing.
+BGP and other dynamic protocols remain unsupported on this driver.
 
 Junos and IOS-XR optics preserve lane IDs, temperature in Celsius and RX/TX dBm;
 missing readings remain null. EOS DOM uses its reported channel. These snapshots
