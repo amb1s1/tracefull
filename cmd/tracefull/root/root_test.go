@@ -164,3 +164,28 @@ func TestMultipleResponderCLICompatibility(t *testing.T) {
 		t.Fatalf("explanation missing: %v\n%s", e, out)
 	}
 }
+
+func TestCollectConfigurationPrecedence(t *testing.T) {
+	dir := t.TempDir()
+	t.Setenv("XDG_CONFIG_HOME", dir)
+	if err := os.Mkdir(filepath.Join(dir, "tracefull"), 0700); err != nil {
+		t.Fatal(err)
+	}
+	inv := filepath.Join(dir, "inventory.json")
+	if err := os.WriteFile(inv, []byte(`{"devices":[{"name":"switch-a","address":"192.0.2.1","platform":"cumulus"}]}`), 0600); err != nil {
+		t.Fatal(err)
+	}
+	config := fmt.Sprintf("inventory: %q\ncollect: [version]\nidentity: [one, two]\njson: true\n", inv)
+	if err := os.WriteFile(filepath.Join(dir, "tracefull", "config.yaml"), []byte(config), 0600); err != nil {
+		t.Fatal(err)
+	}
+	t.Setenv("TRACEFULL_COLLECT", "ingress")
+	out, _, err := execute(t, "collect", "--from", "-", "--dry-run", "--collect", "version")
+	if err != nil || !json.Valid([]byte(out)) || !strings.Contains(out, "cat /etc/os-release") || strings.Contains(out, "ip -j address show") {
+		t.Fatal(err, out)
+	}
+	out, _, err = execute(t, "collect", "--from", "-", "--dry-run", "--format", "text")
+	if err != nil || json.Valid([]byte(out)) || !strings.Contains(out, "ip -j address show") {
+		t.Fatal(err, out)
+	}
+}

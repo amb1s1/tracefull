@@ -117,23 +117,26 @@ func Normalize(values map[string]string) (map[string]string, error) {
 		}
 		out["format"] = selected
 	}
-	if raw, ok := out["no-rdns"]; ok {
-		disabled, e := strconv.ParseBool(raw)
-		if e != nil {
-			return nil, e
-		}
-		delete(out, "no-rdns")
-		if disabled {
-			if raw, ok := out["rdns"]; ok {
-				enabled, e := strconv.ParseBool(raw)
-				if e != nil {
-					return nil, e
-				}
-				if enabled {
-					return nil, fmt.Errorf("rdns and no-rdns conflict within configuration layer")
-				}
+	for _, positive := range []string{"rdns", "live"} {
+		negative := "no-" + positive
+		if raw, ok := out[negative]; ok {
+			disabled, e := strconv.ParseBool(raw)
+			if e != nil {
+				return nil, e
 			}
-			out["rdns"] = "false"
+			delete(out, negative)
+			if disabled {
+				if raw, ok := out[positive]; ok {
+					enabled, e := strconv.ParseBool(raw)
+					if e != nil {
+						return nil, e
+					}
+					if enabled {
+						return nil, fmt.Errorf("%s and %s conflict within configuration layer", positive, negative)
+					}
+				}
+				out[positive] = "false"
+			}
 		}
 	}
 	return out, nil

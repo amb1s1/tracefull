@@ -14,12 +14,14 @@ func New() *cobra.Command {
 		data := schema.Report
 		if kind == "investigation" {
 			data = schema.Investigation
+		} else if kind == "collection" {
+			data = schema.Collection
 		} else if kind != "report" {
 			return fmt.Errorf("unknown schema kind %q", kind)
 		}
 		_, err := c.OutOrStdout().Write(data)
 		return err
 	}}
-	c.Flags().StringVar(&kind, "kind", kind, "report or investigation")
+	c.Flags().StringVar(&kind, "kind", kind, "report, investigation or collection")
 	return c
 }
