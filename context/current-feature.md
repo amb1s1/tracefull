@@ -49,6 +49,15 @@ and `783b0a5`. [PR #5](https://github.com/amb1s1/tracefull/pull/5) is authoritat
 for subsequent CI/integration status. No release or deployment is included.
 Full v0.2 retains the platform and format gaps below.
 
+CI exposed a timing-dependent assertion in the existing 10 ms collection deadline
+test: expiration before session acquisition correctly skipped the session, but the
+test still required a close. The assertion now requires cleanup only for acquired
+sessions. A command-start barrier separately verifies running cancellation closes
+the session, and an expired-context test verifies no session is acquired. No
+runtime deadline or cleanup behavior changed; checks remain enabled. The focused
+cancellation/deadline tests passed 100 repetitions under the race detector, and
+`make check` passed again after the correction.
+
 ## Completed slice — explicit management VRF
 
 Workflow at PR handoff: Ready for review on `codex/mgmt-vrf`.
