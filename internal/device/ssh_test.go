@@ -414,3 +414,27 @@ func TestSSHQueuedCancellation(t *testing.T) {
 		t.Fatal("queued command reached server")
 	}
 }
+
+func TestDefaultIdentityFiles(t *testing.T) {
+	o, _ := fakeSSH(t)
+	dir := t.TempDir()
+	data, err := os.ReadFile(o.IdentityFiles[0])
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err = os.WriteFile(filepath.Join(dir, "id_ed25519"), data, 0600); err != nil {
+		t.Fatal(err)
+	}
+	o.IdentityFiles = nil
+	o.DefaultIdentityDir = dir
+	s, err := DialSSH(context.Background(), o, testPolicy)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer func() { _ = s.Close() }()
+	// Missing defaults are skipped, but an explicitly selected missing key fails.
+	o.IdentityFiles = []string{filepath.Join(dir, "missing")}
+	if _, err = DialSSH(context.Background(), o, testPolicy); err == nil {
+		t.Fatal("missing explicit identity accepted")
+	}
+}

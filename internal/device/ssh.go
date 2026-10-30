@@ -8,6 +8,7 @@ import (
 	"io"
 	"net"
 	"os"
+	"path/filepath"
 	"sync"
 	"time"
 
@@ -21,6 +22,7 @@ import (
 type SSHOptions struct {
 	Address, User, KnownHosts, AgentSocket string
 	IdentityFiles                          []string
+	DefaultIdentityDir                     string
 	InsecureHostKey                        bool
 	ConnectTimeout, CommandTimeout         time.Duration
 	Jump                                   *SSHOptions
@@ -136,9 +138,20 @@ func authentication(ctx context.Context, o SSHOptions) ([]ssh.AuthMethod, func()
 			}
 		}
 	}
-	for _, path := range o.IdentityFiles {
+	paths := o.IdentityFiles
+	defaults := len(paths) == 0 && o.DefaultIdentityDir != ""
+	if defaults {
+		for _, name := range []string{"id_ed25519", "id_ecdsa", "id_rsa"} {
+			paths = append(paths, filepath.Join(o.DefaultIdentityDir, name))
+		}
+	}
+	for _, path := range paths {
 		key, err := readKey(path)
 		if err != nil {
+			var encrypted *ssh.PassphraseMissingError
+			if defaults && (errors.Is(err, os.ErrNotExist) || errors.As(err, &encrypted)) {
+				continue
+			}
 			cleanup()
 			return nil, cleanup, err
 		}
