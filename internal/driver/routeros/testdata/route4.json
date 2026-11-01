@@ -1,0 +1,18 @@
+[
+  {
+    ".id": "*80000001",
+    "active": true,
+    "distance": 1,
+    "dst-address": "0.0.0.0/0",
+    "dynamic": false,
+    "gateway": "192.0.2.3",
+    "immediate-gw": [
+      "192.0.2.3%sfp28-1"
+    ],
+    "inactive": false,
+    "routing-table": "main",
+    "scope": 30,
+    "static": true,
+    "target-scope": 10
+  }
+]

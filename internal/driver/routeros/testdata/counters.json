@@ -1,0 +1,38 @@
+[
+  {
+    ".id": "*B",
+    "actual-mtu": 1500,
+    "comment": "REDACTED",
+    "default-name": "sfp28-1",
+    "disabled": false,
+    "l2mtu": 1584,
+    "last-link-up-time": "2026-10-13 07:26:34",
+    "link-downs": 0,
+    "mac-address": "02:00:00:00:00:04",
+    "max-l2mtu": 9570,
+    "mtu": 1500,
+    "name": "sfp28-1",
+    "running": true,
+    "type": "ether",
+    "vrf": "main"
+  },
+  {
+    ".id": "*B",
+    "comment": "REDACTED",
+    "disabled": false,
+    "fp-rps-drop": 0,
+    "fp-rx-byte": 23803874921,
+    "fp-rx-packet": 142972020,
+    "fp-tx-byte": 0,
+    "fp-tx-packet": 0,
+    "last-link-up-time": "2026-10-13 07:26:34",
+    "link-downs": 0,
+    "name": "sfp28-1",
+    "running": true,
+    "rx-byte": 24375763001,
+    "rx-packet": 142972020,
+    "tx-byte": 376817137954,
+    "tx-packet": 388764897,
+    "tx-queue-drop": 109
+  }
+]

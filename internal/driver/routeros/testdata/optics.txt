@@ -1,0 +1,46 @@
+;;; scrubbed comment
+                      name: sfp28-1
+                    status: link-ok
+          auto-negotiation: done
+                      rate: 1Gbps
+               full-duplex: yes
+           tx-flow-control: no
+           rx-flow-control: no
+                       fec: off
+                 supported: 10M-baseT-half
+                            10M-baseT-full
+                            100M-baseT-half
+                            100M-baseT-full
+                            1G-baseT-half
+                            1G-baseT-full
+                            1G-baseX
+                            2.5G-baseT
+                            2.5G-baseX
+                            5G-baseT
+                            10G-baseT
+                            10G-baseSR-LR
+                            10G-baseCR
+                            25G-baseSR-LR
+                            25G-baseCR
+             sfp-supported: 1G-baseX
+               advertising: 1G-baseX
+  link-partner-advertising:
+        sfp-module-present: yes
+               sfp-rx-loss: no
+              sfp-tx-fault: no
+                  sfp-type: SFP/SFP+/SFP28/SFP56
+        sfp-connector-type: LC
+              sfp-encoding: nrz
+        sfp-link-length-sm: 20km
+           sfp-vendor-name: MikroTik
+    sfp-vendor-part-number: S-31DLC20D
+       sfp-vendor-revision: 2.0
+         sfp-vendor-serial: REDACTED
+    sfp-manufacturing-date: 25-10-27
+            sfp-wavelength: 1310nm
+           sfp-temperature: 36C
+        sfp-supply-voltage: 3.287V
+       sfp-tx-bias-current: 17mA
+              sfp-tx-power: -6.495dBm
+              sfp-rx-power: -6.817dBm
+           eeprom-checksum: good
