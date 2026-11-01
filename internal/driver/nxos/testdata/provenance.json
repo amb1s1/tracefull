@@ -1,0 +1,86 @@
+{
+  "platform": "Cisco NX-OS 10.5(6)",
+  "source": "Authorized read-only device captures; private originals retained outside Git",
+  "files": [
+    {
+      "file": "version-json.json",
+      "source_stdout_sha256": "92169a0d7904d656edc067b8281ba122f50a9648900b9f7a9f22ea5527e5baee",
+      "source_command": "show version | json",
+      "started_unix": 1793575617.2231119,
+      "ended_unix": 1793575623.193985,
+      "excerpt": false
+    },
+    {
+      "file": "route4.json",
+      "source_stdout_sha256": "ea9aefc4c4c01e160bf297e7247dcfdfe6a218c21c7655c993c9af15a4849a7b",
+      "source_command": "show ip route 192.0.2.1 | json",
+      "started_unix": 1793575630.257556,
+      "ended_unix": 1793575633.890569,
+      "excerpt": false
+    },
+    {
+      "file": "route6.json",
+      "source_stdout_sha256": "479fc7cb0a16b750bd2c106df701f44268489137833c285f3779c2155f2ed4cf",
+      "source_command": "show ipv6 route 2001:db8:2::5 | json",
+      "started_unix": 1793575633.891052,
+      "ended_unix": 1793575637.3908758,
+      "excerpt": false
+    },
+    {
+      "file": "cpu.json",
+      "source_stdout_sha256": "145ae2ac165c6579991c201c39859e4ef0dfea234d881fa2cddd3e46bfb92159",
+      "source_command": "show system resources | json",
+      "started_unix": 1793575641.168888,
+      "ended_unix": 1793575646.487648,
+      "excerpt": false
+    },
+    {
+      "file": "lldp.json",
+      "source_stdout_sha256": "967623579babd6c6e1f7f1761792ea58dfb7b37a8f572dca02b3b24fe7af9c15",
+      "source_command": "show lldp neighbors detail | json",
+      "started_unix": 1793575637.3912802,
+      "ended_unix": 1793575641.162076,
+      "excerpt": true
+    },
+    {
+      "file": "addresses4-all.json",
+      "source_stdout_sha256": "85aaddb408da56c39e9c82606b9d7af4366e412a4900f33cf3aa2b41b0524acf",
+      "source_command": "show ip interface brief vrf all | json",
+      "started_unix": 1793575683.764161,
+      "ended_unix": 1793575687.4340212,
+      "excerpt": false
+    },
+    {
+      "file": "addresses6-all.json",
+      "source_stdout_sha256": "47ab03ab038bfa7dc46f883413489d2cf6472a376eb4e5d210b22f5fb6614566",
+      "source_command": "show ipv6 interface brief vrf all | json",
+      "started_unix": 1793575687.434579,
+      "ended_unix": 1793575691.039718,
+      "excerpt": false
+    },
+    {
+      "file": "counters-mgmt.json",
+      "source_stdout_sha256": "68ee93c13f7cae5051dd1151bb09f05cdabec198e0a0f9b223079f7ee1c5973d",
+      "source_command": "show interface mgmt0 | json",
+      "started_unix": 1793575691.040145,
+      "ended_unix": 1793575694.557269,
+      "excerpt": false
+    },
+    {
+      "file": "counters-uplink.json",
+      "source_stdout_sha256": "83cb0ecfd1012db90cef4055b8016db5f8c402cb54f1e0c168c117316fdbb97e",
+      "source_command": "show interface Ethernet1/1 | json",
+      "started_unix": 1793575694.5576909,
+      "ended_unix": 1793575698.139787,
+      "excerpt": false
+    },
+    {
+      "file": "optics-uplink.json",
+      "source_stdout_sha256": "96eb3226a7075f0ee7ecf7f0df04359395c41d1733f2e5f00bee01d6253468b7",
+      "source_command": "show interface Ethernet1/1 transceiver details | json",
+      "started_unix": 1793575698.140191,
+      "ended_unix": 1793575701.776711,
+      "excerpt": false
+    }
+  ]
+}

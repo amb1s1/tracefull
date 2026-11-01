@@ -1,0 +1,39 @@
+{
+  "header_str": "Cisco Nexus Operating System (NX-OS) Software\nTAC support: http://www.cisco.com/tac\nCopyright (C) 2002-2026, Cisco and/or its affiliates.\nAll rights reserved.\nThe copyrights to certain works contained in this software are\nowned by other third parties and used and distributed under their own\nlicenses, such as open source.  This software is provided \"as is,\" and unless\notherwise stated, there is no warranty, express or implied, including but not\nlimited to warranties of merchantability and fitness for a particular purpose.\nCertain components of this software are licensed under\nthe GNU General Public License (GPL) version 2.0 or \nGNU General Public License (GPL) version 3.0  or the GNU\nLesser General Public License (LGPL) Version 2.1 or \nLesser General Public License (LGPL) Version 2.0. \nA copy of each such license is available at\nhttp://www.opensource.org/licenses/gpl-2.0.php and\nhttp://opensource.org/licenses/gpl-3.0.html and\nhttp://www.opensource.org/licenses/lgpl-2.1.php and\nhttp://www.gnu.org/licenses/old-licenses/library.txt.",
+  "bios_ver_str": "01.11",
+  "kickstart_ver_str": "10.5(6)",
+  "release_type": "Maintenance Release",
+  "nxos_ver_str": "10.5(6)",
+  "host_nxos_ver_str": "10.5(6)",
+  "bios_cmpl_time": "12/04/2024",
+  "kick_file_name": "bootflash:///nxos64-cs.10.5.6.M.bin",
+  "nxos_file_name": "bootflash:///nxos64-cs.10.5.6.M.bin",
+  "kick_cmpl_time": "6/15/2026 30:00:00",
+  "nxos_cmpl_time": "6/15/2026 30:00:00",
+  "kick_tmstmp": "07/13/2026 20:50:58",
+  "nxos_tmstmp": "07/13/2026 20:50:58",
+  "boot_lxc_mode": "LXC",
+  "chassis_id": "cisco Nexus9000 C93180YC-FX3 Chassis",
+  "cpu_name": "Intel(R) Xeon(R) CPU D-1526 @ 1.80GHz",
+  "memory": "32802576",
+  "mem_type": "kB",
+  "proc_board_id": "REDACTED",
+  "host_name": "REDACTED",
+  "bootflash_size": "115810648",
+  "kern_uptm_days": "0",
+  "kern_uptm_hrs": "12",
+  "kern_uptm_mins": "10",
+  "kern_uptm_secs": "28",
+  "rr_usecs": "669431",
+  "rr_ctime": "Sun Nov  1 11:19:19 2026",
+  "rr_reason": "Module PowerCycled",
+  "rr_sys_ver": null,
+  "rr_service": "HW check by card-client",
+  "plugins": "Core Plugin, Ethernet Plugin",
+  "manufacturer": "Cisco Systems, Inc.",
+  "TABLE_package_list": {
+    "ROW_package_list": {
+      "package_id": null
+    }
+  }
+}
