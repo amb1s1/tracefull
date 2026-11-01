@@ -1,0 +1,21 @@
+
+
+
+Vlan2602 is up, line protocol is up
+  IPv6 is enabled, link-local address is fe80::2
+  No Virtual link-local address(es):
+  Global unicast address(es):
+    2001:db8:2::5, subnet is 2001:db8:2::0/64
+  Joined group address(es):
+    FF02::1
+    FF02::2
+    FF02::1:FF00:9
+    FF02::1:FF80:24FE
+  MTU is 9198 bytes
+  ICMP error messages limited to one every 100 milliseconds
+  ICMP redirects are disabled
+  ICMP unreachables are sent
+  ND DAD is enabled, number of DAD attempts: 1
+  ND reachable time is 30000 milliseconds (using 30000)
+  ND RAs are suppressed (all)
+  Hosts use stateless autoconfig for addresses.

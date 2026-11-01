@@ -1,0 +1,102 @@
+{
+  "platform": "Cisco IOS-XE 17.12.03",
+  "source": "Authorized read-only device captures; private originals retained outside Git",
+  "files": [
+    {
+      "file": "version.txt",
+      "source_stdout_sha256": "9273aee95b937838c41c92284e23044dc2ac70b3634046dff75d3697025cf1cb",
+      "source_command": "show version",
+      "started_unix": 1793575590.579055,
+      "ended_unix": 1793575593.7185469,
+      "excerpt": false
+    },
+    {
+      "file": "addresses4.txt",
+      "source_stdout_sha256": "20cfb54dbb6a2395f7d831a955bdf8a9473e3368cee09491a3e8516973b28aa8",
+      "source_command": "show ip interface brief",
+      "started_unix": 1793575617.204156,
+      "ended_unix": 1793575619.413822,
+      "excerpt": false
+    },
+    {
+      "file": "addresses6.txt",
+      "source_stdout_sha256": "5629ae14055414da4b28b945b26cc1753e6df3196454351d147489566406705c",
+      "source_command": "show ipv6 interface brief",
+      "started_unix": 1793575619.414809,
+      "ended_unix": 1793575621.378073,
+      "excerpt": false
+    },
+    {
+      "file": "route4.txt",
+      "source_stdout_sha256": "dd5f259f5beaf38269c3cd2d9090874607cfe6ff5657f8c0357639caa67b7be5",
+      "source_command": "show ip route 192.0.2.1",
+      "started_unix": 1793575621.3785422,
+      "ended_unix": 1793575623.363531,
+      "excerpt": false
+    },
+    {
+      "file": "route6.txt",
+      "source_stdout_sha256": "15c62cbd913090ae9d711d677f4da570bfa9defc6456c2a4e3f49580d228288e",
+      "source_command": "show ipv6 route 2001:db8:3::9",
+      "started_unix": 1793575623.3640552,
+      "ended_unix": 1793575625.243562,
+      "excerpt": false
+    },
+    {
+      "file": "lldp.txt",
+      "source_stdout_sha256": "38ac5103faed2e9c5301e3aee7948db95634fb94f7a51819d1e73496874c0b32",
+      "source_command": "show lldp neighbors detail",
+      "started_unix": 1793575625.2439702,
+      "ended_unix": 1793575629.835752,
+      "excerpt": false
+    },
+    {
+      "file": "cpu.txt",
+      "source_stdout_sha256": "9583f780b1fe41a8e9804aa138c07350b2e4f30fefb91dec0c4a744e007c7819",
+      "source_command": "show processes cpu",
+      "started_unix": 1793575629.83625,
+      "ended_unix": 1793575632.554786,
+      "excerpt": true
+    },
+    {
+      "file": "counters-vlan.txt",
+      "source_stdout_sha256": "f1a396bd44397ef6ea420f138f9d87360fca12f8bf229a4926d482c340b5f3bb",
+      "source_command": "show interfaces Vlan2602",
+      "started_unix": 1793575647.77214,
+      "ended_unix": 1793575651.56779,
+      "excerpt": false
+    },
+    {
+      "file": "counters-uplink.txt",
+      "source_stdout_sha256": "652e496adf6df7df914bd0984d7c9874f1c1c861c170abf2df96a4c84ca3c423",
+      "source_command": "show interfaces TenGigabitEthernet1/1/1",
+      "started_unix": 1793575651.568589,
+      "ended_unix": 1793575653.622132,
+      "excerpt": false
+    },
+    {
+      "file": "optics.txt",
+      "source_stdout_sha256": "beae21ab83ecb71bb49b894a0314cf331e30d47c09147880214a1177ec608ca5",
+      "source_command": "show interfaces TenGigabitEthernet1/1/1 transceiver detail",
+      "started_unix": 1793575653.622714,
+      "ended_unix": 1793575655.9294431,
+      "excerpt": false
+    },
+    {
+      "file": "ipv6-interface.txt",
+      "source_stdout_sha256": "1baa1b2e4572a2fb96e2873031f152f8606c4ade9c43d49d46702a1df29ec8e6",
+      "source_command": "show ipv6 interface Vlan2602",
+      "started_unix": 1793575655.929866,
+      "ended_unix": 1793575657.800469,
+      "excerpt": false
+    },
+    {
+      "file": "route6-connected.txt",
+      "source_stdout_sha256": "59f4583a6d3af4f965a97e438c7ce22e8daf050793acd79cd6441dc340c68d57",
+      "source_command": "show ipv6 route 2001:db8:2::5",
+      "started_unix": 1793575657.8010392,
+      "ended_unix": 1793575659.794145,
+      "excerpt": false
+    }
+  ]
+}

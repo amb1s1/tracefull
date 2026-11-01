@@ -1,0 +1,829 @@
+
+
+
+------------------------------------------------
+Local Intf: Te1/1/2
+Local Intf service instance: -
+Chassis id: 0200.0000.0001
+Port id: Ethernet44
+Port Description REDACTED
+System Name:REDACTED
+
+System Description:
+Arista Networks EOS version 4.35.4M running on an Arista Networks DCS-7050SX3-48YC8C
+
+Time remaining: 95 seconds
+System Capabilities: B,R
+Enabled Capabilities: B,R
+Management Addresses:
+    IP: 192.0.2.2
+Auto Negotiation - not supported
+Physical media capabilities - not advertised
+Media Attachment Unit type - not advertised
+Vlan ID: 2602
+Peer Source MAC: 0200.0000.0002
+
+------------------------------------------------
+Local Intf: Te1/1/1
+Local Intf service instance: -
+Chassis id: 0200.0000.0003
+Port id: Ethernet44
+Port Description REDACTED
+System Name:REDACTED
+
+System Description:
+Arista Networks EOS version 4.35.4M running on an Arista Networks DCS-7050SX3-48YC8C
+
+Time remaining: 95 seconds
+System Capabilities: B,R
+Enabled Capabilities: B,R
+Management Addresses:
+    IP: 192.0.2.5
+Auto Negotiation - not supported
+Physical media capabilities - not advertised
+Media Attachment Unit type - not advertised
+Vlan ID: 2602
+Peer Source MAC: 0200.0000.0004
+
+------------------------------------------------
+Local Intf: Gi1/0/10
+Local Intf service instance: -
+Chassis id: 0200.0000.0005
+Port id: 0200.0000.0005
+Port Description:REDACTED
+System Name:REDACTED
+
+System Description:
+Phosphor OpenBMC (Phosphor OpenBMC Project Reference Distro) 3.1.0-dev Linux 6.18.35-cf42ecf-patch-7dcd5e6 #1 SMP Wed Jun 10 00:31:32 UTC 2026 armv7l
+
+Time remaining: 115 seconds
+System Capabilities: B,W,R,S
+Enabled Capabilities: S
+Management Addresses:
+    IP: 192.0.2.6
+    IPV6: 2001:db8:4::a
+Auto Negotiation - supported, enabled
+Physical media capabilities:
+    1000baseT(FD)
+    Asym Pause(FD)
+    Pause(FD)
+    100base-TX(FD)
+    100base-TX(HD)
+    10base-T(FD)
+    10base-T(HD)
+Media Attachment Unit type: 30
+Vlan ID: - not advertised
+Peer Source MAC: 0200.0000.0005
+
+------------------------------------------------
+Local Intf: Gi1/0/31
+Local Intf service instance: -
+Chassis id: 0200.0000.0006
+Port id: 0200.0000.0006
+Port Description:REDACTED
+System Name:REDACTED
+
+System Description:
+Phosphor OpenBMC (Phosphor OpenBMC Project Reference Distro) 2.17.0-dev Linux 6.6.52-f8940d0-dirty-b99c394-00296-gb99c394295eb #1 SMP Mon Sep 23 00:48:44 UTC 2024 armv7l
+
+Time remaining: 99 seconds
+System Capabilities: B,W,R,S
+Enabled Capabilities: S
+Management Addresses:
+    IP: 192.0.2.8
+    IPV6: 2001:db8:4::d
+Auto Negotiation - supported, enabled
+Physical media capabilities:
+    1000baseT(FD)
+    Asym Pause(FD)
+    Pause(FD)
+    100base-TX(FD)
+    100base-TX(HD)
+    10base-T(FD)
+    10base-T(HD)
+Media Attachment Unit type: 30
+Vlan ID: - not advertised
+Peer Source MAC: 0200.0000.0006
+
+------------------------------------------------
+Local Intf: Gi1/0/10
+Local Intf service instance: -
+Chassis id: 0200.0000.0007
+Port id: 0200.0000.0007
+Port Description:REDACTED
+System Name:REDACTED
+
+System Description:
+Phosphor OpenBMC (Phosphor OpenBMC Project Reference Distro) 3.1.0-dev Linux 6.18.35-cf42ecf-patch-7dcd5e6 #1 SMP Wed Jun 10 00:31:32 UTC 2026 armv7l
+
+Time remaining: 115 seconds
+System Capabilities: B,W,R,S
+Enabled Capabilities: S
+Management Addresses:
+    IP: 192.0.2.8
+    IPV6: 2001:db8:4::c
+Auto Negotiation - supported, enabled
+Physical media capabilities:
+    1000baseT(FD)
+    Asym Pause(FD)
+    Pause(FD)
+    100base-TX(FD)
+    100base-TX(HD)
+    10base-T(FD)
+    10base-T(HD)
+Media Attachment Unit type: 30
+Vlan ID: - not advertised
+Peer Source MAC: 0200.0000.0007
+
+------------------------------------------------
+Local Intf: Gi1/0/32
+Local Intf service instance: -
+Chassis id: 0200.0000.0008
+Port id: 0200.0000.0008
+Port Description:REDACTED
+System Name:REDACTED
+
+System Description:
+Phosphor OpenBMC (Phosphor OpenBMC Project Reference Distro) 2.17.0-dev Linux 6.6.52-f8940d0-dirty-b99c394-00296-gb99c394295eb #1 SMP Mon Sep 23 00:48:44 UTC 2024 armv7l
+
+Time remaining: 96 seconds
+System Capabilities: B,W,R,S
+Enabled Capabilities: S
+Management Addresses:
+    IP: 192.0.2.8
+    IPV6: 2001:db8:4::e
+Auto Negotiation - supported, enabled
+Physical media capabilities:
+    1000baseT(FD)
+    Asym Pause(FD)
+    Pause(FD)
+    100base-TX(FD)
+    100base-TX(HD)
+    10base-T(FD)
+    10base-T(HD)
+Media Attachment Unit type: 30
+Vlan ID: - not advertised
+Peer Source MAC: 0200.0000.0008
+
+------------------------------------------------
+Local Intf: Gi1/0/31
+Local Intf service instance: -
+Chassis id: 0200.0000.0009
+Port id: 0200.0000.0009
+Port Description:REDACTED
+System Name:REDACTED
+
+System Description:
+Phosphor OpenBMC (Phosphor OpenBMC Project Reference Distro) 2.17.0-dev Linux 6.6.52-f8940d0-dirty-b99c394-00296-gb99c394295eb #1 SMP Mon Sep 23 00:48:44 UTC 2024 armv7l
+
+Time remaining: 99 seconds
+System Capabilities: B,W,R,S
+Enabled Capabilities: S
+Management Addresses:
+    IP: 192.0.2.8
+    IPV6: 2001:db8:4::10
+Auto Negotiation - supported, enabled
+Physical media capabilities:
+    1000baseT(FD)
+    Asym Pause(FD)
+    Pause(FD)
+    100base-TX(FD)
+    100base-TX(HD)
+    10base-T(FD)
+    10base-T(HD)
+Media Attachment Unit type: 30
+Vlan ID: - not advertised
+Peer Source MAC: 0200.0000.0009
+
+------------------------------------------------
+Local Intf: Gi1/0/32
+Local Intf service instance: -
+Chassis id: 0200.0000.000a
+Port id: 0200.0000.000a
+Port Description:REDACTED
+System Name:REDACTED
+
+System Description:
+Phosphor OpenBMC (Phosphor OpenBMC Project Reference Distro) 4.06.0-dev Linux 6.18.35-cf42ecf-patch-587eebc #1 SMP Wed Jun 10 00:31:32 UTC 2026 armv7l
+
+Time remaining: 96 seconds
+System Capabilities: B,W,R,S
+Enabled Capabilities: S
+Management Addresses:
+    IP: 192.0.2.11
+    IPV6: 2001:db8:4::13
+Auto Negotiation - supported, enabled
+Physical media capabilities:
+    1000baseT(FD)
+    Asym Pause(FD)
+    Pause(FD)
+    100base-TX(FD)
+    100base-TX(HD)
+    10base-T(FD)
+    10base-T(HD)
+Media Attachment Unit type: 30
+Vlan ID: - not advertised
+Peer Source MAC: 0200.0000.000a
+
+------------------------------------------------
+Local Intf: Gi1/0/32
+Local Intf service instance: -
+Chassis id: 0200.0000.000b
+Port id: 0200.0000.000b
+Port Description:REDACTED
+System Name:REDACTED
+
+System Description:
+Phosphor OpenBMC (Phosphor OpenBMC Project Reference Distro) 2.17.0-dev Linux 6.6.52-f8940d0-dirty-52c606d-00296-g52c606d1df59 #1 SMP Mon Sep 23 00:48:44 UTC 2024 armv7l
+
+Time remaining: 96 seconds
+System Capabilities: B,W,R,S
+Enabled Capabilities: S
+Management Addresses:
+    IP: 192.0.2.8
+    IPV6: 2001:db8:4::14
+Auto Negotiation - supported, enabled
+Physical media capabilities:
+    1000baseT(FD)
+    Asym Pause(FD)
+    Pause(FD)
+    100base-TX(FD)
+    100base-TX(HD)
+    10base-T(FD)
+    10base-T(HD)
+Media Attachment Unit type: 30
+Vlan ID: - not advertised
+Peer Source MAC: 0200.0000.000b
+
+------------------------------------------------
+Local Intf: Gi1/0/32
+Local Intf service instance: -
+Chassis id: 0200.0000.000c
+Port id: 0200.0000.000c
+Port Description:REDACTED
+System Name:REDACTED
+
+System Description:
+Phosphor OpenBMC (Phosphor OpenBMC Project Reference Distro) 2.17.0-dev Linux 6.6.52-f8940d0-dirty-52c606d-00296-g52c606d1df59 #1 SMP Mon Sep 23 00:48:44 UTC 2024 armv7l
+
+Time remaining: 96 seconds
+System Capabilities: B,W,R,S
+Enabled Capabilities: S
+Management Addresses:
+    IP: 192.0.2.8
+    IPV6: 2001:db8:4::17
+Auto Negotiation - supported, enabled
+Physical media capabilities:
+    1000baseT(FD)
+    Asym Pause(FD)
+    Pause(FD)
+    100base-TX(FD)
+    100base-TX(HD)
+    10base-T(FD)
+    10base-T(HD)
+Media Attachment Unit type: 30
+Vlan ID: - not advertised
+Peer Source MAC: 0200.0000.000c
+
+------------------------------------------------
+Local Intf: Gi1/0/12
+Local Intf service instance: -
+Chassis id: 0200.0000.000d
+Port id: 0200.0000.000d
+Port Description:REDACTED
+System Name:REDACTED
+
+System Description:
+Phosphor OpenBMC (Phosphor OpenBMC Project Reference Distro) 2.17.0-dev Linux 6.6.52-f8940d0-dirty-52c606d-00296-g52c606d1df59 #1 SMP Mon Sep 23 00:48:44 UTC 2024 armv7l
+
+Time remaining: 101 seconds
+System Capabilities: B,W,R,S
+Enabled Capabilities: S
+Management Addresses:
+    IP: 192.0.2.8
+    IPV6: 2001:db8:4::19
+Auto Negotiation - supported, enabled
+Physical media capabilities:
+    1000baseT(FD)
+    Asym Pause(FD)
+    Pause(FD)
+    100base-TX(FD)
+    100base-TX(HD)
+    10base-T(FD)
+    10base-T(HD)
+Media Attachment Unit type: 30
+Vlan ID: - not advertised
+Peer Source MAC: 0200.0000.000d
+
+------------------------------------------------
+Local Intf: Gi1/0/10
+Local Intf service instance: -
+Chassis id: 0200.0000.000e
+Port id: 0200.0000.000e
+Port Description:REDACTED
+System Name:REDACTED
+
+System Description:
+Phosphor OpenBMC (Phosphor OpenBMC Project Reference Distro) 4.06.0-dev Linux 6.18.35-cf42ecf-patch-587eebc #1 SMP Wed Jun 10 00:31:32 UTC 2026 armv7l
+
+Time remaining: 113 seconds
+System Capabilities: B,W,R,S
+Enabled Capabilities: S
+Management Addresses:
+    IP: 192.0.2.13
+    IPV6: 2001:db8:4::1b
+Auto Negotiation - supported, enabled
+Physical media capabilities:
+    1000baseT(FD)
+    Asym Pause(FD)
+    Pause(FD)
+    100base-TX(FD)
+    100base-TX(HD)
+    10base-T(FD)
+    10base-T(HD)
+Media Attachment Unit type: 30
+Vlan ID: - not advertised
+Peer Source MAC: 0200.0000.000e
+
+------------------------------------------------
+Local Intf: Gi1/0/48
+Local Intf service instance: -
+Chassis id: 0200.0000.000f
+Port id: 0200.0000.000f
+Port Description:REDACTED
+System Name:REDACTED
+
+System Description:
+Phosphor OpenBMC (Phosphor OpenBMC Project Reference Distro) 4.06.0-dev Linux 6.18.35-cf42ecf-patch-587eebc #1 SMP Wed Jun 10 00:31:32 UTC 2026 armv7l
+
+Time remaining: 111 seconds
+System Capabilities: B,W,R,S
+Enabled Capabilities: S
+Management Addresses:
+    IP: 192.0.2.15
+    IPV6: 2001:db8:4::1c
+Auto Negotiation - supported, enabled
+Physical media capabilities:
+    1000baseT(FD)
+    Asym Pause(FD)
+    Pause(FD)
+    100base-TX(FD)
+    100base-TX(HD)
+    10base-T(FD)
+    10base-T(HD)
+Media Attachment Unit type: 30
+Vlan ID: - not advertised
+Peer Source MAC: 0200.0000.000f
+
+------------------------------------------------
+Local Intf: Gi1/0/47
+Local Intf service instance: -
+Chassis id: 0200.0000.0010
+Port id: 0200.0000.0010
+Port Description:REDACTED
+System Name:REDACTED
+
+System Description:
+Phosphor OpenBMC (Phosphor OpenBMC Project Reference Distro) 2.17.0-dev Linux 6.6.52-f8940d0-dirty-b99c394-00296-gb99c394295eb #1 SMP Mon Sep 23 00:48:44 UTC 2024 armv7l
+
+Time remaining: 99 seconds
+System Capabilities: B,W,R,S
+Enabled Capabilities: S
+Management Addresses:
+    IP: 192.0.2.8
+    IPV6: 2001:db8:4::1f
+Auto Negotiation - supported, enabled
+Physical media capabilities:
+    1000baseT(FD)
+    Asym Pause(FD)
+    Pause(FD)
+    100base-TX(FD)
+    100base-TX(HD)
+    10base-T(FD)
+    10base-T(HD)
+Media Attachment Unit type: 30
+Vlan ID: - not advertised
+Peer Source MAC: 0200.0000.0010
+
+------------------------------------------------
+Local Intf: Gi1/0/47
+Local Intf service instance: -
+Chassis id: 0200.0000.0011
+Port id: 0200.0000.0011
+Port Description:REDACTED
+System Name:REDACTED
+
+System Description:
+Phosphor OpenBMC (Phosphor OpenBMC Project Reference Distro) 2.17.0-dev Linux 6.6.52-f8940d0-dirty-52c606d-00296-g52c606d1df59 #1 SMP Mon Sep 23 00:48:44 UTC 2024 armv7l
+
+Time remaining: 99 seconds
+System Capabilities: B,W,R,S
+Enabled Capabilities: S
+Management Addresses:
+    IP: 192.0.2.8
+    IPV6: 2001:db8:4::21
+Auto Negotiation - supported, enabled
+Physical media capabilities:
+    1000baseT(FD)
+    Asym Pause(FD)
+    Pause(FD)
+    100base-TX(FD)
+    100base-TX(HD)
+    10base-T(FD)
+    10base-T(HD)
+Media Attachment Unit type: 30
+Vlan ID: - not advertised
+Peer Source MAC: 0200.0000.0011
+
+------------------------------------------------
+Local Intf: Gi1/0/47
+Local Intf service instance: -
+Chassis id: 0200.0000.0012
+Port id: 0200.0000.0012
+Port Description:REDACTED
+System Name:REDACTED
+
+System Description:
+Phosphor OpenBMC (Phosphor OpenBMC Project Reference Distro) 4.06.0-dev Linux 6.18.35-cf42ecf-patch-587eebc #1 SMP Wed Jun 10 00:31:32 UTC 2026 armv7l
+
+Time remaining: 117 seconds
+System Capabilities: B,W,R,S
+Enabled Capabilities: S
+Management Addresses:
+    IP: 192.0.2.17
+    IPV6: 2001:db8:4::22
+Auto Negotiation - supported, enabled
+Physical media capabilities:
+    1000baseT(FD)
+    Asym Pause(FD)
+    Pause(FD)
+    100base-TX(FD)
+    100base-TX(HD)
+    10base-T(FD)
+    10base-T(HD)
+Media Attachment Unit type: 30
+Vlan ID: - not advertised
+Peer Source MAC: 0200.0000.0012
+
+------------------------------------------------
+Local Intf: Gi1/0/12
+Local Intf service instance: -
+Chassis id: 0200.0000.0013
+Port id: 0200.0000.0013
+Port Description:REDACTED
+System Name:REDACTED
+
+System Description:
+Phosphor OpenBMC (Phosphor OpenBMC Project Reference Distro) 2.17.0-dev Linux 6.6.52-f8940d0-dirty-938b1b2-00296-g938b1b20962f #1 SMP Mon Sep 23 00:48:44 UTC 2024 armv7l
+
+Time remaining: 101 seconds
+System Capabilities: B,W,R,S
+Enabled Capabilities: S
+Management Addresses:
+    IP: 192.0.2.8
+    IPV6: 2001:db8:4::25
+Auto Negotiation - supported, enabled
+Physical media capabilities:
+    1000baseT(FD)
+    Asym Pause(FD)
+    Pause(FD)
+    100base-TX(FD)
+    100base-TX(HD)
+    10base-T(FD)
+    10base-T(HD)
+Media Attachment Unit type: 30
+Vlan ID: - not advertised
+Peer Source MAC: 0200.0000.0013
+
+------------------------------------------------
+Local Intf: Gi1/0/10
+Local Intf service instance: -
+Chassis id: 0200.0000.0014
+Port id: 0200.0000.0014
+Port Description:REDACTED
+System Name:REDACTED
+
+System Description:
+Phosphor OpenBMC (Phosphor OpenBMC Project Reference Distro) 2.17.0-dev Linux 6.6.52-f8940d0-dirty-52c606d-00296-g52c606d1df59 #1 SMP Mon Sep 23 00:48:44 UTC 2024 armv7l
+
+Time remaining: 113 seconds
+System Capabilities: B,W,R,S
+Enabled Capabilities: S
+Management Addresses:
+    IP: 192.0.2.8
+    IPV6: 2001:db8:4::27
+Auto Negotiation - supported, enabled
+Physical media capabilities:
+    1000baseT(FD)
+    Asym Pause(FD)
+    Pause(FD)
+    100base-TX(FD)
+    100base-TX(HD)
+    10base-T(FD)
+    10base-T(HD)
+Media Attachment Unit type: 30
+Vlan ID: - not advertised
+Peer Source MAC: 0200.0000.0014
+
+------------------------------------------------
+Local Intf: Gi1/0/31
+Local Intf service instance: -
+Chassis id: 0200.0000.0015
+Port id: 0200.0000.0015
+Port Description:REDACTED
+System Name:REDACTED
+
+System Description:
+Phosphor OpenBMC (Phosphor OpenBMC Project Reference Distro) 2.17.0-dev Linux 6.6.52-f8940d0-dirty-52c606d-00296-g52c606d1df59 #1 SMP Mon Sep 23 00:48:44 UTC 2024 armv7l
+
+Time remaining: 116 seconds
+System Capabilities: B,W,R,S
+Enabled Capabilities: S
+Management Addresses:
+    IP: 192.0.2.8
+    IPV6: 2001:db8:4::29
+Auto Negotiation - supported, enabled
+Physical media capabilities:
+    1000baseT(FD)
+    Asym Pause(FD)
+    Pause(FD)
+    100base-TX(FD)
+    100base-TX(HD)
+    10base-T(FD)
+    10base-T(HD)
+Media Attachment Unit type: 30
+Vlan ID: - not advertised
+Peer Source MAC: 0200.0000.0015
+
+------------------------------------------------
+Local Intf: Gi1/0/47
+Local Intf service instance: -
+Chassis id: 0200.0000.0016
+Port id: 0200.0000.0016
+Port Description:REDACTED
+System Name:REDACTED
+
+System Description:
+Phosphor OpenBMC (Phosphor OpenBMC Project Reference Distro) 2.17.0-dev Linux 6.6.52-f8940d0-dirty-6df2ccd-00296-g6df2ccd3c9d7 #1 SMP Mon Sep 23 00:48:44 UTC 2024 armv7l
+
+Time remaining: 96 seconds
+System Capabilities: B,W,R,S
+Enabled Capabilities: S
+Management Addresses:
+    IP: 192.0.2.8
+    IPV6: 2001:db8:4::2b
+Auto Negotiation - supported, enabled
+Physical media capabilities:
+    1000baseT(FD)
+    Asym Pause(FD)
+    Pause(FD)
+    100base-TX(FD)
+    100base-TX(HD)
+    10base-T(FD)
+    10base-T(HD)
+Media Attachment Unit type: 30
+Vlan ID: - not advertised
+Peer Source MAC: 0200.0000.0016
+
+------------------------------------------------
+Local Intf: Gi1/0/11
+Local Intf service instance: -
+Chassis id: 0200.0000.0017
+Port id: 0200.0000.0017
+Port Description:REDACTED
+System Name:REDACTED
+
+System Description:
+Phosphor OpenBMC (Phosphor OpenBMC Project Reference Distro) 2.17.0-dev Linux 6.6.52-f8940d0-dirty-6df2ccd-00296-g6df2ccd3c9d7 #1 SMP Mon Sep 23 00:48:44 UTC 2024 armv7l
+
+Time remaining: 114 seconds
+System Capabilities: B,W,R,S
+Enabled Capabilities: S
+Management Addresses:
+    IP: 192.0.2.8
+    IPV6: 2001:db8:4::2d
+Auto Negotiation - supported, enabled
+Physical media capabilities:
+    1000baseT(FD)
+    Asym Pause(FD)
+    Pause(FD)
+    100base-TX(FD)
+    100base-TX(HD)
+    10base-T(FD)
+    10base-T(HD)
+Media Attachment Unit type: 30
+Vlan ID: - not advertised
+Peer Source MAC: 0200.0000.0017
+
+------------------------------------------------
+Local Intf: Gi1/0/11
+Local Intf service instance: -
+Chassis id: 0200.0000.0018
+Port id: 0200.0000.0018
+Port Description:REDACTED
+System Name:REDACTED
+
+System Description:
+Phosphor OpenBMC (Phosphor OpenBMC Project Reference Distro) 2.17.0-dev Linux 6.6.52-f8940d0-dirty-6df2ccd-00296-g6df2ccd3c9d7 #1 SMP Mon Sep 23 00:48:44 UTC 2024 armv7l
+
+Time remaining: 114 seconds
+System Capabilities: B,W,R,S
+Enabled Capabilities: S
+Management Addresses:
+    IP: 192.0.2.8
+    IPV6: 2001:db8:4::2e
+Auto Negotiation - supported, enabled
+Physical media capabilities:
+    1000baseT(FD)
+    Asym Pause(FD)
+    Pause(FD)
+    100base-TX(FD)
+    100base-TX(HD)
+    10base-T(FD)
+    10base-T(HD)
+Media Attachment Unit type: 30
+Vlan ID: - not advertised
+Peer Source MAC: 0200.0000.0018
+
+------------------------------------------------
+Local Intf: Gi1/0/11
+Local Intf service instance: -
+Chassis id: 0200.0000.0019
+Port id: 0200.0000.0019
+Port Description:REDACTED
+System Name:REDACTED
+
+System Description:
+Phosphor OpenBMC (Phosphor OpenBMC Project Reference Distro) 2.17.0-dev Linux 6.6.52-f8940d0-dirty-6df2ccd-00296-g6df2ccd3c9d7 #1 SMP Mon Sep 23 00:48:44 UTC 2024 armv7l
+
+Time remaining: 92 seconds
+System Capabilities: B,W,R,S
+Enabled Capabilities: S
+Management Addresses:
+    IP: 192.0.2.8
+    IPV6: 2001:db8:4::31
+Auto Negotiation - supported, enabled
+Physical media capabilities:
+    1000baseT(FD)
+    Asym Pause(FD)
+    Pause(FD)
+    100base-TX(FD)
+    100base-TX(HD)
+    10base-T(FD)
+    10base-T(HD)
+Media Attachment Unit type: 30
+Vlan ID: - not advertised
+Peer Source MAC: 0200.0000.0019
+
+------------------------------------------------
+Local Intf: Gi1/0/48
+Local Intf service instance: -
+Chassis id: 0200.0000.001a
+Port id: 0200.0000.001a
+Port Description:REDACTED
+System Name:REDACTED
+
+System Description:
+Phosphor OpenBMC (Phosphor OpenBMC Project Reference Distro) 2.17.0-dev Linux 6.6.52-f8940d0-dirty-6df2ccd-00296-g6df2ccd3c9d7 #1 SMP Mon Sep 23 00:48:44 UTC 2024 armv7l
+
+Time remaining: 111 seconds
+System Capabilities: B,W,R,S
+Enabled Capabilities: S
+Management Addresses:
+    IP: 192.0.2.8
+    IPV6: 2001:db8:4::32
+Auto Negotiation - supported, enabled
+Physical media capabilities:
+    1000baseT(FD)
+    Asym Pause(FD)
+    Pause(FD)
+    100base-TX(FD)
+    100base-TX(HD)
+    10base-T(FD)
+    10base-T(HD)
+Media Attachment Unit type: 30
+Vlan ID: - not advertised
+Peer Source MAC: 0200.0000.001a
+
+------------------------------------------------
+Local Intf: Gi1/0/11
+Local Intf service instance: -
+Chassis id: 0200.0000.001b
+Port id: 0200.0000.001b
+Port Description:REDACTED
+System Name:REDACTED
+
+System Description:
+Phosphor OpenBMC (Phosphor OpenBMC Project Reference Distro) 2.17.0-dev Linux 6.6.52-f8940d0-dirty-6df2ccd-00296-g6df2ccd3c9d7 #1 SMP Mon Sep 23 00:48:44 UTC 2024 armv7l
+
+Time remaining: 114 seconds
+System Capabilities: B,W,R,S
+Enabled Capabilities: S
+Management Addresses:
+    IP: 192.0.2.8
+    IPV6: 2001:db8:4::23
+Auto Negotiation - supported, enabled
+Physical media capabilities:
+    1000baseT(FD)
+    Asym Pause(FD)
+    Pause(FD)
+    100base-TX(FD)
+    100base-TX(HD)
+    10base-T(FD)
+    10base-T(HD)
+Media Attachment Unit type: 30
+Vlan ID: - not advertised
+Peer Source MAC: 0200.0000.001b
+
+------------------------------------------------
+Local Intf: Gi1/0/12
+Local Intf service instance: -
+Chassis id: 0200.0000.001c
+Port id: 0200.0000.001c
+Port Description:REDACTED
+System Name:REDACTED
+
+System Description:
+Phosphor OpenBMC (Phosphor OpenBMC Project Reference Distro) 2.17.0-dev Linux 6.6.52-f8940d0-dirty-b99c394-00296-gb99c394295eb #1 SMP Mon Sep 23 00:48:44 UTC 2024 armv7l
+
+Time remaining: 91 seconds
+System Capabilities: B,W,R,S
+Enabled Capabilities: S
+Management Addresses:
+    IP: 192.0.2.8
+    IPV6: 2001:db8:4::20
+Auto Negotiation - supported, enabled
+Physical media capabilities:
+    1000baseT(FD)
+    Asym Pause(FD)
+    Pause(FD)
+    100base-TX(FD)
+    100base-TX(HD)
+    10base-T(FD)
+    10base-T(HD)
+Media Attachment Unit type: 30
+Vlan ID: - not advertised
+Peer Source MAC: 0200.0000.001c
+
+------------------------------------------------
+Local Intf: Gi1/0/31
+Local Intf service instance: -
+Chassis id: 0200.0000.001d
+Port id: 0200.0000.001d
+Port Description:REDACTED
+System Name:REDACTED
+
+System Description:
+Phosphor OpenBMC (Phosphor OpenBMC Project Reference Distro) 2.17.0-dev Linux 6.6.52-f8940d0-dirty-b99c394-00296-gb99c394295eb #1 SMP Mon Sep 23 00:48:44 UTC 2024 armv7l
+
+Time remaining: 101 seconds
+System Capabilities: B,W,R,S
+Enabled Capabilities: S
+Management Addresses:
+    IP: 192.0.2.8
+    IPV6: 2001:db8:4::11
+Auto Negotiation - supported, enabled
+Physical media capabilities:
+    1000baseT(FD)
+    Asym Pause(FD)
+    Pause(FD)
+    100base-TX(FD)
+    100base-TX(HD)
+    10base-T(FD)
+    10base-T(HD)
+Media Attachment Unit type: 30
+Vlan ID: - not advertised
+Peer Source MAC: 0200.0000.001d
+
+------------------------------------------------
+Local Intf: Gi1/0/12
+Local Intf service instance: -
+Chassis id: 0200.0000.001e
+Port id: 0200.0000.001e
+Port Description:REDACTED
+System Name:REDACTED
+
+System Description:
+Phosphor OpenBMC (Phosphor OpenBMC Project Reference Distro) 2.17.0-dev Linux 6.6.52-f8940d0-dirty-52c606d-00296-g52c606d1df59 #1 SMP Mon Sep 23 00:48:44 UTC 2024 armv7l
+
+Time remaining: 101 seconds
+System Capabilities: B,W,R,S
+Enabled Capabilities: S
+Management Addresses:
+    IP: 192.0.2.8
+    IPV6: 2001:db8:4::34
+Auto Negotiation - supported, enabled
+Physical media capabilities:
+    1000baseT(FD)
+    Asym Pause(FD)
+    Pause(FD)
+    100base-TX(FD)
+    100base-TX(HD)
+    10base-T(FD)
+    10base-T(HD)
+Media Attachment Unit type: 30
+Vlan ID: - not advertised
+Peer Source MAC: 0200.0000.001e
+
+
+Total entries displayed: 28

@@ -1,0 +1,26 @@
+
+
+
+Vlan2602 is up, line protocol is up , Autostate Enabled
+  Hardware is Ethernet SVI, address is 0200.0000.001f (bia 0200.0000.001f)
+  MTU 9198 bytes, BW 1000000 Kbit/sec, DLY 10 usec,
+     reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, loopback not set
+  Keepalive not supported
+  ARP type: ARPA, ARP Timeout 04:00:00
+  Last input 00:00:00, output 00:00:00, output hang never
+  Last clearing of "show interface" counters never
+  Input queue: 0/375/326/2812 (size/max/drops/flushes); Total output drops: 0
+  Queueing strategy: fifo
+  Output queue: 0/40 (size/max)
+  5 minute input rate 91000 bits/sec, 100 packets/sec
+  5 minute output rate 4000 bits/sec, 3 packets/sec
+     2394588813 packets input, 269637522850 bytes, 0 no buffer
+     Received 0 broadcasts (0 IP multicasts)
+     0 runts, 0 giants, 0 throttles
+     0 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored
+     40378511 packets output, 22801023091 bytes, 0 underruns
+     Output 0 broadcasts (0 IP multicasts)
+     0 output errors, 2 interface resets
+     0 unknown protocol drops
+     0 output buffer failures, 0 output buffers swapped out
