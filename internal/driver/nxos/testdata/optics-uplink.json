@@ -1,0 +1,52 @@
+{
+  "TABLE_interface": {
+    "ROW_interface": {
+      "interface": "Ethernet1/1",
+      "sfp": "present",
+      "type": "10Gbase-LR",
+      "name": "Arista Networks",
+      "partnum": "SFP-10G-LR-A-ENC",
+      "rev": "B4",
+      "serialnum": "REDACTED",
+      "nom_bitrate": "10300",
+      "len_9": "10",
+      "ciscoid": "3",
+      "ciscoid_1": "4",
+      "TABLE_lane": {
+        "ROW_lane": {
+          "temperature": "40.74",
+          "temp_flag": null,
+          "temp_alrm_hi": "75.00",
+          "temp_alrm_lo": "-5.00",
+          "temp_warn_hi": "70.00",
+          "temp_warn_lo": "0.00",
+          "voltage": "3.27",
+          "volt_flag": null,
+          "volt_alrm_hi": "3.50",
+          "volt_alrm_lo": "3.08",
+          "volt_warn_hi": "3.47",
+          "volt_warn_lo": "3.10",
+          "current": "33.26",
+          "current_flag": null,
+          "current_alrm_hi": "90.00",
+          "current_alrm_lo": "2.00",
+          "current_warn_hi": "85.00",
+          "current_warn_lo": "4.00",
+          "tx_pwr": "-2.85",
+          "tx_pwr_flag": null,
+          "tx_pwr_alrm_hi": "0.49",
+          "tx_pwr_alrm_lo": "-7.52",
+          "tx_pwr_warn_hi": "0.00",
+          "tx_pwr_warn_lo": "-7.01",
+          "rx_pwr": "-2.00",
+          "rx_pwr_flag": null,
+          "rx_pwr_alrm_hi": "0.49",
+          "rx_pwr_alrm_lo": "-16.00",
+          "rx_pwr_warn_hi": "0.00",
+          "rx_pwr_warn_lo": "-15.00",
+          "xmit_faults": "0"
+        }
+      }
+    }
+  }
+}

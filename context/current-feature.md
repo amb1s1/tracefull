@@ -1,8 +1,72 @@
 # Current feature — v0.2 device collection
 
-## Active slice — EOS route validation
+## Active slice — NX-OS, IOS-XE and RouterOS capture validation
 
-Workflow at handoff: Ready for review on `codex/eos-route-validation`.
+Workflow: Ready for review on `codex/remaining-platform-captures`.
+The user retained the full v0.2 scope and supplied one authorized SSH target for
+NX-OS, IOS-XE and RouterOS on November 1, 2026. Standing read-only permission
+applies; RouterOS's password-change prompt may be dismissed with Ctrl+C, without
+changing credentials. Target identifiers and private originals stay outside Git.
+
+Acceptance and slices:
+
+- Verify access/version with strict host keys and noninteractive authentication.
+  Bound each capture to 25 seconds and 1 MiB per stream; retain failures, hashes
+  and timestamps privately. No configuration changes, passwords or probes.
+- Discover real output shapes for supported collection groups before implementing
+  each explicitly registered platform driver. Scrub captures with provenance;
+  missing measurements and unsupported formats stay explicit.
+- Preserve exact command policies, default-context behavior, attribution, schema,
+  session bounds and CLI/domain separation. Add parser/failure tests, pipeline
+  and actual CLI replay, coverage and fuzz checks for each implemented slice.
+- Review and make focused commits; run applicable full local checks and CI before
+  integration. Full v0.2 remains incomplete until every acceptance gap is resolved
+  or explicitly documented as blocked. Native probing remains design only.
+
+Strict-key SSH access succeeded on NX-OS 10.5(6), IOS-XE 17.12.03 and RouterOS
+7.24.5. Noninteractive RouterOS reads did not show a password-change prompt.
+All three drivers are implemented with exact command policies, explicit registry
+composition and saved-capture parser/pipeline/CLI tests. Thirty fixture source pairs
+(ten NX-OS, twelve IOS-XE, eight RouterOS) have verified stdout/stderr hashes.
+Scrubbing retains family/prefix/next-hop interface scope; private identifiers,
+originals and maps remain outside Git. Source command arguments in manifests are
+anonymized with the captures. Native/default JSON gaps, cross-VRF next hops,
+missing counters and unvalidated route/DOM variants remain explicit.
+
+Review reproduced and corrected IOS-XE signed-counter misparsing and truncated
+LLDP success. Negative/invalid counters now fail; LLDP requires its captured entry
+count and complete neighbor identifiers. Unknown measurements remain unknown.
+
+Initial full local checks passed unit/CLI/schema, formatting, vet, race, coverage,
+staticcheck, lint, documentation and build. Coverage: parsers 92.6%, verdicts
+99.4%, drivers 94.0%. Initial bounded fuzz runs passed 42,303 NX-OS, 44,256 IOS-XE
+and 992,251 RouterOS executions. After the IOS-XE review corrections, the same
+full checks passed again (driver coverage 93.8%; parser/verdict gates unchanged),
+and another 173,636 IOS-XE fuzz executions passed. Documented dry-run and
+`schema --kind collection` examples passed. Vulnerability scanning found no reachable/imported-package issues;
+one unused required-module advisory remains. All four Linux/macOS cross-builds
+passed; these do not establish runtime support.
+
+A native CLI version-only smoke test on all three authorized targets passed on
+November 1, 2026 (23:40:28–23:40:34 UTC). All three commands returned parsed
+versions and all six evidence stream hashes verified. The saved trace/inventory
+aliases for this smoke test were synthetic transport selectors, not a measured
+network path. Other groups were validated through real captures and offline CLI
+replay in JSON, text and Markdown, not a full live collection. No passwords,
+configuration changes, probes, release or deployment occurred.
+
+Driver commits: `107b4dd` (NX-OS), `a5e66a5` (IOS-XE), `a070d56` (RouterOS).
+Final fixture whitespace normalization removes blank EOF padding only.
+
+Existing missing reverse formats remain a separate gap; read-only authorization
+does not permit active probes. Full v0.2 stays blocked on those captures and the
+remaining documented route/optics formats. CI and integration are pending.
+
+## Completed slice — EOS route validation
+
+Workflow: Complete. [PR #9](https://github.com/amb1s1/tracefull/pull/9) merged as
+`128cc0c`. Six pre-merge and three post-merge CI checks passed. Integrated package
+tests, main binary rebuild and documented dry-run passed.
 EOS currently has only an IPv6 static-route capture. Use the authorized EOS target
 to validate IPv4 and available dynamic-route responses, including next-hop scope,
 selection and explicitly reported hardware-programming state.

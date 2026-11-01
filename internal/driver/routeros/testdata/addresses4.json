@@ -1,0 +1,36 @@
+[
+  {
+    ".id": "*1",
+    "address": "192.0.2.0/30",
+    "disabled": false,
+    "dynamic": false,
+    "interface": "sfp28-1",
+    "invalid": false,
+    "network": "192.0.2.2",
+    "slave": false,
+    "vrf": "main"
+  },
+  {
+    ".id": "*2",
+    "address": "192.0.2.5/32",
+    "disabled": false,
+    "dynamic": false,
+    "interface": "lo",
+    "invalid": false,
+    "network": "192.0.2.5",
+    "slave": false,
+    "vrf": "main"
+  },
+  {
+    ".id": "*3",
+    "address": "192.0.2.7/24",
+    "comment": "REDACTED",
+    "disabled": false,
+    "dynamic": false,
+    "interface": "vlan2602",
+    "invalid": false,
+    "network": "192.0.2.6",
+    "slave": false,
+    "vrf": "main"
+  }
+]

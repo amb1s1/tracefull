@@ -1,0 +1,70 @@
+{
+  "platform": "MikroTik RouterOS 7.24.5",
+  "source": "Authorized read-only device captures; private originals retained outside Git",
+  "files": [
+    {
+      "file": "resource.txt",
+      "source_stdout_sha256": "ff8b766cf5d4036b4e99c5fdb5042401260b276a8441dae7c540bd4e4e4e25d6",
+      "source_command": "/system resource print",
+      "started_unix": 1793575590.612149,
+      "ended_unix": 1793575593.0938811,
+      "excerpt": false
+    },
+    {
+      "file": "optics.txt",
+      "source_stdout_sha256": "3b87cdda7ba46258bc7a8f0d0edd0e1e3ae4907927e6dc1a7e92faa3c998ceb8",
+      "source_command": "/interface ethernet monitor sfp28-1 once",
+      "started_unix": 1793575657.940681,
+      "ended_unix": 1793575660.7108722,
+      "excerpt": true
+    },
+    {
+      "file": "addresses4.json",
+      "source_stdout_sha256": "37d26e9e4620ec3b9cc6cbabb9345131113747a612328a8b7709da0b642cbea4",
+      "source_command": ":put [:serialize to=json options=json.no-string-conversion value=[/ip address print as-value]]",
+      "started_unix": 1793575935.338185,
+      "ended_unix": 1793575937.848732,
+      "excerpt": false
+    },
+    {
+      "file": "addresses6.json",
+      "source_stdout_sha256": "c332a34853e35073b300cef83f5992b5203bea3366eb14d64c2d02eda7ff4bca",
+      "source_command": ":put [:serialize to=json options=json.no-string-conversion value=[/ipv6 address print as-value]]",
+      "started_unix": 1793575937.852514,
+      "ended_unix": 1793575941.661731,
+      "excerpt": false
+    },
+    {
+      "file": "route4.json",
+      "source_stdout_sha256": "c267f0a950da07eb2cd3cc276299670468002060f99f252aa84f82e4091fa2f7",
+      "source_command": ":put [:serialize to=json options=json.no-string-conversion value=[/ip route print detail as-value where 192.0.2.9 in dst-address and routing-table=main]]",
+      "started_unix": 1793575978.322927,
+      "ended_unix": 1793575980.899634,
+      "excerpt": false
+    },
+    {
+      "file": "route6.json",
+      "source_stdout_sha256": "926729c5a9f0d254cdc6627541f8f61f26986dfa908cf7123815d6520ed0759d",
+      "source_command": ":put [:serialize to=json options=json.no-string-conversion value=[/ipv6 route print detail as-value where 2001:db8:5::13 in dst-address and routing-table=main]]",
+      "started_unix": 1793575980.900034,
+      "ended_unix": 1793575983.39041,
+      "excerpt": false
+    },
+    {
+      "file": "neighbors.json",
+      "source_stdout_sha256": "ff0f788dff7591fc4addb2ec8bf89abf394febde70e674cdc99313822b644d1f",
+      "source_command": ":put [:serialize to=json options=json.no-string-conversion value=[/ip neighbor print detail as-value]]",
+      "started_unix": 1793575983.39077,
+      "ended_unix": 1793575985.985889,
+      "excerpt": false
+    },
+    {
+      "file": "counters.json",
+      "source_stdout_sha256": "deef77886abc498521f00ccff1b2646bf38e3b138fafcee643bce7438cf8be4e",
+      "source_command": ":put [:serialize to=json options=json.no-string-conversion value=([/interface print detail as-value where name=sfp28-1],[/interface print stats-detail as-value where name=sfp28-1])]",
+      "started_unix": 1793576035.899523,
+      "ended_unix": 1793576038.3930838,
+      "excerpt": false
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "neigh_hdr": "neigh_hdr",
+  "TABLE_nbor_detail": {
+    "ROW_nbor_detail": [
+      {
+        "chassis_type": "Mac Address",
+        "chassis_id": "0200.0000.0001",
+        "port_type": "Interface Name",
+        "port_id": "Gi1/0/2",
+        "l_port_id": "mgmt0",
+        "port_desc": "REDACTED",
+        "sys_name": "REDACTED",
+        "sys_desc": "scrubbed description",
+        "ttl": "118",
+        "system_capability": "B, R",
+        "enabled_capability": "B",
+        "mgmt_addr_type": "Address not advertised",
+        "mgmt_addr": "not advertised",
+        "mgmt_addr_ipv6_type": "IPV6",
+        "mgmt_addr_ipv6": "2001:db8:1::7",
+        "vlan_id": "39",
+        "max_framesize": "not advertised",
+        "vlan_name": "not advertised",
+        "link_agg_capability": "not advertised",
+        "link_agg_status": "not advertised",
+        "link_agg_id": "0"
+      },
+      {
+        "chassis_type": "Mac Address",
+        "chassis_id": "0200.0000.0002",
+        "port_type": "Interface Name",
+        "port_id": "Te1/1/1",
+        "l_port_id": "Eth1/1",
+        "port_desc": "REDACTED",
+        "sys_name": "REDACTED",
+        "sys_desc": "scrubbed description",
+        "ttl": "110",
+        "system_capability": "B, R",
+        "enabled_capability": "B",
+        "mgmt_addr_type": "Address not advertised",
+        "mgmt_addr": "not advertised",
+        "mgmt_addr_ipv6_type": "IPV6",
+        "mgmt_addr_ipv6": "2001:db8:1::9",
+        "vlan_id": "not advertised",
+        "max_framesize": "not advertised",
+        "vlan_name": "not advertised",
+        "link_agg_capability": "not advertised",
+        "link_agg_status": "not advertised",
+        "link_agg_id": "0"
+      }
+    ]
+  },
+  "neigh_count": "21"
+}

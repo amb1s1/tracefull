@@ -1,0 +1,87 @@
+[
+  {
+    ".id": "*1",
+    "address": "2001:db8:1::15",
+    "address6": "2001:db8:1::15",
+    "age": "00:00:12",
+    "discovered-by": [
+      "lldp"
+    ],
+    "identity": "REDACTED",
+    "interface": [
+      "sfp28-2",
+      "bridge1"
+    ],
+    "interface-name": "REDACTED",
+    "ipv6": true,
+    "mac-address": "02:00:00:00:00:01",
+    "platform": "Linux",
+    "system-caps": [
+      "router"
+    ],
+    "system-caps-enabled": [
+      "router"
+    ],
+    "system-description": "scrubbed description",
+    "unpack": "none",
+    "version": ""
+  },
+  {
+    ".id": "*3",
+    "address": "2001:db8:1::17",
+    "address6": "2001:db8:1::17",
+    "age": "00:00:22",
+    "discovered-by": [
+      "lldp"
+    ],
+    "identity": "REDACTED",
+    "interface": [
+      "sfp28-3",
+      "bridge1"
+    ],
+    "interface-name": "REDACTED",
+    "ipv6": true,
+    "mac-address": "02:00:00:00:00:02",
+    "platform": "Juniper",
+    "system-caps": [
+      "bridge",
+      "router"
+    ],
+    "system-caps-enabled": [
+      "bridge",
+      "router"
+    ],
+    "system-description": "scrubbed description",
+    "unpack": "none",
+    "version": ""
+  },
+  {
+    ".id": "*4",
+    "address": "2001:db8:1::18",
+    "address6": "2001:db8:1::18",
+    "age": "00:00:04",
+    "discovered-by": [
+      "lldp"
+    ],
+    "identity": "REDACTED",
+    "interface": [
+      "sfp28-4",
+      "bridge1"
+    ],
+    "interface-name": "REDACTED",
+    "ipv6": true,
+    "mac-address": "02:00:00:00:00:03",
+    "platform": "Juniper",
+    "system-caps": [
+      "bridge",
+      "router"
+    ],
+    "system-caps-enabled": [
+      "bridge",
+      "router"
+    ],
+    "system-description": "scrubbed description",
+    "unpack": "none",
+    "version": ""
+  }
+]

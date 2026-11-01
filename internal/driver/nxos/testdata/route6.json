@@ -1,0 +1,33 @@
+{
+  "TABLE_vrf": {
+    "ROW_vrf": {
+      "vrf-name-out": "default",
+      "TABLE_addrf": {
+        "ROW_addrf": {
+          "addrf": "ipv6",
+          "TABLE_prefix": {
+            "ROW_prefix": {
+              "ipprefix": "0::/0",
+              "ipv6prefix": "0::/0",
+              "ucast-nhops": "1",
+              "mcast-nhops": "0",
+              "attached": "false",
+              "TABLE_path": {
+                "ROW_path": {
+                  "ubest": "true",
+                  "ipnexthop": "2001:db8:1::3",
+                  "ipv6nexthop": "2001:db8:1::3",
+                  "nexthop-vrf-name": "management",
+                  "uptime": "PT12H6M48S",
+                  "pref": "1",
+                  "metric": "0",
+                  "clientname": "static"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

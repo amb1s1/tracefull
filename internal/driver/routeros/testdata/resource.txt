@@ -1,0 +1,18 @@
+                   uptime: 2w5d11h7s
+                  version: 7.24.5 (stable)
+               build-time: 2026-09-29 14:21:27
+          minimum-version: 7.11.2
+              free-memory: 15.3GiB
+             total-memory: 16.0GiB
+                      cpu: ARM64
+                cpu-count: 16
+            cpu-frequency: 2000MHz
+                 cpu-load: 0%
+           free-hdd-space: 104.5MiB
+          total-hdd-space: 128.0MiB
+  write-sect-since-reboot: 18280
+         write-sect-total: 149852
+               bad-blocks: 0%
+        architecture-name: arm64
+               board-name: CCR2216-1G-12XS-2XQ
+                 platform: MikroTik

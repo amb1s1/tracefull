@@ -46,6 +46,12 @@ func TestPlatformCapturePipelines(t *testing.T) {
 		platform, dialect, address, dest, iface string
 		files                                   map[string]string
 	}{
+		{"cisco-ios-xe", "iosxe", "2001:db8:2::5", "2001:db8::1", "Vlan2602", map[string]string{
+			"show version": "version.txt", "show ip interface brief": "addresses4.txt", "show ipv6 interface brief": "addresses6.txt", "show ipv6 route 2001:db8::1": "route6.txt", "show processes cpu": "cpu.txt", "show interfaces Vlan2602": "counters-vlan.txt", "show lldp neighbors detail": "lldp.txt",
+		}},
+		{"cisco-nxos", "nxos", "2001:db8:1::b", "2001:db8::1", "mgmt0", map[string]string{
+			"show version | json": "version-json.json", "show ip interface brief vrf all | json": "addresses4-all.json", "show ipv6 interface brief vrf all | json": "addresses6-all.json", "show ipv6 route 2001:db8::1 | json": "route6.json", "show system resources | json": "cpu.json", "show interface mgmt0 | json": "counters-mgmt.json", "show lldp neighbors detail | json": "lldp.json",
+		}},
 		{"arista-eos", "eos", "2001:db8:3::a", "2001:db8:4::f", "Vlan2602", map[string]string{
 			"show processes top once | json": "cpu.json", "show ip interface | json": "addresses4.json", "show ipv6 interface | json": "addresses6.json", "show ipv6 route 2001:db8:4::f | json": "route6.json", "show version | json": "version-json.json", "show interfaces Vlan2602 | json": "counters-vlan.json", "show lldp neighbors detail | json": "lldp.json",
 		}},
@@ -91,7 +97,7 @@ func TestPlatformCapturePipelines(t *testing.T) {
 					optical += len(c.Facts.Optics)
 				}
 			}
-			if tc.dialect != "eos" && optical != 4 {
+			if tc.dialect != "eos" && tc.dialect != "nxos" && tc.dialect != "iosxe" && optical != 4 {
 				t.Fatal("missing real DOM lanes", optical)
 			}
 			for _, f := range r.Findings {
@@ -105,7 +111,7 @@ func TestPlatformCapturePipelines(t *testing.T) {
 }
 
 func TestPlatformRegistry(t *testing.T) {
-	for _, p := range []string{"frr", "linux", "junos", "arista-eos", "eos", "cisco-ios-xr", "iosxr"} {
+	for _, p := range []string{"frr", "linux", "junos", "arista-eos", "eos", "cisco-ios-xr", "iosxr", "cisco-nxos", "nxos", "cisco-ios-xe", "mikrotik-routeros", "routeros"} {
 		d, ok := Registry(p)
 		if !ok || d.Platform() == "" {
 			t.Fatal(p)
@@ -114,7 +120,7 @@ func TestPlatformRegistry(t *testing.T) {
 			t.Fatal("VRF fallback")
 		}
 	}
-	for _, p := range []string{"cisco-ios-xe", "cisco-nxos", "routeros"} {
+	for _, p := range []string{"unvalidated-platform"} {
 		if _, ok := Registry(p); ok {
 			t.Fatal("unvalidated driver", p)
 		}
