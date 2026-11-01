@@ -21,9 +21,12 @@ import (
 	"github.com/amb1s1/tracefull/internal/driver"
 	"github.com/amb1s1/tracefull/internal/driver/cumulus"
 	"github.com/amb1s1/tracefull/internal/driver/eos"
+	"github.com/amb1s1/tracefull/internal/driver/iosxe"
 	"github.com/amb1s1/tracefull/internal/driver/iosxr"
 	"github.com/amb1s1/tracefull/internal/driver/junos"
 	"github.com/amb1s1/tracefull/internal/driver/linuxfrr"
+	"github.com/amb1s1/tracefull/internal/driver/nxos"
+	"github.com/amb1s1/tracefull/internal/driver/routeros"
 	"github.com/amb1s1/tracefull/internal/inventory"
 	"github.com/amb1s1/tracefull/internal/report"
 	"github.com/amb1s1/tracefull/internal/trace"
@@ -51,6 +54,12 @@ func Registry(platform string) (driver.Driver, bool) {
 	switch platform {
 	case "nvidia-cumulus", "cumulus":
 		return cumulus.Driver{}, true
+	case "mikrotik-routeros", "routeros":
+		return routeros.Driver{}, true
+	case "cisco-ios-xe":
+		return iosxe.Driver{}, true
+	case "cisco-nxos", "nxos":
+		return nxos.Driver{}, true
 	case "arista-eos", "eos":
 		return eos.Driver{}, true
 	case "frr", "linux":

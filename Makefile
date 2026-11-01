@@ -21,6 +21,9 @@ fuzz:
 	go test ./internal/driver/cumulus -run '^$$' -fuzz FuzzParse -fuzztime 30s -parallel 4
 	go test ./internal/driver/junos -run '^$$' -fuzz FuzzParse -fuzztime 30s -parallel 4
 	go test ./internal/driver/eos -run '^$$' -fuzz FuzzParse -fuzztime 30s -parallel 4
+	go test ./internal/driver/nxos -run '^$$' -fuzz FuzzParse -fuzztime 30s -parallel 4
+	go test ./internal/driver/iosxe -run '^$$' -fuzz FuzzParse -fuzztime 30s -parallel 4
+	go test ./internal/driver/routeros -run '^$$' -fuzz FuzzParse -fuzztime 30s -parallel 4
 	go test ./internal/driver/linuxfrr -run '^$$' -fuzz FuzzParse -fuzztime 30s -parallel 4
 	go test ./internal/driver/iosxr -run '^$$' -fuzz FuzzParse -fuzztime 30s -parallel 4
 

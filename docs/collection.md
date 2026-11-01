@@ -2,7 +2,8 @@
 
 `collect --from FILE|-` matches a saved trace to inventory and collects attributed,
 read-only device snapshots. Drivers interpret recorded Cumulus Linux 5.16 / FRR
-10.0, Junos 24.4R2-S5.3, Arista EOS 4.33.4M and Cisco IOS-XR 25.4.2 formats.
+10.0, Junos 24.4R2-S5.3, Arista EOS 4.33.4M, Cisco IOS-XR 25.4.2, NX-OS 10.5(6),
+IOS-XE 17.12.03 and RouterOS 7.24.5 formats.
 Cumulus also supplies the Linux/FRR validation environment. v0.2 is **in progress**,
 not a completed multi-platform milestone.
 `investigate` runs local probe tools; it does not automatically open SSH sessions.
@@ -95,14 +96,32 @@ The other profiles and validated formats have distinct limits:
 | `junos` | Terse addresses, detailed connected/IS-IS IPv4 routes, empty IPv6 lookup, extensive physical/logical counters, LLDP, version, uptime, master RE load and per-lane DOM JSON | Address routing-instance membership is unknown. Active RIB selection does not establish hardware installation. Physical MTU includes link framing. Logical owners also select their physical parent for observation. |
 | `arista-eos` (`eos`) | IPv4/IPv6 interfaces, empty IPv4 lookup, IPv6 static default route, counters, LLDP, version/uptime, CPU/load and Ethernet DOM JSON | Hardware-programmed state comes from explicit fields. CPU utilization has an unspecified sampling interval. SVI-to-physical-port mapping is unavailable, so an SVI alone cannot select uplink optics. Empty DOM remains unknown. |
 | `cisco-ios-xr` (`iosxr`) | IPv4/IPv6 brief interfaces, connected IPv6 and IPv4/IPv6 IS-IS routes, counters, LLDP, version/uptime, CPU utilization and per-lane optics text | Connected, no-route and captured primary IS-IS descriptor layouts only; other route layouts fail with raw output retained. IPv6 interface context/prefix and hardware installation remain unknown. CPU percent is separate from load average. This is not an IOS-XE alias. |
+| `cisco-nxos` (`nxos`) | All-VRF brief IPv4/IPv6 addresses, empty IPv4 route and IPv6 static route, interface counters, LLDP, version/uptime, CPU/load and single-lane DOM JSON | Address membership is explicit. Default brief JSON can be empty bytes and is not used. Cross-VRF next hops cannot establish default-context interface ownership. RIB selection is not hardware installation. |
+| `cisco-ios-xe` | IPv4/IPv6 brief addresses, missing IPv4 lookup, IPv6 static/receive routes, counters, LLDP, version, CPU and single-module DOM text | Brief prefix/context metadata, explicit route selection, resolved gateway interface and hardware installation remain unknown. Other route layouts fail. Year/week uptime units are not normalized. This is distinct from IOS-XR. |
+| `mikrotik-routeros` (`routeros`) | JSON address, static/BGP covering-route, LLDP and paired interface detail/statistics reads; resource/optics text | Main maps to default. Only the most-specific matching prefix is normalized; missing active flags remain unknown. Immediate gateways retain interface scope. Hardware installation, omitted counters and MTU framing remain unknown. |
 
 The command policies accept only full reviewed command shapes. Fixed `| json` and
 `| display json` suffixes are remote CLI formatting operations; additional pipes,
-redirection and shell expansion are rejected. Junos, EOS and IOS-XR do not use
-`--sudo`; Linux/FRR uses the same explicit `sudo -n` selection as Cumulus.
+redirection and shell expansion are rejected. Junos, EOS, IOS-XR, NX-OS, IOS-XE
+and RouterOS do not use `--sudo`; Linux/FRR uses the same explicit `sudo -n` selection as Cumulus.
 Their IPv4/IPv6 planners are tested offline, but captures establish only the
-output variants listed above. Junos, EOS and IOS-XR still reject nondefault
+output variants listed above. The new profiles, Junos, EOS and IOS-XR reject nondefault
 contexts before connecting.
+
+RouterOS uses exact reviewed `:serialize` expressions around read-only `print`
+commands; arbitrary scripting, file output, mutations and altered selectors are
+rejected. Resource/optics text retains explicit units because exploratory JSON
+changed uptime and optical-power encodings. Interface details/statistics are two
+consecutive reads, not an atomic sample. The neighbor list can include bridge
+membership; it does not establish a physical topology. SSH exec reads bypassed
+the password-change prompt on the supplied target; the driver never changes a
+password or automatically interacts with a login prompt.
+
+IOS-XE CPU total is the five-second percentage including interrupts; its one-
+and five-minute percentages remain separate. DOM lane N/A stays unknown. NX-OS
+single-lane DOM likewise omits a lane identifier. None of these optical readings
+alone diagnose optic health. Logical interfaces do not select physical members
+without evidence. Missing/unsupported output is retained with an explicit failure.
 
 IOS-XR IS-IS captures include one IPv4 next hop and two IPv4/IPv6 next hops.
 The first descriptor address is the next hop; `from` identifies the originator,
@@ -248,14 +267,18 @@ Real authorized captures validate the listed parsers; see fixture provenance for
 [Cumulus](../internal/driver/cumulus/testdata/README.md),
 [Linux/FRR shared validation](../internal/driver/linuxfrr/testdata/README.md),
 [Junos](../internal/driver/junos/testdata/README.md),
-[EOS](../internal/driver/eos/testdata/README.md) and
-[IOS-XR](../internal/driver/iosxr/testdata/README.md). Tests replay
+[EOS](../internal/driver/eos/testdata/README.md),
+[IOS-XR](../internal/driver/iosxr/testdata/README.md),
+[NX-OS](../internal/driver/nxos/testdata/README.md),
+[IOS-XE](../internal/driver/iosxe/testdata/README.md) and
+[RouterOS](../internal/driver/routeros/testdata/README.md). Tests replay
 these scrubbed bytes through fake sessions/wrappers and use local synthetic SSH
 servers for transport failures. Replay is not live verification of the new CLI.
 No implementation test contacts a real device or sends diagnostic probes.
 
-Full v0.2 still requires real captures for NX-OS, IOS-XE and RouterOS,
-plus remaining optics/reverse formats. Contexts beyond `default` and the explicit
+The supplied NX-OS, IOS-XE and RouterOS targets now provide real captures for
+the formats listed above. Full v0.2 still has unvalidated reverse formats and
+remaining route/optics variants; unsupported variants are not claimed as working. Contexts beyond `default` and the explicit
 Cumulus/Linux-FRR `mgmt` mode remain unsupported. Reverse probing requires separate
 authorization. A user-run native Cumulus collection verified the original default
 mode. Management capture validation was followed by a native Cumulus CLI run on
@@ -268,3 +291,8 @@ unknown keys fail, and secrets are unsupported. Inventory SSH user/jump defaults
 apply when the corresponding option is empty. `investigate` retains its separate
 flag-only configuration contract. Publication and production verification of this
 CLI are separate from local checks and capture validation.
+
+A November 1, 2026 native CLI smoke test ran only the version/resource command on
+each supplied NX-OS, IOS-XE and RouterOS target. All three parsed successfully,
+with strict host keys and retained private evidence. Synthetic trace aliases
+selected the targets; this was not a measured path or full live collection.

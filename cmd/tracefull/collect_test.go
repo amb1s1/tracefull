@@ -16,6 +16,7 @@ func TestCollectExecutable(t *testing.T) {
 	if out, err := exec.Command("go", "build", "-o", bin, ".").CombinedOutput(); err != nil {
 		t.Fatalf("%v %s", err, out)
 	}
+	t.Run("new-platform-pipelines", func(t *testing.T) { testNewPlatformPipelines(t, bin) })
 	t.Run("eos-route", func(t *testing.T) { testEOSRouteExecutable(t, bin) })
 	t.Run("junos-route", func(t *testing.T) { testJunosRouteExecutable(t, bin) })
 	t.Run("isis", func(t *testing.T) { testISISExecutable(t, bin) })
@@ -112,6 +113,9 @@ func testPlatformExecutables(t *testing.T, bin string) {
 		{"frr", "cumulus", "vtysh -c 'show version'", "frr-version.txt", "10.0.3"},
 		{"linux", "cumulus", "vtysh -c 'show version'", "frr-version.txt", "10.0.3"},
 		{"arista-eos", "eos", "show version | json", "version-json.json", "4.33.4M"},
+		{"cisco-nxos", "nxos", "show version | json", "version-json.json", "10.5(6)"},
+		{"cisco-ios-xe", "iosxe", "show version", "version.txt", "17.12.03"},
+		{"mikrotik-routeros", "routeros", "/system resource print", "resource.txt", "7.24.5"},
 		{"junos", "junos", "show version | display json", "version-json.json", "24.4R2-S5.3"},
 		{"cisco-ios-xr", "iosxr", "show version", "version.txt", "25.4.2"},
 	} {

@@ -16,4 +16,3 @@
         architecture-name: arm64
                board-name: CCR2216-1G-12XS-2XQ
                  platform: MikroTik
-
